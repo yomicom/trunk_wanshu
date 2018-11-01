@@ -71,7 +71,8 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/setting_left"
-        android:paddingRight="@dimen/setting_right">
+        android:paddingRight="@dimen/setting_right"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -113,7 +114,8 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/setting_left"
-        android:paddingRight="@dimen/setting_right">
+        android:paddingRight="@dimen/setting_right"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -156,7 +158,8 @@
         android:drawableLeft="@mipmap/ic_me_coin"
         android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
-        android:text="书币明细" />
+        android:text="书币明细"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_chongzhi_record"
@@ -164,25 +167,24 @@
         android:drawableLeft="@mipmap/ic_me_add"
         android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
-        android:text="@string/chongzhi_record" />
+        android:text="@string/chongzhi_record"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_read_history"
         style="@style/style_me_next"
+        android:layout_marginTop="10dp"
         android:drawableLeft="@mipmap/ic_me_history"
         android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
         android:text="@string/history_record" />
-
-
     <TextView
         android:id="@+id/tv_message"
         style="@style/style_me_next"
-        android:layout_marginTop="8dp"
         android:drawableLeft="@mipmap/ic_me_note"
         android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
-        android:text="我的通知" />
+        android:text="联系客服" />
 
     <TextView
         android:id="@+id/tv_setting"
