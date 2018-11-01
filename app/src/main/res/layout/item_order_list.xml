@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="76dp"
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/rl_normal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_big_nomal"
+            android:text="充值成功" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            style="@style/text_big_nomal"
+            android:layout_alignParentRight="true"
+            android:text="+30" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_middle_nomal"
+            android:layout_alignParentBottom="true"
+            android:text=""
+            android:textColor="@color/text_color_2" />
+
+        <TextView
+            android:id="@+id/tv_coin"
+            style="@style/text_middle_nomal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="" />
+
+    </RelativeLayout>
+
+</LinearLayout>

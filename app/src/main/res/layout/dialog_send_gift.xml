@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/ll_horizontal_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_big_nomal"
+                android:layout_width="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/distance_text_text_8"
+                android:src="@mipmap/share_close_dialog" />
+        </RelativeLayout>
+
+        <View style="@style/line_divide" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ricycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center" />
+        </LinearLayout>
+
+        <View style="@style/line_divide" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:text="数量：" />
+
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/reduce_line_space"-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:background="@drawable/editor_left_form">-->
+
+            <TextView
+                android:id="@+id/tv_reduce_count"
+                style="@style/text_small_nomal"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/editor_left_form"
+                android:src="@mipmap/edit_add_format"
+                android:text="-"
+                android:textSize="@dimen/text_huge" />
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/add_line_space"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/editor_right_form">-->
+            <TextView
+                android:id="@+id/tv_gift_count"
+                style="@style/text_middle_nomal"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_gift_count"
+                android:src="@mipmap/edit_add_format"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/tv_add_count"
+                style="@style/text_small_nomal"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/editor_right_form"
+                android:src="@mipmap/edit_add_format"
+                android:text="+"
+                android:textSize="@dimen/text_huge" />
+            <!--</RelativeLayout>-->
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_book_coin"
+            style="@style/text_big_nomal"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:text="余额：" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:text="需支付：" />
+
+            <TextView
+                android:id="@+id/tv_need_pay"
+                style="@style/text_big_nomal"
+                android:text="0书币"
+                android:textColor="@color/gobal_color" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_add_money"
+            android:text="打赏"
+            style="@style/btn_login_style"/>
+    </LinearLayout>
+</LinearLayout>

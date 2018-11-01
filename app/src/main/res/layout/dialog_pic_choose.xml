@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_fans_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="13dp"
+        android:paddingRight="13sp">
+
+        <TextView
+            android:id="@+id/tv_fans_dialog_1"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="拍照"
+            android:textColor="@color/text_color_1"
+            android:textSize="15sp"></TextView>
+
+        <View
+            style="@style/line_divide" />
+
+        <TextView
+            android:id="@+id/tv_fans_dialog_rename"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="选择本地图片"
+            android:textColor="@color/text_color_1"
+            android:textSize="15sp"></TextView>
+    </LinearLayout>
+</LinearLayout>

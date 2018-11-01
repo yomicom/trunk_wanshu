@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/touch_bg">
+
+    <LinearLayout
+        style="@style/rl_normal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text_big_nomal"
+            android:text="Title"
+            android:textSize="@dimen/text_less_huge" />
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/text_middle_nomal"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:text="Title"
+            android:lineSpacingExtra="@dimen/line_spacing_3"
+            android:textColor="@color/text_color_2" />
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/text_small_nomal"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:text="Title" />
+    </LinearLayout>
+</LinearLayout>

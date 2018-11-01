@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/setting_left"
+        android:paddingRight="@dimen/setting_right">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/text_big_nomal"
+                android:text=""
+                android:textSize="@dimen/text_huge" />
+
+            <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_name"
+                android:src="@mipmap/ic_vip"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_id"
+                style="@style/text_big_nomal"
+                android:layout_below="@id/tv_name"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/text_color_2" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_login"
+            style="@style/text_middle_nomal"
+            android:layout_width="90dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_to_login"
+            android:text="立即登录"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/default_circle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_vip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_height"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/setting_left"
+        android:paddingRight="@dimen/setting_right">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_me_vip" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:text="年度VIP会员" />
+
+            <TextView
+                style="@style/text_small_nomal"
+                android:layout_marginTop="2dp"
+                android:text="365天畅读书城所有小说" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_over_time"
+            style="@style/text_middle_nomal"
+            android:layout_marginTop="2dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/icon_next_activity"
+            android:text=""
+            android:textColor="@color/text_color_2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_height"
+        android:layout_marginTop="@dimen/distance_text_text_8"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/setting_left"
+        android:paddingRight="@dimen/setting_right">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_me_remain" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/drawable_padding_normal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:text="账户余额" />
+
+            <TextView
+                android:id="@+id/tv_account_coin"
+                style="@style/text_small_nomal"
+                android:layout_marginTop="2dp"
+                android:text="0书币"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_add_money"
+            style="@style/text_middle_nomal"
+            android:layout_width="52dp"
+            android:layout_height="26dp"
+            android:background="@drawable/shape_add_money"
+            android:text="充值"
+            android:textColor="@color/gobal_color" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_book_coin"
+        style="@style/style_me_next"
+        android:layout_marginTop="@dimen/distance_text_text_8"
+        android:drawableLeft="@mipmap/ic_me_coin"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="书币明细" />
+
+    <TextView
+        android:id="@+id/tv_chongzhi_record"
+        style="@style/style_me_next"
+        android:drawableLeft="@mipmap/ic_me_add"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="@string/chongzhi_record" />
+
+    <TextView
+        android:id="@+id/tv_read_history"
+        style="@style/style_me_next"
+        android:drawableLeft="@mipmap/ic_me_history"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="@string/history_record" />
+
+
+    <TextView
+        android:id="@+id/tv_message"
+        style="@style/style_me_next"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@mipmap/ic_me_note"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="我的通知" />
+
+    <TextView
+        android:id="@+id/tv_setting"
+        style="@style/style_me_next"
+        android:drawableLeft="@mipmap/ic_me_setting"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="设置" />
+
+
+</LinearLayout>

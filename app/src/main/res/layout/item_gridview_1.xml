@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="96dp"
+    android:layout_height="172dp"
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="96dp"
+            android:layout_height="128dp">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/defalt_book_cover"/>
+            <ImageView
+                android:id="@+id/iv_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/top_1" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_novel_title"
+            android:text="标题"
+            android:layout_marginTop="@dimen/distance_text_text_8"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+</LinearLayout>

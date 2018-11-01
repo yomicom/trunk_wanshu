@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="divider">#cdced3</color>
+
+    <color name="gobal_color">#E8554D</color>
+    <color name="text_color_1">#1C1C1C</color>
+    <color name="text_color_2">#8E8E93</color>
+
+    <color name="main_title_color">#fcfcfc</color>
+
+    <color name="search_color_1">#e8554d</color>
+    <color name="search_color_2">#f0841b</color>
+    <color name="search_color_3">#cccccc</color>
+
+    <color name="selector_color_text">#303030</color>
+
+    <color name="bg_woman_banner">#F2AAC2</color>
+    <color name="bg_man_banner">#222951</color>
+    <color name="bg_book_category">#cdced3</color>
+
+    <!--按压后颜色-->
+    <color name="text_pressed">#F0F0F0</color>
+    <color name="text_dashang">#58b9db</color>
+
+    <color name="tip">#88303F9F</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#DE6014</color>
+    <color name="gray">#b8b8b8</color>
+    <color name="green">#5FB236</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="light_white">#cdced3</color>
+    <color name="light_black">#515151</color>
+    <color name="light_pink">#fb9090</color>
+    <color name="light_coffee">#A58D5E</color>
+    <color name="light_gray">#AAAAAA</color>
+    <color name="light_red">#EC4A48</color>
+    <color name="light_blue">#039BE5</color>
+    <color name="dark_red">#B93221</color>
+
+    <!--通用背景色-->
+    <color name="common_bg">#f2f2f2</color>
+    <!--通用触摸背景色-->
+    <color name="common_touch_bg">#E3E3E3</color>
+    <!--通用背景色-->
+    <color name="common_gray_bg">#EEEEEE</color>
+    <!--通用一级标题的颜色-->
+    <color name="common_h1">#212121</color>
+    <!--通用二级标题的颜色-->
+    <color name="common_h2">#727272</color>
+    <!--通用三级标题的颜色-->
+    <color name="common_h3">#B2B2B2</color>
+    <!--通用分割线细-->
+    <color name="common_divider_narrow">#cdced3</color>
+    <!--通用分割线粗-->
+    <color name="common_divider_wide">@color/light_white</color>
+
+    <color name="reader_menu_bg_color">#2e2e2e</color>
+    <!--阅读页背景色-->
+    <color name="read_theme_white">#DDDDDD</color>
+    <color name="read_theme_green">#CCE9CE</color>
+    <color name="read_theme_blue">#061D2D</color>
+    <color name="read_theme_brown">#383234</color>
+    <color name="read_theme_night">#0B0B0C</color>
+    <!--阅读页内容字体色-->
+    <color name="read_content_white">#222222</color>
+    <color name="read_content_gray">#3a3342</color>
+    <color name="read_content_leather">#3a3342</color>
+    <color name="read_content_green">#323332</color>
+    <color name="read_content_blue">#637079</color>
+    <color name="read_content_brown">#95938f</color>
+    <!--章节内容夜间颜色-->
+    <color name="read_content_night">#333333</color>
+    <!--阅读页标题色-->
+    <color name="read_title_white">#7f7f7f</color>
+    <color name="read_title_gray">#aba396</color>
+    <color name="read_title_leather">#7a7261</color>
+    <color name="read_title_green">#778578</color>
+    <color name="read_title_blue">#435460</color>
+    <color name="read_title_brown">#6b6668</color>
+    <!--章节标题夜间颜色-->
+    <color name="read_title_night">#262626</color>
+
+    <!--阅读页底部字体颜色-->
+    <color name="book_read_bottom_text">#e6e6e6</color>
+
+    <!--性别选择颜色值-->
+    <color name="gender_select_male_normal">#B0E2FF</color>
+    <color name="gender_select_male_pressed">#B2DFEE</color>
+    <color name="gender_select_female_normal">#EEA9B8</color>
+    <color name="gender_select_female_pressed">#EEA2AD</color>
+</resources>

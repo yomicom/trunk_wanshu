@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:orientation="vertical"
+    android:background="@drawable/touch_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="@dimen/book_user_avatar"
+            android:layout_height="@dimen/book_user_avatar"
+            android:layout_marginRight="@dimen/distance_image_text_12" />
+
+        <TextView
+            android:id="@+id/tv_user"
+            style="@style/text_middle_nomal"
+            android:layout_toRightOf="@id/iv_user"
+            android:text="Yomi"
+            android:textColor="@color/text_dashang" />
+
+        <TextView
+            android:id="@+id/tv_gift0"
+            style="@style/text_middle_nomal"
+            android:layout_below="@id/tv_user"
+            android:layout_marginTop="@dimen/distance_text_text_10"
+            android:layout_toRightOf="@id/iv_user"
+            android:text="送了" />
+
+        <ImageView
+            android:id="@+id/iv_gift"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/tv_user"
+            android:layout_marginTop="@dimen/distance_text_text_10"
+            android:layout_toRightOf="@id/iv_user"
+            android:layout_marginLeft="33dp"/>
+
+        <TextView
+            android:id="@+id/tv_gift"
+            style="@style/text_middle_nomal"
+            android:layout_below="@id/tv_user"
+            android:layout_marginTop="@dimen/distance_text_text_10"
+            android:layout_toRightOf="@id/iv_user"
+            android:layout_marginLeft="58dp"
+            android:text="1个" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_small_nomal"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/iv_user"
+            android:text="2017-12-01" />
+
+    </RelativeLayout>
+</LinearLayout>

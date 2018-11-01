@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:orientation="horizontal"
+        android:paddingLeft="48dp"
+        android:paddingRight="48dp">
+
+        <View
+            style="@style/line_divide"
+            android:layout_width="50dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            style="@style/text_big_nomal"
+            android:layout_centerInParent="true"
+            android:text="请选择以下方式登录" />
+
+        <View
+            style="@style/line_divide"
+            android:layout_width="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="250dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/qq_login"
+            style="@style/text_small_nomal"
+            android:drawablePadding="@dimen/distance_text_text_8"
+            android:drawableTop="@mipmap/login_qq"
+            android:text="QQ账号" />
+
+        <TextView
+            android:id="@+id/weixin_login"
+            style="@style/text_small_nomal"
+            android:layout_marginLeft="56dp"
+            android:drawablePadding="@dimen/distance_text_text_8"
+            android:drawableTop="@mipmap/login_weixin"
+            android:text="微信账号" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tip"
+        style="@style/text_small_nomal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp" />
+</RelativeLayout>

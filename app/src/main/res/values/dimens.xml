@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--app标题栏高度-->
+    <dimen name="app_title_height">45dp</dimen>
+
+    <!--应用内APP文字-->
+    <dimen name="text_more_small">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_middle">14sp</dimen>
+    <dimen name="text_big">16sp</dimen>
+    <dimen name="text_less_huge">18sp</dimen>
+    <dimen name="text_huge">20sp</dimen>
+
+    <dimen name="line_divide">0.5dp</dimen>
+    <dimen name="line_main_divide">0.5dp</dimen>
+    <dimen name="btn_line_divide">0.5dp</dimen>
+    <dimen name="drawable_padding_normal">8dp</dimen>
+    <dimen name="drawable_padding_small">3dp</dimen>
+
+    <!--设置中选项-->
+    <dimen name="setting_height">55dp</dimen>
+    <dimen name="setting_left">20dp</dimen>
+    <dimen name="setting_right">15dp</dimen>
+
+    <dimen name="setting_cut_10">10dp</dimen>
+    <dimen name="setting_cut_8">8dp</dimen>
+
+    <dimen name="next_height_45">45dp</dimen>
+
+    <!--上下左右距离-->
+    <dimen name="distance_left">18dp</dimen>
+    <dimen name="distance_top">15dp</dimen>
+    <dimen name="distance_top_20">20dp</dimen>
+    <dimen name="distance_image_text_12">12dp</dimen>
+    <dimen name="distance_image_text_15">15dp</dimen>
+    <dimen name="distance_text_text_12">12dp</dimen>
+    <dimen name="distance_text_text_10">10dp</dimen>
+    <dimen name="distance_text_text_8">8dp</dimen>
+    <dimen name="distance_main_top">28dp</dimen>
+    
+    <!--书籍封面大小-->
+    <dimen name="book_cover_width">90dp</dimen>
+    <dimen name="book_cover_height">120dp</dimen>
+
+    <!--文字间隔-->
+    <dimen name="line_spacing_3">3dp</dimen>
+    <dimen name="line_spacing_5">5dp</dimen>
+
+    <dimen name="book_user_avatar">44dp</dimen>
+</resources>

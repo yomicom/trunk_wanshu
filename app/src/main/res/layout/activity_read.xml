@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlBookReadRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/theme_leather_bg"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/flReadWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:layerType="hardware" />
+
+    <LinearLayout
+        android:id="@+id/llBookReadTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_title_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/reader_menu_bg_color"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/distance_left"
+        android:paddingRight="@dimen/distance_left"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:src="@mipmap/back_read" />
+
+        <TextView
+            android:id="@+id/tvBookReadTocTitle"
+            style="@style/text_big_nomal"
+            android:textColor="@color/white"
+            android:layout_width="100dp"
+            android:lines="1"
+            android:layout_marginLeft="1dp"
+            android:visibility="gone"
+            tools:text="" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5" />
+
+        <ImageView
+            android:id="@+id/tvBookReadReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ic_buy_book" />
+
+        <ImageView
+            android:id="@+id/tvBookReadCommunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ic_to_gift" />
+
+        <ImageView
+            android:id="@+id/tvBookReadIntroduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_add_book" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDownloadProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llBookReadBottom"
+        android:background="#89232323"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        android:text="@string/book_read_download_progress"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+    <include layout="@layout/layout_read_aa_set" />
+
+    <include layout="@layout/layout_read_mark" />
+
+    <LinearLayout
+        android:id="@+id/llBookReadBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_height_45"
+        android:layout_alignParentBottom="true"
+        android:background="@color/reader_menu_bg_color"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/tv_book_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_menu_toc_normal" />
+
+
+        <ImageView
+            android:id="@+id/tv_book_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_menu_mode_night_normal" />
+
+
+        <ImageView
+            android:id="@+id/tv_book_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_menu_settings_normal" />
+
+        <ImageView
+            android:id="@+id/tv_book_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_menu_bookmark" />
+
+    </LinearLayout>
+
+</RelativeLayout>

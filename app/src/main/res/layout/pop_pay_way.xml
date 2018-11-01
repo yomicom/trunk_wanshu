@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/id_pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/ll_horizontal_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_big_nomal"
+                android:layout_width="wrap_content"
+                android:text="选择支付方式" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/distance_text_text_8"
+                android:src="@mipmap/share_close_dialog" />
+        </RelativeLayout>
+
+        <View style="@style/line_divide" />
+
+        <RelativeLayout
+            android:id="@+id/choose_alipay"
+            style="@style/ll_horizontal_normal"
+            android:layout_marginTop="@dimen/distance_text_text_10">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:drawableLeft="@mipmap/ic_ali_pay"
+                android:drawablePadding="7dp"
+                android:text="支付宝支付" />
+
+            <ImageView
+                android:id="@+id/iv_select_alipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_choose_book" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/choose_weixin_pay"
+            style="@style/ll_horizontal_normal">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:drawableLeft="@mipmap/ic_weixin_pay"
+                android:drawablePadding="7dp"
+                android:text="微信支付" />
+
+            <ImageView
+                android:id="@+id/iv_select_weixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_no_pay" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_add_money"
+            style="@style/btn_login_style"
+            android:text="确定支付" />
+    </LinearLayout>
+</LinearLayout>

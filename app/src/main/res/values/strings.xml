@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">万书</string>
+
+    <string name="login">登录</string>
+    <string name="weixin_login">微信登录</string>
+    <string name="qq_login">QQ登录</string>
+
+
+    <string name="book_read_reading">朗读</string>
+    <string name="book_read_community">社区</string>
+    <string name="book_read_change_source">换源</string>
+    <string name="book_read_introduce">简介</string>
+    <string name="book_read_mode_day">夜间</string>
+    <string name="book_read_mode_day_manual_setting">日间</string>
+    <string name="book_read_mode_night_manual_setting">夜间</string>
+    <string name="book_read_feedback">反馈</string>
+    <string name="book_read_settings">设置</string>
+    <string name="book_read_download">缓存</string>
+    <string name="book_read_mark">书签</string>
+    <string name="book_read_toc">目录</string>
+    <string name="add_bookmark">新增书签</string>
+    <string name="manage_bookmark">管理</string>
+    <string name="clear_bookmark">清除</string>
+    <string name="book_read_download_error">网络异常，已取消下载</string>
+    <string name="book_read_download_complete">缓存完成，失败%1$d章</string>
+    <string name="book_read_alreday_download">已缓存过:%1$s(%2$d/%3$d)...</string>
+    <string name="book_read_download_progress">正在缓存:%1$s(%2$d/%3$d)...</string>
+    <string name="net_error">网络异常</string>
+    <string name="book_read_add_book">添书</string>
+    <string name="book_read_would_you_like_to_add_this_to_the_book_shelf">是否将本书加入书架？</string>
+    <string name="book_read_join_the_book_shelf">加入书架</string>
+    <string name="book_read_not">不了</string>
+
+    <string name="chongzhi_record">充值记录</string>
+    <string name="history_record">阅读历史</string>
+    <string name="select_books">小说精选</string>
+    <string name="details_books">书籍详情</string>
+
+    <string name="no_web">网络不给力，请稍后再试～～</string>
+    <string name="to_get_web">再试一次</string>
+    <string name="no_book">马上去书城发现好书！</string>
+    <string name="to_get_book">去找书</string>
+    <string name="no_login">登录后开启精彩阅读时间</string>
+    <string name="to_login">马上登录</string>
+
+    <string name="cancel_selected_all">取消全选</string>
+    <string name="selected_all">全选</string>
+    <string name="has_not_selected_delete_book">你没有选择要删的书哦</string>
+    <string name="remove_selected_book">移除所选书籍</string>
+    <string name="delete_local_cache">同时删除本地缓存</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="i_reader_finish">完成</string>
+    <string name="i_reader_last_read">最近阅读</string>
+    <string name="i_reader_all_select">全选</string>
+    <string name="i_reader_delete">删除</string>
+    <string name="i_reader_move">移动至</string>
+    <string name="i_reader_share">分享</string>
+    <string name="i_reader_book_order">加入书单</string>
+    <string name="i_reader_detail">详情</string>
+
+</resources>

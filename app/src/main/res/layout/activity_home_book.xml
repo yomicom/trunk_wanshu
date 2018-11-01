@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.wxb.wanshu.ui.activity.HomeBookActivity">
+
+    <RelativeLayout
+        android:id="@+id/ll_bar"
+        style="@style/ll_horizontal_normal">
+
+        <LinearLayout
+            android:id="@+id/ll_woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_selc_woman"
+                style="@style/text_big_nomal"
+                android:text="女生"
+                android:textColor="@color/gobal_color"
+                android:textSize="17sp" />
+
+            <View
+                android:id="@+id/v_selc_woman"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_below="@id/tv_selc_woman"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/line_selc_sex" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/ll_woman"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_selc_man"
+                style="@style/text_big_nomal"
+                android:text="男生"
+                android:textSize="17sp" />
+
+            <View
+                android:id="@+id/v_selc_man"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_below="@id/tv_selc_man"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/line_selc_sex"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_search_book" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_below="@id/ll_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_to_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/distance_main_top"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/distance_main_top"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_content3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/distance_main_top"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_content4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/distance_main_top"
+                android:visibility="visible">
+
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+    <ImageView
+        android:id="@+id/iv_to_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/back_scroll_top"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="@dimen/distance_top_20"/>
+</RelativeLayout>

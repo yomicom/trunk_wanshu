@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--画一个边线，四个边框只有上面没有边框-->
+<inset
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--形状-->
+    <shape android:shape="rectangle">
+        <!--填充颜色-->
+        <solid android:color="@color/common_bg"></solid>
+        <!--描边-->
+        <stroke android:width="1dp" android:color="#EEEEEE"></stroke>
+        <!--圆角-->
+        <corners android:topLeftRadius="4dp" android:bottomLeftRadius="4dp"/>
+        <size
+            android:width="39dp"
+            android:height="29dp" />
+    </shape>
+</inset>

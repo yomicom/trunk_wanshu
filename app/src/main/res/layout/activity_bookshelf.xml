@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.wxb.wanshu.ui.activity.BookshelfActivity">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_title_height"
+        android:background="@color/main_title_color">
+
+        <TextView
+            style="@style/text_big_nomal"
+            android:layout_centerInParent="true"
+            android:text="书架"
+            android:textSize="@dimen/text_huge" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/setting_right"
+            android:src="@mipmap/ic_search_book" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_edit"
+        style="@style/ll_horizontal_normal"
+        android:visibility="gone"
+        android:background="@color/main_title_color">
+
+        <TextView
+            android:id="@+id/tv_select_all"
+            style="@style/text_big_nomal"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/distance_text_text_10"
+            android:text="全选" />
+        <TextView
+            android:id="@+id/tv_selected_books"
+            style="@style/text_big_nomal"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:text="已选择" />
+
+        <TextView
+            android:id="@+id/tv_finish"
+            style="@style/text_big_nomal"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/distance_text_text_10"
+            android:text="完成" />
+    </RelativeLayout>
+
+    <View style="@style/line_divide" />
+
+    <com.wxb.wanshu.view.recycleview.EasyRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:paddingLeft="@dimen/distance_text_text_8"
+        android:paddingRight="@dimen/distance_text_text_8"
+        app:layout_empty="@layout/bookshelf_empty_view"
+        app:layout_progress="@layout/common_progress_view"
+        app:scrollbarStyle="insideOverlay" />
+
+    <!--<GridView-->
+    <!--android:id="@+id/gridview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white"-->
+    <!--android:columnWidth="100dp"-->
+    <!--android:numColumns="3"-->
+    <!--android:paddingBottom="@dimen/distance_top_20"-->
+    <!--android:paddingLeft="@dimen/distance_left"-->
+    <!--android:paddingRight="@dimen/distance_left"-->
+    <!--android:paddingTop="@dimen/distance_top_20"-->
+    <!--android:scrollbars="none"-->
+    <!--android:stretchMode="spacingWidth"-->
+    <!--android:verticalSpacing="@dimen/distance_top_20"-->
+    <!--android:visibility="visible">-->
+
+    <!--</GridView>-->
+
+    <RelativeLayout
+        android:id="@+id/rl_no_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/common_bg"
+        android:visibility="gone">
+
+        <com.wxb.wanshu.view.EmptyView
+            android:id="@+id/emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"></com.wxb.wanshu.view.EmptyView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llBatchManagement"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View style="@style/line_divide" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/gobal_color" />
+    </LinearLayout>
+</LinearLayout>

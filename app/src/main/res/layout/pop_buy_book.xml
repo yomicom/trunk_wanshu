@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/id_pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/ll_horizontal_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_big_nomal"
+                android:layout_width="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/distance_text_text_8"
+                android:src="@mipmap/share_close_dialog" />
+        </RelativeLayout>
+
+        <View style="@style/line_divide" />
+
+        <TextView
+            android:id="@+id/tv_book_coin"
+            style="@style/text_big_nomal"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:text="余额：" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_big_nomal"
+                android:text="需支付：" />
+
+            <TextView
+                android:id="@+id/tv_need_pay"
+                style="@style/text_big_nomal"
+                android:text="0书币"
+                android:textColor="@color/gobal_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_next_chapter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_choose_book" />
+
+            <TextView
+                style="@style/text_middle_nomal"
+                android:layout_marginLeft="7dp"
+                android:text="自动购买下一章，不再提示"
+                android:textColor="@color/text_color_2" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_add_money"
+            style="@style/btn_login_style"
+            android:text="确定购买" />
+    </LinearLayout>
+</LinearLayout>

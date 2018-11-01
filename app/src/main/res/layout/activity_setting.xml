@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/common_bg"
+    tools:context="com.wxb.wanshu.ui.activity.SettingActivity">
+
+    <include layout="@layout/common_toolbar" />
+
+    <RelativeLayout style="@style/style_me_next"
+        android:layout_marginTop="@dimen/distance_image_text_12">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_setting_push"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="消息提醒"
+            android:textColor="@color/text_color_1"
+            android:textSize="@dimen/text_big"
+            android:theme="@style/MySwitch" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_clean"
+        style="@style/style_me_next"
+        android:layout_marginTop="@dimen/distance_image_text_12"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="清理缓存" />
+
+    <View style="@style/line_divide" />
+
+    <TextView
+        android:id="@+id/tv_advice"
+        style="@style/style_me_next"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="意见反馈" />
+
+    <View style="@style/line_divide" />
+
+    <TextView
+        android:id="@+id/tv_about_us"
+        style="@style/style_me_next"
+        android:drawablePadding="@dimen/drawable_padding_normal"
+        android:drawableRight="@mipmap/icon_next_activity"
+        android:text="关于我们" />
+
+    <Button
+        android:id="@+id/out_login"
+        style="@style/btn_login_style"
+        android:text="退出登录" />
+</LinearLayout>

@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rl_search_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="6dp"
+                android:src="@mipmap/ic_search" />
+
+            <EditText
+                android:id="@+id/et_article_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="输入书名/关键词"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="@color/text_color_1"
+                android:textColorHint="@color/text_color_2"
+                android:textCursorDrawable="@null"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_clean_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@mipmap/quit"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cancle_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="5dp"
+            android:text="取消"
+            android:textColor="@color/text_color_2"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <com.wxb.wanshu.view.recycleview.EasyRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/common_empty_view"
+        app:layout_progress="@layout/common_progress_view"
+        app:scrollbarStyle="insideOverlay"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_other"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/rl_normal"
+            android:layout_marginTop="@dimen/distance_text_text_10">
+
+            <TextView
+                style="@style/text_middle_nomal"
+                android:text="历史搜索"
+                android:textColor="@color/text_color_2" />
+
+            <ImageView
+                android:id="@+id/iv_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_clear_history" />
+        </RelativeLayout>
+
+        <com.wxb.wanshu.view.TagGroup
+            android:id="@+id/tag_group"
+            style="@style/TagGroup"
+            android:layout_marginLeft="@dimen/distance_text_text_10"
+            android:layout_marginTop="@dimen/distance_text_text_8"
+            android:layout_marginRight="@dimen/distance_left" />
+
+        <RelativeLayout style="@style/rl_normal"
+            android:layout_marginTop="@dimen/distance_top_20">
+
+            <TextView
+                style="@style/text_middle_nomal"
+                android:text="热门搜索"
+                android:textColor="@color/text_color_2" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingRight="@dimen/distance_left"
+            android:paddingLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/line_spacing_5"
+            app:layout_progress="@layout/common_progress_view" />
+    </LinearLayout>
+</LinearLayout>

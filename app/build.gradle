@@ -1,0 +1,168 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'me.tatarka.retrolambda'//这个是重点
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.wxb.wanshu"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+//        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // dex突破65535的限制
+        multiDexEnabled true
+        //alibaba ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        //这句很关键  AS新版本java8新特性需要jack工具链
+//        jackOptions {
+//            enabled true
+//        }
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "Ovdy4uU7tl9RTz2f4eoecA",
+                GETUI_APP_KEY   : "szrmjabOKF6Inxhcqgzvq",
+                GETUI_APP_SECRET: "oAtJeybvU99qNorurjdhd1"
+        ]
+    }
+    signingConfigs {
+        release {
+            storeFile file("../wanshu.jks")
+            storePassword "soude123"
+            keyAlias "wanshu"
+            keyPassword "soude123"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled true
+            shrinkResources true
+            //true打包出错：\build\intermediates\res\resources-anzhi-debug-stripped.ap_' specified for property 'resourceFile' does not exist
+            zipAlignEnabled true// 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+
+        s_default {}
+        s_myapp {}
+//        s_mi {}
+//        s_360 {}
+//        s_meizu {}
+//        s_wandoujia {}
+//        s_hicloud {}
+//        s_aliyun {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+
+
+    greendao {
+        schemaVersion 1//数据库版本号
+        daoPackage 'com.zhy.ganamrs.app.greendao'//设置DaoMaster、DaoSession、Dao包名
+        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    }
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+            exclude module: 'jsr305'
+        })
+        //support
+        //tools
+        compile rootProject.ext.dependencies["dagger2"]
+        annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+        //view
+        annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+            exclude module: 'support-annotations'
+            exclude module: 'butterknife-annotations'
+        }
+        //test
+
+        //eventbus
+        compile rootProject.ext.dependencies["androideventbus"]
+        //umeng统计
+        compile rootProject.ext.dependencies["umeng-analytics"]
+        //使用Rxjava2
+        compile rootProject.ext.dependencies["okhttp3"]
+        compile rootProject.ext.dependencies["rxandroid"]
+        compile rootProject.ext.dependencies["rxjava"]
+        compile rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+
+        compile rootProject.ext.dependencies["glide"]
+        //个推
+        compile 'com.getui:sdk:2.11.1.0'
+
+        //友盟分享统计
+        compile files('libs/SocialSDK_QQ_Simplify.jar')
+        compile files('libs/SocialSDK_WeiXin_Full.jar')
+        compile files('libs/umeng_social_api.jar')
+        compile files('libs/umeng_social_net.jar')
+        compile files('libs/umeng_social_tool.jar')
+        compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
+
+        compile 'me.jessyan:arms:2.2.0'
+        //这个是重点
+        retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:+'
+        compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+        compile 'com.github.AlphaBoom:ClassifyView:0.5.2'
+
+        //滑动返回
+        compile 'com.r0adkll:slidableactivity:2.0.6'
+    }
+
+    dataBinding {
+        enabled true
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    compile files('libs/alipaySdk-20170922.jar')
+//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'junit:junit:4.12'
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.wxb.wanshu.ui.activity.CommentActivity">
+
+    <include layout="@layout/common_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/common_bg"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/white"
+                android:gravity="top"
+                android:hint="请在此输入您的问题或建议"
+                android:lineSpacingExtra="@dimen/line_spacing_3"
+                android:maxLength="200"
+                android:padding="@dimen/distance_top_20"
+                android:textColor="@color/text_color_1"
+                android:textColorHint="@color/text_color_2"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_qq"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/distance_text_text_8"
+                android:background="@color/white"
+                android:gravity="top"
+                android:hint="请输入QQ号以便我们与您联系"
+                android:inputType="number"
+                android:lines="1"
+                android:padding="@dimen/distance_top_20"
+                android:textColor="@color/text_color_1"
+                android:textColorHint="@color/text_color_2"
+                android:textSize="14sp" />
+
+            <View style="@style/line_divide" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/distance_left">
+
+                <TextView
+                    style="@style/text_middle_nomal"
+                    android:text="上传问题图片：" />
+
+                <com.wxb.wanshu.view.NoScrollGridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_text_text_12"
+                    android:numColumns="3"
+                    android:stretchMode="columnWidth"
+                    android:scrollbars="none"
+                    android:listSelector="@color/transparent"
+                    android:verticalSpacing="@dimen/distance_text_text_12"></com.wxb.wanshu.view.NoScrollGridView>
+
+                <TextView
+                    style="@style/text_middle_nomal"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/distance_top_20"
+                    android:gravity="right"
+                    android:text="最多可以上传6张"
+                    android:textColor="@color/text_color_2" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_send"
+                style="@style/btn_login_style"
+                android:background="@drawable/less_add_money"
+                android:text="发送"
+                android:layout_marginBottom="@dimen/next_height_45"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
