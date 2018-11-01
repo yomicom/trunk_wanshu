@@ -84,34 +84,36 @@ public class CustomerBanner extends FrameLayout {
 
     public void setData(HomeData.DataBeanX data) {
         List<HomeData.DataBeanX.DataBean> list = data.getData();
-        initContent(list.size());
-        for (int i = 0; i < list.size(); i++) {
-            View item = View.inflate(mContext, R.layout.item_vp_banner, null);
-            ImageView iv = item.findViewById(R.id.iv_banner);
-            TextView tvTitle = item.findViewById(R.id.tv_banner_title);
-            TextView tvIntro = item.findViewById(R.id.tv_banner_intro);
+        if (list != null && list.size() > 0) {
+            initContent(list.size());
+            for (int i = 0; i < list.size(); i++) {
+                View item = View.inflate(mContext, R.layout.item_vp_banner, null);
+                ImageView iv = item.findViewById(R.id.iv_banner);
+                TextView tvTitle = item.findViewById(R.id.tv_banner_title);
+                TextView tvIntro = item.findViewById(R.id.tv_banner_intro);
 
-            HomeData.DataBeanX.DataBean bean = list.get(i);
-            ImageUtils.displayImage(mContext, iv, bean.getCover(),0,0);
-            tvTitle.setText(bean.getTitle());
-            tvIntro.setText(bean.getSummary());
+                HomeData.DataBeanX.DataBean bean = list.get(i);
+                ImageUtils.displayImage(mContext, iv, bean.getCover(), 0, 0);
+                tvTitle.setText(bean.getTitle());
+                tvIntro.setText(bean.getSummary());
 
-            item.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    BookDetailsActivity.startActivity(mContext, bean.getNovel_id());
-                }
-            });
+                item.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        BookDetailsActivity.startActivity(mContext, bean.getNovel_id());
+                    }
+                });
 
-            mPagesIV.add(item);
+                mPagesIV.add(item);
+            }
+
+
+            mVP.setAdapter(new TopPagerAdapter());
+            mVP.setFocusable(true);
+            mVP.setCurrentItem(currentItem);
+            mVP.addOnPageChangeListener(new TopOnPageChangeListener());
+            startCarousel();
         }
-
-
-        mVP.setAdapter(new TopPagerAdapter());
-        mVP.setFocusable(true);
-        mVP.setCurrentItem(currentItem);
-        mVP.addOnPageChangeListener(new TopOnPageChangeListener());
-        startCarousel();
     }
 
     private final Runnable task = new Runnable() {

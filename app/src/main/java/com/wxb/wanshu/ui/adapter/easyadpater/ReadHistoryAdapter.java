@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.ReadHistoryList;
-import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.view.recycleview.adapter.BaseViewHolder;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
@@ -21,7 +20,7 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BaseViewHolder<ReadHistoryList.DataBean>(parent, R.layout.item_read_history) {
+        return new BaseViewHolder<ReadHistoryList.DataBean>(parent, R.layout.include_item_read_history) {
             @Override
             public void setData(ReadHistoryList.DataBean item) {
 

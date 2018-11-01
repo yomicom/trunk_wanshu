@@ -37,7 +37,8 @@
             android:layout_marginTop="@dimen/distance_text_text_10"
             android:layout_toRightOf="@id/iv_book"
             android:lines="1"
-            android:text="" />
+            android:text=""
+            />
 
     </RelativeLayout>
 </LinearLayout>

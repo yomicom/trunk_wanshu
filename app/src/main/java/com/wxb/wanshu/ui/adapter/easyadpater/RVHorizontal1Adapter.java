@@ -19,7 +19,7 @@ public class RVHorizontal1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataB
     private OnRvItemClickListener itemClickListener;
 
     public RVHorizontal1Adapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
-        super(context, list, R.layout.item_horizontal_1);
+        super(context, list, R.layout.include_item_easy_book);
         this.itemClickListener = listener;
     }
 

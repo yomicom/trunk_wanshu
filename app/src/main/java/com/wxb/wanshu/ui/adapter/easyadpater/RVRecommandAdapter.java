@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.BookDetails;
-import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.ui.adapter.base.EasyRVAdapter;
 import com.wxb.wanshu.ui.adapter.base.EasyRVHolder;
@@ -20,7 +19,7 @@ public class RVRecommandAdapter extends EasyRVAdapter<BookDetails.DataBean.Recom
     private OnRvItemClickListener itemClickListener;
 
     public RVRecommandAdapter(Context context, List<BookDetails.DataBean.RecommendBean> list, OnRvItemClickListener listener) {
-        super(context, list, R.layout.item_horizontal_1);
+        super(context, list, R.layout.include_item_easy_book);
         this.itemClickListener = listener;
     }
 

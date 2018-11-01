@@ -60,4 +60,9 @@
     <string name="i_reader_book_order">加入书单</string>
     <string name="i_reader_detail">详情</string>
 
+    <string name="home_rank">排行榜</string>
+    <string name="home_best">精品馆</string>
+    <string name="home_short">短篇</string>
+    <string name="home_finish">完本</string>
+
 </resources>

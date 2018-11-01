@@ -101,11 +101,36 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                 .inject(this);
 
         mPresenter.attachView(this);
-        mPresenter.getHomeData(sex_type);
+//        mPresenter.getHomeData(sex_type);
+//        dialog = CustomDialog.instance(this);
+//        dialog.setCancelable(true);
+//        dialog.show();
 
-        dialog = CustomDialog.instance(this);
-        dialog.setCancelable(true);
-        dialog.show();
+        showData();
+    }
+
+    private void showData() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+
+        HomeData.DataBeanX dataBeanX = new HomeData.DataBeanX();
+        //轮播图
+        bannerFragment = BannerFragment.newInstance(dataBeanX, sex_type);
+        transaction.replace(frameId[0], bannerFragment);
+
+        HorizontalType1Fragment type1Fragment = HorizontalType1Fragment.newInstance(dataBeanX);
+        transaction.replace(frameId[1], type1Fragment);
+
+        VerticalType1Fragment verticalType1Fragment = VerticalType1Fragment.newInstance(dataBeanX, sex_type);
+        transaction.replace(frameId[2], verticalType1Fragment);
+
+        GridViewType1Fragment gridViewType1Fragment = GridViewType1Fragment.newInstance(dataBeanX, sex_type);
+        transaction.replace(frameId[3], gridViewType1Fragment);
+
+//        VerticalType2Fragment verticalType2Fragment = VerticalType2Fragment.newInstance(dataBeanX);
+//        transaction.replace(frameId[4], verticalType2Fragment);
+
+        transaction.commit();
     }
 
     @OnClick({R.id.ll_woman, R.id.ll_man, R.id.iv_search, R.id.iv_to_top})
@@ -193,7 +218,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                     transaction.replace(frameId[2], verticalType1Fragment);
                 }
                 if (TYPE_RANK.equals(type)) {
-                    GridViewType1Fragment gridViewType1Fragment = GridViewType1Fragment.newInstance(dataBeanX,sex_type);
+                    GridViewType1Fragment gridViewType1Fragment = GridViewType1Fragment.newInstance(dataBeanX, sex_type);
                     transaction.replace(frameId[3], gridViewType1Fragment);
                 }
                 if (TYPE_FREE.equals(type)) {

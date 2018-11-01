@@ -72,7 +72,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
         tabHost.setup(this.getLocalActivityManager());
 
         tabHost.addTab(tabHost.newTabSpec(TAB_DATA).setIndicator(TAB_DATA)
-                .setContent(new Intent(this, HomeActivity.class)));
+                .setContent(new Intent(this, HomeBookActivity.class)));
         tabHost.addTab(tabHost.newTabSpec(TAB_FUNC).setIndicator(TAB_FUNC)
                 .setContent(new Intent(this, BookshelfActivity.class)));
         tabHost.addTab(tabHost.newTabSpec(TAB_ARC).setIndicator(TAB_ARC)

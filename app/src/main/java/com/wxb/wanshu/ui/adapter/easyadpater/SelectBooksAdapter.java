@@ -1,21 +1,12 @@
 package com.wxb.wanshu.ui.adapter.easyadpater;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.BookList;
-import com.wxb.wanshu.bean.HomeData;
-import com.wxb.wanshu.common.OnRvItemClickListener;
-import com.wxb.wanshu.ui.adapter.base.EasyRVAdapter;
-import com.wxb.wanshu.ui.adapter.base.EasyRVHolder;
 import com.wxb.wanshu.view.recycleview.adapter.BaseViewHolder;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
-
-import java.util.List;
-
-import static android.R.id.list;
 
 /**
  * Created by qiming on 2017/11/30.
@@ -29,7 +20,7 @@ public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> 
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BaseViewHolder<BookList.DataBean>(parent,R.layout.item_select_book) {
+        return new BaseViewHolder<BookList.DataBean>(parent,R.layout.include_item_big_book) {
             @Override
             public void setData(BookList.DataBean item) {
 

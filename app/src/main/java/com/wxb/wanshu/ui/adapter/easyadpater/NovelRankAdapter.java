@@ -4,12 +4,9 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.NovelRank;
 import com.wxb.wanshu.view.recycleview.adapter.BaseViewHolder;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
-
-import java.util.List;
 
 /**
  * Created by qiming on 2017/11/30.
@@ -23,7 +20,7 @@ public class NovelRankAdapter extends RecyclerArrayAdapter<NovelRank.DataBean> {
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BaseViewHolder<NovelRank.DataBean>(parent, R.layout.item_select_book) {
+        return new BaseViewHolder<NovelRank.DataBean>(parent, R.layout.include_item_big_book) {
             @Override
             public void setData(NovelRank.DataBean item) {
 

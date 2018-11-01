@@ -48,4 +48,8 @@
     <dimen name="line_spacing_5">5dp</dimen>
 
     <dimen name="book_user_avatar">44dp</dimen>
+
+    <!-- 头像图片大小 -->
+    <dimen name="img_cover_width">45dp</dimen>
+    <dimen name="img_cover_height">45dp</dimen>
 </resources>
