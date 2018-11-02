@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -25,9 +24,10 @@ import com.wxb.wanshu.common.MyShareListener;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
 import com.wxb.wanshu.ui.fragment.BannerFragment;
-import com.wxb.wanshu.ui.fragment.GridViewType1Fragment;
-import com.wxb.wanshu.ui.fragment.HorizontalType1Fragment;
-import com.wxb.wanshu.ui.fragment.VerticalType1Fragment;
+import com.wxb.wanshu.ui.fragment.HomeBookListFragment;
+import com.wxb.wanshu.ui.fragment.HomeNewBookFragment;
+import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
+import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.fragment.VerticalType2Fragment;
 import com.wxb.wanshu.ui.presenter.HomeBookPresenter;
 import com.wxb.wanshu.view.loadding.CustomDialog;
@@ -118,14 +118,17 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         bannerFragment = BannerFragment.newInstance(dataBeanX, sex_type);
         transaction.replace(frameId[0], bannerFragment);
 
-        HorizontalType1Fragment type1Fragment = HorizontalType1Fragment.newInstance(dataBeanX);
-        transaction.replace(frameId[1], type1Fragment);
+        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(dataBeanX);
+        transaction.replace(frameId[1], recommendFragment);
 
-        VerticalType1Fragment verticalType1Fragment = VerticalType1Fragment.newInstance(dataBeanX, sex_type);
-        transaction.replace(frameId[2], verticalType1Fragment);
+        HomeNewBookFragment newBookFragment = HomeNewBookFragment.newInstance(dataBeanX);
+        transaction.replace(frameId[2], newBookFragment);
 
-        GridViewType1Fragment gridViewType1Fragment = GridViewType1Fragment.newInstance(dataBeanX, sex_type);
-        transaction.replace(frameId[3], gridViewType1Fragment);
+        HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(dataBeanX, sex_type);
+        transaction.replace(frameId[3], homePopularityFragment);
+
+        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(dataBeanX, sex_type);
+        transaction.replace(frameId[4], homeBookListFragment);
 
 //        VerticalType2Fragment verticalType2Fragment = VerticalType2Fragment.newInstance(dataBeanX);
 //        transaction.replace(frameId[4], verticalType2Fragment);
@@ -210,16 +213,16 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                     transaction.replace(frameId[0], bannerFragment);
                 }
                 if (TYPE_GRID.equals(type)) {
-                    HorizontalType1Fragment type1Fragment = HorizontalType1Fragment.newInstance(dataBeanX);
+                    HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance(dataBeanX);
                     transaction.replace(frameId[1], type1Fragment);
                 }
                 if (TYPE_LIST.equals(type)) {
-                    VerticalType1Fragment verticalType1Fragment = VerticalType1Fragment.newInstance(dataBeanX, sex_type);
-                    transaction.replace(frameId[2], verticalType1Fragment);
+                    HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(dataBeanX, sex_type);
+                    transaction.replace(frameId[2], homeBookListFragment);
                 }
                 if (TYPE_RANK.equals(type)) {
-                    GridViewType1Fragment gridViewType1Fragment = GridViewType1Fragment.newInstance(dataBeanX, sex_type);
-                    transaction.replace(frameId[3], gridViewType1Fragment);
+                    HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(dataBeanX, sex_type);
+                    transaction.replace(frameId[3], homePopularityFragment);
                 }
                 if (TYPE_FREE.equals(type)) {
                     VerticalType2Fragment verticalType2Fragment = VerticalType2Fragment.newInstance(dataBeanX);

@@ -4,49 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/distance_left"
-        android:layout_marginRight="@dimen/distance_left">
-
-        <TextView
-            android:id="@+id/tv_tag"
-            style="@style/text_big_nomal"
-            android:layout_width="match_parent"
-            android:gravity="left"
-            android:textSize="@dimen/text_huge" />
-
-        <com.wxb.wanshu.view.RushBuyCountDownTimerView
-            android:id="@+id/timerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone"></com.wxb.wanshu.view.RushBuyCountDownTimerView>
-
-        <TextView
-            android:id="@+id/tv_more"
-            style="@style/text_middle_nomal"
-            android:layout_alignParentRight="true"
-            android:drawableRight="@mipmap/ic_look_more"
-            android:text="查看更多"
-            android:layout_centerVertical="true"
-            android:textColor="@color/text_color_2"
-            android:visibility="visible" />
-    </RelativeLayout>
+    <include layout="@layout/include_look_more"></include>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_horizontal_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/distance_left"
-        android:layout_marginRight="@dimen/distance_left"
         android:layout_marginTop="12dp"
-        android:foregroundGravity="center" />
-    <View style="@style/line_main_divide"
-        android:layout_marginLeft="@dimen/distance_left"
         android:layout_marginRight="@dimen/distance_left"
-        android:layout_marginTop="@dimen/distance_main_top"/>
+        android:foregroundGravity="center" />
+
+    <View
+        style="@style/line_main_divide"
+        android:layout_marginLeft="@dimen/distance_left"
+        android:layout_marginTop="@dimen/distance_main_top"
+        android:layout_marginRight="@dimen/distance_left" />
 </LinearLayout>

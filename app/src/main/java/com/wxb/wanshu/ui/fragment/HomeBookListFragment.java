@@ -1,9 +1,7 @@
 package com.wxb.wanshu.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +15,7 @@ import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVHorizontal1Adapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVVertical1Adapter;
-import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.recycleview.NoScrollLayoutManager;
 import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
 
@@ -32,7 +28,7 @@ import butterknife.Unbinder;
  * Created by qiming on 2017/11/30.
  */
 
-public class VerticalType1Fragment extends BaseFragment implements OnRvItemClickListener {
+public class HomeBookListFragment extends BaseFragment implements OnRvItemClickListener {
     @BindView(R.id.tv_tag)
     TextView tvTag;
     @BindView(R.id.tv_more)
@@ -49,8 +45,8 @@ public class VerticalType1Fragment extends BaseFragment implements OnRvItemClick
         return R.layout.vertical_type1;
     }
 
-    public static VerticalType1Fragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
-        VerticalType1Fragment fragment = new VerticalType1Fragment();
+    public static HomeBookListFragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
+        HomeBookListFragment fragment = new HomeBookListFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", dataBeanX);
         bundle.putSerializable("sex", sex_type);
@@ -99,7 +95,6 @@ public class VerticalType1Fragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;

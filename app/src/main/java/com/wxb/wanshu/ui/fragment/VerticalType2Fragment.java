@@ -29,8 +29,8 @@ import butterknife.Unbinder;
  */
 
 public class VerticalType2Fragment extends BaseFragment implements OnRvItemClickListener {
-    @BindView(R.id.timerView)
-    RushBuyCountDownTimerView timerView;
+//    @BindView(R.id.timerView)
+//    RushBuyCountDownTimerView timerView;
     @BindView(R.id.tv_tag)
     TextView tvTag;
     @BindView(R.id.tv_more)
@@ -72,11 +72,11 @@ public class VerticalType2Fragment extends BaseFragment implements OnRvItemClick
         tvTag.setText(data.getName());
 
         int time = data.getTtl();
-        visible(timerView);
+//        visible(timerView);
         gone(tvMore);
 
-        timerView.addTime(time);
-        timerView.start();
+//        timerView.addTime(time);
+//        timerView.start();
     }
 
     @Override
@@ -101,7 +101,6 @@ public class VerticalType2Fragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;

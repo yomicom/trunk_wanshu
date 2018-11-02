@@ -56,7 +56,6 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
 
     public BuyBookPopupWindow(Activity context, int novel_id, int chapter) {
         super(context);
-        // TODO Auto-generated constructor stub
         bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
@@ -73,7 +72,6 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
      * @param context
      */
     private void init(Context context) {
-        // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         //绑定布局
         mPopView = inflater.inflate(R.layout.pop_buy_book, null);
@@ -127,7 +125,6 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
                 int height = mPopView.findViewById(R.id.id_pop_layout).getTop();
                 int y = (int) event.getY();
                 if (event.getAction() == MotionEvent.ACTION_UP) {

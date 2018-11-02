@@ -18,9 +18,6 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.NovelRankActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVGridView1Adapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVVertical1Adapter;
-import com.wxb.wanshu.utils.ViewToolUtils;
-import com.wxb.wanshu.view.recycleview.NoScrollLayoutManager;
 import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
 
 import butterknife.BindView;
@@ -31,7 +28,7 @@ import butterknife.Unbinder;
  * Created by qiming on 2017/11/30.
  */
 
-public class GridViewType1Fragment extends BaseFragment implements OnRvItemClickListener {
+public class HomePopularityFragment extends BaseFragment implements OnRvItemClickListener {
     @BindView(R.id.tv_tag)
     TextView tvTag;
     @BindView(R.id.tv_more)
@@ -48,8 +45,8 @@ public class GridViewType1Fragment extends BaseFragment implements OnRvItemClick
         return R.layout.vertical_type1;
     }
 
-    public static GridViewType1Fragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
-        GridViewType1Fragment fragment = new GridViewType1Fragment();
+    public static HomePopularityFragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
+        HomePopularityFragment fragment = new HomePopularityFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", dataBeanX);
         bundle.putSerializable("sex", sex_type);
@@ -97,7 +94,6 @@ public class GridViewType1Fragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;

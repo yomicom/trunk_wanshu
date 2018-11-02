@@ -77,7 +77,6 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
 
     public PayMoneyPopWindow(Activity context) {
         super(context);
-        // TODO Auto-generated constructor stub
         bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
@@ -92,7 +91,6 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
      * @param context
      */
     private void init(Context context) {
-        // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         //绑定布局
         mPopView = inflater.inflate(R.layout.pop_pay_way, null);
