@@ -94,8 +94,8 @@ public class CustomerBanner extends FrameLayout {
 
                 HomeData.DataBeanX.DataBean bean = list.get(i);
                 ImageUtils.displayImage(mContext, iv, bean.getCover(), 0, 0);
-                tvTitle.setText(bean.getTitle());
-                tvIntro.setText(bean.getSummary());
+                tvTitle.setText(bean.getName());
+                tvIntro.setText(bean.getDescription());
 
                 item.setOnClickListener(new OnClickListener() {
                     @Override

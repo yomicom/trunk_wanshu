@@ -37,6 +37,7 @@
     <dimen name="distance_text_text_12">12dp</dimen>
     <dimen name="distance_text_text_10">10dp</dimen>
     <dimen name="distance_text_text_8">8dp</dimen>
+    <dimen name="distance_text_text_6">6dp</dimen>
     <dimen name="distance_main_top">28dp</dimen>
     
     <!--书籍封面大小-->

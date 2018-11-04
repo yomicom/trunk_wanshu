@@ -28,6 +28,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.internal.platform.Platform;
 import okio.Buffer;
 import okio.BufferedSource;
 
@@ -109,7 +110,7 @@ public final class LoggingInterceptor implements Interceptor {
         Logger DEFAULT = new Logger() {
             @Override
             public void log(String message) {
-                //Platform.get().log(4, message, null);
+                Platform.get().log(4, message, null);
             }
         };
     }

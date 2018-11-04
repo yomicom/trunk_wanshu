@@ -5,13 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -19,13 +18,13 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMMin;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.MyShareListener;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
 import com.wxb.wanshu.ui.fragment.BannerFragment;
 import com.wxb.wanshu.ui.fragment.HomeBookListFragment;
-import com.wxb.wanshu.ui.fragment.HomeNewBookFragment;
 import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.fragment.VerticalType2Fragment;
@@ -45,13 +44,18 @@ import butterknife.OnClick;
  */
 public class HomeBookActivity extends FragmentActivity implements HomeContract.View {
 
-    int frameId[] = {R.id.fl_banner, R.id.fl_content1, R.id.fl_content2, R.id.fl_content3, R.id.fl_content4};
-    @BindView(R.id.tv_selc_woman)
-    TextView tvSelcWoman;
-    @BindView(R.id.tv_selc_man)
-    TextView tvSelcMan;
-    @BindView(R.id.iv_search)
-    ImageView ivSearch;
+    int frameId[] = {R.id.fl_banner, R.id.fl_content1, R.id.fl_content2, R.id.fl_content3, R.id.fl_content4,R.id.fl_content5};
+
+    @Inject
+    HomeBookPresenter mPresenter;
+
+    String TYPE_CAROUSEL = "carousel";//广告banner
+    String TYPE_GRID = "grid";//推荐
+    String TYPE_LIST = "list";//小说精选
+    String TYPE_RANK = "rank";//排行榜
+    String TYPE_FREE = "free";//限时免费
+    @BindView(R.id.ll_to_top)
+    LinearLayout llToTop;
     @BindView(R.id.fl_banner)
     FrameLayout flBanner;
     @BindView(R.id.fl_content1)
@@ -62,31 +66,16 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     FrameLayout flContent3;
     @BindView(R.id.fl_content4)
     FrameLayout flContent4;
-
-    @BindView(R.id.v_selc_woman)
-    View vSelcWoman;
-    @BindView(R.id.v_selc_man)
-    View vSelcMan;
+    @BindView(R.id.fl_content5)
+    FrameLayout flContent5;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.iv_to_top)
     ImageView ivToTop;
-
-    @Inject
-    HomeBookPresenter mPresenter;
-
-    String TYPE_CAROUSEL = "carousel";//广告banner
-    String TYPE_GRID = "grid";//推荐
-    String TYPE_LIST = "list";//小说精选
-    String TYPE_RANK = "rank";//排行榜
-    String TYPE_FREE = "free";//限时免费
-    private FragmentTransaction transaction;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
-    public static int MAN_TYPE = 10;
-    public static int WOMAN_TYPE = 20;
-    int sex_type = 20;
+    int list_type = 20;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,75 +90,44 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                 .inject(this);
 
         mPresenter.attachView(this);
-//        mPresenter.getHomeData(sex_type);
+        mPresenter.getHomeData("");
 //        dialog = CustomDialog.instance(this);
 //        dialog.setCancelable(true);
 //        dialog.show();
 
-        showData();
     }
 
-    private void showData() {
+    private void showData(List<HomeData.DataBeanX> data) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        HomeData.DataBeanX dataBeanX = new HomeData.DataBeanX();
         //轮播图
-        bannerFragment = BannerFragment.newInstance(dataBeanX, sex_type);
+        bannerFragment = BannerFragment.newInstance(data.get(0));
         transaction.replace(frameId[0], bannerFragment);
 
-        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(dataBeanX);
-        transaction.replace(frameId[1], recommendFragment);
+        //主编力荐
+//        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance();
+//        transaction.replace(frameId[1], recommendFragment);
 
-        HomeNewBookFragment newBookFragment = HomeNewBookFragment.newInstance(dataBeanX);
-        transaction.replace(frameId[2], newBookFragment);
+//        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(list_type);
+//        transaction.replace(frameId[2], homeBookListFragment);
 
-        HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(dataBeanX, sex_type);
-        transaction.replace(frameId[3], homePopularityFragment);
-
-        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(dataBeanX, sex_type);
-        transaction.replace(frameId[4], homeBookListFragment);
-
-//        VerticalType2Fragment verticalType2Fragment = VerticalType2Fragment.newInstance(dataBeanX);
-//        transaction.replace(frameId[4], verticalType2Fragment);
+        //人气佳作
+//        HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance();
+//        transaction.replace(frameId[3], homePopularityFragment);
+//
+//        homeBookListFragment = HomeBookListFragment.newInstance(list_type);
+//        transaction.replace(frameId[4], homeBookListFragment);
+//
+//        homeBookListFragment = HomeBookListFragment.newInstance(list_type);
+//        transaction.replace(frameId[5], homeBookListFragment);
 
         transaction.commit();
     }
 
-    @OnClick({R.id.ll_woman, R.id.ll_man, R.id.iv_search, R.id.iv_to_top})
+    @OnClick({R.id.iv_to_top})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ll_woman:
-                if (sex_type != WOMAN_TYPE) {
-                    sex_type = WOMAN_TYPE;
-                    mPresenter.getHomeData(sex_type);
-                    tvSelcWoman.setTextColor(ContextCompat.getColor(this, R.color.gobal_color));
-                    vSelcWoman.setVisibility(View.VISIBLE);
-
-                    tvSelcMan.setTextColor(ContextCompat.getColor(this, R.color.text_color_1));
-                    vSelcMan.setVisibility(View.INVISIBLE);
-                    if (bannerFragment != null) {
-                        bannerFragment.setBannerColor(true);
-                    }
-                }
-                break;
-            case R.id.ll_man:
-                if (sex_type != MAN_TYPE) {
-                    sex_type = MAN_TYPE;
-                    mPresenter.getHomeData(sex_type);
-                    tvSelcMan.setTextColor(ContextCompat.getColor(this, R.color.gobal_color));
-                    vSelcMan.setVisibility(View.VISIBLE);
-
-                    tvSelcWoman.setTextColor(ContextCompat.getColor(this, R.color.text_color_1));
-                    vSelcWoman.setVisibility(View.INVISIBLE);
-                    if (bannerFragment != null) {
-                        bannerFragment.setBannerColor(false);
-                    }
-                }
-                break;
-            case R.id.iv_search:
-                SearchActivity.startActivity(this);
-                break;
             case R.id.iv_to_top://gh_8348fbc38b91 掌读宝
                 UMImage image = new UMImage(this, "https://open.weixin.qq.com/cgi-bin/openproxy?url=http%3A%2F%2Fwx.qlogo.cn%2Fmmhead%2FQ3auHgzwzM5RaVqFHiboLO91ItfVH5UG4QKdb6EMqSgfvQNicevjnLhw%2F0");
                 UMMin umMin = new UMMin("http://www.qq.com");
@@ -198,41 +156,10 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     @Override
     public void showHome(HomeData data) {
         if (data != null) {
-            if (dialog != null)
-                dialog.hide();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            transaction = fragmentManager.beginTransaction();
-
-            List<HomeData.DataBeanX> list = data.getData();
-            for (int i = 0; i < list.size(); i++) {
-                HomeData.DataBeanX dataBeanX = list.get(i);
-                String type = dataBeanX.getType();
-
-                if (TYPE_CAROUSEL.equals(type)) {
-                    bannerFragment = BannerFragment.newInstance(dataBeanX, sex_type);
-                    transaction.replace(frameId[0], bannerFragment);
-                }
-                if (TYPE_GRID.equals(type)) {
-                    HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance(dataBeanX);
-                    transaction.replace(frameId[1], type1Fragment);
-                }
-                if (TYPE_LIST.equals(type)) {
-                    HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(dataBeanX, sex_type);
-                    transaction.replace(frameId[2], homeBookListFragment);
-                }
-                if (TYPE_RANK.equals(type)) {
-                    HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(dataBeanX, sex_type);
-                    transaction.replace(frameId[3], homePopularityFragment);
-                }
-                if (TYPE_FREE.equals(type)) {
-                    VerticalType2Fragment verticalType2Fragment = VerticalType2Fragment.newInstance(dataBeanX);
-                    transaction.replace(frameId[4], verticalType2Fragment);
-                }
-            }
-
-            transaction.commit();
+            showData(data.getData());
         }
     }
+
 
     @Override
     public void netError() {

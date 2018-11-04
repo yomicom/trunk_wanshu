@@ -34,9 +34,10 @@ import java.util.Map;
  */
 public class Constant {
 
-    public static final String IMG_BASE_URL = "http://statics.zhuishushenqi.com";
+    public static final String APP_ID = "1";
+    public static final String APP_SECRET = "6f2e7db1743fc59dd127bef6032e98bd";
 
-    public static final String API_BASE_URL = "http://api-dev.wanshu.com";
+    public static final String API_BASE_URL = "http://app-dev.wanshu.com";
 
     public static String PATH_DATA = FileUtils.createRootPath(AppUtils.getAppContext()) + "/cache";
 

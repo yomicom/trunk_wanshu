@@ -25,8 +25,8 @@ public class RVGridView1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBea
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.iv, item.getCover())
-                .setText(R.id.tv_title, item.getTitle());
+//        viewHolder.setImageUrl(R.id.iv, item.getCover())
+//                .setText(R.id.tv_title, item.getTitle());
 
         switch (position + 1) {
             case 1:

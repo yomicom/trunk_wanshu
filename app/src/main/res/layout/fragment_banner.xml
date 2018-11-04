@@ -5,47 +5,68 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/rl_banner"
+    <RelativeLayout
+        android:id="@+id/rl_bg"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp">
+        android:layout_height="195dp"
+        android:paddingLeft="@dimen/distance_top_20"
+        android:paddingRight="@dimen/distance_top_20">
 
-        <RelativeLayout
-            android:id="@+id/rl_bg"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg_woman_banner"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/distance_text_text_12"
+            android:background="@drawable/bg_search_home"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-            <com.wxb.wanshu.view.CustomerBanner
-                android:id="@+id/vp_banner"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_centerInParent="true" />
+            <TextView
+                android:id="@+id/et_article_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint=""
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="@color/text_color_1"
+                android:textColorHint="@color/text_color_2"
+                android:textCursorDrawable="@null"
+                android:textSize="13sp" />
 
-            <LinearLayout
-                android:id="@+id/pointGroup"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="18dp"
-                android:orientation="horizontal" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/distance_text_text_8"
+                android:src="@mipmap/ic_search" />
+        </LinearLayout>
+
+        <com.wxb.wanshu.view.CustomerBanner
+            android:id="@+id/vp_banner"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true" />
+
+        <LinearLayout
+            android:id="@+id/pointGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="18dp"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/line_spacing_5"
+        android:paddingRight="@dimen/line_spacing_5">
 
         <LinearLayout
             android:id="@+id/item_rank"
@@ -59,7 +80,7 @@
                 android:layout_width="@dimen/img_cover_width"
                 android:layout_height="@dimen/img_cover_height"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_data" />
+                android:src="@mipmap/ic_rank" />
 
             <TextView
                 style="@style/text_middle_nomal"
@@ -79,7 +100,7 @@
                 android:layout_width="@dimen/img_cover_width"
                 android:layout_height="@dimen/img_cover_height"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_data" />
+                android:src="@mipmap/ic_best" />
 
             <TextView
                 style="@style/text_middle_nomal"
@@ -99,7 +120,7 @@
                 android:layout_width="@dimen/img_cover_width"
                 android:layout_height="@dimen/img_cover_height"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_data" />
+                android:src="@mipmap/ic_short" />
 
             <TextView
                 style="@style/text_middle_nomal"
@@ -119,7 +140,7 @@
                 android:layout_width="@dimen/img_cover_width"
                 android:layout_height="@dimen/img_cover_height"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_data" />
+                android:src="@mipmap/ic_finish" />
 
             <TextView
                 style="@style/text_middle_nomal"
@@ -127,4 +148,10 @@
                 android:text="@string/home_finish" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/divide"
+        style="@style/line_main_divide"
+        android:layout_marginLeft="@dimen/distance_top_20"
+        android:layout_marginRight="@dimen/distance_top_20" />
 </LinearLayout>

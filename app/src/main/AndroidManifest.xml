@@ -183,7 +183,8 @@
         <activity
             android:name=".ui.activity.AboutUsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Slidable"></activity>
+            android:theme="@style/AppTheme.NoActionBar.Slidable" />
+        <activity android:name=".ui.activity.ConnectUsActivity"></activity>
     </application>
 
 </manifest>

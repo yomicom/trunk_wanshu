@@ -9,7 +9,6 @@ import java.util.List;
 
 public class HomeData extends Base{
 
-
     private List<DataBeanX> data;
 
     public List<DataBeanX> getData() {
@@ -20,19 +19,13 @@ public class HomeData extends Base{
         this.data = data;
     }
 
-    public static class DataBeanX implements Serializable{
+    public static class DataBeanX implements Serializable {
         /**
-         * type : carousel
-         * name : 轮播
-         * data : [{"novel_id":1955,"author":"小小海洋","category":"穿越架空","is_free":0,"free_time":0,"read":4,"title":"随身英雄系统","level":80,"cover":"http://lily.sunshe.com/c/742/1067742_issqed0gdz_o.jpg","summary":"典韦吕布赵子龙！千军万马之中，如入无人之境！ 一剑西来，天外飞仙！还有独孤求败，以魔剑行走天下！ 自从带着英雄系统穿越之后，陆离的生活就开始大不一样了，可是这个小娃娃你是谁？ 竟然还可以口吐三昧真火！ 你说你是那个个翻天覆地的大圣？谁信啊！ 大圣，别打脸\u2026\u2026 \u2026\u2026 从此之后，历史武将，武侠人物，神话传说就这样乱入进了陆离的身边！","link":"http://xs.yiwei.com/book?account_id=84&novel_id=1955","complete_status":1},{"novel_id":2109,"author":"海丰","category":"浪漫青春","is_free":0,"free_time":0,"read":14,"title":"我的极品美女上司","level":100,"cover":"http://image.2cms.top/images/2017/08/05/bcb76ee9c0901c9c0521c8ca59dc38d3.jpg","summary":"初出茅庐的小记者，神出鬼差爬上了美女总编的床，真是痛并快乐着\u2026\u2026","link":"http://xs.yiwei.com/book?account_id=84&novel_id=1955","complete_status":1}]
-         * columns : 4
-         * ttl : 100800
+         * type : big_cover
+         * data : [{"novel_id":1,"name":"偏爱成狂：总裁掳妻请绕道","cover":"http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-94da23b4cfbe26025d6c482fa5ef975d.jpg","description":"他，是宛城家喻户晓的傅氏首席，倨傲，清贵，却偏偏对一个女人痴心不改，宁做最卑微的情种。四年前，她说真正爱的是另一个男人，并且怀了他的孩子。四年后，再相逢，他不惜一切代价，要让她得到应有的惩罚，可罚来罚去，才发现最痛不欲生的那个人，还是他\u2026\u2026","word_num":1234567,"author":"猫尔","category_name":"时空穿越","is_complete":true},{"novel_id":2,"name":"千金归来：老公，请走开","cover":"http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":33345,"author":"栀想","category_name":"总裁豪门","is_complete":false},{"novel_id":1,"name":"偏爱成狂：总裁掳妻请绕道","cover":"http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-94da23b4cfbe26025d6c482fa5ef975d.jpg","description":"他，是宛城家喻户晓的傅氏首席，倨傲，清贵，却偏偏对一个女人痴心不改，宁做最卑微的情种。四年前，她说真正爱的是另一个男人，并且怀了他的孩子。四年后，再相逢，他不惜一切代价，要让她得到应有的惩罚，可罚来罚去，才发现最痛不欲生的那个人，还是他\u2026\u2026","word_num":1234567,"author":"猫尔","category_name":"时空穿越","is_complete":true},{"novel_id":2,"name":"千金归来：老公，请走开","cover":"http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":33345,"author":"栀想","category_name":"总裁豪门","is_complete":false},{"novel_id":1,"name":"偏爱成狂：总裁掳妻请绕道","cover":"http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-94da23b4cfbe26025d6c482fa5ef975d.jpg","description":"他，是宛城家喻户晓的傅氏首席，倨傲，清贵，却偏偏对一个女人痴心不改，宁做最卑微的情种。四年前，她说真正爱的是另一个男人，并且怀了他的孩子。四年后，再相逢，他不惜一切代价，要让她得到应有的惩罚，可罚来罚去，才发现最痛不欲生的那个人，还是他\u2026\u2026","word_num":1234567,"author":"猫尔","category_name":"时空穿越","is_complete":true}]
          */
 
         private String type;
-        private String name;
-        private int columns;
-        private int ttl;
         private List<DataBean> data;
 
         public String getType() {
@@ -43,30 +36,6 @@ public class HomeData extends Base{
             this.type = type;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getColumns() {
-            return columns;
-        }
-
-        public void setColumns(int columns) {
-            this.columns = columns;
-        }
-
-        public int getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(int ttl) {
-            this.ttl = ttl;
-        }
-
         public List<DataBean> getData() {
             return data;
         }
@@ -75,34 +44,26 @@ public class HomeData extends Base{
             this.data = data;
         }
 
-        public static class DataBean  implements Serializable{
+        public static class DataBean {
             /**
-             * novel_id : 1955
-             * author : 小小海洋
-             * category : 穿越架空
-             * is_free : 0
-             * free_time : 0
-             * read : 4
-             * title : 随身英雄系统
-             * level : 80
-             * cover : http://lily.sunshe.com/c/742/1067742_issqed0gdz_o.jpg
-             * summary : 典韦吕布赵子龙！千军万马之中，如入无人之境！ 一剑西来，天外飞仙！还有独孤求败，以魔剑行走天下！ 自从带着英雄系统穿越之后，陆离的生活就开始大不一样了，可是这个小娃娃你是谁？ 竟然还可以口吐三昧真火！ 你说你是那个个翻天覆地的大圣？谁信啊！ 大圣，别打脸…… …… 从此之后，历史武将，武侠人物，神话传说就这样乱入进了陆离的身边！
-             * link : http://xs.yiwei.com/book?account_id=84&novel_id=1955
-             * complete_status : 1
+             * novel_id : 1
+             * name : 偏爱成狂：总裁掳妻请绕道
+             * cover : http://laidian-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-94da23b4cfbe26025d6c482fa5ef975d.jpg
+             * description : 他，是宛城家喻户晓的傅氏首席，倨傲，清贵，却偏偏对一个女人痴心不改，宁做最卑微的情种。四年前，她说真正爱的是另一个男人，并且怀了他的孩子。四年后，再相逢，他不惜一切代价，要让她得到应有的惩罚，可罚来罚去，才发现最痛不欲生的那个人，还是他……
+             * word_num : 1234567
+             * author : 猫尔
+             * category_name : 时空穿越
+             * is_complete : true
              */
 
             private int novel_id;
-            private String author;
-            private String category;
-            private int is_free;
-            private int free_time;
-            private int read;
-            private String title;
-            private int level;
+            private String name;
             private String cover;
-            private String summary;
-            private String link;
-            private int complete_status;
+            private String description;
+            private int word_num;
+            private String author;
+            private String category_name;
+            private boolean is_complete;
 
             public int getNovel_id() {
                 return novel_id;
@@ -112,60 +73,12 @@ public class HomeData extends Base{
                 this.novel_id = novel_id;
             }
 
-            public String getAuthor() {
-                return author;
+            public String getName() {
+                return name;
             }
 
-            public void setAuthor(String author) {
-                this.author = author;
-            }
-
-            public String getCategory() {
-                return category;
-            }
-
-            public void setCategory(String category) {
-                this.category = category;
-            }
-
-            public int getIs_free() {
-                return is_free;
-            }
-
-            public void setIs_free(int is_free) {
-                this.is_free = is_free;
-            }
-
-            public int getFree_time() {
-                return free_time;
-            }
-
-            public void setFree_time(int free_time) {
-                this.free_time = free_time;
-            }
-
-            public int getRead() {
-                return read;
-            }
-
-            public void setRead(int read) {
-                this.read = read;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public int getLevel() {
-                return level;
-            }
-
-            public void setLevel(int level) {
-                this.level = level;
+            public void setName(String name) {
+                this.name = name;
             }
 
             public String getCover() {
@@ -176,28 +89,44 @@ public class HomeData extends Base{
                 this.cover = cover;
             }
 
-            public String getSummary() {
-                return summary;
+            public String getDescription() {
+                return description;
             }
 
-            public void setSummary(String summary) {
-                this.summary = summary;
+            public void setDescription(String description) {
+                this.description = description;
             }
 
-            public String getLink() {
-                return link;
+            public int getWord_num() {
+                return word_num;
             }
 
-            public void setLink(String link) {
-                this.link = link;
+            public void setWord_num(int word_num) {
+                this.word_num = word_num;
             }
 
-            public int getComplete_status() {
-                return complete_status;
+            public String getAuthor() {
+                return author;
             }
 
-            public void setComplete_status(int complete_status) {
-                this.complete_status = complete_status;
+            public void setAuthor(String author) {
+                this.author = author;
+            }
+
+            public String getCategory_name() {
+                return category_name;
+            }
+
+            public void setCategory_name(String category_name) {
+                this.category_name = category_name;
+            }
+
+            public boolean isIs_complete() {
+                return is_complete;
+            }
+
+            public void setIs_complete(boolean is_complete) {
+                this.is_complete = is_complete;
             }
         }
     }

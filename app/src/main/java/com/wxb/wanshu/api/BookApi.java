@@ -34,9 +34,20 @@ import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
 import com.wxb.wanshu.bean.RewardType;
+import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
+import com.wxb.wanshu.utils.ToolUtil;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -44,8 +55,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-
-import static android.R.attr.data;
 
 /**
  * https://github.com/JustWayward/BookReader
@@ -75,8 +84,13 @@ public class BookApi {
         return instance;
     }
 
-    public Observable<HomeData> getHomeData(int sex_type) {
-        return service.getHomeData(sex_type);
+    public Observable<HomeData> getHomeData(String key) {
+        Map<String, String> map = new HashMap<>();
+        map.put("app_id", Constant.APP_ID);
+        map.put("token", "");
+        map.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        map.put("key", key);
+        return service.getHomeData(buildSign(map, Constant.APP_SECRET), Constant.APP_ID, "",String.valueOf(System.currentTimeMillis() / 1000), key);
     }
 
     public Observable<RewardType> getRewardType() {
@@ -132,7 +146,7 @@ public class BookApi {
     }
 
     public Observable<BookRewardData> getBookReward(int novel_id, int page) {
-        return service.getRewardRank(novel_id,page);
+        return service.getRewardRank(novel_id, page);
     }
 
     public Observable<BookselfList> getBookshelfList(int page, int pageSize) {
@@ -202,97 +216,42 @@ public class BookApi {
     public Observable<ChapterRead> getChapterRead(int novel_id, int chapter) {
         return service.getChapterRead(novel_id, chapter);
     }
-//
-//    public synchronized Observable<List<BookSource>> getBookSource(String view, String book) {
-//        return service.getABookSource(view, book);
-//    }
-//
-//    public Observable<RankingList> getRanking() {
-//        return service.getRanking();
-//    }
-//
-//    public Observable<Rankings> getRanking(String rankingId) {
-//        return service.getRanking(rankingId);
-//    }
-//
-//    public Observable<BookLists> getBookLists(String duration, String sort, String start, String limit, String tag, String gender) {
-//        return service.getBookLists(duration, sort, start, limit, tag, gender);
-//    }
-//
-//    public Observable<BookListTags> getBookListTags() {
-//        return service.getBookListTags();
-//    }
-//
-//    public Observable<BookListDetail> getBookListDetail(String bookListId) {
-//        return service.getBookListDetail(bookListId);
-//    }
-//
-//    public synchronized Observable<CategoryList> getCategoryList() {
-//        return service.getCategoryList();
-//    }
-//
-//    public Observable<CategoryListLv2> getCategoryListLv2() {
-//        return service.getCategoryListLv2();
-//    }
-//
-//    public Observable<BooksByCats> getBooksByCats(String gender, String type, String major, String minor, int start, @Query("limit") int limit) {
-//        return service.getBooksByCats(gender, type, major, minor, start, limit);
-//    }
-//
-//    public Observable<DiscussionList> getBookDisscussionList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
-//        return service.getBookDisscussionList(block, duration, sort, type, start, limit, distillate);
-//    }
-//
-//    public Observable<Disscussion> getBookDisscussionDetail(String disscussionId) {
-//        return service.getBookDisscussionDetail(disscussionId);
-//    }
-//
-//    public Observable<CommentList> getBestComments(String disscussionId) {
-//        return service.getBestComments(disscussionId);
-//    }
-//
-//    public Observable<CommentList> getBookDisscussionComments(String disscussionId, String start, String limit) {
-//        return service.getBookDisscussionComments(disscussionId, start, limit);
-//    }
-//
-//    public Observable<BookReviewList> getBookReviewList(String duration, String sort, String type, String start, String limit, String distillate) {
-//        return service.getBookReviewList(duration, sort, type, start, limit, distillate);
-//    }
-//
-//    public Observable<BookReview> getBookReviewDetail(String bookReviewId) {
-//        return service.getBookReviewDetail(bookReviewId);
-//    }
-//
-//    public Observable<CommentList> getBookReviewComments(String bookReviewId, String start, String limit) {
-//        return service.getBookReviewComments(bookReviewId, start, limit);
-//    }
-//
-//    public Observable<BookHelpList> getBookHelpList(String duration, String sort, String start, String limit, String distillate) {
-//        return service.getBookHelpList(duration, sort, start, limit, distillate);
-//    }
-//
-//    public Observable<BookHelp> getBookHelpDetail(String helpId) {
-//        return service.getBookHelpDetail(helpId);
-//    }
-//
-//    public Observable<Login> login(String platform_uid, String platform_token, String platform_code) {
-//        LoginReq loginReq = new LoginReq();
-//        loginReq.platform_code = platform_code;
-//        loginReq.platform_token = platform_token;
-//        loginReq.platform_uid = platform_uid;
-//        return service.login(loginReq);
-//    }
-//
-//    public Observable<DiscussionList> getBookDetailDisscussionList(String book, String sort, String type, String start, String limit) {
-//        return service.getBookDetailDisscussionList(book, sort, type, start, limit);
-//    }
-//
-//    public Observable<HotReview> getBookDetailReviewList(String book, String sort, String start, String limit) {
-//        return service.getBookDetailReviewList(book, sort, start, limit);
-//    }
-//
-//    public Observable<DiscussionList> getGirlBookDisscussionList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
-//        return service.getBookDisscussionList(block, duration, sort, type, start, limit, distillate);
-//    }
 
+    public static String buildSign(Map<String, String> parameters, String key) {
+        if (parameters.containsKey("sign")) {
+            parameters.remove("sign");
+        }
+        List<Map.Entry<String, String>> infoIds = new ArrayList<Map.Entry<String, String>>(parameters.entrySet());
+        Collections.sort(infoIds, new Comparator<Map.Entry<String, String>>() {
+            public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
+                //return (o2.getValue() - o1.getValue());
+                return (o1.getKey()).toString().compareTo(o2.getKey());
+            }
+        });
+        return ToolUtil.stringToMD5(buildString(infoIds) + key);
+    }
+
+
+    /**
+     * 根据参数值构建url字符串
+     *
+     * @param infoIds
+     * @return
+     */
+    private static String buildString(List<Map.Entry<String, String>> infoIds) {
+        String str = "";
+        try {
+            for (int i = 0; i < infoIds.size(); i++) {
+                Map.Entry map = (Map.Entry) infoIds.get(i);
+                String key = map.getKey().toString();
+                String value = map.getValue().toString();
+                str = str + URLEncoder.encode(key, "utf8") + "=" + URLEncoder.encode(value, "utf8") + "&";
+            }
+            if (str.length() > 0)
+                str = str.substring(0, str.length() - 1);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 }

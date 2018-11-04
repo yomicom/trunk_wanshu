@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 主编推荐
+ * 主编力荐
  * Created by qiming on 2017/11/21.
  */
 
@@ -73,20 +73,10 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         return R.layout.fragment_horizontal01;
     }
 
-    public static HomeRecommendFragment newInstance(HomeData.DataBeanX dataBeanX) {
+    public static HomeRecommendFragment newInstance() {
         HomeRecommendFragment fragment = new HomeRecommendFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("data", dataBeanX);
         bundle.putInt("tag", 1);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    public static HomeRecommendFragment newInstance2(BookDetails.DataBean dataBeanX) {
-        HomeRecommendFragment fragment = new HomeRecommendFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("data", dataBeanX);
-        bundle.putInt("tag", 2);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -113,21 +103,11 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
         rvHorizontal1.setLayoutManager(layoutManager);
 
-        if (type == 1) {//首页主编推荐
-            HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
-            RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), data.getData(), this);
-            rvHorizontal1.setAdapter(adapter);
+//        HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
+//        RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), data.getData(), this);
+//        rvHorizontal1.setAdapter(adapter);
 
-            tvTag.setText(data.getName());
-        } else {//书籍详情猜你喜欢
-            gone(divide);
-            tvTag.setText("猜你喜欢");
-
-            BookDetails.DataBean data = (BookDetails.DataBean) bundle.getSerializable("data");
-            RVRecommandAdapter adapter = new RVRecommandAdapter(getActivity(), data.getRecommend(), this);
-            rvHorizontal1.setAdapter(adapter);
-        }
-
+//        tvTag.setText(data.getName());
     }
 
     @Override
@@ -145,10 +125,6 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        if (type == 1) {
-            BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getNovel_id());
-        } else {
-            BookDetailsActivity.startActivity(getActivity(), ((BookDetails.DataBean.RecommendBean) data).getNovel_id());
-        }
+        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getNovel_id());
     }
 }

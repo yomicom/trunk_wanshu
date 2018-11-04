@@ -29,9 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.R.attr.type;
-import static com.wxb.wanshu.ui.activity.HomeBookActivity.MAN_TYPE;
-
 public class NovelRankActivity extends BaseRVActivity<NovelRank.DataBean> implements NovelRankContract.View {
 
     @BindView(R.id.common_toolbar)
@@ -94,8 +91,6 @@ public class NovelRankActivity extends BaseRVActivity<NovelRank.DataBean> implem
 
     @Override
     public void configViews() {
-        sex_type = getIntent().getIntExtra(SEX_TYPE, MAN_TYPE);
-
         initAdapter(NovelRankAdapter.class, false, true);
         mRecyclerView.removeAllItemDecoration();
     }

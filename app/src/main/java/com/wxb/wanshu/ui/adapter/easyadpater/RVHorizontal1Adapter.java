@@ -25,8 +25,8 @@ public class RVHorizontal1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataB
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.mipmap.defalt_book_cover)
-                .setText(R.id.tv_title, item.getTitle());
+        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.mipmap.defalt_book_cover);
+//                .setText(R.id.tv_title, item.getTitle());
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -33,6 +33,7 @@ import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
 import com.wxb.wanshu.bean.RewardType;
+import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
@@ -58,8 +59,9 @@ public interface BookApiService {
      *
      * @return
      */
-    @GET("/index/home")
-    Observable<HomeData> getHomeData(@Query("sex_type") int sex_type);
+    @GET("/novel/recommendList")
+    Observable<HomeData> getHomeData(@Query("sign") String sign, @Query("app_id") String app_id,
+                                     @Query("token") String token, @Query("timestamp") String timestamp, @Query("key") String key);
 
     /**
      * 打赏礼物类型

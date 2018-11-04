@@ -45,11 +45,11 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
         return R.layout.vertical_type1;
     }
 
-    public static HomeBookListFragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
+    public static HomeBookListFragment newInstance( int sex_type) {
         HomeBookListFragment fragment = new HomeBookListFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("data", dataBeanX);
         bundle.putSerializable("sex", sex_type);
+//        bundle.putSerializable("data", dataBeanX);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -67,10 +67,10 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
     @Override
     public void initDatas() {
         Bundle bundle = getArguments();
-        data = (HomeData.DataBeanX) bundle.getSerializable("data");
-        sex_type = bundle.getInt("sex");
-
-        tvTag.setText(data.getName());
+//        data = (HomeData.DataBeanX) bundle.getSerializable("data");
+//        sex_type = bundle.getInt("sex");
+//
+//        tvTag.setText(data.getName());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
         tvMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SelectBooksActivity.startActivity(getActivity(), sex_type,data.getName());
+//                SelectBooksActivity.startActivity(getActivity(), sex_type,data.getName());
             }
         });
     }

@@ -69,9 +69,9 @@ public class VerticalType2Fragment extends BaseFragment implements OnRvItemClick
         Bundle bundle = getArguments();
         data = (HomeData.DataBeanX) bundle.getSerializable("data");
 
-        tvTag.setText(data.getName());
+//        tvTag.setText(data.getName());
 
-        int time = data.getTtl();
+//        int time = data.getTtl();
 //        visible(timerView);
         gone(tvMore);
 

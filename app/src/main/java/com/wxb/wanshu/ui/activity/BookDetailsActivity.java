@@ -206,9 +206,9 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance2(data);
-            transaction.replace(R.id.fl_content_recommand, type1Fragment);
-            transaction.commit();
+//            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance2(data);
+//            transaction.replace(R.id.fl_content_recommand, type1Fragment);
+//            transaction.commit();
         } else {
             gone(flContentRecommand);
         }

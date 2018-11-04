@@ -1,6 +1,7 @@
 package com.wxb.wanshu.ui.contract;
 
 import com.wxb.wanshu.base.BaseContract;
+import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.HomeData;
 
 /**
@@ -16,7 +17,7 @@ public interface HomeContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getHomeData(int sex_type);
+        void getHomeData(String key);
     }
 
 }

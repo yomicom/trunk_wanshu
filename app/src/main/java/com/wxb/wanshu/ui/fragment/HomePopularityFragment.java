@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
+ * 人气佳作
  * Created by qiming on 2017/11/30.
  */
 
@@ -45,11 +46,9 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
         return R.layout.vertical_type1;
     }
 
-    public static HomePopularityFragment newInstance(HomeData.DataBeanX dataBeanX, int sex_type) {
+    public static HomePopularityFragment newInstance() {
         HomePopularityFragment fragment = new HomePopularityFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("data", dataBeanX);
-        bundle.putSerializable("sex", sex_type);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -70,7 +69,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
         data = (HomeData.DataBeanX) bundle.getSerializable("data");
         sex_type = bundle.getInt("sex");
 
-        tvTag.setText(data.getName());
+//        tvTag.setText(data.getName());
     }
 
     @Override
@@ -87,7 +86,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
         tvMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NovelRankActivity.startActivity(mContext,sex_type,data.getName());
+//                NovelRankActivity.startActivity(mContext,sex_type,data.getName());
             }
         });
     }
