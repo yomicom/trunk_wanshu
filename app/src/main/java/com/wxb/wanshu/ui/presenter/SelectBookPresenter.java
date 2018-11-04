@@ -1,6 +1,6 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.NovelCategory;
@@ -25,16 +25,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> implements SelectBooksContract.Presenter<SelectBooksContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public SelectBookPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public SelectBookPresenter(Api api) {
+        this.api = api;
     }
 
     @Override
     public void getBookList(int sex_type,String category_id, String complete_status,int page,String kw) {
-        Subscription rxSubscription = bookApi.getSelectBookList(sex_type,category_id,complete_status,page,kw).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getSelectBookList(sex_type,category_id,complete_status,page,kw).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override
@@ -59,7 +59,7 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
     @Override
     public void getNovelCategory() {
         String key = StringUtils.creatAcacheKey("category-list", SettingManager.getInstance().getUserChooseSex());
-        Observable<NovelCategory> fromNetWork = bookApi.getNovelCategory()
+        Observable<NovelCategory> fromNetWork = api.getNovelCategory()
                 .compose(RxUtil.<NovelCategory>rxCacheListHelper(key));
 
         //依次检查disk、network

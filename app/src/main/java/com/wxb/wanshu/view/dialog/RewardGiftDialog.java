@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.RewardType;
 import com.wxb.wanshu.bean.SimpleEventBus;
@@ -66,8 +66,8 @@ public class RewardGiftDialog implements View.OnClickListener {
         RewardType.DataBean type0 = rewardType.data.get(0);
         tvNeedPay.setText(type0.getAmount() + "书币");
 
-        BookApi bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
-        Subscription subscribe = bookApi.getUserInfo().subscribeOn(Schedulers.io())
+        Api api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        Subscription subscribe = api.getUserInfo().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserInfo>() {
                     @Override
@@ -135,7 +135,7 @@ public class RewardGiftDialog implements View.OnClickListener {
                     int giftCount = Integer.parseInt((String) tvGiftCount.getText());
                     String type = adapter.getData(adapter.getSelectedPos()).getType();
 
-                    Subscription subscribe = bookApi.rewardGift(type, giftCount, novel_id, "").subscribeOn(Schedulers.io())
+                    Subscription subscribe = api.rewardGift(type, giftCount, novel_id, "").subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Observer<Base>() {
                                 @Override

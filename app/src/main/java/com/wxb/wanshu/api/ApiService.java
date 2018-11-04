@@ -52,7 +52,7 @@ import rx.Observable;
  * @author yuyh.
  * @date 2016/8/3.
  */
-public interface BookApiService {
+public interface ApiService {
 
     /**
      * 获取书城首页数据

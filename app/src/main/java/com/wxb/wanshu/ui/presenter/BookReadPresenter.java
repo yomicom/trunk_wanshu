@@ -17,7 +17,7 @@ package com.wxb.wanshu.ui.presenter;
 
 import android.content.Context;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.Base;
@@ -43,18 +43,18 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
         implements BookReadContract.Presenter<BookReadContract.View> {
 
     private Context mContext;
-    private BookApi bookApi;
+    private Api api;
 
     @Inject
-    public BookReadPresenter(Context mContext, BookApi bookApi) {
+    public BookReadPresenter(Context mContext, Api api) {
         this.mContext = mContext;
-        this.bookApi = bookApi;
+        this.api = api;
     }
 
     @Override
     public void getBookMixAToc(final int novel_id) {
 //        String key = StringUtils.creatAcacheKey("book-toc", novel_id);
-//        Observable<BookMenu.DataBean> fromNetWork = bookApi.getBookMixAToc(novel_id)
+//        Observable<BookMenu.DataBean> fromNetWork = api.getBookMixAToc(novel_id)
 //                .map(new Func1<BookMenu, BookMenu.DataBean>() {
 //                    @Override
 //                    public BookMenu.DataBean call(BookMenu data) {
@@ -88,7 +88,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 //                });
 //        addSubscrebe(rxSubscription);
 
-        Subscription rxSubscription = bookApi.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookMenu>() {
                     @Override
@@ -113,7 +113,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 
     @Override
     public void getChapterRead(int novel_id, final int chapter) {
-        Subscription rxSubscription = bookApi.getChapterRead(novel_id, chapter).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getChapterRead(novel_id, chapter).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ChapterRead>() {
                     @Override
@@ -140,7 +140,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 
     @Override
     public void getRewardType() {
-        bookApi.getRewardType().subscribeOn(Schedulers.io())
+        api.getRewardType().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RewardType>() {
                     @Override
@@ -163,7 +163,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     @Override
     public void addBookShelf(int novel_id) {
 
-        bookApi.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
+        api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override

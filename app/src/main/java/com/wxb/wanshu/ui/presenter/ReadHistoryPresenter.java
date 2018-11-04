@@ -1,11 +1,8 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.ReadHistoryList;
-import com.wxb.wanshu.bean.UserOrder;
-import com.wxb.wanshu.ui.activity.ListActivity.ReadHistoryActivity;
-import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.utils.LogUtils;
 
@@ -21,16 +18,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> implements ReadHistoryContract.Presenter<ReadHistoryContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public ReadHistoryPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public ReadHistoryPresenter(Api api) {
+        this.api = api;
     }
 
     @Override
     public void getReadHistoryList(int page) {
-        Subscription rxSubscription = bookApi.getReadHistoryList(page).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getReadHistoryList(page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ReadHistoryList>() {
                     @Override

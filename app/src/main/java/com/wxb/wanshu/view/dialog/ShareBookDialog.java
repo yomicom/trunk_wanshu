@@ -17,19 +17,16 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.common.MyShareListener;
 import com.wxb.wanshu.utils.ImageUtils;
 
-import butterknife.OnClick;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-
-import static android.R.attr.data;
 
 /**
  * Created by qiming on 2017/12/5.
@@ -47,7 +44,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
     private TextView tvQq;
     private TextView tvWeixin;
     private TextView tvFriend;
-    private BookApi bookApi;
+    private Api api;
     protected CompositeSubscription mCompositeSubscription;
     int novel_id;
 
@@ -55,7 +52,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
         super(context);
         this.context = context;
         this.novel_id = novel_id;
-        bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
     }
 
     @Override
@@ -83,7 +80,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
 
     private void initData() {
 
-        Subscription subscribe = bookApi.getBookDetail(novel_id).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getBookDetail(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
                     @Override

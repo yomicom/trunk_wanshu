@@ -1,11 +1,9 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.BookMenu;
-import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.ui.contract.MenuContract;
-import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.utils.LogUtils;
 
 import javax.inject.Inject;
@@ -20,16 +18,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class BookMenuPresenter extends RxPresenter<MenuContract.View> implements MenuContract.Presenter<MenuContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public BookMenuPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public BookMenuPresenter(Api api) {
+        this.api = api;
     }
 
     @Override
     public void getBookMenu(int novel_id) {
-        Subscription rxSubscription = bookApi.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookMenu>() {
                     @Override

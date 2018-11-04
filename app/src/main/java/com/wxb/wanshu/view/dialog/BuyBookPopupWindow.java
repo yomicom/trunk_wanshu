@@ -17,11 +17,10 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.ui.activity.RechargeAmountActivity;
-import com.wxb.wanshu.utils.ImageUtils;
 
 import rx.Observer;
 import rx.Subscription;
@@ -45,7 +44,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
     private ImageView ivSelect;
     private Button btAddMoney;
 
-    private BookApi bookApi;
+    private Api api;
     protected CompositeSubscription mCompositeSubscription;
     Activity mContext;
 
@@ -56,7 +55,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
 
     public BuyBookPopupWindow(Activity context, int novel_id, int chapter) {
         super(context);
-        bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
         init(context);
@@ -83,7 +82,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
 
     private void setView() {
 
-        Subscription subscribe = bookApi.getUserInfo().subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getUserInfo().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserInfo>() {
                     @Override
@@ -182,7 +181,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
              * 购买书籍
              */
             if ("确定购买".equals(btAddMoney.getText().toString())) {
-                Subscription subscribe = bookApi.getBookDetail(novel_id).subscribeOn(Schedulers.io())
+                Subscription subscribe = api.getBookDetail(novel_id).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<BookDetails>() {
                             @Override

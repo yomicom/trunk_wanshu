@@ -12,12 +12,10 @@ import com.umeng.socialize.UMShareAPI;
 import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.component.DaggerAppComponent;
 import com.wxb.wanshu.module.AppModule;
-import com.wxb.wanshu.module.BookApiModule;
+import com.wxb.wanshu.module.ApiModule;
 import com.wxb.wanshu.utils.AppUtils;
 import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
-
-import static com.wxb.wanshu.base.Constant.WEXIN_APPSECRECT;
 
 /**
  * Created by qiming on 2017/11/23.
@@ -66,7 +64,7 @@ public class ReaderApplication extends Application {
 
     private void initCompoent() {
         appComponent = DaggerAppComponent.builder()
-                .bookApiModule(new BookApiModule())
+                .bookApiModule(new ApiModule())
                 .appModule(new AppModule(this))
                 .build();
     }

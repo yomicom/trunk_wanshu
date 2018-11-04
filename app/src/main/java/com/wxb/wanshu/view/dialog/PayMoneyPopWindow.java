@@ -28,24 +28,15 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.Constant;
-import com.wxb.wanshu.bean.BookDetails;
-import com.wxb.wanshu.bean.UserInfo;
-import com.wxb.wanshu.ui.activity.RechargeAmountActivity;
-import com.wxb.wanshu.utils.FormatUtils;
 import com.wxb.wanshu.utils.OrderInfoUtil;
 import com.wxb.wanshu.utils.PayResult;
 
 import java.util.Map;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-
-import static com.wxb.wanshu.R.id.tv;
 
 /**
  * Created by qiming on 2017/12/21.
@@ -56,7 +47,7 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
     private View mPopView;
     private OnItemClickListener mListener;
 
-    private BookApi bookApi;
+    private Api api;
     protected CompositeSubscription mCompositeSubscription;
     Activity mContext;
 
@@ -77,7 +68,7 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
 
     public PayMoneyPopWindow(Activity context) {
         super(context);
-        bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
         init(context);
@@ -213,7 +204,7 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
                 dismiss();
                 break;
         }
-//            Subscription subscribe = bookApi.getBookDetail(0).subscribeOn(Schedulers.io())
+//            Subscription subscribe = api.getBookDetail(0).subscribeOn(Schedulers.io())
 //                    .observeOn(AndroidSchedulers.mainThread())
 //                    .subscribe(new Observer<BookDetails>() {
 //                        @Override

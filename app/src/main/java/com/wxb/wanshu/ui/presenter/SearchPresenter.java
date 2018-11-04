@@ -1,12 +1,9 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.HotNovelList;
-import com.wxb.wanshu.bean.UserOrder;
-import com.wxb.wanshu.ui.activity.SearchActivity;
-import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.utils.LogUtils;
 
@@ -22,16 +19,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class SearchPresenter extends RxPresenter<SearchContract.View> implements SearchContract.Presenter<SearchContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public SearchPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public SearchPresenter(Api api) {
+        this.api = api;
     }
 
     @Override
     public void getHotNovelList() {
-        Subscription rxSubscription = bookApi.getHotNovelList().subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getHotNovelList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HotNovelList>() {
                     @Override
@@ -55,7 +52,7 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
 
     @Override
     public void getBookList(int sex_type,String category_id, String complete_status,int page,String kw) {
-        Subscription rxSubscription = bookApi.getSelectBookList(sex_type,category_id,complete_status,page,kw).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getSelectBookList(sex_type,category_id,complete_status,page,kw).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override

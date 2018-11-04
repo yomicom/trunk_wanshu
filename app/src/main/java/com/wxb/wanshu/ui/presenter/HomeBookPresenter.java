@@ -1,8 +1,7 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
-import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.ui.contract.HomeContract;
 import com.wxb.wanshu.utils.LogUtils;
@@ -20,15 +19,15 @@ import rx.schedulers.Schedulers;
 
 public class HomeBookPresenter extends RxPresenter<HomeContract.View> implements HomeContract.Presenter<HomeContract.View> {
 
-    private BookApi bookApi;
+    private Api api;
 
     @Inject
-    public HomeBookPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public HomeBookPresenter(Api api) {
+        this.api = api;
     }
     @Override
     public void getHomeData(String key) {
-        Subscription rxSubscription = bookApi.getHomeData(key).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getHomeData(key).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeData>() {
                     @Override

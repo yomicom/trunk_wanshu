@@ -34,7 +34,6 @@ import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
 import com.wxb.wanshu.bean.RewardType;
-import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
@@ -62,25 +61,25 @@ import rx.Observable;
  * @author yuyh.
  * @date 2016/8/3.
  */
-public class BookApi {
+public class Api {
 
-    public static BookApi instance;
+    public static Api instance;
 
-    private BookApiService service;
+    private ApiService service;
 
-    public BookApi(OkHttpClient okHttpClient) {
+    public Api(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.API_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
                 .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
                 .client(okHttpClient)
                 .build();
-        service = retrofit.create(BookApiService.class);
+        service = retrofit.create(ApiService.class);
     }
 
-    public static BookApi getInstance(OkHttpClient okHttpClient) {
+    public static Api getInstance(OkHttpClient okHttpClient) {
         if (instance == null)
-            instance = new BookApi(okHttpClient);
+            instance = new Api(okHttpClient);
         return instance;
     }
 

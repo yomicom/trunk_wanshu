@@ -1,7 +1,6 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
-import com.wxb.wanshu.base.BaseContract;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
@@ -22,17 +21,17 @@ import rx.schedulers.Schedulers;
  */
 
 public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> implements BookDetailsContract.Presenter<BookDetailsContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public BookDetailsPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public BookDetailsPresenter(Api api) {
+        this.api = api;
     }
 
 
     @Override
     public void getBookDetails(int novel_id) {
-        Subscription subscribe = bookApi.getBookDetail(novel_id).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getBookDetail(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
                     @Override
@@ -55,7 +54,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
     @Override
     public void getBookReward(int novel_id,int page) {
-        Subscription subscribe = bookApi.getBookReward(novel_id,page).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getBookReward(novel_id,page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookRewardData>() {
                     @Override
@@ -78,7 +77,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
     @Override
     public void getRewardType() {
-        Subscription subscribe = bookApi.getRewardType().subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getRewardType().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RewardType>() {
                     @Override
@@ -102,7 +101,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
     @Override
     public void addBookShelf(int novel_id) {
 
-        Subscription subscribe = bookApi.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override

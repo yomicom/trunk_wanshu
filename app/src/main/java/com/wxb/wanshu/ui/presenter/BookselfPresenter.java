@@ -1,13 +1,10 @@
 package com.wxb.wanshu.ui.presenter;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookselfList;
-import com.wxb.wanshu.bean.RechargeAmount;
 import com.wxb.wanshu.ui.contract.BookselfContract;
-import com.wxb.wanshu.ui.contract.RechargeAmountContract;
-import com.wxb.wanshu.utils.LogUtils;
 
 import javax.inject.Inject;
 
@@ -21,16 +18,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class BookselfPresenter  extends RxPresenter<BookselfContract.View> implements BookselfContract.Presenter<BookselfContract.View> {
-    BookApi bookApi;
+    Api api;
 
     @Inject
-    public BookselfPresenter(BookApi bookApi) {
-        this.bookApi = bookApi;
+    public BookselfPresenter(Api api) {
+        this.api = api;
     }
 
     @Override
     public void getData(int page,int pageSize) {
-        Subscription rxSubscription = bookApi.getBookshelfList(page,pageSize).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.getBookshelfList(page,pageSize).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookselfList>() {
                     @Override
@@ -54,7 +51,7 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
     @Override
     public void delBooks(String novel_ids) {
 
-        Subscription rxSubscription = bookApi.delBookshelfList(novel_ids).subscribeOn(Schedulers.io())
+        Subscription rxSubscription = api.delBookshelfList(novel_ids).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override

@@ -1,11 +1,10 @@
 package com.wxb.wanshu.module;
 
-import com.wxb.wanshu.api.BookApi;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.api.HeaderInterceptor;
 import com.wxb.wanshu.api.LoggingInterceptor;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +15,7 @@ import okhttp3.OkHttpClient;
  */
 
 @Module
-public class BookApiModule {
+public class ApiModule {
 
     @Provides
     public OkHttpClient provideOkHttpClient() {
@@ -39,7 +38,7 @@ public class BookApiModule {
     }
 
     @Provides
-    protected BookApi provideBookService(OkHttpClient okHttpClient) {
-        return BookApi.getInstance(okHttpClient);
+    protected Api provideBookService(OkHttpClient okHttpClient) {
+        return Api.getInstance(okHttpClient);
     }
 }
