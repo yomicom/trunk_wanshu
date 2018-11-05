@@ -12,15 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMMin;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.bean.HomeBookData;
 import com.wxb.wanshu.bean.HomeData;
-import com.wxb.wanshu.common.MyShareListener;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
 import com.wxb.wanshu.ui.fragment.BannerFragment;

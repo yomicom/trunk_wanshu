@@ -6,11 +6,24 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_title_height">
+
+        <TextView
+            style="@style/text_big_nomal"
+            android:layout_centerInParent="true"
+            android:text="我的"
+            android:textSize="@dimen/text_huge" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@color/white"
         android:paddingLeft="@dimen/setting_left"
-        android:paddingRight="@dimen/setting_right">
+        android:paddingRight="@dimen/setting_right"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -31,7 +44,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/tv_name"
                 android:src="@mipmap/ic_vip"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_id"
@@ -100,8 +113,8 @@
             android:id="@+id/tv_over_time"
             style="@style/text_middle_nomal"
             android:layout_marginTop="2dp"
-            android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_next_activity"
+            android:drawablePadding="5dp"
             android:text=""
             android:textColor="@color/text_color_2" />
     </LinearLayout>
@@ -138,7 +151,7 @@
                 style="@style/text_small_nomal"
                 android:layout_marginTop="2dp"
                 android:text="0书币"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView
@@ -156,43 +169,134 @@
         style="@style/style_me_next"
         android:layout_marginTop="@dimen/distance_text_text_8"
         android:drawableLeft="@mipmap/ic_me_coin"
-        android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
+        android:drawablePadding="@dimen/drawable_padding_normal"
         android:text="书币明细"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_chongzhi_record"
         style="@style/style_me_next"
         android:drawableLeft="@mipmap/ic_me_add"
-        android:drawablePadding="@dimen/drawable_padding_normal"
         android:drawableRight="@mipmap/icon_next_activity"
+        android:drawablePadding="@dimen/drawable_padding_normal"
         android:text="@string/chongzhi_record"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/tv_read_history"
-        style="@style/style_me_next"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="@dimen/distance_left"
         android:layout_marginTop="10dp"
-        android:drawableLeft="@mipmap/ic_me_history"
-        android:drawablePadding="@dimen/drawable_padding_normal"
-        android:drawableRight="@mipmap/icon_next_activity"
-        android:text="@string/history_record" />
-    <TextView
-        android:id="@+id/tv_message"
-        style="@style/style_me_next"
-        android:drawableLeft="@mipmap/ic_me_note"
-        android:drawablePadding="@dimen/drawable_padding_normal"
-        android:drawableRight="@mipmap/icon_next_activity"
-        android:text="联系客服" />
+        android:layout_marginRight="@dimen/distance_left"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_setting"
-        style="@style/style_me_next"
-        android:drawableLeft="@mipmap/ic_me_setting"
-        android:drawablePadding="@dimen/drawable_padding_normal"
-        android:drawableRight="@mipmap/icon_next_activity"
-        android:text="设置" />
+        <ImageView
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/read_history" />
 
+        <ImageView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/comment_us" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/item_read_screen_time"
+        style="@style/style_me_next_item"
+        android:layout_marginTop="@dimen/distance_image_text_15">
+
+        <TextView
+            style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
+            android:text="阅读屏幕关闭时间" />
+
+        <TextView
+            android:id="@+id/read_screen_time"
+            style="@style/style_me_next_content"
+            android:text="系统时间" />
+    </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/setting_left"
+        android:layout_marginRight="@dimen/setting_right" />
+
+    <RelativeLayout
+        android:id="@+id/item_clean"
+        style="@style/style_me_next_item">
+
+        <TextView
+            style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
+            android:text="清除缓存" />
+
+        <TextView
+            android:id="@+id/clean"
+            style="@style/style_me_next_content" />
+    </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/setting_left"
+        android:layout_marginRight="@dimen/setting_right" />
+
+    <RelativeLayout
+        android:id="@+id/item_score"
+        style="@style/style_me_next_item">
+
+        <TextView
+            style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
+            android:text="给应用打分" />
+
+        <TextView
+            android:id="@+id/score"
+            style="@style/style_me_next_content" />
+    </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/setting_left"
+        android:layout_marginRight="@dimen/setting_right" />
+
+    <RelativeLayout
+        android:id="@+id/item_update"
+        style="@style/style_me_next_item">
+
+        <TextView
+            style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
+            android:text="检查更新" />
+
+        <TextView
+            android:id="@+id/update"
+            style="@style/style_me_next_content" />
+    </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/setting_left"
+        android:layout_marginRight="@dimen/setting_right" />
+
+    <RelativeLayout
+        android:id="@+id/about_us"
+        style="@style/style_me_next_item">
+
+        <TextView
+            style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
+            android:text="关于我们" />
+
+        <TextView style="@style/style_me_next_content" />
+    </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/setting_left"
+        android:layout_marginRight="@dimen/setting_right" />
 </LinearLayout>

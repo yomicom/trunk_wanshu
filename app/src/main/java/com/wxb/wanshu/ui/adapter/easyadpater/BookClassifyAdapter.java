@@ -1,0 +1,39 @@
+package com.wxb.wanshu.ui.adapter.easyadpater;
+
+import android.content.Context;
+import android.view.View;
+
+import com.wxb.wanshu.R;
+import com.wxb.wanshu.bean.HomeData;
+import com.wxb.wanshu.common.OnRvItemClickListener;
+import com.wxb.wanshu.ui.adapter.base.EasyRVAdapter;
+import com.wxb.wanshu.ui.adapter.base.EasyRVHolder;
+
+import java.util.List;
+
+/**
+ * Created by qiming on 2017/11/30.
+ */
+
+public class BookClassifyAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
+    private OnRvItemClickListener itemClickListener;
+
+    public BookClassifyAdapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
+        super(context, list, R.layout.item_book_classify);
+        this.itemClickListener = listener;
+    }
+
+    @Override
+    protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
+        viewHolder.setImageUrl(R.id.cover, item.getCover())
+                .setText(R.id.classify, item.getName())
+                .setText(R.id.book_num, "共" + item.getWord_num() + "本");
+
+        viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(view, position, item);
+            }
+        });
+    }
+}

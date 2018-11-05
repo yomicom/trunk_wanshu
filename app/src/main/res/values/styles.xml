@@ -150,7 +150,23 @@
         <item name="android:textColor">@color/text_color_1</item>
         <item name="android:textSize">@dimen/text_big</item>
         <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/select_setting_text</item>
+    </style>
+    <style name="style_me_next_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/setting_left</item>
+        <item name="android:paddingRight">@dimen/setting_right</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="style_me_next_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableRight">@mipmap/icon_next_activity</item>
+        <item name="android:drawablePadding">@dimen/distance_text_text_10</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <!--常见LinearLayouts水平样式-->
