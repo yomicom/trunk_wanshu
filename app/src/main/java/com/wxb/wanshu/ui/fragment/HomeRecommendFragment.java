@@ -1,7 +1,6 @@
 package com.wxb.wanshu.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,14 +18,10 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
-import com.wxb.wanshu.ui.activity.HomeBookActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVHorizontal1Adapter;
 import com.wxb.wanshu.utils.ImageUtils;
-import com.wxb.wanshu.utils.ScreenUtils;
-import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
-import com.wxb.wanshu.view.recycleview.decoration.SpaceDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +66,8 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     TextView author;
     @BindView(R.id.tv_word_nums)
     TextView tvWordNums;
+    @BindView(R.id.tv_more)
+    TextView tvMore;
     private int type;
 
     @Override
@@ -117,15 +114,18 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
                 }
 
                 if (type == 0) {//主编力荐
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                    rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
+//                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+//                    rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
+                    GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
                     rvHorizontal1.setLayoutManager(layoutManager);
+                    rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 20, false));
                     RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), list, this);
                     rvHorizontal1.setAdapter(adapter);
                 } else {//火热连载
+                    tvMore.setVisibility(View.VISIBLE);
                     GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
                     rvHorizontal1.setLayoutManager(layoutManager);
-                    rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 40, false));
+                    rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 50, false));
                     HomeHotAdapter adapter = new HomeHotAdapter(getActivity(), list, this);
                     rvHorizontal1.setAdapter(adapter);
                 }

@@ -1,7 +1,6 @@
 package com.wxb.wanshu.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,10 +15,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
-import com.wxb.wanshu.ui.activity.NovelRankActivity;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVGridView1Adapter;
-import com.wxb.wanshu.utils.ScreenUtils;
-import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
+import com.wxb.wanshu.ui.adapter.easyadpater.RVHomePopularAdapter;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
 import butterknife.BindView;
@@ -82,7 +78,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
             rvHorizontal1.setLayoutManager(layoutManager);
             rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
 
-            RVGridView1Adapter adapter = new RVGridView1Adapter(getActivity(), data.getData(), this);
+            RVHomePopularAdapter adapter = new RVHomePopularAdapter(getActivity(), data.getData(), this);
             rvHorizontal1.setAdapter(adapter);
         }
 

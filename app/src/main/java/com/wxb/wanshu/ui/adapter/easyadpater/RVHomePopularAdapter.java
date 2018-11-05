@@ -15,11 +15,11 @@ import java.util.List;
  * Created by qiming on 2017/11/30.
  */
 
-public class RVGridView1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
+public class RVHomePopularAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
     private OnRvItemClickListener itemClickListener;
 
-    public RVGridView1Adapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
-        super(context, list, R.layout.include_item_easy_book);
+    public RVHomePopularAdapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
+        super(context, list, R.layout.include_item_easy_book_2);
         this.itemClickListener = listener;
     }
 

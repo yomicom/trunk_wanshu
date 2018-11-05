@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="74dp"
+    android:layout_width="90dp"
     android:layout_height="wrap_content"
     android:background="@drawable/touch_bg"
     android:orientation="vertical">
@@ -14,14 +14,13 @@
         <ImageView
             android:id="@+id/iv"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:src="@mipmap/defalt_book_cover"/>
 
         <TextView
             android:id="@+id/tv_title"
             style="@style/text_novel_title"
             android:text="标题"
-            android:maxLines="2"
             android:layout_marginTop="@dimen/distance_cover_title"
             android:textSize="@dimen/text_middle" />
     </LinearLayout>

@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 排行榜
+ *
  * Created by qiming on 2017/11/30.
  */
 
