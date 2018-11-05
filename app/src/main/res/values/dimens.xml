@@ -29,9 +29,11 @@
     <dimen name="next_height_45">45dp</dimen>
 
     <!--上下左右距离-->
-    <dimen name="distance_left">18dp</dimen>
+    <dimen name="distance_left">20dp</dimen>
     <dimen name="distance_top">15dp</dimen>
+    <dimen name="distance_cover_title">7dp</dimen>
     <dimen name="distance_top_20">20dp</dimen>
+    <dimen name="distance_image_text">15dp</dimen>
     <dimen name="distance_image_text_12">12dp</dimen>
     <dimen name="distance_image_text_15">15dp</dimen>
     <dimen name="distance_text_text_12">12dp</dimen>

@@ -11,6 +11,7 @@ import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.AppComponent;
+import com.wxb.wanshu.ui.activity.SearchActivity;
 import com.wxb.wanshu.view.CustomerBanner;
 
 import butterknife.BindView;
@@ -79,7 +80,7 @@ public class BannerFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish})
+    @OnClick({R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish, R.id.search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.item_rank:
@@ -89,6 +90,9 @@ public class BannerFragment extends BaseFragment {
             case R.id.item_short:
                 break;
             case R.id.item_finish:
+                break;
+            case R.id.search:
+                SearchActivity.startActivity(getActivity());
                 break;
         }
     }

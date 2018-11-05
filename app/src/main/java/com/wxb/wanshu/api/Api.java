@@ -37,7 +37,7 @@ import com.wxb.wanshu.bean.RewardType;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
-import com.wxb.wanshu.utils.ToolUtil;
+import com.wxb.wanshu.utils.MD5;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -84,12 +84,7 @@ public class Api {
     }
 
     public Observable<HomeData> getHomeData(String key) {
-        Map<String, String> map = new HashMap<>();
-        map.put("app_id", Constant.APP_ID);
-        map.put("token", "");
-        map.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
-        map.put("key", key);
-        return service.getHomeData(buildSign(map, Constant.APP_SECRET), Constant.APP_ID, "",String.valueOf(System.currentTimeMillis() / 1000), key);
+        return service.getHomeData( key);
     }
 
     public Observable<RewardType> getRewardType() {
@@ -176,81 +171,11 @@ public class Api {
         return service.rewardGift(type, number, novel_id, chapter_id);
     }
 
-    //    public Observable<HotWord> getHotWord() {
-//        return service.getHotWord();
-//    }
-//
-//    public Observable<AutoComplete> getAutoComplete(String query) {
-//        return service.autoComplete(query);
-//    }
-//
-//    public Observable<SearchDetail> getSearchResult(String query) {
-//        return service.searchBooks(query);
-//    }
-//
-//    public Observable<BooksByTag> searchBooksByAuthor(String author) {
-//        return service.searchBooksByAuthor(author);
-//    }
-//
-//    public Observable<BookDetail> getBookDetail(String bookId) {
-//        return service.getBookDetail(bookId);
-//    }
-//
-//    public Observable<HotReview> getHotReview(String book) {
-//        return service.getHotReview(book);
-//    }
-//
-//    public Observable<RecommendBookList> getRecommendBookList(String bookId, String limit) {
-//        return service.getRecommendBookList(bookId, limit);
-//    }
-//
-//    public Observable<BooksByTag> getBooksByTag(String tags, String start, String limit) {
-//        return service.getBooksByTag(tags, start, limit);
-//    }
-//
     public Observable<BookMenu> getBookMixAToc(int bookId) {
         return service.getBookMixAToc(bookId);
     }
 
     public Observable<ChapterRead> getChapterRead(int novel_id, int chapter) {
         return service.getChapterRead(novel_id, chapter);
-    }
-
-    public static String buildSign(Map<String, String> parameters, String key) {
-        if (parameters.containsKey("sign")) {
-            parameters.remove("sign");
-        }
-        List<Map.Entry<String, String>> infoIds = new ArrayList<Map.Entry<String, String>>(parameters.entrySet());
-        Collections.sort(infoIds, new Comparator<Map.Entry<String, String>>() {
-            public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
-                //return (o2.getValue() - o1.getValue());
-                return (o1.getKey()).toString().compareTo(o2.getKey());
-            }
-        });
-        return ToolUtil.stringToMD5(buildString(infoIds) + key);
-    }
-
-
-    /**
-     * 根据参数值构建url字符串
-     *
-     * @param infoIds
-     * @return
-     */
-    private static String buildString(List<Map.Entry<String, String>> infoIds) {
-        String str = "";
-        try {
-            for (int i = 0; i < infoIds.size(); i++) {
-                Map.Entry map = (Map.Entry) infoIds.get(i);
-                String key = map.getKey().toString();
-                String value = map.getValue().toString();
-                str = str + URLEncoder.encode(key, "utf8") + "=" + URLEncoder.encode(value, "utf8") + "&";
-            }
-            if (str.length() > 0)
-                str = str.substring(0, str.length() - 1);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return str;
     }
 }

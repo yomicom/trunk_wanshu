@@ -18,7 +18,9 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.NovelRankActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVGridView1Adapter;
+import com.wxb.wanshu.utils.ScreenUtils;
 import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
+import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,12 +45,13 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
 
     @Override
     public int getLayoutId() {
-        return R.layout.vertical_type1;
+        return R.layout.frag_home_popular;
     }
 
-    public static HomePopularityFragment newInstance() {
+    public static HomePopularityFragment newInstance(HomeData.DataBeanX dataBeanX) {
         HomePopularityFragment fragment = new HomePopularityFragment();
         Bundle bundle = new Bundle();
+        bundle.putSerializable("data", dataBeanX);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -69,7 +72,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
         data = (HomeData.DataBeanX) bundle.getSerializable("data");
         sex_type = bundle.getInt("sex");
 
-//        tvTag.setText(data.getName());
+        tvTag.setText(data.getName());
     }
 
     @Override
@@ -77,7 +80,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
         if (data != null) {
             GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
             rvHorizontal1.setLayoutManager(layoutManager);
-            rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 30));
+            rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
 
             RVGridView1Adapter adapter = new RVGridView1Adapter(getActivity(), data.getData(), this);
             rvHorizontal1.setAdapter(adapter);

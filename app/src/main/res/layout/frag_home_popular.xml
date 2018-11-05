@@ -10,6 +10,9 @@
         android:id="@+id/rv_horizontal_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="@dimen/distance_left"
+        android:layout_marginRight="@dimen/distance_left"
         android:foregroundGravity="center" />
 
 </LinearLayout>

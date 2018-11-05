@@ -8,9 +8,7 @@
     <RelativeLayout
         android:id="@+id/rl_bg"
         android:layout_width="match_parent"
-        android:layout_height="195dp"
-        android:paddingLeft="@dimen/distance_top_20"
-        android:paddingRight="@dimen/distance_top_20">
+        android:layout_height="195dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +17,10 @@
             android:background="@drawable/bg_search_home"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/search"
+            android:layout_marginLeft="@dimen/distance_top_20"
+            android:layout_marginRight="@dimen/distance_top_20">
 
             <TextView
                 android:id="@+id/et_article_search"
@@ -47,7 +48,7 @@
         <com.wxb.wanshu.view.CustomerBanner
             android:id="@+id/vp_banner"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true" />
 
         <LinearLayout

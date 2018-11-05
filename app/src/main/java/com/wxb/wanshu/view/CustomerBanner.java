@@ -165,9 +165,9 @@ public class CustomerBanner extends FrameLayout {
         public void onPageSelected(int position) {
             for (int i = 0; i < mDotsIV.size(); i++) {
                 if (i == position) {
-                    mDotsIV.get(i).setImageResource(R.drawable.dot_focus);
+                    mDotsIV.get(i).setImageResource(R.mipmap.dot_focus);
                 } else {
-                    mDotsIV.get(i).setImageResource(R.drawable.dot_blur);
+                    mDotsIV.get(i).setImageResource(R.mipmap.dot_blur);
                 }
             }
         }

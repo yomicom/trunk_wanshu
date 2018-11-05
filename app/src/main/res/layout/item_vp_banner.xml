@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:orientation="horizontal">-->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_marginRight="32dp"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_banner_title"
-            android:text="霸道总裁"
             style="@style/text_novel_title"
-            android:textSize="@dimen/text_huge"
+            android:singleLine="true"
+            android:text="霸道总裁"
             android:textColor="@color/white"
-            android:singleLine="true"/>
+            android:textSize="@dimen/text_huge" />
+
         <TextView
             android:id="@+id/tv_banner_intro"
-            android:text="放假爱上了附近啊老大放假啊大家法拉看电视解放东路撒娇发神街坊蓝卡队神街坊卡拉丁减肥啦的减肥留点时间法拉克"
             style="@style/text_novel_intro"
-            android:textColor="#BBFFFFFF"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="放假爱上了附近啊老大放假啊大家法拉看电视解放东路撒娇发神街坊蓝卡队神街坊卡拉丁减肥啦的减肥留点时间法拉克"
+            android:textColor="#BBFFFFFF" />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_banner"
-        android:layout_width="85dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    </LinearLayout>
+    <!--</LinearLayout>-->
 </LinearLayout>

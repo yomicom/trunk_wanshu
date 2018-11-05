@@ -1,14 +1,18 @@
 package com.wxb.wanshu.module;
 
 import com.wxb.wanshu.api.Api;
-import com.wxb.wanshu.api.HeaderInterceptor;
+import com.wxb.wanshu.api.CustomSignInterceptor;
+import com.wxb.wanshu.api.HeadersInterceptor;
 import com.wxb.wanshu.api.LoggingInterceptor;
+
+import org.apache.http.params.HttpParams;
 
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.internal.http.HttpHeaders;
 
 /**
  * Created by qiming on 2017/11/24.
@@ -32,7 +36,8 @@ public class ApiModule {
                 .connectTimeout(20 * 1000, TimeUnit.MILLISECONDS)
                 .readTimeout(20 * 1000, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true) // 失败重发
-                .addInterceptor(new HeaderInterceptor())
+                .addInterceptor(new CustomSignInterceptor())//添加参数签名拦截器
+                .addInterceptor(new HeadersInterceptor())
                 .addInterceptor(logging);
         return builder.build();
     }

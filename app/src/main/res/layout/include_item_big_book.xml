@@ -66,7 +66,7 @@
             android:layout_alignLeft="@id/tv_title"
             android:layout_below="@id/tv_title"
             android:layout_marginRight="14dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/rl_article_pic"
             android:orientation="vertical" >
 
@@ -79,6 +79,7 @@
                 <TextView
                     android:id="@+id/tv_article_intro"
                     style="@style/text_novel_intro"
+                    android:maxLines="2"
                     android:gravity="top"
                     android:text="111" />
 
@@ -91,30 +92,30 @@
                 android:layout_marginBottom="2dp">
 
                 <TextView
-                    android:id="@+id/read_times"
+                    android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
-                    android:text="11" />
+                    android:text="11"/>
 
                 <TextView
-                    android:id="@+id/tv_status"
+                    android:id="@+id/tv_word_nums"
                     style="@style/text_small_nomal"
-                    android:layout_height="16dp"
+                    android:background="@drawable/bg_book_category"
+                    android:text="10万字"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/bg_book_status"
-                    android:text="已完结"
-                    android:textColor="@color/gobal_color"
-                    android:textSize="@dimen/text_more_small" />
+                    android:layout_height="16dp"
+                    android:textSize="@dimen/text_more_small"/>
 
                 <TextView
                     android:id="@+id/tv_category"
                     style="@style/text_small_nomal"
+                    android:text="都市言情"
+                    android:textColor="@color/gobal_color"
+                    android:background="@drawable/bg_book_status"
                     android:layout_height="16dp"
                     android:layout_marginRight="11dp"
-                    android:layout_toLeftOf="@id/tv_status"
-                    android:background="@drawable/bg_book_category"
-                    android:text="都市言情"
-                    android:textSize="@dimen/text_more_small" />
+                    android:layout_toLeftOf="@id/tv_word_nums"
+                    android:textSize="@dimen/text_more_small"/>
             </RelativeLayout>
         </LinearLayout>
 

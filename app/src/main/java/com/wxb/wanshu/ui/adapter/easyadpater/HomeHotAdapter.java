@@ -15,22 +15,19 @@ import java.util.List;
  * Created by qiming on 2017/11/30.
  */
 
-public class RVVertical1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
+public class HomeHotAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
     private OnRvItemClickListener itemClickListener;
 
-    public RVVertical1Adapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
-        super(context, list, R.layout.include_item_big_book);
+    public HomeHotAdapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
+        super(context, list, R.layout.item_home_hot);
         this.itemClickListener = listener;
     }
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.mipmap.defalt_book_cover)
-                .setText(R.id.article_title, item.getName())
-                .setText(R.id.tv_article_intro, item.getDescription())
-                .setText(R.id.author, item.getAuthor())
-                .setText(R.id.tv_word_nums, item.getWord_num() + "字")
-                .setText(R.id.tv_category, item.getCategory_name());
+        viewHolder.setImageUrl(R.id.cover, item.getCover())
+                .setText(R.id.title, item.getName())
+                .setText(R.id.word_num, item.getWord_num() + "字");
 
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override

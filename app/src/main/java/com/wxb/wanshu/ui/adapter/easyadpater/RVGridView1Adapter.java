@@ -19,35 +19,35 @@ public class RVGridView1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBea
     private OnRvItemClickListener itemClickListener;
 
     public RVGridView1Adapter(Context context, List<HomeData.DataBeanX.DataBean> list, OnRvItemClickListener listener) {
-        super(context, list, R.layout.item_gridview_1);
+        super(context, list, R.layout.include_item_easy_book);
         this.itemClickListener = listener;
     }
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-//        viewHolder.setImageUrl(R.id.iv, item.getCover())
-//                .setText(R.id.tv_title, item.getTitle());
+        viewHolder.setImageUrl(R.id.iv, item.getCover())
+                .setText(R.id.tv_title, item.getName());
 
-        switch (position + 1) {
-            case 1:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_1);
-                break;
-            case 2:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_2);
-                break;
-            case 3:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_3);
-                break;
-            case 4:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_4);
-                break;
-            case 5:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_5);
-                break;
-            case 6:
-                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_6);
-                break;
-        }
+//        switch (position + 1) {
+//            case 1:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_1);
+//                break;
+//            case 2:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_2);
+//                break;
+//            case 3:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_3);
+//                break;
+//            case 4:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_4);
+//                break;
+//            case 5:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_5);
+//                break;
+//            case 6:
+//                viewHolder.setImageResource(R.id.iv_sort, R.mipmap.top_6);
+//                break;
+//        }
 
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override

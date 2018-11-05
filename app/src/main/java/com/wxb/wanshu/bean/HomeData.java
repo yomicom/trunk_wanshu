@@ -26,6 +26,7 @@ public class HomeData extends Base{
          */
 
         private String type;
+        private String name;
         private List<DataBean> data;
 
         public String getType() {
@@ -42,6 +43,14 @@ public class HomeData extends Base{
 
         public void setData(List<DataBean> data) {
             this.data = data;
+        }
+
+        public String getName() {
+            return name == null ? "" : name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public static class DataBean {

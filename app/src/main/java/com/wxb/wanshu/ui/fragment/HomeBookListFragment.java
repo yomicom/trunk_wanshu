@@ -36,7 +36,6 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
     @BindView(R.id.rv_horizontal_1)
     RecyclerView rvHorizontal1;
     Unbinder unbinder;
-    int sex_type = 10;
 
     private HomeData.DataBeanX data;
 
@@ -45,11 +44,10 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
         return R.layout.vertical_type1;
     }
 
-    public static HomeBookListFragment newInstance( int sex_type) {
+    public static HomeBookListFragment newInstance(HomeData.DataBeanX dataBeanX) {
         HomeBookListFragment fragment = new HomeBookListFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("sex", sex_type);
-//        bundle.putSerializable("data", dataBeanX);
+        bundle.putSerializable("data", dataBeanX);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -67,10 +65,9 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
     @Override
     public void initDatas() {
         Bundle bundle = getArguments();
-//        data = (HomeData.DataBeanX) bundle.getSerializable("data");
-//        sex_type = bundle.getInt("sex");
-//
-//        tvTag.setText(data.getName());
+        data = (HomeData.DataBeanX) bundle.getSerializable("data");
+
+        tvTag.setText(data.getName());
     }
 
     @Override
@@ -79,18 +76,13 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
             NoScrollLayoutManager layoutManager = new NoScrollLayoutManager(getActivity());
             layoutManager.setScrollEnabled(false);
             rvHorizontal1.setLayoutManager(layoutManager);
-            rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 30));
+            rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 0));
 
             RVVertical1Adapter adapter = new RVVertical1Adapter(getActivity(), data.getData(), this);
             rvHorizontal1.setAdapter(adapter);
         }
 
-        tvMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                SelectBooksActivity.startActivity(getActivity(), sex_type,data.getName());
-            }
-        });
+        tvMore.setVisibility(View.GONE);
     }
 
     @Override

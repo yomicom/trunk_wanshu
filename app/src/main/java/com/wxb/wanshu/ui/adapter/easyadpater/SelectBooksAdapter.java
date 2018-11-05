@@ -27,8 +27,8 @@ public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> 
                 holder.setImageUrl(R.id.iv_article_pic, item.getCover(),R.mipmap.defalt_book_cover)
                         .setText(R.id.article_title, item.getTitle())
                         .setText(R.id.tv_article_intro, item.getSummary())
-                        .setText(R.id.read_times, item.getRead() + "人在看")
-                        .setText(R.id.tv_status, item.getComplete_status() == 0 ? "未完结" : "已完结")
+//                        .setText(R.id.author, item.getRead() + "人在看")
+//                        .setText(R.id.tv_status, item.getComplete_status() == 0 ? "未完结" : "已完结")
                         .setText(R.id.tv_category, item.getCategory());
 
             }

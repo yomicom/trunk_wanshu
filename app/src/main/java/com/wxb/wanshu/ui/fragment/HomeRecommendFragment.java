@@ -2,6 +2,7 @@ package com.wxb.wanshu.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,21 +15,28 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
-import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
+import com.wxb.wanshu.ui.activity.HomeBookActivity;
+import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVHorizontal1Adapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVRecommandAdapter;
+import com.wxb.wanshu.utils.ImageUtils;
+import com.wxb.wanshu.utils.ScreenUtils;
 import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
+import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
+import com.wxb.wanshu.view.recycleview.decoration.SpaceDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 主编力荐
+ * 主编力荐/火热连载
  * Created by qiming on 2017/11/21.
  */
 
@@ -39,9 +47,6 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     RecyclerView rvHorizontal1;
     Unbinder unbinder;
 
-    RecyclerView.LayoutManager layoutManager;
-    @BindView(R.id.divide)
-    View divide;
     @BindView(R.id.iv_article_pic)
     ImageView ivArticlePic;
     @BindView(R.id.iv_free)
@@ -58,14 +63,14 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     TextView tvArticleIntro;
     @BindView(R.id.rl_time)
     RelativeLayout rlTime;
-    @BindView(R.id.read_times)
-    TextView readTimes;
-    @BindView(R.id.tv_status)
-    TextView tvStatus;
     @BindView(R.id.tv_category)
     TextView tvCategory;
     @BindView(R.id.rl_material_item)
     RelativeLayout rlMaterialItem;
+    @BindView(R.id.author)
+    TextView author;
+    @BindView(R.id.tv_word_nums)
+    TextView tvWordNums;
     private int type;
 
     @Override
@@ -73,10 +78,11 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         return R.layout.fragment_horizontal01;
     }
 
-    public static HomeRecommendFragment newInstance() {
+    public static HomeRecommendFragment newInstance(HomeData.DataBeanX dataBeanX, int type) {
         HomeRecommendFragment fragment = new HomeRecommendFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("tag", 1);
+        bundle.putSerializable("data", dataBeanX);
+        bundle.putInt("type", type);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -98,16 +104,45 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     @Override
     public void configViews() {
         Bundle bundle = getArguments();
-        type = bundle.getInt("tag");
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
-        rvHorizontal1.setLayoutManager(layoutManager);
+        type = bundle.getInt("type");
 
-//        HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
-//        RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), data.getData(), this);
-//        rvHorizontal1.setAdapter(adapter);
+        HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
+        List<HomeData.DataBeanX.DataBean> list0 = data.getData();
+        if (list0.size() > 0) {
+            setOneBookData(list0.get(0));
+            if (list0.size() > 1) {
+                List list = new ArrayList();
+                for (int i = 1; i < list0.size(); i++) {
+                    list.add(list0.get(i));
+                }
 
-//        tvTag.setText(data.getName());
+                if (type == 0) {//主编力荐
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                    rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
+                    rvHorizontal1.setLayoutManager(layoutManager);
+                    RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), list, this);
+                    rvHorizontal1.setAdapter(adapter);
+                } else {//火热连载
+                    GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+                    rvHorizontal1.setLayoutManager(layoutManager);
+                    rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 40, false));
+                    HomeHotAdapter adapter = new HomeHotAdapter(getActivity(), list, this);
+                    rvHorizontal1.setAdapter(adapter);
+                }
+            }
+        }
+
+        tvTag.setText(data.getName());
+    }
+
+    private void setOneBookData(HomeData.DataBeanX.DataBean item) {
+        ImageUtils.displayImage(getActivity(), ivArticlePic, item.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
+        articleTitle.setText(item.getName());
+        tvArticleIntro.setText(item.getDescription());
+        author.setText(item.getAuthor());
+        tvWordNums.setText(item.getWord_num() + "字");
+        tvCategory.setText(item.getCategory_name());
+
     }
 
     @Override

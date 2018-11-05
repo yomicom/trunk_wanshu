@@ -64,7 +64,7 @@ public class ReaderApplication extends Application {
 
     private void initCompoent() {
         appComponent = DaggerAppComponent.builder()
-                .bookApiModule(new ApiModule())
+                .apiModule(new ApiModule())
                 .appModule(new AppModule(this))
                 .build();
     }

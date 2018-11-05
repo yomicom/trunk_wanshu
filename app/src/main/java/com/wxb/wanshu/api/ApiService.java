@@ -60,8 +60,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/recommendList")
-    Observable<HomeData> getHomeData(@Query("sign") String sign, @Query("app_id") String app_id,
-                                     @Query("token") String token, @Query("timestamp") String timestamp, @Query("key") String key);
+    Observable<HomeData> getHomeData(@Query("key") String key);
 
     /**
      * 打赏礼物类型

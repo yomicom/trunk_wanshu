@@ -81,17 +81,16 @@
                 android:layout_marginBottom="2dp">
 
                 <TextView
-                    android:id="@+id/read_times"
+                    android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
                     android:text="11"/>
 
                 <TextView
-                    android:id="@+id/tv_status"
+                    android:id="@+id/tv_word_nums"
                     style="@style/text_small_nomal"
                     android:background="@drawable/bg_book_status"
-                    android:text="已完结"
-                    android:textColor="@color/gobal_color"
+                    android:text="10万字"
                     android:layout_alignParentRight="true"
                     android:layout_height="16dp"
                     android:textSize="@dimen/text_more_small"/>
@@ -101,9 +100,10 @@
                     style="@style/text_small_nomal"
                     android:background="@drawable/bg_book_category"
                     android:text="都市言情"
+                    android:textColor="@color/gobal_color"
                     android:layout_height="16dp"
                     android:layout_marginRight="11dp"
-                    android:layout_toLeftOf="@id/tv_status"
+                    android:layout_toLeftOf="@id/tv_word_nums"
                     android:textSize="@dimen/text_more_small"/>
             </RelativeLayout>
         </LinearLayout>
