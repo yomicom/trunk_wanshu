@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
+import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVHorizontal1Adapter;
 import com.wxb.wanshu.utils.ImageUtils;
@@ -69,6 +71,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     @BindView(R.id.tv_more)
     TextView tvMore;
     private int type;
+    private HomeData.DataBeanX data;
 
     @Override
     public int getLayoutId() {
@@ -103,7 +106,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         Bundle bundle = getArguments();
         type = bundle.getInt("type");
 
-        HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
+        data = (HomeData.DataBeanX) bundle.getSerializable("data");
         List<HomeData.DataBeanX.DataBean> list0 = data.getData();
         if (list0.size() > 0) {
             setOneBookData(list0.get(0));
@@ -122,7 +125,6 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
                     RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), list, this);
                     rvHorizontal1.setAdapter(adapter);
                 } else {//火热连载
-                    tvMore.setVisibility(View.VISIBLE);
                     GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
                     rvHorizontal1.setLayoutManager(layoutManager);
                     rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 50, false));
@@ -133,6 +135,18 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         }
 
         tvTag.setText(data.getName());
+
+        setMoreView();
+    }
+
+    private void setMoreView() {
+        String type = data.getType();
+        String name = data.getName();
+        if (type.equals(Constant.BookType.EDITOR)) {
+            tvMore.setVisibility(View.GONE);
+        }
+        tvMore.setOnClickListener(v ->
+                SelectBooksActivity.startActivity(mContext, type, name));
     }
 
     private void setOneBookData(HomeData.DataBeanX.DataBean item) {

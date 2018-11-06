@@ -2,7 +2,7 @@ package com.wxb.wanshu.ui.presenter;
 
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
-import com.wxb.wanshu.bean.NovelRank;
+import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.ui.contract.NovelRankContract;
 import com.wxb.wanshu.utils.LogUtils;
 
@@ -29,7 +29,7 @@ public class NovelRankPresenter extends RxPresenter<NovelRankContract.View> impl
     public void getNovelRank(String type, int page) {
         Subscription rxSubscription = api.getRankBookList(type, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NovelRank>() {
+                .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
                         mView.complete();
@@ -42,7 +42,7 @@ public class NovelRankPresenter extends RxPresenter<NovelRankContract.View> impl
                     }
 
                     @Override
-                    public void onNext(NovelRank data) {
+                    public void onNext(BookList data) {
                         mView.showNovelRank(data);
                     }
                 });

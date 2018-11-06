@@ -131,10 +131,10 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         EventBus.getDefault().register(this);
         novel_id = getIntent().getIntExtra(INTENT_BOOK_ID, 0);
 
-        showDialog();
         mPresenter.attachView(this);
-        mPresenter.getBookDetails(novel_id);
-        mPresenter.getBookReward(novel_id, rewardPage);
+//        showDialog();
+//        mPresenter.getBookDetails(novel_id);
+//        mPresenter.getBookReward(novel_id, rewardPage);
     }
 
     @Override

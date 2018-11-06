@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.NovelCategory;
 import com.wxb.wanshu.component.AppComponent;
@@ -23,12 +24,11 @@ import javax.inject.Inject;
  */
 public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View {
 
-    int MAN_TYPE = 10;
-    public static String SEX_TYPE = "sex_type";
-    int sex_type;
+    public static String TYPE = "type";
+    String type;
 
-    public static void startActivity(Context context, int sex_type, String title) {
-        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(SEX_TYPE, sex_type).putExtra("title", title));
+    public static void startActivity(Context context, String type, String title) {
+        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title));
     }
 
     @Inject
@@ -56,12 +56,13 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     @Override
     public void initDatas() {
         mPresenter.attachView(this);
-        mPresenter.getBookList(sex_type, "", "", page, "");
+
+        type = getIntent().getStringExtra(TYPE);
+        getData();
     }
 
     @Override
     public void configViews() {
-        sex_type = getIntent().getIntExtra(SEX_TYPE, MAN_TYPE);
 
         initAdapter(SelectBooksAdapter.class, false, true);
         mRecyclerView.removeAllItemDecoration();
@@ -91,7 +92,49 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     @Override
     public void onLoadMore() {
         page++;
-        mPresenter.getBookList(sex_type, "", "", page, "");
+        getData();
+    }
+
+    private void getData() {
+        switch (type) {
+            case "classify":
+                mPresenter.getBookList(0, "", "", page, "");
+                break;
+            case Constant.BookType.Boutique_All:
+                mPresenter.getBoutiqueList(0, page);
+                break;
+            case Constant.BookType.Boutique_Publishing:
+                mPresenter.getBoutiqueList(1, page);
+                break;
+            case Constant.BookType.Boutique_Finished:
+                mPresenter.getBoutiqueList(2, page);
+                break;
+            case Constant.BookType.Short_AncientRomance:
+                mPresenter.getShortStoryList(1, page);
+                break;
+            case Constant.BookType.Short_ModernRomance:
+                mPresenter.getShortStoryList(2, page);
+                break;
+            case Constant.BookType.Short_All:
+                mPresenter.getShortStoryList(0, page);
+                break;
+            case Constant.BookType.Finished_All:
+                mPresenter.getFinishList("read", 1, page);
+                break;
+            case Constant.BookType.Finished_Popular:
+                mPresenter.getFinishList("read", 1, page);
+                break;
+            case Constant.BookType.Finished_Latest:
+                mPresenter.getFinishList("time", 1, page);
+                break;
+
+            case Constant.BookType.PUBLISHING://首页-火爆连载
+                mPresenter.getBoutiqueList(1, page);
+                break;
+            case Constant.BookType.FINISH://首页-完本精选
+                mPresenter.getBoutiqueList(2, page);
+                break;
+        }
     }
 
     @Override

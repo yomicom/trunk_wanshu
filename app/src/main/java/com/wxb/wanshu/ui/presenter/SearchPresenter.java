@@ -4,7 +4,6 @@ import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.HotNovelList;
-import com.wxb.wanshu.bean.NovelRank;
 import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.utils.LogUtils;
 

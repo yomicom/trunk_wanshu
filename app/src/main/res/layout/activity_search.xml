@@ -42,7 +42,7 @@
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:textColor="@color/text_color_1"
-                android:textColorHint="@color/text_color_2"
+                android:textColorHint="@color/text_hint_color"
                 android:textCursorDrawable="@null"
                 android:textSize="13sp" />
 

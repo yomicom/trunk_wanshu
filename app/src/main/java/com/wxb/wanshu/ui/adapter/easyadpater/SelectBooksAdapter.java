@@ -30,13 +30,6 @@ public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> 
                         .setText(R.id.author, item.getAuthor())
                         .setText(R.id.tv_word_nums, item.getWord_num() + "字")
                         .setText(R.id.tv_category, item.getCategory_name());
-
-                holder.setOnItemViewClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        itemClickListener.onItemClick(view, position, item);
-                    }
-                });
             }
         };
     }

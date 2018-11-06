@@ -44,6 +44,8 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
         String clientid = PushManager.getInstance().getClientid(this);
         if("".equals(clientid)){}
+
+
     }
 
 

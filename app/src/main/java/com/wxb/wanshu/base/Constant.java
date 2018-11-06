@@ -164,41 +164,39 @@ public class Constant {
             BookType.POPULAR,
             BookType.PUBLISHING,
             BookType.FINISH,
-            BookType.HOT,
-            BookType.CYJK,
-            BookType.HMZC,
-            BookType.XDYQ,
-            BookType.GDYQ,
-            BookType.HXYQ,
-            BookType.DMTR
+            BookType.Boutique_All,
+            BookType.Boutique_Publishing,
+            BookType.Boutique_Finished,
+            BookType.Short_ModernRomance,
+            BookType.Short_AncientRomance,
+            BookType.Short_All,
+            BookType.Finished_All,
+            BookType.Finished_Popular,
+            BookType.Finished_Latest
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface BookType {
         String ALL = "all";
 
-        String EDITOR = "editor";//编辑力荐
+        String EDITOR = "homepage:editor";//编辑力荐
 
-        String FRESH = "fresh";//新书速递
+        String FRESH = "homepage:fresh";//新书速递
 
-        String POPULAR = "popular";//人气佳作
+        String POPULAR = "homepage:popular";//人气佳作
 
-        String PUBLISHING = "publishing";//火爆连载
+        String PUBLISHING = "homepage:publishing";//火爆连载
 
-        String FINISH = "finish";//完本精选
+        String FINISH = "homepage:complete";//完本精选
 
-        String HOT = "hot";//热门推荐
-
-        String CYJK = "cyjk";
-
-        String HMZC = "hmzc";
-
-        String XDYQ = "xdyq";
-
-        String GDYQ = "gdyq";
-
-        String HXYQ = "hxyq";
-
-        String DMTR = "dmtr";
+        String Boutique_All = "boutique:all";//畅读精品
+        String Boutique_Publishing = "boutique:publishing";//连载好文
+        String Boutique_Finished = "boutique:finished";//完结精选
+        String Short_ModernRomance = "short:modernRomance";//现代言情
+        String Short_AncientRomance = "short:ancientRomance";//古代言情
+        String Short_All = "short:all";//精选短篇
+        String Finished_All = "finished:all";//完结精选
+        String Finished_Popular = "finished:popular";//人气红文
+        String Finished_Latest = "finished:latest";//最新完结
     }
 
     public static List<String> bookTypeList = new ArrayList<String>() {{
@@ -208,28 +206,30 @@ public class Constant {
         add(BookType.POPULAR);
         add(BookType.PUBLISHING);
         add(BookType.FINISH);
-        add(BookType.HOT);
-        add(BookType.CYJK);
-        add(BookType.HMZC);
-        add(BookType.XDYQ);
-        add(BookType.GDYQ);
-        add(BookType.HXYQ);
-        add(BookType.DMTR);
+        add(BookType.Boutique_All);
+        add(BookType.Boutique_Publishing);
+        add(BookType.Boutique_Finished);
+        add(BookType.Short_ModernRomance);
+        add(BookType.Short_AncientRomance);
+        add(BookType.Short_All);
+        add(BookType.Finished_All);
+        add(BookType.Finished_Popular);
+        add(BookType.Finished_Latest);
     }};
-
-    public static Map<String, String> bookType = new HashMap<String, String>() {{
-        put("qt", "其他");
-        put(BookType.EDITOR, "玄幻奇幻");
-        put(BookType.FRESH, "武侠仙侠");
-        put(BookType.POPULAR, "都市异能");
-        put(BookType.PUBLISHING, "历史军事");
-        put(BookType.FINISH, "游戏竞技");
-        put(BookType.HOT, "科幻灵异");
-        put(BookType.CYJK, "穿越架空");
-        put(BookType.HMZC, "豪门总裁");
-        put(BookType.XDYQ, "现代言情");
-        put(BookType.GDYQ, "古代言情");
-        put(BookType.HXYQ, "幻想言情");
-        put(BookType.DMTR, "耽美同人");
-    }};
+//
+//    public static Map<String, String> bookType = new HashMap<String, String>() {{
+//        put("qt", "其他");
+//        put(BookType.EDITOR, "玄幻奇幻");
+//        put(BookType.FRESH, "武侠仙侠");
+//        put(BookType.POPULAR, "都市异能");
+//        put(BookType.PUBLISHING, "历史军事");
+//        put(BookType.FINISH, "游戏竞技");
+//        put(BookType.HOT, "科幻灵异");
+//        put(BookType.CYJK, "穿越架空");
+//        put(BookType.HMZC, "豪门总裁");
+//        put(BookType.XDYQ, "现代言情");
+//        put(BookType.GDYQ, "古代言情");
+//        put(BookType.HXYQ, "幻想言情");
+//        put(BookType.DMTR, "耽美同人");
+//    }};
 }

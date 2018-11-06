@@ -20,7 +20,13 @@ public interface SelectBooksContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getBookList(int sex_type,String category_id, String complete_status,int page,String kw);
+        void getBookList(int sex_type, String category_id, String complete_status, int page, String kw);
+
+        void getBoutiqueList(int type, int page);
+
+        void getShortStoryList(int category_id, int page);
+
+        void getFinishList(String sort, int status, int page);
 
         void getNovelCategory();
     }

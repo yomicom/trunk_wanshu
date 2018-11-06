@@ -28,7 +28,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.bean.NotificationList;
 import com.wxb.wanshu.bean.NovelCategory;
-import com.wxb.wanshu.bean.NovelRank;
+import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
@@ -158,14 +158,40 @@ public interface ApiService {
     Observable<BookList> getSelectBookList(@Query("sex_type") int sex_type, @Query("category_id") String category_id, @Query("complete_status") String complete_status, @Query("page") int page, @Query("kw") String kw);
 
     /**
+     * 精品馆频道-更多列表
+     *
+     * @return
+     */
+    @GET("/novel/boutiqueList")
+    Observable<BookList> getBoutiqueList(@Query("type") int type, @Query("page") int page);
+
+    /**
+     * 短篇频道-更多列表
+     *
+     * @return
+     */
+    @GET("/novel/shortStoryList")
+    Observable<BookList> getShortStoryList(@Query("category_id") int category_id, @Query("page") int page);
+
+    /**
+     * 完本频道-更多列表
+     * @param sort 排序方式
+     * @param status 完结状态
+     * @param page
+     * @return
+     */
+    @GET("/novel/finishedList")
+    Observable<BookList> getFinishedList(@Query("sort") String sort, @Query("status") int status, @Query("page") int page);
+
+    /**
      * 获取排行榜列表
      *
      * @return
      */
 //    @GET("/novel/rankList")
-//    Observable<NovelRank> getRankBookList(@Query("type") String type, @Query("page") int page);
+//    Observable<BookList> getRankBookList(@Query("type") String type, @Query("page") int page);
     @GET("/novel/finishedList?sort=time")
-    Observable<NovelRank> getRankBookList();
+    Observable<BookList> getRankBookList();
 
     /**
      * 获取书籍详情
@@ -188,7 +214,7 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/novel/bookshelfList")
+    @GET("/client/bookshelf")
     Observable<BookselfList> getBookshelfList(@Query("page") int page, @Query("pageSize") int pageSize);
 
     /**
@@ -204,7 +230,7 @@ public interface ApiService {
      *
      * @return
      */
-    @POST("/novel/delBookshelf")
+    @POST("/client/bookshelf")
     Observable<Base> delBookshelfList(@Query("novel_ids") String novel_ids);
 
     /**
@@ -233,6 +259,19 @@ public interface ApiService {
     @POST("/order/reward")
     Observable<Base> rewardGift(@Query("type") String type, @Query("number") int number,
                                 @Query("novel_id") int novel_id, @Query("chapter_id") String chapter_id);
+
+    /**
+     * 上报设备
+     *
+     * device_id：设备唯一标示
+     * type：设备类型，1android，2ios
+     * version：app版本
+     * os：操作系统信息
+     * @return
+     */
+    @POST("/client/launch")
+    Observable<Base> clientLaunch(@Query("device_id") String device_id, @Query("type") int type,
+                                @Query("version") String version, @Query("os") String os);
 
     /**
      * 清空系统消息
@@ -289,12 +328,13 @@ public interface ApiService {
 
     /**
      * 搜索小说
+     *
      * @param keyword
      * @param page
      * @return
      */
     @GET("/novel/search")
-    Observable<BookList> getSearchResult(@Query("keyword") String keyword,@Query("page") int page);
+    Observable<BookList> getSearchResult(@Query("keyword") String keyword, @Query("page") int page);
 
 //    @GET("/post/post-count-by-book")
 //    Observable<PostCount> postCountByBook(@Query("bookId") String bookId);

@@ -11,10 +11,14 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
+import com.wxb.wanshu.ui.activity.KindNovelActivity;
+import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
+import com.wxb.wanshu.ui.activity.NovelRankActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.RVHomePopularAdapter;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
@@ -82,12 +86,19 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
             rvHorizontal1.setAdapter(adapter);
         }
 
-        tvMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                NovelRankActivity.startActivity(mContext,sex_type,data.getName());
-            }
-        });
+        setMoreView();
+    }
+
+    private void setMoreView() {
+        String type = data.getType();
+        String name = data.getName();
+        if (type.equals(Constant.BookType.POPULAR)) {//首页点更多到精品馆频道
+            tvMore.setOnClickListener(v ->
+                    KindNovelActivity.startActivity(mContext,0));
+        }else {
+            tvMore.setOnClickListener(v ->
+                    SelectBooksActivity.startActivity(mContext, type, name));
+        }
     }
 
     @Override

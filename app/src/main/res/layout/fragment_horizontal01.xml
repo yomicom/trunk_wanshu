@@ -4,28 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/distance_left"
-        android:layout_marginRight="@dimen/distance_left">
-
-        <TextView
-            android:id="@+id/tv_tag"
-            style="@style/text_big_nomal"
-            android:layout_width="match_parent"
-            android:gravity="left"
-            android:textSize="@dimen/text_huge" />
-        <TextView
-            android:id="@+id/tv_more"
-            style="@style/text_middle_nomal"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:drawableRight="@mipmap/ic_look_more"
-            android:text="查看更多"
-            android:textColor="@color/text_color_2"
-            android:visibility="gone" />
-    </RelativeLayout>
+    <include layout="@layout/include_look_more"></include>
 
     <include layout="@layout/include_item_big_book"></include>
 

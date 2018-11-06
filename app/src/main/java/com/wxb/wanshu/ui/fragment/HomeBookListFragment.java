@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
@@ -82,7 +83,17 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
             rvHorizontal1.setAdapter(adapter);
         }
 
-        tvMore.setVisibility(View.GONE);
+        setMoreView();
+    }
+
+    private void setMoreView() {
+        String type = data.getType();
+        String name = data.getName();
+        if (type.equals(Constant.BookType.EDITOR)) {
+            tvMore.setVisibility(View.GONE);
+        }
+        tvMore.setOnClickListener(v ->
+                SelectBooksActivity.startActivity(mContext, type, name));
     }
 
     @Override

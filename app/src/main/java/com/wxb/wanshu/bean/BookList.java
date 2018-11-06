@@ -3,6 +3,7 @@ package com.wxb.wanshu.bean;
 import java.util.List;
 
 /**
+ * 书籍列表（排行榜、精品等）
  * Created by qiming on 2017/11/30.
  */
 

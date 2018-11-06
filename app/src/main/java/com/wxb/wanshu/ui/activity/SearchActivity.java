@@ -63,7 +63,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     @BindView(R.id.rootLayout)
     LinearLayout rootLayout;
     @BindView(R.id.tag_group)
-    TagGroup mTagGroup;
+    TagGroup RecordGroup;
 
 
     public static void startActivity(Context context, HomeData.DataBeanX beanX) {
@@ -129,7 +129,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     }
 
     private void setView() {
-        mTagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+        RecordGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
             @Override
             public void onTagClick(String tag) {
                 etSearch.setText(tag);
@@ -284,10 +284,10 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     private void initSearchHistory() {
         List<String> list = CacheManager.getInstance().getSearchHistory();
         if (list != null && list.size() > 0) {
-            mTagGroup.setTags(list);
-            visible(ivDel, mTagGroup);
+            RecordGroup.setTags(list);
+            visible(ivDel, RecordGroup);
         } else {
-            gone(ivDel, mTagGroup);
+            gone(ivDel, RecordGroup);
         }
     }
 

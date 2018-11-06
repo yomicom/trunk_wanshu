@@ -3,7 +3,6 @@ package com.wxb.wanshu.ui.contract;
 import com.wxb.wanshu.base.BaseContract;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.HotNovelList;
-import com.wxb.wanshu.bean.NovelRank;
 
 /**
  * Created by qiming on 2017/11/23.

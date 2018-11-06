@@ -29,7 +29,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.bean.NotificationList;
 import com.wxb.wanshu.bean.NovelCategory;
-import com.wxb.wanshu.bean.NovelRank;
+import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
@@ -37,16 +37,6 @@ import com.wxb.wanshu.bean.RewardType;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
-import com.wxb.wanshu.utils.MD5;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -84,7 +74,7 @@ public class Api {
     }
 
     public Observable<HomeData> getHomeData(String key) {
-        return service.getHomeData( key);
+        return service.getHomeData(key);
     }
 
     public Observable<RewardType> getRewardType() {
@@ -138,8 +128,9 @@ public class Api {
     public Observable<BookDetails> getBookDetail(int novel_id) {
         return service.getBookDetail(novel_id);
     }
+
     public Observable<BookList> getSearchResult(String keyword, int page) {
-        return service.getSearchResult(keyword,page);
+        return service.getSearchResult(keyword, page);
     }
 
     public Observable<BookRewardData> getBookReward(int novel_id, int page) {
@@ -150,9 +141,23 @@ public class Api {
         return service.getBookshelfList(page, pageSize);
     }
 
-    public Observable<NovelRank> getRankBookList(String type, int page) {
+    public Observable<BookList> getRankBookList(String type, int page) {
 //        return service.getRankBookList(type, page);
         return service.getRankBookList();
+    }
+
+    public Observable<BookList> getBoutiqueList(int type, int page) {
+        return service.getBoutiqueList(type, page);
+//        return service.getRankBookList();
+    }
+
+    public Observable<BookList> getShortStoryList(int category_id, int page) {
+        return service.getShortStoryList(category_id, page);
+//        return service.getRankBookList();
+    }
+
+    public Observable<BookList> getFinishedList(String sort, int status, int page) {
+        return service.getFinishedList(sort, status, page);
     }
 
     public Observable<Base> addBookshelfList(int novel_id) {
@@ -173,6 +178,9 @@ public class Api {
 
     public Observable<Base> rewardGift(String type, int number, int novel_id, String chapter_id) {
         return service.rewardGift(type, number, novel_id, chapter_id);
+    }
+    public Observable<Base> clientLaunch(String device_id, int type, String version, String os) {
+        return service.clientLaunch(device_id, type, version, os);
     }
 
     public Observable<BookMenu> getBookMixAToc(int bookId) {

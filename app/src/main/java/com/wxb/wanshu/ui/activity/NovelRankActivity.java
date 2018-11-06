@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
-import com.wxb.wanshu.bean.NovelRank;
+import com.wxb.wanshu.bean.BookList;;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.adapter.easyadpater.NovelRankAdapter;
@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NovelRankActivity extends BaseRVActivity<NovelRank.DataBean> implements NovelRankContract.View {
+public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> implements NovelRankContract.View {
 
     String type = "read";
 
@@ -149,7 +149,7 @@ public class NovelRankActivity extends BaseRVActivity<NovelRank.DataBean> implem
     }
 
     @Override
-    public void showNovelRank(NovelRank data) {
+    public void showNovelRank(BookList data) {
         if (page == START_PAGE) {
             mAdapter.clear();
         }
