@@ -96,7 +96,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getNovel_id());
+        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId());
     }
 
     @Override

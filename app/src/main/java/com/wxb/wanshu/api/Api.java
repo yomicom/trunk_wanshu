@@ -138,6 +138,9 @@ public class Api {
     public Observable<BookDetails> getBookDetail(int novel_id) {
         return service.getBookDetail(novel_id);
     }
+    public Observable<BookList> getSearchResult(String keyword, int page) {
+        return service.getSearchResult(keyword,page);
+    }
 
     public Observable<BookRewardData> getBookReward(int novel_id, int page) {
         return service.getRewardRank(novel_id, page);

@@ -91,7 +91,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             //轮播图
-            bannerFragment = BannerFragment.newInstance(data.get(0));
+            bannerFragment = BannerFragment.newInstance(data.get(0),data.get(data.size()-1));
             transaction.replace(frameId[0], bannerFragment);
 
             //主编力荐

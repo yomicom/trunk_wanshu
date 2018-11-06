@@ -197,7 +197,7 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getNovel_id());
+        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId());
     }
 
     @Override
@@ -271,15 +271,6 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
                     ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvMan, R.color.gobal_color);
                     ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvWoman, R.color.text_color_1);
                 }
-                break;
-        }
-    }
-
-    @OnClick({R.id.iv_search})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_search:
-                SearchActivity.startActivity(mContext);
                 break;
         }
     }

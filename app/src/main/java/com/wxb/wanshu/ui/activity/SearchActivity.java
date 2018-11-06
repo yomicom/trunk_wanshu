@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.BookList;
+import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
@@ -31,6 +32,7 @@ import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.ui.presenter.SearchPresenter;
 import com.wxb.wanshu.view.TagGroup;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,12 +43,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements SearchContract.View{
-
-    int MAN_TYPE = 10;
-    int WOMAN_TYPE = 20;
-    public static String SEX_TYPE = "sex_type";
-    int sex_type;
+public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements SearchContract.View {
 
     String keyword = "";
     @BindView(R.id.et_article_search)
@@ -59,10 +56,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     LinearLayout rlSearchCancle;
     @BindView(R.id.iv_del)
     ImageView ivDel;
-    //    @BindView(R.id.recyclerview_history)
-//    RecyclerView recyclerviewHistory;
-    @BindView(R.id.recyclerview_hot)
-    RecyclerView recyclerviewHot;
+    @BindView(R.id.hot_group)
+    TagGroup HotGroup;
     @BindView(R.id.ll_other)
     LinearLayout llOther;
     @BindView(R.id.rootLayout)
@@ -70,11 +65,11 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     @BindView(R.id.tag_group)
     TagGroup mTagGroup;
 
-    //    private NovelCategoryAdapter mHisAdapter;
-    private List<String> mHisList = new ArrayList<>();
 
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, SearchActivity.class));
+    public static void startActivity(Context context, HomeData.DataBeanX beanX) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtra("data", beanX);
+        context.startActivity(intent);
     }
 
     @Inject
@@ -99,6 +94,29 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
     @Override
     public void initDatas() {
+        //设置热门标签
+        initAdapter(SelectBooksAdapter.class, false, true);
+        mRecyclerView.removeAllItemDecoration();
+
+        HomeData.DataBeanX data = (HomeData.DataBeanX) getIntent().getSerializableExtra("data");
+        List<String> list = new ArrayList<>();
+        List<HomeData.DataBeanX.DataBean> HotBookData = data.getData();
+        for (int i = 0; i < HotBookData.size(); i++) {
+            list.add(HotBookData.get(i).getName());
+        }
+        HotGroup.setTags(list);
+        HotGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+            @Override
+            public void onTagClick(String tag) {
+                for (int i = 0; i < HotBookData.size(); i++) {
+                    if (tag.equals(HotBookData.get(i).getName())) {
+                        BookDetailsActivity.startActivity(mContext, HotBookData.get(i).getId());
+                        break;
+                    }
+                }
+            }
+        });
+
         initSearchHistory();
     }
 
@@ -106,13 +124,6 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     public void configViews() {
 
         mPresenter.attachView(this);
-        mPresenter.getHotNovelList();
-
-        initAdapter(SelectBooksAdapter.class, false, true);
-        mRecyclerView.removeAllItemDecoration();
-
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-        recyclerviewHot.setLayoutManager(layoutManager);
 
         setView();
     }
@@ -137,10 +148,11 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                if ("".equals(etSearch.getText().toString()))
+                if ("".equals(etSearch.getText().toString())) {
                     ivClean.setVisibility(View.GONE);
-                else
+                } else {
                     ivClean.setVisibility(View.VISIBLE);
+                }
             }
         });
         ivClean.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +189,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             gone(llOther);
 
             page = START_PAGE;
-            mPresenter.getBookList(sex_type, "", "", page, key);
+            mPresenter.getBookList(key, page);
             hideKeyboard(mContext);
             saveSearchHistory(key);
         }
@@ -199,18 +211,17 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             mAdapter.clear();
         }
         mAdapter.addAll(data.getData());
-//        mAdapter.clear();
     }
 
     @Override
     public void onLoadMore() {
         page++;
-        mPresenter.getBookList(sex_type,  "", "",page, keyword);
+        mPresenter.getBookList(keyword, page);
     }
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(mContext, mAdapter.getAllData().get(position).getNovel_id());
+        BookDetailsActivity.startActivity(mContext, mAdapter.getAllData().get(position).getId());
     }
 
     @Override
@@ -223,24 +234,19 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
     @Override
     public void showHotNovelList(HotNovelList data) {
-        HotNovelAdapter hotNovelAdapter = new HotNovelAdapter(mContext, data.getData(), new OnRvItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position, Object data) {
-                BookDetailsActivity.startActivity(mContext, ((HotNovelList.DataBean) data).getNovel_id());
-            }
-        });
-        recyclerviewHot.setAdapter(hotNovelAdapter);
     }
 
     @OnClick({R.id.tv_cancle_search, R.id.iv_del})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_cancle_search:
-                finish();
+//                finish();
+                search(etSearch.getText().toString().trim());
                 break;
             case R.id.iv_del:
                 CacheManager.getInstance().saveSearchHistory(null);
                 initSearchHistory();
+                gone(ivDel);
                 break;
         }
     }
@@ -277,14 +283,12 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
     private void initSearchHistory() {
         List<String> list = CacheManager.getInstance().getSearchHistory();
-//        mHisAdapter.clear();
         if (list != null && list.size() > 0) {
             mTagGroup.setTags(list);
-            visible(ivClean, mTagGroup);
+            visible(ivDel, mTagGroup);
         } else {
-            gone(ivClean, mTagGroup);
+            gone(ivDel, mTagGroup);
         }
-//        mHisAdapter.notifyDataSetChanged();
     }
 
     private void hideKeyboard(Context context) {

@@ -3,6 +3,7 @@ package com.wxb.wanshu.ui.contract;
 import com.wxb.wanshu.base.BaseContract;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.HotNovelList;
+import com.wxb.wanshu.bean.NovelRank;
 
 /**
  * Created by qiming on 2017/11/23.
@@ -17,7 +18,7 @@ public interface SearchContract {
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
         void getHotNovelList();
-        void getBookList(int sex_type,String category_id, String complete_status,int page,String kw);
+        void getBookList(String kw,int page);
     }
 
 }

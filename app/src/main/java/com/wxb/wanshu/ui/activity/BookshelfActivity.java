@@ -256,9 +256,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                     showDeleteCacheDialog(mContext, removeList);
                 }
                 break;
-            case R.id.iv_search:
-                SearchActivity.startActivity(mContext);
-                break;
         }
     }
 

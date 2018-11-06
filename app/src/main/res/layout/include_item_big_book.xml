@@ -58,7 +58,7 @@
                 android:id="@+id/article_title"
                 style="@style/text_novel_title"
                 android:maxLines="1"
-                android:text="标题"></TextView>
+                android:text=""></TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
                     style="@style/text_novel_intro"
                     android:maxLines="2"
                     android:gravity="top"
-                    android:text="111" />
+                    android:text="" />
 
             </RelativeLayout>
 
@@ -96,7 +96,9 @@
                     android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
-                    android:text="11"/>
+                    android:text=""
+                    android:drawableLeft="@mipmap/ic_author"
+                    android:drawablePadding="7dp"/>
 
                 <TextView
                     android:id="@+id/tv_word_nums"

@@ -34,16 +34,18 @@ public class BannerFragment extends BaseFragment {
     @BindView(R.id.rl_bg)
     RelativeLayout relativeLayoutBg;
     Unbinder unbinder;
+    private HomeData.DataBeanX data_search;
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_banner;
     }
 
-    public static BannerFragment newInstance(HomeData.DataBeanX dataBeanX) {
+    public static BannerFragment newInstance(HomeData.DataBeanX dataBeanX, HomeData.DataBeanX beanX) {
         BannerFragment fragment = new BannerFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", dataBeanX);
+        bundle.putSerializable("data_search", beanX);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,6 +64,7 @@ public class BannerFragment extends BaseFragment {
     public void initDatas() {
         Bundle bundle = getArguments();
         HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
+        data_search = (HomeData.DataBeanX) bundle.getSerializable("data_search");
         banner.setData(data);
     }
 
@@ -92,11 +95,13 @@ public class BannerFragment extends BaseFragment {
                 KindNovelActivity.startActivity(mContext,0);
                 break;
             case R.id.item_short:
+                KindNovelActivity.startActivity(mContext,1);
                 break;
             case R.id.item_finish:
+                KindNovelActivity.startActivity(mContext,2);
                 break;
             case R.id.search:
-                SearchActivity.startActivity(getActivity());
+                SearchActivity.startActivity(getActivity(),data_search);
                 break;
         }
     }

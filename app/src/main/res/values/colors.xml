@@ -22,6 +22,8 @@
     <color name="text_pressed">#F0F0F0</color>
     <color name="text_dashang">#58b9db</color>
 
+    <color name="bg_tag_group">#F5F5F5</color>
+
     <color name="tip">#88303F9F</color>
 
     <color name="white">#ffffffff</color>

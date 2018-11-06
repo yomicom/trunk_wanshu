@@ -287,6 +287,15 @@ public interface ApiService {
     @GET("/read/index")
     Observable<ChapterRead> getChapterRead(@Query("novel_id") int novel_id, @Query("chapter") int chapter);
 
+    /**
+     * 搜索小说
+     * @param keyword
+     * @param page
+     * @return
+     */
+    @GET("/novel/search")
+    Observable<BookList> getSearchResult(@Query("keyword") String keyword,@Query("page") int page);
+
 //    @GET("/post/post-count-by-book")
 //    Observable<PostCount> postCountByBook(@Query("bookId") String bookId);
 //

@@ -84,7 +84,8 @@
                     android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
-                    android:text="11"/>
+                    android:drawableLeft="@mipmap/ic_author"
+                    android:drawablePadding="7dp"/>
 
                 <TextView
                     android:id="@+id/tv_word_nums"

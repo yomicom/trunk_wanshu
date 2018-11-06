@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="输入书名/关键词"
+                android:hint="输入书名、关键词"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:textColor="@color/text_color_1"
@@ -87,12 +87,11 @@
         android:orientation="vertical">
 
         <RelativeLayout style="@style/rl_normal"
-            android:layout_marginTop="@dimen/distance_text_text_10">
+            android:layout_marginTop="@dimen/line_spacing_5">
 
             <TextView
-                style="@style/text_middle_nomal"
-                android:text="历史搜索"
-                android:textColor="@color/text_color_2" />
+                style="@style/text_big_nomal"
+                android:text="历史搜索" />
 
             <ImageView
                 android:id="@+id/iv_del"
@@ -105,27 +104,27 @@
         <com.wxb.wanshu.view.TagGroup
             android:id="@+id/tag_group"
             style="@style/TagGroup"
-            android:layout_marginLeft="@dimen/distance_text_text_10"
-            android:layout_marginTop="@dimen/distance_text_text_8"
-            android:layout_marginRight="@dimen/distance_left" />
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_top"
+            android:layout_marginRight="@dimen/distance_left"
+            app:atg_backgroundColor="@color/bg_tag_group"
+            app:atg_pressedBackgroundColor="@color/text_pressed"/>
 
         <RelativeLayout style="@style/rl_normal"
-            android:layout_marginTop="@dimen/distance_top_20">
+            android:layout_marginTop="@dimen/distance_top">
 
             <TextView
-                style="@style/text_middle_nomal"
-                android:text="热门搜索"
-                android:textColor="@color/text_color_2" />
+                style="@style/text_big_nomal"
+                android:text="热门搜索" />
         </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_hot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:paddingRight="@dimen/distance_left"
-            android:paddingLeft="@dimen/distance_left"
-            android:layout_marginTop="@dimen/line_spacing_5"
-            app:layout_progress="@layout/common_progress_view" />
+        <com.wxb.wanshu.view.TagGroup
+            android:id="@+id/hot_group"
+            style="@style/TagGroup"
+            android:layout_marginLeft="@dimen/distance_left"
+            android:layout_marginTop="@dimen/distance_top"
+            android:layout_marginRight="@dimen/distance_left"
+            app:atg_backgroundColor="@color/bg_tag_group"
+            app:atg_pressedBackgroundColor="@color/text_pressed"/>
     </LinearLayout>
 </LinearLayout>

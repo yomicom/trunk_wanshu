@@ -4,6 +4,7 @@ import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.HotNovelList;
+import com.wxb.wanshu.bean.NovelRank;
 import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.utils.LogUtils;
 
@@ -51,8 +52,8 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
     }
 
     @Override
-    public void getBookList(int sex_type,String category_id, String complete_status,int page,String kw) {
-        Subscription rxSubscription = api.getSelectBookList(sex_type,category_id,complete_status,page,kw).subscribeOn(Schedulers.io())
+    public void getBookList(String kw,int page) {
+        Subscription rxSubscription = api.getSearchResult(kw,page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override
