@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/distance_view_item"-->
+                <!--android:background="@color/common_bg" />-->
+
+            <FrameLayout
+                android:id="@+id/fl_content0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/distance_left"
+                android:layout_marginBottom="@dimen/distance_left"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_view_item"
+                android:background="@color/common_bg" />
+
+            <FrameLayout
+                android:id="@+id/fl_content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_left"
+                android:layout_marginBottom="@dimen/distance_left"
+                android:background="@color/white"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_view_item"
+                android:background="@color/common_bg" />
+
+            <FrameLayout
+                android:id="@+id/fl_content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_left"
+                android:layout_marginBottom="@dimen/distance_top"
+                android:background="@color/white"
+                android:visibility="visible">
+
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

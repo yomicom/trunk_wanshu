@@ -24,7 +24,6 @@ import javax.inject.Inject;
 public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View {
 
     int MAN_TYPE = 10;
-    int WOMAN_TYPE = 20;
     public static String SEX_TYPE = "sex_type";
     int sex_type;
 

@@ -43,6 +43,7 @@
     <dimen name="distance_text_text_6">6dp</dimen>
     <dimen name="distance_main_top">28dp</dimen>
     <dimen name="distance_main_item">38dp</dimen>
+    <dimen name="distance_view_item">12dp</dimen>
 
     <!--书籍封面大小-->
     <dimen name="book_cover_width">90dp</dimen>

@@ -159,12 +159,12 @@ public class Constant {
 
     @StringDef({
             BookType.ALL,
-            BookType.XHQH,
-            BookType.WXXX,
-            BookType.DSYN,
-            BookType.LSJS,
-            BookType.YXJJ,
-            BookType.KHLY,
+            BookType.EDITOR,
+            BookType.FRESH,
+            BookType.POPULAR,
+            BookType.PUBLISHING,
+            BookType.FINISH,
+            BookType.HOT,
             BookType.CYJK,
             BookType.HMZC,
             BookType.XDYQ,
@@ -176,17 +176,17 @@ public class Constant {
     public @interface BookType {
         String ALL = "all";
 
-        String XHQH = "xhqh";
+        String EDITOR = "editor";//编辑力荐
 
-        String WXXX = "wxxx";
+        String FRESH = "fresh";//新书速递
 
-        String DSYN = "dsyn";
+        String POPULAR = "popular";//人气佳作
 
-        String LSJS = "lsjs";
+        String PUBLISHING = "publishing";//火爆连载
 
-        String YXJJ = "yxjj";
+        String FINISH = "finish";//完本精选
 
-        String KHLY = "khly";
+        String HOT = "hot";//热门推荐
 
         String CYJK = "cyjk";
 
@@ -203,12 +203,12 @@ public class Constant {
 
     public static List<String> bookTypeList = new ArrayList<String>() {{
         add(BookType.ALL);
-        add(BookType.XHQH);
-        add(BookType.WXXX);
-        add(BookType.DSYN);
-        add(BookType.LSJS);
-        add(BookType.YXJJ);
-        add(BookType.KHLY);
+        add(BookType.EDITOR);
+        add(BookType.FRESH);
+        add(BookType.POPULAR);
+        add(BookType.PUBLISHING);
+        add(BookType.FINISH);
+        add(BookType.HOT);
         add(BookType.CYJK);
         add(BookType.HMZC);
         add(BookType.XDYQ);
@@ -219,12 +219,12 @@ public class Constant {
 
     public static Map<String, String> bookType = new HashMap<String, String>() {{
         put("qt", "其他");
-        put(BookType.XHQH, "玄幻奇幻");
-        put(BookType.WXXX, "武侠仙侠");
-        put(BookType.DSYN, "都市异能");
-        put(BookType.LSJS, "历史军事");
-        put(BookType.YXJJ, "游戏竞技");
-        put(BookType.KHLY, "科幻灵异");
+        put(BookType.EDITOR, "玄幻奇幻");
+        put(BookType.FRESH, "武侠仙侠");
+        put(BookType.POPULAR, "都市异能");
+        put(BookType.PUBLISHING, "历史军事");
+        put(BookType.FINISH, "游戏竞技");
+        put(BookType.HOT, "科幻灵异");
         put(BookType.CYJK, "穿越架空");
         put(BookType.HMZC, "豪门总裁");
         put(BookType.XDYQ, "现代言情");

@@ -42,11 +42,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     @Inject
     HomeBookPresenter mPresenter;
 
-    String TYPE_CAROUSEL = "carousel";//广告banner
-    String TYPE_GRID = "grid";//推荐
-    String TYPE_LIST = "list";//小说精选
-    String TYPE_RANK = "rank";//排行榜
-    String TYPE_FREE = "free";//限时免费
     @BindView(R.id.ll_to_top)
     LinearLayout llToTop;
     @BindView(R.id.fl_banner)
@@ -85,39 +80,40 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
         mPresenter.attachView(this);
         mPresenter.getHomeData("");
-//        dialog = CustomDialog.instance(this);
-//        dialog.setCancelable(true);
-//        dialog.show();
-
+        dialog = CustomDialog.instance(this);
+        dialog.setCancelable(true);
+        dialog.show();
     }
 
     private void showData(List<HomeData.DataBeanX> data) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (data.size() > 5) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        //轮播图
-        bannerFragment = BannerFragment.newInstance(data.get(0));
-        transaction.replace(frameId[0], bannerFragment);
+            //轮播图
+            bannerFragment = BannerFragment.newInstance(data.get(0));
+            transaction.replace(frameId[0], bannerFragment);
 
-//        主编力荐
-        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(1),POPULAR_LIST);
-        transaction.replace(frameId[1], recommendFragment);
+            //主编力荐
+            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(1), POPULAR_LIST);
+            transaction.replace(frameId[1], recommendFragment);
 
-        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(data.get(2));
-        transaction.replace(frameId[2], homeBookListFragment);
+            HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(data.get(2));
+            transaction.replace(frameId[2], homeBookListFragment);
 
-        //人气佳作
-        HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(data.get(3));
-        transaction.replace(frameId[3], homePopularityFragment);
+            //人气佳作
+            HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(data.get(3));
+            transaction.replace(frameId[3], homePopularityFragment);
 
-//        火热连载
-         recommendFragment = HomeRecommendFragment.newInstance(data.get(4),HOT_LIST);
-        transaction.replace(frameId[4], recommendFragment);
+            //火热连载
+            recommendFragment = HomeRecommendFragment.newInstance(data.get(4), HOT_LIST);
+            transaction.replace(frameId[4], recommendFragment);
 
-        homeBookListFragment = HomeBookListFragment.newInstance(data.get(5));
-        transaction.replace(frameId[5], homeBookListFragment);
+            homeBookListFragment = HomeBookListFragment.newInstance(data.get(5));
+            transaction.replace(frameId[5], homeBookListFragment);
 
-        transaction.commit();
+            transaction.commit();
+        }
     }
 
     @OnClick({R.id.iv_to_top})

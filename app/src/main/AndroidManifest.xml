@@ -187,6 +187,8 @@
         <activity
             android:name=".ui.activity.ConnectUsActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.KindNovelActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

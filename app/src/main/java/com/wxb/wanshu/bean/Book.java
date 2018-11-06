@@ -1,6 +1,8 @@
 package com.wxb.wanshu.bean;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     /**
      * id : 2

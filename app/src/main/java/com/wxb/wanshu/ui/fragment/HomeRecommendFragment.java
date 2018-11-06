@@ -160,6 +160,6 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getNovel_id());
+        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
     }
 }

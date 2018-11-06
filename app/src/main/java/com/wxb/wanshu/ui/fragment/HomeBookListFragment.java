@@ -100,7 +100,7 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getNovel_id());
+        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
     }
 
 }

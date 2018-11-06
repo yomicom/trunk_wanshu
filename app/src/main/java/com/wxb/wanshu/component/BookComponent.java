@@ -4,6 +4,7 @@ import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.BookshelfActivity;
 import com.wxb.wanshu.ui.activity.ClassifyActivity;
 import com.wxb.wanshu.ui.activity.HomeBookActivity;
+import com.wxb.wanshu.ui.activity.KindNovelActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.MenuActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.OrderListActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
@@ -37,5 +38,7 @@ public interface BookComponent {
     NovelRankActivity inject(NovelRankActivity activity);
 
     MenuActivity inject(MenuActivity activity);
+
+    KindNovelActivity inject(KindNovelActivity activity);
 
 }

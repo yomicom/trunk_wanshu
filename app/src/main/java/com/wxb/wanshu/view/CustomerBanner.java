@@ -100,7 +100,7 @@ public class CustomerBanner extends FrameLayout {
                 item.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        BookDetailsActivity.startActivity(mContext, bean.getNovel_id());
+                        BookDetailsActivity.startActivity(mContext, bean.getId());
                     }
                 });
 
