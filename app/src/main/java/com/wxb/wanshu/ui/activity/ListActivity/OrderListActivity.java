@@ -11,14 +11,8 @@ import com.wxb.wanshu.component.DaggerAccountComponent;
 import com.wxb.wanshu.ui.adapter.easyadpater.OrderListAdapter;
 import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.ui.presenter.OrderListPresenter;
-import com.wxb.wanshu.view.recycleview.EasyRecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
 
 /**
  * 精选书籍列表页

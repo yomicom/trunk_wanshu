@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,29 +17,17 @@ import android.widget.PopupWindow;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.AmountRecordList;
-import com.wxb.wanshu.bean.ReadHistoryList;
-import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
 import com.wxb.wanshu.ui.adapter.easyadpater.AmountRecordAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.AmountTypeAdapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.MyNotificationAdapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.OrderListAdapter;
 import com.wxb.wanshu.ui.contract.AmountRecordContract;
-import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.ui.presenter.AmountRecordPresenter;
-import com.wxb.wanshu.ui.presenter.OrderListPresenter;
-import com.wxb.wanshu.view.dialog.ShareBookDialog;
-import com.wxb.wanshu.view.recycleview.EasyRecyclerView;
-import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
-import com.wxb.wanshu.view.recycleview.decoration.SpaceDecoration;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static com.wxb.wanshu.R.id.item;
 
 /**
  * 精选书籍列表页

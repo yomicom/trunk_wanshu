@@ -26,8 +26,8 @@ public class NovelRankPresenter extends RxPresenter<NovelRankContract.View> impl
     }
 
     @Override
-    public void getNovelRank(int type, int sex_type, int page) {
-        Subscription rxSubscription = api.getRankBookList(type, sex_type, page).subscribeOn(Schedulers.io())
+    public void getNovelRank(String type, int page) {
+        Subscription rxSubscription = api.getRankBookList(type, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<NovelRank>() {
                     @Override

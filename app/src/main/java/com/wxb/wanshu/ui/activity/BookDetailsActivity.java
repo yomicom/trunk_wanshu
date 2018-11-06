@@ -28,7 +28,6 @@ import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.activity.ListActivity.MenuActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookRewardAdapter;
 import com.wxb.wanshu.ui.contract.BookDetailsContract;
-import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.BookDetailsPresenter;
 import com.wxb.wanshu.utils.ImageUtils;
 import com.wxb.wanshu.utils.ToastUtils;

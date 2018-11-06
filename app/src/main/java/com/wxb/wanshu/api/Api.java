@@ -147,8 +147,9 @@ public class Api {
         return service.getBookshelfList(page, pageSize);
     }
 
-    public Observable<NovelRank> getRankBookList(int type, int sex_type, int page) {
-        return service.getRankBookList(type, sex_type, page);
+    public Observable<NovelRank> getRankBookList(String type, int page) {
+//        return service.getRankBookList(type, page);
+        return service.getRankBookList();
     }
 
     public Observable<Base> addBookshelfList(int novel_id) {

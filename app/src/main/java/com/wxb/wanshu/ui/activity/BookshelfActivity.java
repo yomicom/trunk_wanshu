@@ -2,7 +2,6 @@ package com.wxb.wanshu.ui.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -31,7 +30,6 @@ import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 import org.simple.eventbus.EventBus;
-import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +37,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.string.no;
 
 public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> implements BookselfContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
 

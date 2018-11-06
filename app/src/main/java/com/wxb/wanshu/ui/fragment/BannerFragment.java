@@ -11,6 +11,7 @@ import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.AppComponent;
+import com.wxb.wanshu.ui.activity.NovelRankActivity;
 import com.wxb.wanshu.ui.activity.SearchActivity;
 import com.wxb.wanshu.view.CustomerBanner;
 
@@ -84,6 +85,7 @@ public class BannerFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.item_rank:
+                NovelRankActivity.startActivity(mContext);
                 break;
             case R.id.item_best:
                 break;

@@ -8,15 +8,11 @@ import android.view.MenuItem;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.NotificationList;
-import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
 import com.wxb.wanshu.ui.adapter.easyadpater.MyNotificationAdapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.OrderListAdapter;
 import com.wxb.wanshu.ui.contract.MyNotificationContract;
-import com.wxb.wanshu.ui.contract.OrderListContract;
 import com.wxb.wanshu.ui.presenter.MyNotificationPresenter;
-import com.wxb.wanshu.ui.presenter.OrderListPresenter;
 
 import javax.inject.Inject;
 

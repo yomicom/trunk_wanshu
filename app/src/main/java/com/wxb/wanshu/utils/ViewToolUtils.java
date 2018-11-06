@@ -25,6 +25,9 @@ public class ViewToolUtils {
     public static void getResourceColor(Context context, TextView view, int color) {
         view.setTextColor(ContextCompat.getColor(context, color));
     }
+    public static void setBackgroundResourceColor(Context context, TextView view, int color) {
+        view.setBackgroundColor(ContextCompat.getColor(context, color));
+    }
 
 
     //EditText设置清除图标是否可见

@@ -16,6 +16,6 @@ public interface NovelRankContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getNovelRank(int type,int sex_type,int page);
+        void getNovelRank(String type,int page);
     }
 }

@@ -3,8 +3,6 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,18 +11,15 @@ import android.widget.ListView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
-import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
-import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookMenuAdapter;
 import com.wxb.wanshu.ui.contract.MenuContract;
 import com.wxb.wanshu.ui.presenter.BookMenuPresenter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

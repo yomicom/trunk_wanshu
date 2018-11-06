@@ -163,8 +163,10 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/novel/rank")
-    Observable<NovelRank> getRankBookList(@Query("type") int type, @Query("sex_type") int sex_type, @Query("page") int page);
+//    @GET("/novel/rankList")
+//    Observable<NovelRank> getRankBookList(@Query("type") String type, @Query("page") int page);
+    @GET("/novel/finishedList?sort=time")
+    Observable<NovelRank> getRankBookList();
 
     /**
      * 获取书籍详情

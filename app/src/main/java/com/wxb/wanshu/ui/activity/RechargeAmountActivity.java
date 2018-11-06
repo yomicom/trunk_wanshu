@@ -3,7 +3,6 @@ package com.wxb.wanshu.ui.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
@@ -16,13 +15,9 @@ import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.bean.RechargeAmount;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
-import com.wxb.wanshu.component.DaggerBookComponent;
-import com.wxb.wanshu.manager.ThemeManager;
-import com.wxb.wanshu.ui.adapter.easyadpater.ReadThemeAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.RechatgeAmountAdapter;
 import com.wxb.wanshu.ui.contract.RechargeAmountContract;
 import com.wxb.wanshu.ui.presenter.RechargeAmountPresenter;
-import com.wxb.wanshu.view.dialog.BuyBookPopupWindow;
 import com.wxb.wanshu.view.dialog.PayMoneyPopWindow;
 
 import java.util.List;
@@ -30,8 +25,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-
-import static com.wxb.wanshu.R.id.gvTheme;
 
 public class RechargeAmountActivity extends BaseActivity implements RechargeAmountContract.View {
     @BindView(R.id.tv_tips)

@@ -5,94 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.wxb.wanshu.ui.activity.NovelRankActivity">
 
     <include layout="@layout/common_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/next_height_45"
-        android:background="@color/white"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/item_click_sort"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="75dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:background="@color/common_bg"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_click_sort"
-                style="@style/text_middle_nomal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="点击榜"
+                android:id="@+id/read"
+                style="@style/rank_list_title"
+                android:layout_marginTop="@dimen/distance_top"
+                android:background="@color/white"
+                android:text="畅读榜"
                 android:textColor="@color/gobal_color" />
 
-            <View
-                android:id="@+id/view_click"
-                android:layout_width="25dp"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/gobal_color" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/item_sell_sort"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            <TextView
+                android:id="@+id/search"
+                style="@style/rank_list_title"
+                android:text="热搜榜" />
 
             <TextView
-                android:id="@+id/tv_sell_sort"
-                style="@style/text_middle_nomal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="畅销榜" />
-
-            <View
-                android:id="@+id/view_sell"
-                android:layout_width="25dp"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/gobal_color"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/item_reward_sort"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                android:id="@+id/click"
+                style="@style/rank_list_title"
+                android:text="点击榜" />
 
             <TextView
-                android:id="@+id/tv_reward_sort"
-                style="@style/text_middle_nomal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="打赏榜" />
+                android:id="@+id/store"
+                style="@style/rank_list_title"
+                android:text="收藏榜" />
+        </LinearLayout>
 
-            <View
-                android:id="@+id/view_reward"
-                android:layout_width="25dp"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/gobal_color"
-                android:visibility="gone" />
-        </RelativeLayout>
-
+        <com.wxb.wanshu.view.recycleview.EasyRecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_empty="@layout/common_empty_view"
+            app:layout_progress="@layout/common_progress_view"
+            app:scrollbarStyle="insideOverlay" />
     </LinearLayout>
 
-    <View style="@style/line_divide" />
-
-    <com.wxb.wanshu.view.recycleview.EasyRecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_empty="@layout/common_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay" />
 </LinearLayout>

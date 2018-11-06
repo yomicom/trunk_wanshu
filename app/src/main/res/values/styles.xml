@@ -118,6 +118,15 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <!--排行榜侧边样式-->
+    <style name="rank_list_title">
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <!--文章简介样式-->
     <style name="text_novel_intro">
         <item name="android:textColor">@color/text_color_2</item>

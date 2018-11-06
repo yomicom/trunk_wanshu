@@ -3,7 +3,6 @@ package com.wxb.wanshu.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
@@ -35,11 +34,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.data;
-import static android.R.attr.path;
 
 public class CommentActivity extends BaseActivity implements CommentContract.View {
 

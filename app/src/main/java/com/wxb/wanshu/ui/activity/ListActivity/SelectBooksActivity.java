@@ -2,9 +2,6 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
@@ -16,15 +13,10 @@ import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SelectBooksContract;
 import com.wxb.wanshu.ui.presenter.SelectBookPresenter;
-import com.wxb.wanshu.view.recycleview.EasyRecyclerView;
-import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
 
 /**
  * 精选书籍列表页
