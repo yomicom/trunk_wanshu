@@ -48,12 +48,12 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
     protected CompositeSubscription mCompositeSubscription;
     Activity mContext;
 
-    int novel_id;
+    String novel_id;
     int chapter;
     int pay;//需花费金额
     private int amount;//账户余额
 
-    public BuyBookPopupWindow(Activity context, int novel_id, int chapter) {
+    public BuyBookPopupWindow(Activity context, String novel_id, int chapter) {
         super(context);
         api = MyApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;

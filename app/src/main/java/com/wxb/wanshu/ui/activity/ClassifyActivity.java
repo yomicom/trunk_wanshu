@@ -1,9 +1,10 @@
 package com.wxb.wanshu.ui.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -14,26 +15,28 @@ import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.NovelCategory;
+import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
+import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.NovelCategoryAdapter;
+import com.wxb.wanshu.ui.adapter.easyadpater.RVHomePopularAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SelectBooksContract;
 import com.wxb.wanshu.ui.presenter.SelectBookPresenter;
 import com.wxb.wanshu.utils.ViewToolUtils;
-import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
+import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 分类
  */
-public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View, View.OnClickListener {
+public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View, View.OnClickListener, OnRvItemClickListener {
 
     int MAN_TYPE = 10;
     int WOMAN_TYPE = 20;
@@ -43,13 +46,21 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     SelectBookPresenter mPresenter;
     @BindView(R.id.iv_search)
     ImageView ivSearch;
+    @BindView(R.id.recycleview)
+    RecyclerView recycleview;
 
-    private List<NovelCategory.DataBean> categoryList;
+    //    private List<NovelCategory.DataBean> categoryList;
     private NovelCategoryAdapter categoryAdapter;
 
     private HeaderViewHolder headerViewHolder;
     String category_id = "";
     String complete_status = "";
+
+    @Override
+    public void onItemClick(View view, int position, Object data) {
+        NovelCategory.DataBean dataBean = (NovelCategory.DataBean) data;
+        SelectBooksActivity.startActivity(mContext, "classify", dataBean.getId(), dataBean.getName());
+    }
 
 
     static class HeaderViewHolder {
@@ -65,7 +76,7 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
         private TextView tvWoman;
 
         public HeaderViewHolder(View view) {
-           initView(view);
+            initView(view);
         }
 
         private void initView(View view) {
@@ -114,30 +125,30 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
 
     private void refreshData() {
         page = START_PAGE;
-        mPresenter.getBookList(sex_type, category_id, complete_status, page, "");
+//        mPresenter.getBookList(sex_type, category_id, complete_status, page, "");
     }
 
     @Override
     public void configViews() {
 
         initAdapter(SelectBooksAdapter.class, false, true);
-        mRecyclerView.removeAllItemDecoration();
+//        mRecyclerView.removeAllItemDecoration();
 
-        mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-
-            @Override
-            public View onCreateView(ViewGroup parent) {
-                View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_view_classify, parent, false);
-                return headerView;
-            }
-
-            @Override
-            public void onBindView(View headerView) {
-                headerViewHolder = new HeaderViewHolder(headerView);
-                setView();
-            }
-
-        });
+//        mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+//
+//            @Override
+//            public View onCreateView(ViewGroup parent) {
+//                View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_view_classify, parent, false);
+//                return headerView;
+//            }
+//
+//            @Override
+//            public void onBindView(View headerView) {
+//                headerViewHolder = new HeaderViewHolder(headerView);
+//                setView();
+//            }
+//
+//        });
     }
 
     private void setView() {
@@ -162,42 +173,34 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
 
     @Override
     public void showBookList(BookList data) {
-        if (page == START_PAGE) {
-            mAdapter.clear();
-        }
-        mAdapter.addAll(data.getData());
+//        if (page == START_PAGE) {
+//            mAdapter.clear();
+//        }
+//        mAdapter.addAll(data.getData());
     }
 
     @Override
-    public void showNovelCategory(List<NovelCategory.DataBean> categoryData) {
-        categoryList = categoryData;
-        categoryAdapter = new NovelCategoryAdapter(mContext, categoryList);
-        headerViewHolder.gridview.setAdapter(categoryAdapter);
-        headerViewHolder.gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NovelCategory.DataBean dataBean = categoryList.get(i);
-                if (!dataBean.isSelected) {
-                    category_id = dataBean.getCategory_id() + "";
-                    categoryAdapter.selectNoAll();
-                    dataBean.isSelected = true;
+    public void showNovelCategory(NovelCategory categoryData) {
 
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllCategory, R.color.text_color_2);
-                    categoryAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+        List<NovelCategory.DataBean> data = categoryData.getData();
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+        recycleview.setLayoutManager(layoutManager);
+        recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
+
+        NovelCategoryAdapter adapter = new NovelCategoryAdapter(mContext, data, this);
+        recycleview.setAdapter(adapter);
+
     }
 
     @Override
     public void onLoadMore() {
-        page++;
-        mPresenter.getBookList(sex_type, category_id, complete_status, page, "");
+//        page++;
+//        mPresenter.getBookList(sex_type, category_id, complete_status, page, "");
     }
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId());
+//        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId());
     }
 
     @Override

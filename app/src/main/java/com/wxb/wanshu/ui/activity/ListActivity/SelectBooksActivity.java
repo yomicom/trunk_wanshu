@@ -30,6 +30,9 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     public static void startActivity(Context context, String type, String title) {
         context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title));
     }
+    public static void startActivity(Context context, String type,String category_id, String title) {
+        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title).putExtra("category", category_id));
+    }
 
     @Inject
     SelectBookPresenter mPresenter;
@@ -85,7 +88,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     }
 
     @Override
-    public void showNovelCategory(List<NovelCategory.DataBean> category) {
+    public void showNovelCategory(NovelCategory category) {
 
     }
 
@@ -98,7 +101,8 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     private void getData() {
         switch (type) {
             case "classify":
-                mPresenter.getBookList(0, "", "", page, "");
+                String category_id = getIntent().getStringExtra("category_id");
+                mPresenter.getBookList( category_id,  page);
                 break;
             case Constant.BookType.Boutique_All:
                 mPresenter.getBoutiqueList(0, page);

@@ -51,8 +51,12 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
         this.api = api;
     }
 
+    /**
+     *  小说目录
+     * @param novel_id
+     */
     @Override
-    public void getBookMixAToc(final int novel_id) {
+    public void getBookMixAToc(final String novel_id) {
 //        String key = StringUtils.creatAcacheKey("book-toc", novel_id);
 //        Observable<BookMenu.DataBean> fromNetWork = api.getBookMixAToc(novel_id)
 //                .map(new Func1<BookMenu, BookMenu.DataBean>() {
@@ -112,8 +116,8 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     @Override
-    public void getChapterRead(int novel_id, final int chapter) {
-        Subscription rxSubscription = api.getChapterRead(novel_id, chapter).subscribeOn(Schedulers.io())
+    public void getChapterRead(String novel_id, final int chapter_id,int next) {
+        Subscription rxSubscription = api.getChapterRead(novel_id, chapter_id,next).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ChapterRead>() {
                     @Override
@@ -121,7 +125,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                         if (data.data != null && mView != null) {
                             mView.showChapterRead(data.data);
                         } else {
-                            mView.netError(chapter);
+                            mView.netError(chapter_id);
                         }
                     }
 
@@ -132,7 +136,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("onError: " + e);
-                        mView.netError(chapter);
+                        mView.netError(chapter_id);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -161,7 +165,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     @Override
-    public void addBookShelf(int novel_id) {
+    public void addBookShelf(String novel_id) {
 
         api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

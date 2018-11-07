@@ -48,7 +48,7 @@ public class TocListAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBean
     @Override
     public void convert(EasyLVHolder holder, int position, BookMenu.DataBean.ChaptersBean chapters) {
         TextView tvTocItem = holder.getView(R.id.tvTocItem);
-        tvTocItem.setText(chapters.chapter_name);
+        tvTocItem.setText(chapters.name);
         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_theme_selected);
         if (currentChapter == position + 1) {
             tvTocItem.setTextColor(ContextCompat.getColor(mContext, R.color.light_red));

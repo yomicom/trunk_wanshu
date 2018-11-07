@@ -20,32 +20,21 @@ public class NovelCategory extends Base {
 
     public static class DataBean {
         /**
-         * category_id : 1
-         * cover : http://s.weituibao.com/static/1498129510527/DUSHI.png
-         * name : 都市言情
-         * tag : ["都市情感","婚姻","情仇爱恨","美女"]
+         * id : 2
+         * name : 时空穿越
+         * cover : http://s.weituibao.com/static/1498129510527/CHUANYUE.png
          */
 
-        private int category_id;
-        private String cover;
+        private String id;
         private String name;
-        private List<String> tag;
-        public boolean isSelected = false;
+        private String cover;
 
-        public int getCategory_id() {
-            return category_id;
+        public String getId() {
+            return id;
         }
 
-        public void setCategory_id(int category_id) {
-            this.category_id = category_id;
-        }
-
-        public String getCover() {
-            return cover;
-        }
-
-        public void setCover(String cover) {
-            this.cover = cover;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getName() {
@@ -56,12 +45,12 @@ public class NovelCategory extends Base {
             this.name = name;
         }
 
-        public List<String> getTag() {
-            return tag;
+        public String getCover() {
+            return cover;
         }
 
-        public void setTag(List<String> tag) {
-            this.tag = tag;
+        public void setCover(String cover) {
+            this.cover = cover;
         }
     }
 }

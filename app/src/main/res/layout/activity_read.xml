@@ -59,20 +59,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/ic_buy_book" />
+            android:src="@mipmap/ic_buy_book"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/tvBookReadCommunity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/ic_to_gift" />
+            android:src="@mipmap/ic_to_gift"
+            android:visibility="gone"/>
 
-        <ImageView
+        <TextView
+            style="@style/text_middle_nomal"
+            android:text="加入书架"
+            android:textColor="@color/white"
             android:id="@+id/tvBookReadIntroduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_add_book" />
+            android:drawableRight="@mipmap/ic_add_book"
+            android:drawablePadding="@dimen/drawable_padding_normal"/>
 
     </LinearLayout>
 
@@ -139,7 +145,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_menu_bookmark" />
+            android:src="@mipmap/ic_menu_bookmark"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

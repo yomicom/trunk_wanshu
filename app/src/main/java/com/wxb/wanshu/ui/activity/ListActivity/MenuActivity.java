@@ -31,7 +31,7 @@ import static com.wxb.wanshu.ui.activity.BookDetailsActivity.INTENT_BOOK_ID;
 
 public class MenuActivity extends BaseActivity implements MenuContract.View {
 
-    int novel_id;
+    String novel_id;
     int curChapter;
     public static String INTENT_CHAPTER = "chapter";
     public static String INTENT_IS_READING = "isReading";
@@ -45,14 +45,14 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     private BookMenuAdapter adapter;
     private boolean isReading = false;
 
-    public static void startActivity(Context context, int novel_id, int curChapter, boolean isReading) {
+    public static void startActivity(Context context, String novel_id, int curChapter, boolean isReading) {
         context.startActivity(new Intent(context, MenuActivity.class)
                 .putExtra(INTENT_BOOK_ID, novel_id)
                 .putExtra(INTENT_CHAPTER, curChapter)
                 .putExtra(INTENT_IS_READING, isReading));
     }
 
-    public static void startActivityFor(Activity context, int novel_id, int curChapter, boolean isReading) {
+    public static void startActivityFor(Activity context, String novel_id, int curChapter, boolean isReading) {
         context.startActivityForResult(new Intent(context, MenuActivity.class)
                 .putExtra(INTENT_BOOK_ID, novel_id)
                 .putExtra(INTENT_CHAPTER, curChapter)
@@ -94,7 +94,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
 
     @Override
     public void initDatas() {
-        novel_id = getIntent().getIntExtra(INTENT_BOOK_ID, 0);
+        novel_id = getIntent().getStringExtra(INTENT_BOOK_ID);
         curChapter = getIntent().getIntExtra(INTENT_CHAPTER, 0);
         isReading = getIntent().getBooleanExtra(INTENT_IS_READING, false);
         mPresenter.attachView(this);
@@ -112,12 +112,12 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                 BookMenu.DataBean.ChaptersBean data = adapter.getData(position);
                 if (isReading) {
                     Intent intent = getIntent();
-                    intent.putExtra("chapter", data.getChapter_num());
+//                    intent.putExtra("chapter", data.getChapter_num());
 
                     setResult(RESULT_OK,intent);
                     finish();
                 } else {
-                    ReadActivity.startActivity(mContext, novel_id, data.getChapter_num(),true);
+//                    ReadActivity.startActivity(mContext, novel_id, data.getChapter_num(),true);
                 }
             }
         });

@@ -26,8 +26,7 @@ public class BookClassifyAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBe
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
         viewHolder.setImageUrl(R.id.cover, item.getCover())
-                .setText(R.id.classify, item.getName())
-                .setText(R.id.book_num, "共" + item.getWord_num() + "本");
+                .setText(R.id.classify, item.getName());
 
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override

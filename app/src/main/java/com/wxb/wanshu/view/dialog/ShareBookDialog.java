@@ -46,9 +46,9 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
     private TextView tvFriend;
     private Api api;
     protected CompositeSubscription mCompositeSubscription;
-    int novel_id;
+    String novel_id;
 
-    public ShareBookDialog(Context context, int novel_id) {
+    public ShareBookDialog(Context context, String novel_id) {
         super(context);
         this.context = context;
         this.novel_id = novel_id;

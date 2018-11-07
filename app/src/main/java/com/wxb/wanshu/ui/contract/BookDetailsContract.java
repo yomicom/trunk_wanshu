@@ -24,13 +24,13 @@ public interface BookDetailsContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getBookDetails(int novel_id, int client_id, int user_id);
+        void getBookDetails(String novel_id, int client_id, int user_id);
 
-        void getBookReward(int novel_id, int page);
+        void getBookReward(String novel_id, int page);
 
         void getRewardType();
 
-        void addBookShelf(int novel_id);
+        void addBookShelf(String novel_id);
 
 //         void rewardGift(String type, int number, int novel_id, String chapter_id);
     }

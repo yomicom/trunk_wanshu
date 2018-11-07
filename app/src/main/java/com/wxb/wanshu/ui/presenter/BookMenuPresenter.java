@@ -26,7 +26,7 @@ public class BookMenuPresenter extends RxPresenter<MenuContract.View> implements
     }
 
     @Override
-    public void getBookMenu(int novel_id) {
+    public void getBookMenu(String novel_id) {
         Subscription rxSubscription = api.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookMenu>() {

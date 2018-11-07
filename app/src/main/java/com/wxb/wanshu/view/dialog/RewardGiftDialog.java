@@ -46,7 +46,7 @@ public class RewardGiftDialog implements View.OnClickListener {
     private static int amount;
 
     public static PopupWindow shareView(Activity context, int baseId,
-                                        RewardType rewardType, String title, int novel_id) {
+                                        RewardType rewardType, String title, String novel_id) {
         CompositeSubscription mCompositeSubscription = null;
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -135,7 +135,7 @@ public class RewardGiftDialog implements View.OnClickListener {
                     int giftCount = Integer.parseInt((String) tvGiftCount.getText());
                     String type = adapter.getData(adapter.getSelectedPos()).getType();
 
-                    Subscription subscribe = api.rewardGift(type, giftCount, novel_id, "").subscribeOn(Schedulers.io())
+                    Subscription subscribe = api.rewardGift(type, giftCount, Integer.parseInt(novel_id), "").subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Observer<Base>() {
                                 @Override

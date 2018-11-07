@@ -16,11 +16,11 @@ public interface SelectBooksContract {
     interface View extends BaseContract.BaseView {
         void showBookList(BookList data);
 
-        void showNovelCategory(List<NovelCategory.DataBean> category);
+        void showNovelCategory(NovelCategory category);
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getBookList(int sex_type, String category_id, String complete_status, int page, String kw);
+        void getBookList(String category_id, int page);
 
         void getBoutiqueList(int type, int page);
 

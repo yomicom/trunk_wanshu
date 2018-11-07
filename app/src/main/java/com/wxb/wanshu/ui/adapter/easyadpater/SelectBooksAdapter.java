@@ -29,7 +29,7 @@ public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> 
                         .setText(R.id.tv_article_intro, item.getDescription())
                         .setText(R.id.author, item.getAuthor())
                         .setText(R.id.tv_word_nums, item.getWord_num() + "字")
-                        .setText(R.id.tv_category, item.getCategory_name());
+                        .setText(R.id.tv_category, item.is_complete?"已完结":"连载中");
             }
         };
     }

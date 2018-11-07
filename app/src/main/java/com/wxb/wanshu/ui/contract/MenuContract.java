@@ -15,6 +15,6 @@ public interface MenuContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getBookMenu(int novel_id);
+        void getBookMenu(String novel_id);
     }
 }

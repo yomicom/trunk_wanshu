@@ -111,7 +111,7 @@ public class BookselfList extends Base{
          * complete_status : 1
          */
 
-        private int novel_id;
+        private String novel_id;
         private String cover;
         private String title;
         private String link;
@@ -124,11 +124,11 @@ public class BookselfList extends Base{
         public boolean showCheckBox = false;//显示多选框
         public boolean isSeleted = false;//被选中
 
-        public int getNovel_id() {
+        public String getNovel_id() {
             return novel_id;
         }
 
-        public void setNovel_id(int novel_id) {
+        public void setNovel_id(String novel_id) {
             this.novel_id = novel_id;
         }
 

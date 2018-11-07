@@ -85,14 +85,13 @@ import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTE
 
 public class ReadActivity extends BaseActivity implements BookReadContract.View {
 
+    @Inject
+    BookReadPresenter mPresenter;
+
     @BindView(R.id.ivBack)
     ImageView mIvBack;
-    @BindView(R.id.tvBookReadReading)
-    ImageView tvBuyBook;
-    @BindView(R.id.tvBookReadCommunity)
-    ImageView tvGift;
     @BindView(R.id.tvBookReadIntroduce)
-    ImageView tvAddBook;
+    TextView tvAddBook;
 
     @BindView(R.id.flReadWidget)
     FrameLayout flReadWidget;
@@ -151,9 +150,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     boolean isCollected = false;//是否被添加书架
 
-    @Inject
-    BookReadPresenter mPresenter;
-
     private List<BookMenu.DataBean.ChaptersBean> mChapterList = new ArrayList<>();
 
     private int currentChapter = 1;
@@ -175,11 +171,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public static final String INTENT_SD = "isFromSD";
     public static final String INTENT_MENU = "isFromMenu";
 
-    private int novel_id;
+    private String novel_id;
 
     private boolean isAutoLightness = false; // 记录其他页面是否自动调整亮度
     private boolean isFromSD = false;
-    private BuyBookPopupWindow buyBookPopupWindow;
+//    private BuyBookPopupWindow buyBookPopupWindow;
     private boolean isFromMenu = false;
     private ShareBookDialog shareBookDialog;
 
@@ -193,7 +189,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         startActivity(context, bookId, false);
     }
 
-    public static void startActivity(Context context, int bookId, int currentChapter, boolean isFromMenu) {
+    public static void startActivity(Context context, String bookId, int currentChapter, boolean isFromMenu) {
         context.startActivity(new Intent(context, ReadActivity.class)
                 .putExtra(INTENT_BEAN, bookId)
                 .putExtra(INTENT_CHAPTER, currentChapter)
@@ -228,7 +224,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @Override
     public void initDatas() {
-        novel_id = getIntent().getIntExtra(INTENT_BEAN, 0);
+        novel_id = getIntent().getStringExtra(INTENT_BEAN);
         currentChapter = getIntent().getIntExtra(INTENT_CHAPTER, 1);
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         isFromMenu = getIntent().getBooleanExtra(INTENT_MENU, false);
@@ -291,12 +287,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             mChapterList.add(chapters);
             showChapterRead(null);
             //本地书籍隐藏社区、简介、缓存按钮
-            gone(tvGift, tvAddBook);
+            gone( tvAddBook);
             return;
         }
         mPresenter.getBookMixAToc(novel_id);
 
-        buyBookPopupWindow = new BuyBookPopupWindow((Activity) mContext, novel_id, currentChapter);
+//        buyBookPopupWindow = new BuyBookPopupWindow((Activity) mContext, novel_id, currentChapter);
     }
 
     /**
@@ -399,7 +395,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (CacheManager.getInstance().getChapterFile(novel_id + "", currentChapter) != null) {
             showChapterRead(null);
         } else {
-            mPresenter.getChapterRead(novel_id, currentChapter);
+            mPresenter.getChapterRead(novel_id, currentChapter,0);
         }
     }
 
@@ -494,8 +490,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.tvBookReadReading)
     public void buyBook() {
         gone(rlReadAaSet, rlReadMark);
-        buyBookPopupWindow.setPay(0);
-        buyBookPopupWindow.showAtLocation(findViewById(R.id.rlBookReadRoot), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//        buyBookPopupWindow.setPay(0);
+//        buyBookPopupWindow.showAtLocation(findViewById(R.id.rlBookReadRoot), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     /**
@@ -808,7 +804,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(novel_id + "", i) == null) {
-                    mPresenter.getChapterRead(novel_id, i);
+                    mPresenter.getChapterRead(novel_id, i,0);
                 }
             }
         }

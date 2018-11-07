@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="164dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_hot_book"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/distance_image_text_15"
-    android:paddingTop="@dimen/distance_text_text_10"
-    android:paddingRight="@dimen/distance_image_text_15"
-    android:paddingBottom="@dimen/distance_text_text_10">
+    android:paddingLeft="@dimen/distance_left"
+    android:paddingTop="@dimen/distance_left"
+    android:paddingRight="@dimen/distance_left"
+    android:paddingBottom="@dimen/distance_left">
 
     <ImageView
         android:id="@+id/cover"
@@ -22,12 +22,5 @@
         android:maxLines="2"
         android:text="都市言情"
         android:layout_marginTop="@dimen/distance_big_cover_title"/>
-
-    <TextView
-        android:id="@+id/book_num"
-        style="@style/text_small_nomal"
-        android:layout_marginTop="@dimen/distance_text_text_6"
-        android:layout_alignParentBottom="true"
-        android:text="0本" />
 
 </LinearLayout>

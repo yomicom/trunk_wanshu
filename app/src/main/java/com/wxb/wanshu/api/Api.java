@@ -122,11 +122,11 @@ public class Api {
         return service.getNotificationList(page);
     }
 
-    public Observable<BookList> getSelectBookList(int sex_type, String category_id, String complete_status, int page, String kw) {
-        return service.getSelectBookList(sex_type, category_id, complete_status, page, kw);
+    public Observable<BookList> getSelectBookList(String category_id,int page) {
+        return service.getSelectBookList( category_id, page);
     }
 
-    public Observable<BookDetails> getBookDetail(int novel_id,int client_id,int user_id) {
+    public Observable<BookDetails> getBookDetail(String novel_id,int client_id,int user_id) {
         return service.getBookDetail(novel_id,client_id,user_id);
     }
 
@@ -134,7 +134,7 @@ public class Api {
         return service.getSearchResult(keyword, page);
     }
 
-    public Observable<BookRewardData> getBookReward(int novel_id, int page) {
+    public Observable<BookRewardData> getBookReward(String novel_id, int page) {
         return service.getRewardRank(novel_id, page);
     }
 
@@ -161,8 +161,11 @@ public class Api {
         return service.getFinishedList(sort, status, page);
     }
 
-    public Observable<Base> addBookshelfList(int novel_id) {
+    public Observable<Base> addBookshelfList(String novel_id) {
         return service.addBookshelfList(novel_id);
+    }
+    public Observable<NovelCategory> getCategoryList() {
+        return service.getCategoryList();
     }
 
     public Observable<Base> delBookshelfList(String novel_ids) {
@@ -184,11 +187,11 @@ public class Api {
         return service.clientLaunch(device_id, type, version, os);
     }
 
-    public Observable<BookMenu> getBookMixAToc(int bookId) {
-        return service.getBookMixAToc(bookId);
+    public Observable<BookMenu> getBookMixAToc(String novel_id) {
+        return service.getBookMixAToc(novel_id);
     }
 
-    public Observable<ChapterRead> getChapterRead(int novel_id, int chapter) {
-        return service.getChapterRead(novel_id, chapter);
+    public Observable<ChapterRead> getChapterRead(String novel_id, int chapter_id,int next) {
+        return service.getChapterRead(novel_id, chapter_id,next);
     }
 }

@@ -222,6 +222,12 @@
         <item name="android:background">@color/divider</item>
     </style>
 
+    <style name="item_divide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/distance_view_item</item>
+        <item name="android:background">@color/common_bg</item>
+    </style>
+
     <style name="line_main_divide">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_main_divide</item>

@@ -155,8 +155,8 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/novel/list")
-    Observable<BookList> getSelectBookList(@Query("sex_type") int sex_type, @Query("category_id") String category_id, @Query("complete_status") String complete_status, @Query("page") int page, @Query("kw") String kw);
+    @GET("/novel/getListByCategory")
+    Observable<BookList> getSelectBookList(@Query("category_id") String category_id, @Query("page") int page);
 
     /**
      * 精品馆频道-更多列表
@@ -200,7 +200,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/detail")
-    Observable<BookDetails> getBookDetail(@Query("novel_id") int novel_id,@Query("client_id") int client_id,@Query("user_id") int user_id);
+    Observable<BookDetails> getBookDetail(@Query("novel_id") String novel_id,@Query("client_id") int client_id,@Query("user_id") int user_id);
 
     /**
      * 获取书籍打赏
@@ -208,7 +208,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/rewardRank")
-    Observable<BookRewardData> getRewardRank(@Query("novel_id") int novel_id, @Query("page") int page);
+    Observable<BookRewardData> getRewardRank(@Query("novel_id") String novel_id, @Query("page") int page);
 
     /**
      * 获取书架
@@ -224,7 +224,7 @@ public interface ApiService {
      * @return
      */
     @POST("/novel/addBookshelf")
-    Observable<Base> addBookshelfList(@Query("novel_id") int novel_id);
+    Observable<Base> addBookshelfList(@Query("novel_id") String novel_id);
 
     /**
      * 删除书架
@@ -308,8 +308,8 @@ public interface ApiService {
      * @param novel_id
      * @return
      */
-    @GET("/novel/chapters")
-    Observable<BookMenu> getBookMixAToc(@Query("novel_id") int novel_id);
+    @GET("/novel/catalogs")
+    Observable<BookMenu> getBookMixAToc(@Query("novel_id") String novel_id);
 
     //    @GET("/mix-toc/{bookId}")
 //    Observable<BookRead> getBookRead(@Path("bookId") String bookId);
@@ -321,11 +321,11 @@ public interface ApiService {
      * 小说内容
      *
      * @param novel_id
-     * @param chapter
+     * @param chapter_id
      * @return
      */
-    @GET("/read/index")
-    Observable<ChapterRead> getChapterRead(@Query("novel_id") int novel_id, @Query("chapter") int chapter);
+    @GET("/novel/read")
+    Observable<ChapterRead> getChapterRead(@Query("novel_id") String novel_id, @Query("chapter_id") int chapter_id, @Query("next") int next);
 
     /**
      * 搜索小说
@@ -440,14 +440,14 @@ public interface ApiService {
 //    @GET("/book-list/{bookListId}")
 //    Observable<BookListDetail> getBookListDetail(@Path("bookListId") String bookListId);
 //
-//    /**
-//     * 获取分类
-//     *
-//     * @return
-//     */
-//    @GET("/cats/lv2/statistics")
-//    Observable<CategoryList> getCategoryList();
-//
+    /**
+     * 获取分类
+     *
+     * @return
+     */
+    @GET("/novel/categories")
+    Observable<NovelCategory> getCategoryList();
+
 //    /**
 //     * 获取二级分类
 //     *

@@ -33,8 +33,8 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
     }
 
     @Override
-    public void getBookList(int sex_type, String category_id, String complete_status, int page, String kw) {
-        Subscription rxSubscription = api.getSelectBookList(sex_type, category_id, complete_status, page, kw).subscribeOn(Schedulers.io())
+    public void getBookList( String category_id,int page) {
+        Subscription rxSubscription = api.getSelectBookList(category_id, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override
@@ -132,6 +132,26 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
 
     @Override
     public void getNovelCategory() {
+        Subscription rxSubscription = api.getCategoryList().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<NovelCategory>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.e("getBookListDetail:" + e.toString());
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onNext(NovelCategory data) {
+                        mView.showNovelCategory(data);
+                    }
+                });
+        addSubscrebe(rxSubscription);
 //        String key = StringUtils.creatAcacheKey("category-list", SettingManager.getInstance().getUserChooseSex());
 //        Observable<NovelCategory> fromNetWork = api.getNovelCategory()
 //                .compose(RxUtil.<NovelCategory>rxCacheListHelper(key));

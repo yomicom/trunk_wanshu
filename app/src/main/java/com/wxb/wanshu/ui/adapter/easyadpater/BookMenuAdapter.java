@@ -35,9 +35,9 @@ import java.util.List;
 public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBean> {
 
     int selectPos;
-    int novel_id;
+    String novel_id;
 
-    public BookMenuAdapter(Context context, List<BookMenu.DataBean.ChaptersBean> list, int novel_id, int selectPos) {
+    public BookMenuAdapter(Context context, List<BookMenu.DataBean.ChaptersBean> list, String novel_id, int selectPos) {
         super(context, list, R.layout.item_book_menu);
         this.selectPos = selectPos;
         this.novel_id = novel_id;
@@ -45,25 +45,25 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
 
     @Override
     public void convert(EasyLVHolder holder, int position, BookMenu.DataBean.ChaptersBean data) {
-        holder.setText(R.id.tv_chapter_title, data.getChapter_name());
+        holder.setText(R.id.tv_chapter_title, data.name);
 
         //付费维度各状态优先级：免费＞会员免费＞已购买＞限时免费＞未购买（含单章购买/整本购买标识）
-        if (data.is_free == 1) {//免费
-            holder.setText(R.id.tv_chapter_status, "").setVisible(R.id.iv_locked_chapter, false);
-        } else if (data.is_vip == 1) {//会员免费
-            holder.setText(R.id.tv_chapter_status, "会员免费").setVisible(R.id.iv_locked_chapter, false);
-        } else if (data.is_buy == 1) {//已购买
-            holder.setText(R.id.tv_chapter_status, "已购买").setVisible(R.id.iv_locked_chapter, false);
-        } else if (data.free_time != 0) {//限时免费
-            holder.setText(R.id.tv_chapter_status, "限时免费").setVisible(R.id.iv_locked_chapter, false);
-        } else if (data.is_whole == 1) {//需整本购买标识
-            holder.setText(R.id.tv_chapter_status, "").setVisible(R.id.iv_locked_chapter, true);
-        } else {
-            holder.setText(R.id.tv_chapter_status, data.fee + "书币").setVisible(R.id.iv_locked_chapter, false);
-        }
+//        if (data.is_free == 1) {//免费
+//            holder.setText(R.id.tv_chapter_status, "").setVisible(R.id.iv_locked_chapter, false);
+//        } else if (data.is_vip == 1) {//会员免费
+//            holder.setText(R.id.tv_chapter_status, "会员免费").setVisible(R.id.iv_locked_chapter, false);
+//        } else if (data.is_buy == 1) {//已购买
+//            holder.setText(R.id.tv_chapter_status, "已购买").setVisible(R.id.iv_locked_chapter, false);
+//        } else if (data.free_time != 0) {//限时免费
+//            holder.setText(R.id.tv_chapter_status, "限时免费").setVisible(R.id.iv_locked_chapter, false);
+//        } else if (data.is_whole == 1) {//需整本购买标识
+//            holder.setText(R.id.tv_chapter_status, "").setVisible(R.id.iv_locked_chapter, true);
+//        } else {
+//            holder.setText(R.id.tv_chapter_status, data.fee + "书币").setVisible(R.id.iv_locked_chapter, false);
+//        }
 
         //若该章节已缓存，则高亮显示
-        if (CacheManager.getInstance().getChapterFile(novel_id + "", data.getChapter_id()) != null) {
+        if (CacheManager.getInstance().getChapterFile(novel_id , data.sort) != null) {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_1);
         }else {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_2);

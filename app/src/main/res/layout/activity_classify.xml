@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.wxb.wanshu.ui.activity.ClassifyActivity">
 
@@ -26,10 +26,16 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/setting_right"
-            android:src="@mipmap/ic_search_book" />
+            android:src="@mipmap/ic_search_book"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View style="@style/line_divide" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/distance_left"></android.support.v7.widget.RecyclerView>
 
     <com.wxb.wanshu.view.recycleview.EasyRecyclerView
         android:id="@+id/recyclerview"
@@ -37,5 +43,6 @@
         android:layout_height="match_parent"
         app:layout_empty="@layout/common_empty_view"
         app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay" />
+        app:scrollbarStyle="insideOverlay"
+        android:visibility="gone"/>
 </LinearLayout>

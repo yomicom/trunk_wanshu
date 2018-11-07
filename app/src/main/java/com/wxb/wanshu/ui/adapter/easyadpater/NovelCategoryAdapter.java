@@ -20,26 +20,29 @@ import static android.R.id.list;
  * Created by qiming on 2017/12/14.
  */
 
-public class NovelCategoryAdapter extends EasyLVAdapter<NovelCategory.DataBean> {
+public class NovelCategoryAdapter extends EasyRVAdapter<NovelCategory.DataBean> {
+    private OnRvItemClickListener itemClickListener;
 
-    public NovelCategoryAdapter(Context context, List<NovelCategory.DataBean> list) {
-        super(context, list, R.layout.item_search_history);
+    public NovelCategoryAdapter(Context context, List<NovelCategory.DataBean> list, OnRvItemClickListener itemClickListener) {
+        super(context, list, R.layout.item_book_classify);
+        this.itemClickListener = itemClickListener;
+    }
+    public void selectNoAll() {
+//        for (NovelCategory.DataBean dataBean : mList) {
+//            dataBean.isSelected = false;
+//        }
+//        notifyDataSetChanged();
     }
 
     @Override
-    public void convert(EasyLVHolder viewHolder, int position, NovelCategory.DataBean item) {
-        viewHolder.setText(R.id.tv, item.getName());
-        if (item.isSelected) {
-            viewHolder.setTextColorRes(R.id.tv, R.color.gobal_color);
-        } else {
-            viewHolder.setTextColorRes(R.id.tv, R.color.text_color_2);
-        }
-    }
+    protected void onBindData(EasyRVHolder viewHolder, int position, NovelCategory.DataBean item) {
 
-    public void selectNoAll() {
-        for (NovelCategory.DataBean dataBean : mList) {
-            dataBean.isSelected = false;
-        }
-        notifyDataSetChanged();
+        viewHolder.setImageUrl(R.id.cover,item.getCover()).setText(R.id.classify, item.getName());
+        viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(view, position, item);
+            }
+        });
     }
 }

@@ -30,7 +30,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
 
     @Override
-    public void getBookDetails(int novel_id, int client_id, int user_id) {
+    public void getBookDetails(String novel_id, int client_id, int user_id) {
         Subscription subscribe = api.getBookDetail(novel_id, client_id, user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
@@ -53,7 +53,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
     }
 
     @Override
-    public void getBookReward(int novel_id, int page) {
+    public void getBookReward(String novel_id, int page) {
         Subscription subscribe = api.getBookReward(novel_id, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookRewardData>() {
@@ -99,7 +99,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
     }
 
     @Override
-    public void addBookShelf(int novel_id) {
+    public void addBookShelf(String novel_id) {
 
         Subscription subscribe = api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -93,7 +93,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     @BindView(R.id.ll_content)
     LinearLayout llContent;
 
-    int novel_id;
+    String novel_id;
     @BindView(R.id.last_chapter)
     TextView lastChapter;
     @BindView(R.id.last_chapter_time)
@@ -107,7 +107,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     public static void startActivity(Context context, String novel_id) {
         context.startActivity(new Intent(context, BookDetailsActivity.class)
-                .putExtra(INTENT_BOOK_ID, novel_id));
+                .putExtra(INTENT_BOOK_ID, "2"));
     }
 
     @Inject
@@ -132,12 +132,12 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     public void initDatas() {
 
         EventBus.getDefault().register(this);
-        novel_id = getIntent().getIntExtra(INTENT_BOOK_ID, 0);
+        novel_id = getIntent().getStringExtra(INTENT_BOOK_ID);
         int client_id = SharedPreferencesUtil.getInstance().getInt(SharedPreferencesUtil.CLIENT_ID, 1);
 
         mPresenter.attachView(this);
         showDialog();
-        mPresenter.getBookDetails(2, client_id, 0);
+        mPresenter.getBookDetails(novel_id, client_id, 0);
 //        mPresenter.getBookReward(novel_id, rewardPage);
     }
 
