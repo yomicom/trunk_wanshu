@@ -20,7 +20,7 @@
             style="@style/text_middle_nomal"
             android:layout_marginTop="@dimen/distance_text_text_12"
             android:text="Title"
-            android:lineSpacingExtra="@dimen/line_spacing_3"
+            android:lineSpacingExtra="@dimen/line_small_space"
             android:textColor="@color/text_color_2" />
 
         <TextView

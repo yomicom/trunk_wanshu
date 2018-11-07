@@ -29,7 +29,7 @@
                 android:background="@color/white"
                 android:gravity="top"
                 android:hint="请在此输入您的问题或建议"
-                android:lineSpacingExtra="@dimen/line_spacing_3"
+                android:lineSpacingExtra="@dimen/line_small_space"
                 android:maxLength="200"
                 android:padding="@dimen/distance_top_20"
                 android:textColor="@color/text_color_1"

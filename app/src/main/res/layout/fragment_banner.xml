@@ -63,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/line_spacing_5"
-        android:paddingRight="@dimen/line_spacing_5">
+        android:paddingLeft="@dimen/line_big_space"
+        android:paddingRight="@dimen/line_big_space">
 
         <LinearLayout
             android:id="@+id/item_rank"

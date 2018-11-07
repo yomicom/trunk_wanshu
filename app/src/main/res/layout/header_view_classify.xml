@@ -28,7 +28,7 @@
             style="@style/text_middle_nomal"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:drawablePadding="@dimen/line_spacing_3"
+            android:drawablePadding="@dimen/line_small_space"
             android:drawableRight="@mipmap/icon_open_nomal"
             android:text="收起"
             android:textColor="@color/text_color_2"></TextView>

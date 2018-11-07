@@ -76,6 +76,7 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/distance_left"
+                android:paddingBottom="@dimen/distance_top"
                 android:paddingTop="5dp">
 
                 <TextView
@@ -83,6 +84,8 @@
                     style="@style/text_small_nomal"
                     android:layout_width="match_parent"
                     android:gravity="left"
+                    android:maxLines="3"
+                    android:lineSpacingExtra="@dimen/line_small_space"
                     android:textSize="14sp"></TextView>
 
                 <ImageView

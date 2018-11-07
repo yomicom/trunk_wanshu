@@ -50,8 +50,8 @@
     <dimen name="book_cover_height">120dp</dimen>
 
     <!--文字间隔-->
-    <dimen name="line_spacing_3">3dp</dimen>
-    <dimen name="line_spacing_5">5dp</dimen>
+    <dimen name="line_small_space">3dp</dimen>
+    <dimen name="line_big_space">5dp</dimen>
 
     <dimen name="book_user_avatar">44dp</dimen>
 

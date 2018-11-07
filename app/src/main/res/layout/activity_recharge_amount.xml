@@ -39,6 +39,6 @@
         android:layout_marginRight="@dimen/distance_left"
         android:layout_marginTop="@dimen/distance_text_text_10"
         android:text=""
-        android:lineSpacingExtra="@dimen/line_spacing_3"
+        android:lineSpacingExtra="@dimen/line_small_space"
         android:gravity="left"/>
 </LinearLayout>

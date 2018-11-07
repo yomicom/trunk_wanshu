@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/tv_amount"
             style="@style/text_small_nomal"
-            android:layout_marginTop="@dimen/line_spacing_3"
+            android:layout_marginTop="@dimen/line_small_space"
             android:text="100书币" />
     </LinearLayout>
 </LinearLayout>
