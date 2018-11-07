@@ -39,6 +39,8 @@ public class SharedPreferencesUtil {
     public Context context;
     public SharedPreferences prefs;
     public SharedPreferences.Editor editor;
+    public static String GET_CUSTOME_UUID = "GET_CUSTOME_UUID";
+    public static String CLIENT_ID = "CLIENT_ID";
 
     public synchronized static SharedPreferencesUtil getInstance() {
         return prefsUtil;
@@ -65,6 +67,10 @@ public class SharedPreferencesUtil {
 
     public boolean getBoolean(String key, boolean defaultVal) {
         return this.prefs.getBoolean(key, defaultVal);
+    }
+
+    public boolean contain(String key) {
+        return this.prefs.contains(key);
     }
 
     public boolean getBoolean(String key) {

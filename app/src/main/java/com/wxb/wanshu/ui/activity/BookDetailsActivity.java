@@ -2,6 +2,7 @@ package com.wxb.wanshu.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -25,11 +26,12 @@ import com.wxb.wanshu.bean.SimpleEventBus;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
-import com.wxb.wanshu.ui.activity.ListActivity.MenuActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookRewardAdapter;
 import com.wxb.wanshu.ui.contract.BookDetailsContract;
+import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.BookDetailsPresenter;
 import com.wxb.wanshu.utils.ImageUtils;
+import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.dialog.RewardGiftDialog;
@@ -45,6 +47,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -59,18 +62,12 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     ImageView ivIsFree;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_type)
-    TextView tvType;
-    @BindView(R.id.tv_status)
-    TextView tvStatus;
     @BindView(R.id.tv_read)
     TextView tvRead;
-    @BindView(R.id.tv_free_time)
-    TextView tvFreeTime;
+    @BindView(R.id.author)
+    TextView author;
     @BindView(R.id.rl_image)
     RelativeLayout rlImage;
-    @BindView(R.id.tv_message)
-    TextView tvMessage;
     @BindView(R.id.fl_content_recommand)
     FrameLayout flContentRecommand;
     @BindView(R.id.tv_dashang)
@@ -97,12 +94,18 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     LinearLayout llContent;
 
     int novel_id;
+    @BindView(R.id.last_chapter)
+    TextView lastChapter;
+    @BindView(R.id.last_chapter_time)
+    TextView lastChapterTime;
+    @BindView(R.id.book_chapter_num)
+    TextView bookChapterNum;
     private BookDetails.DataBean bookDetails;
     private BookRewardAdapter adapter;
     private int rewardPage = 1;
     private ShareBookDialog shareBookDialog;
 
-    public static void startActivity(Context context, int novel_id) {
+    public static void startActivity(Context context, String novel_id) {
         context.startActivity(new Intent(context, BookDetailsActivity.class)
                 .putExtra(INTENT_BOOK_ID, novel_id));
     }
@@ -130,10 +133,11 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
         EventBus.getDefault().register(this);
         novel_id = getIntent().getIntExtra(INTENT_BOOK_ID, 0);
+        int client_id = SharedPreferencesUtil.getInstance().getInt(SharedPreferencesUtil.CLIENT_ID, 1);
 
         mPresenter.attachView(this);
-//        showDialog();
-//        mPresenter.getBookDetails(novel_id);
+        showDialog();
+        mPresenter.getBookDetails(2, client_id, 0);
 //        mPresenter.getBookReward(novel_id, rewardPage);
     }
 
@@ -172,26 +176,21 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     private void showBookData(BookDetails.DataBean data) {
         ImageUtils.displayImage(this, ivBook, data.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
-        tvTitle.setText(data.getTitle());
-        int is_free = data.getIs_free();
-        if (is_free == 0) {
-            gone(ivIsFree);
-        } else {
-            visible(ivIsFree);
-        }
-        tvType.setText(data.getCategory() + "  |  ");
-        tvStatus.setText(data.getComplete_status() == 0 ? "未完结" : "已完结");
-        tvRead.setText(data.getWord_num() + "字  |  " + data.getRead() + "人在看");
-
-        tvDashangRecord.setText("已收到打赏" + data.getReward_amount() + "书币");
-        if (bookDetails.getIs_collect() == 1) {
+        tvTitle.setText(data.getName());
+        author.setText(data.getAuthor());
+        tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + data.getWord_num() + "字");
+        if (bookDetails.getIs_onsale().equals(1)) {
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
         } else {
             tvAddBook.setText("加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
         }
-        ViewToolUtils.setShowMoreContent(4, data.getSummary(), tvAccountIntro, ivShowText, descriptionLayout);
+
+        lastChapter.setText("最新："+data.getLatest_chapter().name);
+        lastChapterTime.setText("更新时间："+data.latest_chapter.publish_time);
+        bookChapterNum.setText("共" + data.getChapter_num() + "章");
+        ViewToolUtils.setShowMoreContent(4, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
 
     /**
@@ -205,9 +204,9 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-//            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance2(data);
-//            transaction.replace(R.id.fl_content_recommand, type1Fragment);
-//            transaction.commit();
+            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance(data, 2);
+            transaction.replace(R.id.fl_content_recommand, type1Fragment);
+            transaction.commit();
         } else {
             gone(flContentRecommand);
         }
@@ -227,7 +226,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     public void showRewardType(RewardType data) {
         hideDialog();
         if (data != null && bookDetails != null) {
-            RewardGiftDialog.shareView(this, R.id.ll_content, data, bookDetails.getTitle(), novel_id);
+            RewardGiftDialog.shareView(this, R.id.ll_content, data, bookDetails.getName(), novel_id);
         }
     }
 
@@ -237,11 +236,11 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             ToastUtils.showLongToast("添加书架成功");
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-            bookDetails.setIs_collect(1);
+//            bookDetails.(1);
         }
     }
 
-    @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.tv_add_book, R.id.tv_read_book, R.id.tv_message})
+    @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.tv_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_to_dashang:
@@ -253,15 +252,18 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 mPresenter.getBookReward(novel_id, rewardPage);
                 break;
             case R.id.tv_add_book:
-                if (bookDetails.getIs_collect() == 0) {
-                    mPresenter.addBookShelf(novel_id);
-                }
+//                if (bookDetails.getis() == 0) {
+//                    mPresenter.addBookShelf(novel_id);
+//                }
                 break;
             case R.id.tv_read_book:
-                ReadActivity.startActivity(this, bookDetails.getNovel_id());
+                ReadActivity.startActivity(this, bookDetails.getId());
                 break;
-            case R.id.tv_message:
-                MenuActivity.startActivity(this, bookDetails.getNovel_id(), 0, false);
+            case R.id.book_menu:
+//                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
+                break;
+            case R.id.item_last_chapter:
+//                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
         }
     }
@@ -294,7 +296,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         super.onDestroy();
         mPresenter.detachView();
         EventBus.getDefault().unregister(this);
-        if (shareBookDialog != null){
+        if (shareBookDialog != null) {
             shareBookDialog.dismiss();
         }
     }
@@ -302,5 +304,12 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     @Override
     public void onItemClick(View view, int position, Object data) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

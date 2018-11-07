@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
@@ -82,7 +82,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerBookComponent.builder()
-                .appComponent(ReaderApplication.getsInstance().getAppComponent())
+                .appComponent(MyApplication.getsInstance().getAppComponent())
                 .build()
                 .inject(this);
     }

@@ -9,13 +9,12 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
-import com.wxb.wanshu.ui.fragment.BannerFragment;
 import com.wxb.wanshu.ui.fragment.HomeBookListFragment;
 import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
@@ -66,7 +65,7 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerBookComponent.builder()
-                .appComponent(ReaderApplication.getsInstance().getAppComponent())
+                .appComponent(MyApplication.getsInstance().getAppComponent())
                 .build()
                 .inject(this);
     }

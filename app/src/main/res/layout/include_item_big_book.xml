@@ -5,7 +5,8 @@
     android:background="@drawable/touch_bg"
     android:orientation="vertical"
     android:paddingLeft="@dimen/distance_left"
-    android:paddingRight="@dimen/distance_left">
+    android:paddingRight="@dimen/distance_left"
+    android:id="@+id/one_item">
 
     <RelativeLayout
         android:id="@+id/rl_material_item"

@@ -17,6 +17,7 @@ package com.wxb.wanshu.api;
 
 import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.utils.MD5;
+import com.wxb.wanshu.utils.Utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -45,12 +46,19 @@ public final class CustomSignInterceptor extends BaseDynamicInterceptor<CustomSi
     public TreeMap<String, String> dynamic(TreeMap<String, String> dynamicMap) {
         //dynamicMap:是原有的全局参数+局部参数
         dynamicMap.put("app_id", Constant.APP_ID);
-        if (isTimeStamp()) {//是否添加时间戳，因为你的字段key可能不是timestamp,这种动态的自己处理
-            dynamicMap.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
-        }
+        dynamicMap.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
         if (isAccessToken()) {//是否添加token
             dynamicMap.put("token", "");
         }
+        //device_id：设备唯一标示
+        //device_type：设备类型，1android，2ios
+        //version：app版本
+        // os：操作系统信息
+        dynamicMap.put("device_id", Utils.getUUID());
+        dynamicMap.put("device_type", "1");
+        dynamicMap.put("version", Utils.getVersionName());
+        dynamicMap.put("os", Utils.getOsMessage());
+
         if (isSign()) {//是否签名,因为你的字段key可能不是sign，这种动态的自己处理
             dynamicMap.put("sign", sign(dynamicMap));
         }

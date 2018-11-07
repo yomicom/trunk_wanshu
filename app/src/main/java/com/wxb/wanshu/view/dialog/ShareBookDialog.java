@@ -15,8 +15,8 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.common.MyShareListener;
@@ -52,7 +52,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
         super(context);
         this.context = context;
         this.novel_id = novel_id;
-        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = MyApplication.getsInstance().getAppComponent().getReaderApi();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
 
     private void initData() {
 
-        Subscription subscribe = api.getBookDetail(novel_id).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getBookDetail(novel_id,0,0).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
                     @Override
@@ -96,7 +96,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
                     public void onNext(BookDetails data) {
                         bookDetails = data.getData();
                         ImageUtils.displayImage(context, ivBook, bookDetails.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
-                        tvTitle.setText("把《" + bookDetails.getTitle() + "》");
+                        tvTitle.setText("把《" + bookDetails.getName() + "》");
                     }
                 });
         addSubscrebe(subscribe);
@@ -119,10 +119,10 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
 
         UMImage image = new UMImage(context, bookDetails.getCover());
-        UMWeb web = new UMWeb(bookDetails.getCatalog_url());
-        web.setTitle(bookDetails.getTitle());//标题
+        UMWeb web = new UMWeb("url");
+        web.setTitle(bookDetails.getName());//标题
         web.setThumb(image);  //缩略图
-        web.setDescription(bookDetails.getSummary());//描述
+        web.setDescription(bookDetails.getDescription());//描述
 
         switch (view.getId()) {
             case R.id.tv_qq:

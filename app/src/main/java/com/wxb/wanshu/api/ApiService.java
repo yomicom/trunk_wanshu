@@ -24,6 +24,7 @@ import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.bean.BookRewardData;
 import com.wxb.wanshu.bean.BookselfList;
+import com.wxb.wanshu.bean.ClientData;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.bean.NotificationList;
@@ -198,8 +199,8 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/novel/novelInfo")
-    Observable<BookDetails> getBookDetail(@Query("novel_id") int novel_id);
+    @GET("/novel/detail")
+    Observable<BookDetails> getBookDetail(@Query("novel_id") int novel_id,@Query("client_id") int client_id,@Query("user_id") int user_id);
 
     /**
      * 获取书籍打赏
@@ -270,8 +271,8 @@ public interface ApiService {
      * @return
      */
     @POST("/client/launch")
-    Observable<Base> clientLaunch(@Query("device_id") String device_id, @Query("type") int type,
-                                @Query("version") String version, @Query("os") String os);
+    Observable<ClientData> clientLaunch(@Query("device_id") String device_id, @Query("type") int type,
+                                        @Query("version") String version, @Query("os") String os);
 
     /**
      * 清空系统消息

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
@@ -74,7 +74,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         ButterKnife.bind(this);
 
         DaggerBookComponent.builder()
-                .appComponent(ReaderApplication.getsInstance().getAppComponent())
+                .appComponent(MyApplication.getsInstance().getAppComponent())
                 .build()
                 .inject(this);
 

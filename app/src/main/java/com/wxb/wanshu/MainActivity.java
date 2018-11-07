@@ -12,16 +12,22 @@ import android.widget.TextView;
 
 import com.igexin.sdk.PushManager;
 import com.umeng.analytics.MobclickAgent;
-import com.wxb.wanshu.bean.Base;
+import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookShelfStatus;
+import com.wxb.wanshu.bean.ClientData;
 import com.wxb.wanshu.ui.activity.BookshelfActivity;
 import com.wxb.wanshu.ui.activity.ClassifyActivity;
-import com.wxb.wanshu.ui.activity.HomeActivity;
 import com.wxb.wanshu.ui.activity.HomeBookActivity;
 import com.wxb.wanshu.ui.activity.MeActivity;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
+
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends ActivityGroup implements View.OnClickListener{
 
@@ -31,6 +37,8 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
     TextView txtData, txtFunc, txtArticle, txtMe;
     String TAB_DATA = "data", TAB_FUNC = "func", TAB_ARC = "article", TAB_ME = "me";
 
+    private Api api;
+    protected CompositeSubscription mCompositeSubscription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,33 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
         String clientid = PushManager.getInstance().getClientid(this);
         if("".equals(clientid)){}
 
+//        clientLaunch();
+    }
 
+    /**
+     * 上报设备数据
+     */
+    private void clientLaunch() {
+        api = MyApplication.getsInstance().getAppComponent().getReaderApi();
+        //MyApplication.getMyContext().getPackageManager().getPackageInfo(MyApplication.getMyContext().getPackageName()
+        Subscription subscribe = api.clientLaunch("",1,"","android").subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ClientData>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ClientData data) {
+                        int client_id = data.getData().getClient_id();
+                    }
+                });
+        addSubscrebe(subscribe);
     }
 
 
@@ -147,5 +181,19 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    protected void unSubscribe() {
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription.unsubscribe();
+        }
+    }
+
+    protected void addSubscrebe(Subscription subscription) {
+        if (mCompositeSubscription == null) {
+            mCompositeSubscription = new CompositeSubscription();
+        }
+        mCompositeSubscription.add(subscription);
     }
 }

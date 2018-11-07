@@ -18,7 +18,7 @@ package com.wxb.wanshu.utils;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.MyApplication;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -54,7 +54,7 @@ public class RxUtil {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 LogUtils.d("get data from disk: key==" + key);
-                String json = ACache.get(ReaderApplication.getsInstance()).getAsString(key);
+                String json = ACache.get(MyApplication.getsInstance()).getAsString(key);
                 LogUtils.d("get data from disk finish , json==" + json);
                 if (!TextUtils.isEmpty(json)) {
                     subscriber.onNext(json);
@@ -97,7 +97,7 @@ public class RxUtil {
                                                     List list = (List) field.get(data);
                                                     LogUtils.d("list==" + list);
                                                     if (list != null && !list.isEmpty()) {
-                                                        ACache.get(ReaderApplication.getsInstance())
+                                                        ACache.get(MyApplication.getsInstance())
                                                                 .put(key, new Gson().toJson(data, clazz));
                                                         LogUtils.d("cache finish");
                                                     }
@@ -128,7 +128,7 @@ public class RxUtil {
                                     @Override
                                     public void call() {
                                         LogUtils.d("get data from network finish ,start cache...");
-                                        ACache.get(ReaderApplication.getsInstance())
+                                        ACache.get(MyApplication.getsInstance())
                                                 .put(key, new Gson().toJson(data, data.getClass()));
                                         LogUtils.d("cache finish");
                                     }

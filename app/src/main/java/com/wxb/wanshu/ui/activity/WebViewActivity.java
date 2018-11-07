@@ -18,8 +18,8 @@ import butterknife.BindView;
 public class WebViewActivity extends BaseActivity {
     public static String INTENT_WEBVIEW_URL = "url";
 
-    public static void startActivity(Context context, String url) {
-        context.startActivity(new Intent(context, WebViewActivity.class).putExtra(INTENT_WEBVIEW_URL, url));
+    public static void startActivity(Context context,String title, String url) {
+        context.startActivity(new Intent(context, WebViewActivity.class).putExtra(INTENT_WEBVIEW_URL, url).putExtra("title", title));
     }
 
     @BindView(R.id.webView)
@@ -37,7 +37,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("年度VIP会员");
+        mCommonToolbar.setTitle(getIntent().getStringExtra("title"));
     }
 
     @Override

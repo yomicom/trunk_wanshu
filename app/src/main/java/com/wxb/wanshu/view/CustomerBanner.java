@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
+import com.wxb.wanshu.ui.activity.WebViewActivity;
 import com.wxb.wanshu.utils.ImageUtils;
 
 import java.util.ArrayList;
@@ -89,18 +90,23 @@ public class CustomerBanner extends FrameLayout {
             for (int i = 0; i < list.size(); i++) {
                 View item = View.inflate(mContext, R.layout.item_vp_banner, null);
                 ImageView iv = item.findViewById(R.id.iv_banner);
-                TextView tvTitle = item.findViewById(R.id.tv_banner_title);
-                TextView tvIntro = item.findViewById(R.id.tv_banner_intro);
+//                TextView tvTitle = item.findViewById(R.id.tv_banner_title);
+//                TextView tvIntro = item.findViewById(R.id.tv_banner_intro);
 
                 HomeData.DataBeanX.DataBean bean = list.get(i);
                 ImageUtils.displayImage(mContext, iv, bean.getCover(), 0, 0);
-                tvTitle.setText(bean.getName());
-                tvIntro.setText(bean.getDescription());
+//                tvTitle.setText(bean.getName());
+//                tvIntro.setText(bean.getDescription());
+                String type = bean.type;
 
                 item.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        BookDetailsActivity.startActivity(mContext, bean.getId());
+                        if ("page".equals(bean.type)) {
+                            WebViewActivity.startActivity(mContext,"",bean.url);
+                        } else {
+                            BookDetailsActivity.startActivity(mContext, bean.getId());
+                        }
                     }
                 });
 

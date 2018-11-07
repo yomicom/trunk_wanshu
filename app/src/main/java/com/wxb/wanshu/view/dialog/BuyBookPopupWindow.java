@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.UserInfo;
@@ -55,7 +55,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
 
     public BuyBookPopupWindow(Activity context, int novel_id, int chapter) {
         super(context);
-        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = MyApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
         init(context);
@@ -181,7 +181,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
              * 购买书籍
              */
             if ("确定购买".equals(btAddMoney.getText().toString())) {
-                Subscription subscribe = api.getBookDetail(novel_id).subscribeOn(Schedulers.io())
+                Subscription subscribe = api.getBookDetail(novel_id,0,0).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<BookDetails>() {
                             @Override

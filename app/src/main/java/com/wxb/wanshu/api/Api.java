@@ -25,6 +25,7 @@ import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.bean.BookRewardData;
 import com.wxb.wanshu.bean.BookselfList;
+import com.wxb.wanshu.bean.ClientData;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.bean.NotificationList;
@@ -125,8 +126,8 @@ public class Api {
         return service.getSelectBookList(sex_type, category_id, complete_status, page, kw);
     }
 
-    public Observable<BookDetails> getBookDetail(int novel_id) {
-        return service.getBookDetail(novel_id);
+    public Observable<BookDetails> getBookDetail(int novel_id,int client_id,int user_id) {
+        return service.getBookDetail(novel_id,client_id,user_id);
     }
 
     public Observable<BookList> getSearchResult(String keyword, int page) {
@@ -179,7 +180,7 @@ public class Api {
     public Observable<Base> rewardGift(String type, int number, int novel_id, String chapter_id) {
         return service.rewardGift(type, number, novel_id, chapter_id);
     }
-    public Observable<Base> clientLaunch(String device_id, int type, String version, String os) {
+    public Observable<ClientData> clientLaunch(String device_id, int type, String version, String os) {
         return service.clientLaunch(device_id, type, version, os);
     }
 

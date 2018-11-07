@@ -2,7 +2,6 @@ package com.wxb.wanshu.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,9 +12,6 @@ import android.view.animation.Transformation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
 
 /**
  * Created by qiming on 2017/11/29.

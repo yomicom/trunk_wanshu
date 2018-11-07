@@ -60,7 +60,7 @@ public class CacheManager {
      */
 //    public List<BookLists.BookListsBean> getCollectionList() {
 //        List<BookLists.BookListsBean> list = (ArrayList<BookLists.BookListsBean>) ACache.get(
-//                ReaderApplication.getsInstance()).getAsObject(getCollectionKey());
+//                MyApplication.getsInstance()).getAsObject(getCollectionKey());
 //        return list == null ? null : list;
 //    }
 //
@@ -73,7 +73,7 @@ public class CacheManager {
 //            if (bean != null) {
 //                if (TextUtils.equals(bean._id, bookListId)) {
 //                    list.remove(bean);
-//                    ACache.get(ReaderApplication.getsInstance()).put(getCollectionKey(), (Serializable) list);
+//                    ACache.get(MyApplication.getsInstance()).put(getCollectionKey(), (Serializable) list);
 //                    break;
 //                }
 //            }
@@ -94,7 +94,7 @@ public class CacheManager {
 //            }
 //        }
 //        list.add(bean);
-//        ACache.get(ReaderApplication.getsInstance()).put(getCollectionKey(), (Serializable) list);
+//        ACache.get(MyApplication.getsInstance()).put(getCollectionKey(), (Serializable) list);
 //        ToastUtils.showToast("收藏成功");
 //    }
 //

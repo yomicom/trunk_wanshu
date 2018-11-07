@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:id="@+id/ll_content"
-    android:visibility="gone"
     tools:context="com.wxb.wanshu.ui.activity.BookDetailsActivity">
 
     <include layout="@layout/common_toolbar" />
@@ -45,45 +44,29 @@
                     android:id="@+id/tv_title"
                     style="@style/text_novel_title"
                     android:layout_toRightOf="@id/iv_book"
-                    android:lines="1"
-                    android:text="" />
+                    android:lines="2"
+                    android:text=""
+                    android:textSize="@dimen/text_less_huge" />
 
                 <TextView
-                    android:id="@+id/tv_type"
+                    android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_below="@id/tv_title"
                     android:layout_marginTop="@dimen/distance_text_text_12"
                     android:layout_toRightOf="@id/iv_book"
                     android:lines="1"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/tv_status"
-                    style="@style/text_small_nomal"
-                    android:layout_below="@id/tv_title"
-                    android:layout_marginTop="@dimen/distance_text_text_12"
-                    android:layout_toRightOf="@id/tv_type"
-                    android:lines="1"
                     android:text=""
-                    android:textColor="@color/text_dashang" />
+                    android:textColor="@color/gobal_color" />
 
                 <TextView
                     android:id="@+id/tv_read"
                     style="@style/text_small_nomal"
-                    android:layout_below="@id/tv_type"
+                    android:layout_below="@id/author"
                     android:layout_marginTop="@dimen/distance_text_text_10"
                     android:layout_toRightOf="@id/iv_book"
                     android:lines="1"
                     android:text="" />
 
-                <TextView
-                    android:id="@+id/tv_free_time"
-                    style="@style/text_small_nomal"
-                    android:layout_below="@id/tv_read"
-                    android:layout_marginTop="@dimen/distance_text_text_10"
-                    android:layout_toRightOf="@id/iv_book"
-                    android:lines="1"
-                    android:text="" />
             </RelativeLayout>
 
             <LinearLayout
@@ -92,10 +75,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingBottom="4dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="3dp">
+                android:paddingLeft="@dimen/distance_left"
+                android:paddingTop="5dp">
 
                 <TextView
                     android:id="@+id/tv_account_intro"
@@ -110,28 +91,96 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
                     android:paddingTop="5dp"
+                    android:paddingRight="5dp"
                     android:src="@mipmap/icon_open_nomal"
                     android:visibility="gone" />
             </LinearLayout>
 
-            <View style="@style/line_divide" />
+            <View
+                style="@style/line_divide"
+                android:layout_marginLeft="@dimen/distance_left"
+                android:layout_marginRight="@dimen/distance_left" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/item_last_chapter"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/distance_left"
+                    android:paddingRight="@dimen/distance_left">
+
+                    <TextView
+                        android:id="@+id/last_chapter"
+                        style="@style/text_big_nomal"
+                        android:maxLines="1"
+                        android:text="最新" />
+
+                    <TextView
+                        android:id="@+id/last_chapter_time"
+                        style="@style/text_small_nomal"
+                        android:layout_below="@id/last_chapter"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="1"
+                        android:text="----" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="@dimen/line_divide"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/divider" />
+
+                <RelativeLayout
+                    android:id="@+id/book_menu"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/distance_left"
+                    android:paddingRight="@dimen/distance_left">
+
+                    <TextView
+                        android:id="@+id/menu"
+                        style="@style/text_big_nomal"
+                        android:maxLines="1"
+                        android:text="目录" />
+
+                    <TextView
+                        android:id="@+id/book_chapter_num"
+                        style="@style/text_small_nomal"
+                        android:layout_below="@id/menu"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="1"
+                        android:text="----" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_message"
-                style="@style/style_me_next"
-                android:layout_height="@dimen/next_height_45"
-                android:drawablePadding="@dimen/drawable_padding_normal"
-                android:drawableRight="@mipmap/icon_next_activity"
-                android:text="查看目录"
-                android:layout_marginBottom="@dimen/setting_cut_8" />
+                android:id="@+id/tv_tag"
+                style="@style/text_big_nomal"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:gravity="left"
+                android:layout_marginTop="@dimen/distance_view_item"
+                android:paddingLeft="@dimen/distance_left"
+                android:paddingTop="@dimen/distance_left"
+                android:paddingRight="@dimen/distance_left"
+                android:text="同类作品"
+                android:textSize="@dimen/text_huge" />
 
             <FrameLayout
                 android:id="@+id/fl_content_recommand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/setting_cut_8"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -139,7 +188,48 @@
                 android:paddingBottom="@dimen/distance_top"
                 android:visibility="visible" />
 
-            <RelativeLayout style="@style/rl_normal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_view_item"
+                android:layout_marginBottom="@dimen/distance_view_item"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/distance_left">
+
+                <TextView
+                    style="@style/text_big_nomal"
+                    android:layout_marginBottom="@dimen/distance_left"
+                    android:text="图书相关信息" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_middle_nomal"
+                        android:text="版权来源："
+                        android:textColor="@color/text_color_2" />
+
+                    <TextView
+                        style="@style/text_middle_nomal"
+                        android:text="绾书文学网"
+                        android:textColor="@color/gobal_color" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/text_middle_nomal"
+                    android:layout_marginTop="@dimen/distance_text_text_10"
+                    android:gravity="left"
+                    android:lineSpacingExtra="4dp"
+                    android:text="免责声明：本书数字版权由杭州文心网络科技有限公司提供，授权本软件使用、制作、发行。若包含不良信息，请及时告知客服。"
+                    android:textColor="@color/text_color_2" />
+            </LinearLayout>
+
+            <RelativeLayout
+                style="@style/rl_normal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_dashang"
@@ -150,8 +240,8 @@
                     android:id="@+id/tv_dashang_record"
                     style="@style/text_small_nomal"
                     android:layout_alignBottom="@id/tv_dashang"
-                    android:layout_marginBottom="4dp"
                     android:layout_marginLeft="@dimen/distance_text_text_8"
+                    android:layout_marginBottom="4dp"
                     android:layout_toRightOf="@id/tv_dashang"
                     android:text="打赏记录" />
 
@@ -161,8 +251,8 @@
                     android:layout_alignBottom="@id/tv_dashang"
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="1dp"
-                    android:text="我要打赏"
                     android:padding="5dp"
+                    android:text="我要打赏"
                     android:textColor="@color/text_dashang" />
 
                 <android.support.v7.widget.RecyclerView
@@ -176,8 +266,6 @@
 
             </RelativeLayout>
 
-            <View style="@style/line_divide" />
-
             <TextView
                 android:id="@+id/tv_load_more"
                 style="@style/text_middle_nomal"
@@ -186,7 +274,8 @@
                 android:layout_below="@id/rv_dashang"
                 android:background="@color/white"
                 android:text="加载更多"
-                android:textColor="@color/text_color_2" />
+                android:textColor="@color/text_color_2"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 
@@ -212,9 +301,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/gobal_color"
             android:text="开始阅读"
-            android:textColor="@color/white" />
+            android:textColor="@color/gobal_color" />
     </LinearLayout>
 
 </LinearLayout>

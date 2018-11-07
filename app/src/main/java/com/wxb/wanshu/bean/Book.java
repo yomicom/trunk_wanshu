@@ -15,20 +15,22 @@ public class Book implements Serializable {
      * is_complete : false
      */
 
-    private int id;
-    private String name;
-    private String cover;
-    private String description;
-    private int word_num;
-    private String author;
-    private String category_name;
-    private boolean is_complete;
+    public String id;
+    public String name;
+    public String cover;
+    public String description;
+    public int word_num;
+    public String author;
+    public String type;
+    public String url;
+    public String category_name;
+    public boolean is_complete;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

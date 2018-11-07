@@ -5,11 +5,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,13 +17,10 @@ import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrInterface;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
-import com.wxb.wanshu.manager.SettingManager;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
-import com.wxb.wanshu.utils.StatusBarCompat;
 import com.wxb.wanshu.view.loadding.CustomDialog;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -58,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         transparent19and20();
         mContext = this;
         ButterKnife.bind(this);
-        setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
+        setupActivityComponent(MyApplication.getsInstance().getAppComponent());
         mCommonToolbar = findViewById(R.id.common_toolbar);
         if (mCommonToolbar != null) {
             //设置默认Toolbar样式

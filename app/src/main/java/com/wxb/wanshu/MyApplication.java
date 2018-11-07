@@ -21,16 +21,16 @@ import com.wxb.wanshu.utils.SharedPreferencesUtil;
  * Created by qiming on 2017/11/23.
  */
 
-public class ReaderApplication extends Application {
+public class MyApplication extends Application {
 
 
-    private static ReaderApplication sInstance;
+    private static MyApplication sInstance;
     private AppComponent appComponent;
 
 //    private RefWatcher refWatcher;
 //
 //    public static RefWatcher getRefWatcher(Context context) {
-//        ReaderApplication application = (ReaderApplication) context.getApplicationContext();
+//        MyApplication application = (MyApplication) context.getApplicationContext();
 //        return application.refWatcher;
 //    }
 
@@ -58,7 +58,7 @@ public class ReaderApplication extends Application {
         MobclickAgent.setCatchUncaughtExceptions(true);
     }
 
-    public static ReaderApplication getsInstance() {
+    public static MyApplication getsInstance() {
         return sInstance;
     }
 

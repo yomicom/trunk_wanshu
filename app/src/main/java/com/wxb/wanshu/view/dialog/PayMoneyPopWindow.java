@@ -26,8 +26,8 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.utils.OrderInfoUtil;
@@ -68,7 +68,7 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
 
     public PayMoneyPopWindow(Activity context) {
         super(context);
-        api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        api = MyApplication.getsInstance().getAppComponent().getReaderApi();
         mContext = context;
 
         init(context);

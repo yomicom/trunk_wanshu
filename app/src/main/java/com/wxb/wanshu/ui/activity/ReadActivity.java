@@ -189,7 +189,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         super.onCreate(savedInstanceState);
     }
     //添加收藏需要，所以跳转的时候传递整个实体类
-    public static void startActivity(Context context, int bookId) {
+    public static void startActivity(Context context, String bookId) {
         startActivity(context, bookId, false);
     }
 
@@ -200,7 +200,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 .putExtra(INTENT_MENU, isFromMenu));
     }
 
-    public static void startActivity(Context context, int bookId, boolean isFromSD) {
+    public static void startActivity(Context context, String bookId, boolean isFromSD) {
         context.startActivity(new Intent(context, ReadActivity.class)
                 .putExtra(INTENT_BEAN, bookId)
                 .putExtra(INTENT_SD, isFromSD));
@@ -795,7 +795,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             shareBookDialog.dismiss();
         }
         // 观察内存泄漏情况
-//        ReaderApplication.getRefWatcher(this).watch(this);
+//        MyApplication.getRefWatcher(this).watch(this);
     }
 
     private class ReadListener implements OnReadStateChangeListener {

@@ -1,6 +1,5 @@
 package com.wxb.wanshu.utils;
 
-import android.accounts.Account;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -20,8 +19,8 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
 
 /**
  * Created by qiming on 2017/11/22.
@@ -34,7 +33,7 @@ public class ImageUtils {
     private static ImageLoader imageLoader;
 
     static {
-        mContext = ReaderApplication.getsInstance();
+        mContext = MyApplication.getsInstance();
         initImageLoader();
     }
 
@@ -58,7 +57,7 @@ public class ImageUtils {
     public static void showCircleImage(Context context, String url, ImageView imageView) {
         if (context != null) {
             RequestOptions placeholder = new RequestOptions().placeholder(R.mipmap.ic_launcher).transform(new CircleCrop());
-            Glide.with(ReaderApplication.getsInstance()).load(url).apply(placeholder).into(imageView);
+            Glide.with(MyApplication.getsInstance()).load(url).apply(placeholder).into(imageView);
         }
     }
 

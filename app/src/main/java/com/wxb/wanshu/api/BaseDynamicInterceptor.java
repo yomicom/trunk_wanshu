@@ -37,8 +37,18 @@ public abstract class BaseDynamicInterceptor<R extends BaseDynamicInterceptor> i
     private boolean isSign = true;    //是否需要签名
     private boolean timeStamp = true;    //是否需要追加时间戳
     private boolean accessToken = true;    //是否需要添加token
+    private boolean client_id = false;    //是否需要添加token
 
     public BaseDynamicInterceptor() {
+    }
+
+    public boolean isClientID() {
+        return client_id;
+    }
+
+    public R client_id(boolean client_id) {
+        client_id = client_id;
+        return (R) this;
     }
 
     public boolean isSign() {

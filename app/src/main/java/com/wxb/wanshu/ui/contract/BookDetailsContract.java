@@ -11,27 +11,27 @@ import com.wxb.wanshu.bean.RewardType;
  */
 
 public interface BookDetailsContract {
-     interface View extends BaseContract.BaseView{
-         void showBookDetails(BookDetails.DataBean data);
+    interface View extends BaseContract.BaseView {
+        void showBookDetails(BookDetails.DataBean data);
 
-         void showBookReward(BookRewardData data);
+        void showBookReward(BookRewardData data);
 
-         void showRewardType(RewardType data);
+        void showRewardType(RewardType data);
 
-         void addBookResult(Base result);
+        void addBookResult(Base result);
 
 //         void getRewardGiftResult(Base result);
-     }
+    }
 
-     interface Presenter<T> extends BaseContract.BasePresenter<T>{
-         void getBookDetails(int novel_id);
+    interface Presenter<T> extends BaseContract.BasePresenter<T> {
+        void getBookDetails(int novel_id, int client_id, int user_id);
 
-         void getBookReward(int novel_id,int page);
+        void getBookReward(int novel_id, int page);
 
-         void getRewardType();
+        void getRewardType();
 
-         void addBookShelf(int novel_id);
+        void addBookShelf(int novel_id);
 
 //         void rewardGift(String type, int number, int novel_id, String chapter_id);
-     }
+    }
 }

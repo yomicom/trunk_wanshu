@@ -17,7 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.wxb.wanshu.R;
-import com.wxb.wanshu.ReaderApplication;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.RewardType;
@@ -66,7 +66,7 @@ public class RewardGiftDialog implements View.OnClickListener {
         RewardType.DataBean type0 = rewardType.data.get(0);
         tvNeedPay.setText(type0.getAmount() + "书币");
 
-        Api api = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
+        Api api = MyApplication.getsInstance().getAppComponent().getReaderApi();
         Subscription subscribe = api.getUserInfo().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserInfo>() {
