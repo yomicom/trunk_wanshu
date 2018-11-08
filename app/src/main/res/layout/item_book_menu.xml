@@ -7,6 +7,7 @@
 
     <RelativeLayout
         style="@style/ll_horizontal_normal"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
@@ -14,6 +15,13 @@
             style="@style/text_middle_nomal"
             android:lines="1"
             android:text="11"
+            android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/tv_chapter_time"
+            style="@style/text_small_nomal"
+            android:text="11"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/tv_chapter_title"
             android:layout_centerVertical="true" />
 
         <TextView

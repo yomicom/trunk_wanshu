@@ -61,7 +61,7 @@ public class BookDetails extends Base {
         public String category_id;
         public String sex_type;
         public String word_num;
-        public String sort;
+        public int sort;
         public String chapter_num;
         public String free_chapter_num;
         public String create_time;
@@ -70,6 +70,7 @@ public class BookDetails extends Base {
         public String view_count;
         public String is_onsale;
         public String category_name;
+        public boolean on_shelf;
         public FirstChapterBean first_chapter;
         public LatestChapterBean latest_chapter;
         public List<RecommendBean> recommend;
@@ -162,11 +163,11 @@ public class BookDetails extends Base {
             this.word_num = word_num;
         }
 
-        public String getSort() {
+        public int getSort() {
             return sort;
         }
 
-        public void setSort(String sort) {
+        public void setSort(int sort) {
             this.sort = sort;
         }
 
@@ -258,7 +259,7 @@ public class BookDetails extends Base {
             this.recommend = recommend;
         }
 
-        public static class FirstChapterBean {
+        public static class FirstChapterBean implements Serializable{
             /**
              * id : 1
              * name : 第1章 三不画
@@ -267,6 +268,7 @@ public class BookDetails extends Base {
 
             public String id;
             public String name;
+            public int sort;
             public String publish_time;
 
             public String getId() {
@@ -294,7 +296,7 @@ public class BookDetails extends Base {
             }
         }
 
-        public static class LatestChapterBean {
+        public static class LatestChapterBean implements Serializable{
             /**
              * id : 3
              * name : 第3章 魂再现
@@ -303,6 +305,7 @@ public class BookDetails extends Base {
 
             public String id;
             public String name;
+            public int sort;
             public String publish_time;
 
             public String getId() {

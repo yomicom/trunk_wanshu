@@ -18,7 +18,7 @@ public interface BookselfContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getData(int page,int pageSize);
+        void getData();
 
         void delBooks(String novel_ids);
     }

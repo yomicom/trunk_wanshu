@@ -1,6 +1,5 @@
 package com.wxb.wanshu.ui.activity;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -52,15 +50,12 @@ import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.ScreenUtils;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.ToastUtils;
-import com.wxb.wanshu.view.dialog.BuyBookPopupWindow;
+import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
-import com.wxb.wanshu.view.dialog.RewardGiftDialog;
 import com.wxb.wanshu.view.dialog.ShareBookDialog;
 import com.wxb.wanshu.view.readview.BaseReadView;
-import com.wxb.wanshu.view.readview.NoAimWidget;
 import com.wxb.wanshu.view.readview.OnReadStateChangeListener;
 import com.wxb.wanshu.view.readview.OverlappedWidget;
-import com.wxb.wanshu.view.readview.PageWidget;
 
 import org.simple.eventbus.EventBus;
 
@@ -75,7 +70,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.wxb.wanshu.R.id.tv_fontSize;
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTER;
 
 /**
@@ -103,7 +97,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     //    @BindView(R.id.tvBookReadDownload)
 //    TextView mTvBookReadDownload;
     @BindView(R.id.llBookReadBottom)
-    LinearLayout mLlBookReadBottom;
+    LinearLayout llBookReadBottom;
     @BindView(R.id.rlBookReadRoot)
     RelativeLayout mRlBookReadRoot;
     @BindView(R.id.tvDownloadProgress)
@@ -119,8 +113,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     ImageView ivBrightnessPlus;
     @BindView(R.id.tvFontsizeMinus)
     ImageView tvFontsizeMinus;
-    @BindView(tv_fontSize)
+    @BindView(R.id.tv_fontSize)
     TextView tvFontSize;
+    @BindView(R.id.seekbarFontSize)
+    SeekBar seekbarFontSize;
     @BindView(R.id.tvFontsizePlus)
     ImageView tvFontsizePlus;
 
@@ -137,14 +133,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     CheckBox cbAutoBrightness;
     @BindView(R.id.gvTheme)
     GridView gvTheme;
-    @BindView(R.id.tv_book_menu)
-    ImageView tvBookMenu;
+    @BindView(R.id.iv_book_mode)
+    ImageView ivBookMode;
     @BindView(R.id.tv_book_mode)
-    ImageView tvBookMode;
-    @BindView(R.id.tv_book_setting)
-    ImageView tvBookSetting;
-    @BindView(R.id.tv_book_share)
-    ImageView tvBookShare;
+    TextView tvBookMode;
+    @BindView(R.id.seekbarChapter)
+    SeekBar seekbarChapter;
+    @BindView(R.id.item_chapter)
+    LinearLayout itemChapter;
 
     private View decodeView;
 
@@ -175,15 +171,17 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private boolean isAutoLightness = false; // 记录其他页面是否自动调整亮度
     private boolean isFromSD = false;
-//    private BuyBookPopupWindow buyBookPopupWindow;
+    //    private BuyBookPopupWindow buyBookPopupWindow;
     private boolean isFromMenu = false;
     private ShareBookDialog shareBookDialog;
+    private int chapter_num = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setCanSlide(false);
         super.onCreate(savedInstanceState);
     }
+
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, String bookId) {
         startActivity(context, bookId, false);
@@ -287,7 +285,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             mChapterList.add(chapters);
             showChapterRead(null);
             //本地书籍隐藏社区、简介、缓存按钮
-            gone( tvAddBook);
+            gone(tvAddBook);
             return;
         }
         mPresenter.getBookMixAToc(novel_id);
@@ -329,6 +327,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         seekbarLightness.setProgress(ScreenUtils.getScreenBrightness());
         isAutoLightness = ScreenUtils.isAutoBrightness(this);
 
+        seekbarChapter.setOnSeekBarChangeListener(new SeekBarChangeListener());
 
         this.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS), true, Brightness);
 
@@ -355,16 +354,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     private void initPagerWidget() {
-        switch (SharedPreferencesUtil.getInstance().getInt(Constant.FLIP_STYLE, 0)) {
-            case 0:
-                mPageWidget = new PageWidget(this, novel_id + "", mChapterList, new ReadListener());
-                break;
-            case 1:
-                mPageWidget = new OverlappedWidget(this, novel_id + "", mChapterList, new ReadListener());
-                break;
-            case 2:
-                mPageWidget = new NoAimWidget(this, novel_id + "", mChapterList, new ReadListener());
-        }
+//        switch (SharedPreferencesUtil.getInstance().getInt(Constant.FLIP_STYLE, 0)) {
+//            case 0:
+//                mPageWidget = new PageWidget(this, novel_id + "", mChapterList, new ReadListener());
+//                break;
+//            case 1:
+        mPageWidget = new OverlappedWidget(this, novel_id + "", mChapterList, new ReadListener());
+//                break;
+//            case 2:
+//                mPageWidget = new NoAimWidget(this, novel_id + "", mChapterList, new ReadListener());
+//        }
 
         registerReceiver(receiver, intentFilter);
         if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
@@ -378,31 +377,60 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     /**
      * 加载章节列表
      *
-     * @param list
+     * @param dataBean
      */
     @Override
-    public void showBookToc(List<BookMenu.DataBean.ChaptersBean> list) {
+    public void showBookToc(BookMenu.DataBean dataBean) {
+        List<BookMenu.DataBean.ChaptersBean> list = dataBean.getChapters();
         mChapterList.clear();
         mChapterList.addAll(list);
 
-        readCurrentChapter();
+        //总章节数
+        chapter_num = dataBean.novel.chapter_num;
+        seekbarChapter.setMax(chapter_num);
+        readCurrentChapter(currentChapter);
+    }
+
+    /**
+     * 读书并设置章节进度
+     *
+     * @param chapter
+     */
+    private void setChapterProgress(int chapter) {
+        seekbarChapter.setProgress(chapter);
+        currentChapter = chapter;
     }
 
     /**
      * 获取当前章节。章节文件存在则直接阅读，不存在则请求
      */
-    public void readCurrentChapter() {
-        if (CacheManager.getInstance().getChapterFile(novel_id + "", currentChapter) != null) {
+    public void readCurrentChapter(int chapter) {
+        if (CacheManager.getInstance().getChapterFile(novel_id, chapter) != null) {
             showChapterRead(null);
         } else {
-            mPresenter.getChapterRead(novel_id, currentChapter,0);
+            showDialog();
+            mPresenter.getChapterRead(novel_id, chapter, 0);
         }
     }
 
     @Override
     public synchronized void showChapterRead(ChapterRead.DataBean data) { // 加载章节内容
         if (data != null) {
-            CacheManager.getInstance().saveChapterFile(novel_id + "", currentChapter, data);
+            switch (data.code) {
+                case 410://小说已下架
+                    finish();
+                    break;
+                case 420://小说未完待续
+                    finish();
+                    break;
+                case 430://小说完结
+                    finish();
+                    break;
+                case 0:
+                    CacheManager.getInstance().saveChapterFile(novel_id + "", currentChapter, data);
+                    isCollected = data.on_shelf;
+                    break;
+            }
         }
 
         if (!startRead) {
@@ -425,15 +453,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void netError(int chapter) {
         hideDialog();//防止因为网络问题而出现dialog不消失
         if (Math.abs(chapter - currentChapter) <= 1) {
-            ToastUtils.showToast(R.string.net_error);
+            ToastUtils.showToast(R.string.last_chapter);
         }
     }
 
     @Override
     public void showRewardType(RewardType data) {
         if (data != null) {
-            hideDialog();
-            RewardGiftDialog.shareView(this, R.id.rlBookReadRoot, data, "", novel_id);
+//            hideDialog();
+//            RewardGiftDialog.shareView(this, R.id.rlBookReadRoot, data, "", novel_id);
         }
     }
 
@@ -441,9 +469,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void addBookResult(Base result) {
         if (result.getErrcode() == 0) {
             ToastUtils.showLongToast("添加书架成功");
-//            tvAddBook.setText("已加入书架");
-//            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-//            bookDetails.setIs_collect(1);
+            tvAddBook.setText("已加入书架");
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+            isCollected = true;
         }
     }
 
@@ -458,13 +486,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     private synchronized void hideReadBar() {
-        gone(mTvDownloadProgress, mLlBookReadBottom, mLlBookReadTop, rlReadAaSet, rlReadMark);
+        gone(mTvDownloadProgress, llBookReadBottom, mLlBookReadTop, rlReadAaSet, rlReadMark, itemChapter);
         hideStatusBar();
         decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
     }
 
     private synchronized void showReadBar() { // 显示工具栏
-        visible(mLlBookReadBottom, mLlBookReadTop);
+        visible(llBookReadBottom, mLlBookReadTop, itemChapter);
         showStatusBar();
         decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
@@ -500,6 +528,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.tvBookReadIntroduce)
     public void addBook() {
         gone(rlReadAaSet, rlReadMark);
+        visible(itemChapter);
         mPresenter.addBookShelf(novel_id);
     }
 
@@ -515,9 +544,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     /***************Bottom Bar*****************/
 
-    @OnClick(R.id.tv_book_mode)
+    @OnClick(R.id.item_book_mode)
     public void onClickChangeMode() { // 日/夜间模式切换
         gone(rlReadAaSet, rlReadMark);
+        visible(itemChapter);
 
         boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
         changedMode(isNight, -1);
@@ -537,27 +567,32 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         gvAdapter.select(curTheme);
 
         mPageWidget.setTheme(isNight ? ThemeManager.NIGHT : curTheme);
+
         if (!isNight) {
             mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[curTheme]),
                     ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[curTheme]));
-            tvBookMode.setImageResource(R.mipmap.ic_menu_mode_night_normal);
+            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_night_normal);
+            tvBookMode.setText("夜间");
         } else {
-            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[6]),
-                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[6]));
-            tvBookMode.setImageResource(R.mipmap.ic_menu_mode_day_manual);
+            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]),
+                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]));
+            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_day_manual);
+            tvBookMode.setText("日间");
         }
 
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
     }
 
-    @OnClick(R.id.tv_book_setting)//设置
+    @OnClick(R.id.item_book_setting)//设置
     public void setting() {
-        if (isVisible(mLlBookReadBottom)) {
+        if (isVisible(llBookReadBottom)) {
             if (isVisible(rlReadAaSet)) {
                 gone(rlReadAaSet);
+                visible(itemChapter);
             } else {
                 visible(rlReadAaSet);
                 gone(rlReadMark);
+                gone(itemChapter);
             }
         }
     }
@@ -595,9 +630,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         shareBookDialog.show();
     }
 
-    @OnClick(R.id.tv_book_menu)//目录
+    @OnClick(R.id.item_book_menu)//目录
     public void onClickToc() {
         gone(rlReadAaSet, rlReadMark);
+        visible(itemChapter);
         visible(mTvBookReadTocTitle);
         MenuActivity.startActivityFor(this, novel_id, currentChapter, true);
     }
@@ -639,14 +675,35 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         SettingManager.getInstance().clearBookMarks(novel_id + "");
     }
 
+
+    /***************Chapter*****************/
+    @OnClick(R.id.pre_chapter)//查看上一章
+    public void preChapter() {
+        if (currentChapter > 1) {
+            currentChapter = currentChapter - 1;
+            startRead = false;
+            readCurrentChapter(currentChapter);
+        } else {
+            ToastUtils.showToast("已经是第一章了");
+        }
+    }
+
+    @OnClick(R.id.next_chapter)//查看下一章
+    public void nextChapter() {
+//        if (currentChapter > 1) {
+        currentChapter = currentChapter + 1;
+        startRead = false;
+        readCurrentChapter(currentChapter);
+//        } else {
+//            ToastUtils.showToast("已经是第一章了");
+//        }
+    }
+
     /***************Book Mark*****************/
-
-    /***************Event*****************/
-
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //    public void showDownProgress(DownloadProgress progress) {
 //        if (novel_id.equals(progress.novel_id)) {
-//            if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
+//            if (isVisible(llBookReadBottom)) { // 如果工具栏显示，则进度条也显示
 //                visible(mTvDownloadProgress);
 //                // 如果之前缓存过，就给提示
 //                mTvDownloadProgress.setText(progress.message);
@@ -658,7 +715,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //    public void downloadMessage(final DownloadMessage msg) {
-//        if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
+//        if (isVisible(llBookReadBottom)) { // 如果工具栏显示，则进度条也显示
 //            if (novel_id.equals(msg.novel_id)) {
 //                visible(mTvDownloadProgress);
 //                mTvDownloadProgress.setText(msg.message);
@@ -681,7 +738,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         ConfirmDialog.showNotice(mContext, "提示", "确认将此书加入书架？", "确定", "取消", new ConfirmDialog.SureCallback() {
             @Override
             public void exec() throws Exception {
-
+                mPresenter.addBookShelf(novel_id);
             }
         }, new ConfirmDialog.CancleCallback() {
             @Override
@@ -703,8 +760,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 case 100:
                     currentChapter = data.getIntExtra("chapter", 1);
                     startRead = false;
-                    showDialog();
-                    readCurrentChapter();
+                    readCurrentChapter(currentChapter);
                     hideReadBar();
                     break;
                 default:
@@ -719,8 +775,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             case KeyEvent.KEYCODE_BACK:
                 if (isVisible(rlReadAaSet)) {
                     gone(rlReadAaSet);
+                    visible(itemChapter);
                     return true;
-                } else if (isVisible(mLlBookReadBottom)) {
+                } else if (isVisible(llBookReadBottom)) {
                     hideReadBar();
                     return true;
                 } else if (!isCollected) {//若未包含在书架中
@@ -798,13 +855,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onChapterChanged(int chapter) {
             LogUtils.i("onChapterChanged:" + chapter);
+
+            setChapterProgress(currentChapter);
             currentChapter = chapter;
 //            mTocListAdapter.setCurrentChapter(currentChapter);
             // 加载前一节 与 后三节
             for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(novel_id + "", i) == null) {
-                    mPresenter.getChapterRead(novel_id, i,0);
+                    mPresenter.getChapterRead(novel_id, i, 0);
                 }
             }
         }
@@ -846,6 +905,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     && !SettingManager.getInstance().isAutoBrightness()) { // 非自动调节模式下 才可调整屏幕亮度
                 ScreenUtils.saveScreenBrightnessInt100(progress, ReadActivity.this);
                 //SettingManager.getInstance().saveReadBrightness(progress);
+            } else if (seekBar.getId() == seekbarChapter.getId() && fromUser) {
+                readCurrentChapter(progress);
             }
         }
 
@@ -877,6 +938,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
     }
 
+    /**
+     * 实时更新电池余量和系统时间
+     */
     class Receiver extends BroadcastReceiver {
 
         @Override
@@ -908,9 +972,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private void calcFontSize(int fontSize) {
         // progress range 1 - 10
+        int progress = 1;
         if (fontSize >= 20 && fontSize <= 60) {
-//            seekbarFontSize.setProgress(progress);
-//            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
+            seekbarFontSize.setProgress(progress);
+            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
             mPageWidget.setFontSize(fontSize);
             tvFontSize.setText(fontSize + "");
         }

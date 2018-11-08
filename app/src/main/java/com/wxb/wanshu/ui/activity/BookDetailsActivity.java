@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.bean.Base;
@@ -26,6 +27,7 @@ import com.wxb.wanshu.bean.SimpleEventBus;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
+import com.wxb.wanshu.ui.activity.ListActivity.MenuActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookRewardAdapter;
 import com.wxb.wanshu.ui.contract.BookDetailsContract;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
@@ -120,7 +122,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerBookComponent.builder().appComponent(appComponent).build().inject(this);
+        DaggerBookComponent.builder().appComponent(MyApplication.getsInstance().getAppComponent()).build().inject(this);
     }
 
     @Override
@@ -179,7 +181,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         tvTitle.setText(data.getName());
         author.setText(data.getAuthor());
         tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + data.getWord_num() + "字");
-        if (bookDetails.getIs_onsale().equals(1)) {
+        if (bookDetails.on_shelf) {
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
         } else {
@@ -187,8 +189,8 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
         }
 
-        lastChapter.setText("最新："+data.getLatest_chapter().name);
-        lastChapterTime.setText("更新时间："+data.latest_chapter.publish_time);
+        lastChapter.setText("最新：" + data.getLatest_chapter().name);
+        lastChapterTime.setText("更新时间：" + data.latest_chapter.publish_time);
         bookChapterNum.setText("共" + data.getChapter_num() + "章");
         ViewToolUtils.setShowMoreContent(4, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
@@ -236,7 +238,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             ToastUtils.showLongToast("添加书架成功");
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-//            bookDetails.(1);
+            bookDetails.on_shelf = true;
         }
     }
 
@@ -252,18 +254,20 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 mPresenter.getBookReward(novel_id, rewardPage);
                 break;
             case R.id.tv_add_book:
-//                if (bookDetails.getis() == 0) {
-//                    mPresenter.addBookShelf(novel_id);
-//                }
+                if (!bookDetails.on_shelf) {
+                    mPresenter.addBookShelf(novel_id);
+                }else {
+
+                }
                 break;
             case R.id.tv_read_book:
                 ReadActivity.startActivity(this, bookDetails.getId());
                 break;
             case R.id.book_menu:
-//                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
+                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
             case R.id.item_last_chapter:
-//                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
+                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, false);
                 break;
         }
     }

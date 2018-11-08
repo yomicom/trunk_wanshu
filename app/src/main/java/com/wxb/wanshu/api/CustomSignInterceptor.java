@@ -43,6 +43,11 @@ import okhttp3.Response;
 public final class CustomSignInterceptor extends BaseDynamicInterceptor<CustomSignInterceptor> {
 
     @Override
+    public Response intercept(Chain chain) throws IOException {
+        return super.intercept(chain);
+    }
+
+    @Override
     public TreeMap<String, String> dynamic(TreeMap<String, String> dynamicMap) {
         //dynamicMap:是原有的全局参数+局部参数
         dynamicMap.put("app_id", Constant.APP_ID);

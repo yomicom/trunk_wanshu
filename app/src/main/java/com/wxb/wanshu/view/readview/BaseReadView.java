@@ -19,13 +19,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.manager.SettingManager;
 import com.wxb.wanshu.manager.ThemeManager;
+import com.wxb.wanshu.utils.AppUtils;
 import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.ScreenUtils;
 import com.wxb.wanshu.utils.ToastUtils;
@@ -64,8 +67,8 @@ public abstract class BaseReadView extends View {
         mScreenWidth = ScreenUtils.getScreenWidth();
         mScreenHeight = ScreenUtils.getScreenHeight();
 
-        mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
-        mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
+        mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
+        mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
         mCurrentPageCanvas = new Canvas(mCurPageBitmap);
         mNextPageCanvas = new Canvas(mNextPageBitmap);
 
@@ -79,7 +82,8 @@ public abstract class BaseReadView extends View {
     public synchronized void init(int theme) {
         if (!isPrepared) {
             try {
-                pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
+//                pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
+                pagefactory.setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), ThemeManager.getThemeColor(theme)));
                 // 自动跳转到上次阅读位置
                 int pos[] = SettingManager.getInstance().getReadProgress(bookId);
                 int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
@@ -100,7 +104,8 @@ public abstract class BaseReadView extends View {
     public void jumpInitChapter(int theme, int chapter) {
         if (!isPrepared) {
             try {
-                pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
+//                pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
+                pagefactory.setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), ThemeManager.getThemeColor(theme)));
                 // 自动跳转到上次阅读位置
                 int pos[] = SettingManager.getInstance().getReadProgress(bookId);
                 int ret = pagefactory.openBook(chapter, new int[]{0, 0});

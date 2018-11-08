@@ -26,10 +26,12 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Region;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.manager.SettingManager;
 import com.wxb.wanshu.manager.ThemeManager;
+import com.wxb.wanshu.utils.AppUtils;
 
 import java.util.List;
 
@@ -509,9 +511,11 @@ public class PageWidget extends BaseReadView {
     public synchronized void setTheme(int theme) {
         resetTouchPoint();
         calcCornerXY(mTouch.x, mTouch.y);
-        Bitmap bg = ThemeManager.getThemeDrawable(theme);
-        if (bg != null) {
-            pagefactory.setBgBitmap(bg);
+//        Bitmap bg = ThemeManager.getThemeDrawable(theme);
+        int color = ContextCompat.getColor(AppUtils.getAppContext(), ThemeManager.getThemeColor(theme));
+        if (color != 0) {
+//            pagefactory.setBgBitmap(bg);
+            pagefactory.setBgColor(color);
             pagefactory.convertBetteryBitmap();
             if (isPrepared) {
                 pagefactory.onDraw(mCurrentPageCanvas);
@@ -519,7 +523,7 @@ public class PageWidget extends BaseReadView {
                 postInvalidate();
             }
         }
-        if (theme < 5) {
+        if (theme < ThemeManager.THEME_CONTENT_COLOR.length) {
             SettingManager.getInstance().saveReadTheme(theme);
         }
     }

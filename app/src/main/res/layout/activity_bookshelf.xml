@@ -12,53 +12,32 @@
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_title_height"
-        android:background="@color/main_title_color">
+        android:background="@color/main_title_color"
+        android:paddingLeft="@dimen/distance_top"
+        android:paddingRight="@dimen/distance_top">
 
+        <TextView
+            android:id="@+id/finish"
+            style="@style/text_big_nomal"
+            android:text="完成"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_color_2"
+            android:textSize="@dimen/text_middle" />
         <TextView
             style="@style/text_big_nomal"
             android:layout_centerInParent="true"
             android:text="书架"
             android:textSize="@dimen/text_huge" />
-
-        <ImageView
-            android:id="@+id/iv_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/manage"
+            style="@style/text_big_nomal"
+            android:layout_centerVertical="true"
+            android:text="管理"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/setting_right"
-            android:src="@mipmap/ic_search_book" />
-    </RelativeLayout>
+            android:textColor="@color/text_color_2"
+            android:textSize="@dimen/text_middle" />
 
-    <RelativeLayout
-        android:id="@+id/ll_edit"
-        style="@style/ll_horizontal_normal"
-        android:visibility="gone"
-        android:background="@color/main_title_color">
-
-        <TextView
-            android:id="@+id/tv_select_all"
-            style="@style/text_big_nomal"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:paddingRight="@dimen/distance_text_text_10"
-            android:text="全选" />
-        <TextView
-            android:id="@+id/tv_selected_books"
-            style="@style/text_big_nomal"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerInParent="true"
-            android:text="已选择" />
-
-        <TextView
-            android:id="@+id/tv_finish"
-            style="@style/text_big_nomal"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="@dimen/distance_text_text_10"
-            android:text="完成" />
     </RelativeLayout>
 
     <View style="@style/line_divide" />

@@ -45,7 +45,7 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
 
     @Override
     public void convert(EasyLVHolder holder, int position, BookMenu.DataBean.ChaptersBean data) {
-        holder.setText(R.id.tv_chapter_title, data.name);
+        holder.setText(R.id.tv_chapter_title, data.name).setText(R.id.tv_chapter_time, data.publish_time);
 
         //付费维度各状态优先级：免费＞会员免费＞已购买＞限时免费＞未购买（含单章购买/整本购买标识）
 //        if (data.is_free == 1) {//免费
@@ -63,9 +63,9 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
 //        }
 
         //若该章节已缓存，则高亮显示
-        if (CacheManager.getInstance().getChapterFile(novel_id , data.sort) != null) {
+        if (CacheManager.getInstance().getChapterFile(novel_id, data.sort) != null) {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_1);
-        }else {
+        } else {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_2);
         }
 

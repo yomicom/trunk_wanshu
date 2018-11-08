@@ -2,22 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlReadAaSet"
     android:layout_width="match_parent"
-    android:layout_height="190dp"
+    android:layout_height="132dp"
     android:layout_above="@+id/llBookReadBottom"
     android:background="@color/reader_menu_bg_color"
     android:clickable="true"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="gone"
+    android:paddingTop="@dimen/distance_text_text_10">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/distance_top_20"
-        android:layout_marginBottom="@dimen/distance_top_20"
+        android:layout_marginBottom="@dimen/setting_cut_10"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/ivBrightnessMinus"
@@ -55,27 +56,30 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
         <ImageView
             android:id="@+id/tvFontsizeMinus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_size_minus" />
 
-        <!--<SeekBar-->
-        <!--android:id="@+id/seekbarFontSize"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:max="100"-->
-        <!--android:maxHeight="3dp"-->
-        <!--android:minHeight="3dp"-->
-        <!--android:progressDrawable="@drawable/seekbar_bg"-->
-        <!--android:thumb="@drawable/seekbar_thumb"-->
-        <!--android:thumbOffset="10dp" />-->
+        <SeekBar
+            android:id="@+id/seekbarFontSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="3dp"
+            android:minHeight="3dp"
+            android:progressDrawable="@drawable/seekbar_bg"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="10dp"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/tv_fontSize"
             style="@style/text_big_nomal"
@@ -83,7 +87,8 @@
             android:layout_weight="1"
             android:text="18"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_less_huge" />
+            android:textSize="@dimen/text_less_huge"
+            android:visibility="visible"/>
 
         <ImageView
             android:id="@+id/tvFontsizePlus"
@@ -122,14 +127,13 @@
 
     <GridView
         android:id="@+id/gvTheme"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/distance_left"
-        android:layout_marginRight="@dimen/distance_left"
-        android:layout_marginTop="@dimen/distance_top_20"
-        android:listSelector="@android:color/transparent"
-        android:numColumns="6"
+        android:layout_marginTop="@dimen/distance_text_text_12"
         android:columnWidth="32dp"
-        android:stretchMode="spacingWidth"
-        android:scrollbars="none" />
+        android:layout_gravity="center_horizontal"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:stretchMode="spacingWidth" />
 </LinearLayout>

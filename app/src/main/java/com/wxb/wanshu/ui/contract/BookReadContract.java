@@ -15,7 +15,7 @@ import java.util.List;
 public interface BookReadContract {
 
     interface View extends BaseContract.BaseView {
-        void showBookToc(List<BookMenu.DataBean.ChaptersBean> list);
+        void showBookToc(BookMenu.DataBean list);
 
         void showChapterRead(ChapterRead.DataBean data);
 

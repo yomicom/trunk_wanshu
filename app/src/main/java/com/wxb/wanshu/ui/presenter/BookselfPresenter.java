@@ -26,8 +26,8 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
     }
 
     @Override
-    public void getData(int page,int pageSize) {
-        Subscription rxSubscription = api.getBookshelfList(page,pageSize).subscribeOn(Schedulers.io())
+    public void getData() {
+        Subscription rxSubscription = api.getBookshelfList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookselfList>() {
                     @Override

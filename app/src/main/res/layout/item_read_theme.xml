@@ -14,8 +14,8 @@
   ~ limitations under the License.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
+    android:layout_width="23dp"
+    android:layout_height="23dp"
     android:orientation="vertical">
 
         <ImageView
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/ic_theme_selected"
+            android:background="@mipmap/ic_theme_selected"
             android:visibility="gone" />
 
 </RelativeLayout>

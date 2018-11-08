@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/common_bg"
     tools:context="com.wxb.wanshu.ui.activity.ListActivity.MenuActivity">
 
     <include layout="@layout/common_toolbar" />

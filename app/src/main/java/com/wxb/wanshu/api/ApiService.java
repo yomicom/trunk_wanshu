@@ -39,6 +39,8 @@ import com.wxb.wanshu.bean.UserOrder;
 import com.wxb.wanshu.bean.UploadPictureBean;
 
 import okhttp3.MultipartBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -176,7 +178,8 @@ public interface ApiService {
 
     /**
      * 完本频道-更多列表
-     * @param sort 排序方式
+     *
+     * @param sort   排序方式
      * @param status 完结状态
      * @param page
      * @return
@@ -200,7 +203,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/detail")
-    Observable<BookDetails> getBookDetail(@Query("novel_id") String novel_id,@Query("client_id") int client_id,@Query("user_id") int user_id);
+    Observable<BookDetails> getBookDetail(@Query("novel_id") String novel_id, @Query("client_id") int client_id, @Query("user_id") int user_id);
 
     /**
      * 获取书籍打赏
@@ -216,23 +219,25 @@ public interface ApiService {
      * @return
      */
     @GET("/client/bookshelf")
-    Observable<BookselfList> getBookshelfList(@Query("page") int page, @Query("pageSize") int pageSize);
+    Observable<BookselfList> getBookshelfList();
 
     /**
      * 添加书架
      *
      * @return
      */
-    @POST("/novel/addBookshelf")
-    Observable<Base> addBookshelfList(@Query("novel_id") String novel_id);
+    @FormUrlEncoded
+    @POST("/client/bookshelf")
+    Observable<Base> addBookshelfList(@Field("novel_ids") String novel_id, @Field("is_delete") int is_delete);
 
     /**
      * 删除书架
      *
      * @return
      */
+    @FormUrlEncoded
     @POST("/client/bookshelf")
-    Observable<Base> delBookshelfList(@Query("novel_ids") String novel_ids);
+    Observable<Base> delBookshelfList(@Field("novel_ids") String novel_ids, @Field("is_delete") int is_delete);
 
     /**
      * 上传图片
@@ -263,11 +268,12 @@ public interface ApiService {
 
     /**
      * 上报设备
-     *
+     * <p>
      * device_id：设备唯一标示
      * type：设备类型，1android，2ios
      * version：app版本
      * os：操作系统信息
+     *
      * @return
      */
     @POST("/client/launch")
@@ -440,6 +446,7 @@ public interface ApiService {
 //    @GET("/book-list/{bookListId}")
 //    Observable<BookListDetail> getBookListDetail(@Path("bookListId") String bookListId);
 //
+
     /**
      * 获取分类
      *

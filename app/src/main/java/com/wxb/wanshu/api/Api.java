@@ -138,8 +138,8 @@ public class Api {
         return service.getRewardRank(novel_id, page);
     }
 
-    public Observable<BookselfList> getBookshelfList(int page, int pageSize) {
-        return service.getBookshelfList(page, pageSize);
+    public Observable<BookselfList> getBookshelfList() {
+        return service.getBookshelfList();
     }
 
     public Observable<BookList> getRankBookList(String type, int page) {
@@ -162,14 +162,14 @@ public class Api {
     }
 
     public Observable<Base> addBookshelfList(String novel_id) {
-        return service.addBookshelfList(novel_id);
+        return service.addBookshelfList(novel_id,0);
     }
     public Observable<NovelCategory> getCategoryList() {
         return service.getCategoryList();
     }
 
     public Observable<Base> delBookshelfList(String novel_ids) {
-        return service.delBookshelfList(novel_ids);
+        return service.delBookshelfList(novel_ids,1);
     }
 
     public Observable<UploadPictureBean> uploadSinglePicture(MultipartBody.Part part) {

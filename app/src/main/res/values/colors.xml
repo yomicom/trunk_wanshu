@@ -63,31 +63,34 @@
     <!--通用分割线粗-->
     <color name="common_divider_wide">@color/light_white</color>
 
-    <color name="reader_menu_bg_color">#2e2e2e</color>
+    <color name="reader_menu_bg_color">#333333</color>
     <!--阅读页背景色-->
-    <color name="read_theme_white">#DDDDDD</color>
-    <color name="read_theme_green">#CCE9CE</color>
+    <color name="read_theme_white">#FBFBFB</color>
+    <color name="read_theme_gray">#E0A063</color>
+    <color name="read_theme_green">#B0D38A</color>
     <color name="read_theme_blue">#061D2D</color>
     <color name="read_theme_brown">#383234</color>
     <color name="read_theme_night">#0B0B0C</color>
     <!--阅读页内容字体色-->
-    <color name="read_content_white">#222222</color>
-    <color name="read_content_gray">#3a3342</color>
+    <color name="read_content_white">#222333</color>
+    <color name="read_content_gray">#222333</color>
     <color name="read_content_leather">#3a3342</color>
-    <color name="read_content_green">#323332</color>
+    <color name="read_content_green">#222333</color>
     <color name="read_content_blue">#637079</color>
     <color name="read_content_brown">#95938f</color>
     <!--章节内容夜间颜色-->
-    <color name="read_content_night">#333333</color>
+    <color name="read_content_night">#222333</color>
     <!--阅读页标题色-->
-    <color name="read_title_white">#7f7f7f</color>
-    <color name="read_title_gray">#aba396</color>
+    <color name="read_title_white">#888999</color>
+    <color name="read_title_gray">#87847A</color>
     <color name="read_title_leather">#7a7261</color>
-    <color name="read_title_green">#778578</color>
+    <color name="read_title_green">#8DAB8E</color>
     <color name="read_title_blue">#435460</color>
     <color name="read_title_brown">#6b6668</color>
     <!--章节标题夜间颜色-->
-    <color name="read_title_night">#262626</color>
+    <color name="read_title_night">#4C5054</color>
+    <!--电池颜色-->
+    <color name="read_seekbar_battery">#4C5054</color>
 
     <!--阅读页底部字体颜色-->
     <color name="book_read_bottom_text">#e6e6e6</color>

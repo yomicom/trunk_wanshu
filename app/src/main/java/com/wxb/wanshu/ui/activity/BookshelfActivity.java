@@ -9,14 +9,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
@@ -41,23 +40,17 @@ import butterknife.OnClick;
 
 public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> implements BookselfContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
 
-    @BindView(R.id.iv_search)
-    ImageView ivSearch;
     @BindView(R.id.emptyView)
     EmptyView emptyView;
     @BindView(R.id.rl_no_content)
     RelativeLayout rlNoContent;
 
-    @BindView(R.id.tool_bar)
-    RelativeLayout toolBar;
-    @BindView(R.id.tv_select_all)
-    TextView tvSelectAll;
-    @BindView(R.id.tv_selected_books)
-    TextView tvSelectedBooks;
-    @BindView(R.id.tv_finish)
-    TextView tvFinish;
-    @BindView(R.id.ll_edit)
-    RelativeLayout llEdit;
+    //    @BindView(R.id.tool_bar)
+//    RelativeLayout toolBar;
+    @BindView(R.id.finish)
+    TextView finish;
+    @BindView(R.id.manage)
+    TextView manage;
     @BindView(R.id.tvDelete)
     TextView tvDelete;
     @BindView(R.id.llBatchManagement)
@@ -124,8 +117,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         emptyView.setEnterListener(new EmptyView.Callback() {
             @Override
             public void exec() {
-                page = START_PAGE;
-                mPresenter.getData(page, pageSize);
+                mPresenter.getData();
             }
         });
     }
@@ -152,20 +144,17 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     @Override
     public void onRefresh() {
         super.onRefresh();
-        page = START_PAGE;
-        mPresenter.getData(page, pageSize);
+        mPresenter.getData();
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        page++;
-        mPresenter.getData(page, pageSize);
     }
 
     @Override
     public void onItemClick(int position) {
-        if (isVisible(llBatchManagement)) { //批量管理时，点击选中某项
+        if (isVisible(finish)) { //批量管理时，点击选中某项
             BookselfList.DataBean item = mAdapter.getItem(position);
             if (item.isSeleted) {
                 item.isSeleted = false;
@@ -179,9 +168,9 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             for (BookselfList.DataBean bean : mAdapter.getAllData()) {
                 if (bean.isSeleted) removeList.add(bean);
             }
-            tvSelectedBooks.setText("已选择" + removeList.size() + "");
+//            tvSelectedBooks.setText("已选择" + removeList.size() + "");
         } else {
-            ReadActivity.startActivity(this, mAdapter.getItem(position).getNovel_id());
+            ReadActivity.startActivity(this, mAdapter.getItem(position).getId());
         }
     }
 
@@ -199,8 +188,9 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
      */
     public void goneBatchManagementAndRefreshUI() {
         if (mAdapter == null) return;
-        gone(llBatchManagement, llEdit);
-        visible(toolBar);
+        gone(finish, llBatchManagement);
+        manage.setText("管理");
+        manage.setTextColor(getResources().getColor(R.color.text_color_2));
         for (BookselfList.DataBean bean :
                 mAdapter.getAllData()) {
             bean.showCheckBox = false;
@@ -220,30 +210,22 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         for (BookselfList.DataBean bean : mAdapter.getAllData()) {
             bean.showCheckBox = true;
         }
-        mAdapter.getItem(position).isSeleted = true;
-        mAdapter.notifyDataSetChanged();
+        if (position > 0) {
+            mAdapter.getItem(position).isSeleted = true;
+            mAdapter.notifyDataSetChanged();
+        }
 
-        visible(llBatchManagement, llEdit);
-        gone(toolBar);
+        visible(finish, llBatchManagement);
+        manage.setText("全选");
+        manage.setTextColor(getResources().getColor(R.color.gobal_color));
 
         EventBus.getDefault().post(new BookShelfStatus(false));
     }
 
 
-    @OnClick({R.id.tv_select_all, R.id.tv_finish, R.id.tvDelete, R.id.iv_search})
+    @OnClick({R.id.tvDelete, R.id.finish, R.id.manage})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_select_all:
-                isSelectAll = !isSelectAll;
-                tvSelectAll.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
-                for (BookselfList.DataBean bean : mAdapter.getAllData()) {
-                    bean.isSeleted = isSelectAll;
-                }
-                mAdapter.notifyDataSetChanged();
-                break;
-            case R.id.tv_finish:
-                goneBatchManagementAndRefreshUI();
-                break;
             case R.id.tvDelete:
 
                 List<BookselfList.DataBean> removeList = new ArrayList<>();
@@ -254,6 +236,21 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                     mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
                     showDeleteCacheDialog(mContext, removeList);
+                }
+                break;
+            case R.id.finish://完成操作
+                goneBatchManagementAndRefreshUI();
+                break;
+            case R.id.manage:
+                if (isVisible(llBatchManagement)) {//全选操作
+                    isSelectAll = !isSelectAll;
+                    manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
+                    for (BookselfList.DataBean bean : mAdapter.getAllData()) {
+                        bean.isSeleted = isSelectAll;
+                    }
+                    mAdapter.notifyDataSetChanged();
+                } else {//管理操作
+                    showBatchManagementLayout(-1);
                 }
                 break;
         }
@@ -310,7 +307,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
 
                         StringBuilder novelIds = new StringBuilder();
                         for (BookselfList.DataBean item : removeList) {
-                            novelIds.append(item.getNovel_id());
+                            novelIds.append(item.getId());
                         }
                         if (novelIds.length() > 0)
                             mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));

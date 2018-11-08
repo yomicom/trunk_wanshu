@@ -52,7 +52,8 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     /**
-     *  小说目录
+     * 小说目录
+     *
      * @param novel_id
      */
     @Override
@@ -97,10 +98,10 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                 .subscribe(new Observer<BookMenu>() {
                     @Override
                     public void onNext(BookMenu data) {
-                        List<BookMenu.DataBean.ChaptersBean> list = data.getData().chapters;
-                        if (list != null && !list.isEmpty() && mView != null) {
-                            mView.showBookToc(list);
-                        }
+//                        List<BookMenu.DataBean.ChaptersBean> list = data.getData().chapters;
+//                        if (list != null && !list.isEmpty() && mView != null) {
+                        mView.showBookToc(data.getData());
+//                        }
                     }
 
                     @Override
@@ -116,8 +117,8 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     @Override
-    public void getChapterRead(String novel_id, final int chapter_id,int next) {
-        Subscription rxSubscription = api.getChapterRead(novel_id, chapter_id,next).subscribeOn(Schedulers.io())
+    public void getChapterRead(String novel_id, final int chapter_id, int next) {
+        Subscription rxSubscription = api.getChapterRead(novel_id, chapter_id, next).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ChapterRead>() {
                     @Override

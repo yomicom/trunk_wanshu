@@ -73,7 +73,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public void showBookMenu(BookMenu data) {
         adapter.addAll(data.getData().getChapters());
 
-        listView.setSelection(curChapter);
+        listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
     }
 
     @Override
@@ -103,7 +103,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
 
     @Override
     public void configViews() {
-        adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter);
+        adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter - 1);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -112,12 +112,12 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                 BookMenu.DataBean.ChaptersBean data = adapter.getData(position);
                 if (isReading) {
                     Intent intent = getIntent();
-//                    intent.putExtra("chapter", data.getChapter_num());
+                    intent.putExtra("chapter", data.sort);
 
-                    setResult(RESULT_OK,intent);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
-//                    ReadActivity.startActivity(mContext, novel_id, data.getChapter_num(),true);
+                    ReadActivity.startActivity(mContext, novel_id, data.sort, true);
                 }
             }
         });

@@ -98,7 +98,7 @@ public class BookMenu extends Base {
             public String sex_type;
             public String word_num;
             public String sort;
-            public String chapter_num;
+            public int chapter_num;
             public String free_chapter_num;
             public String create_time;
             public String update_time;
@@ -202,11 +202,11 @@ public class BookMenu extends Base {
                 this.sort = sort;
             }
 
-            public String getChapter_num() {
+            public int getChapter_num() {
                 return chapter_num;
             }
 
-            public void setChapter_num(String chapter_num) {
+            public void setChapter_num(int chapter_num) {
                 this.chapter_num = chapter_num;
             }
 

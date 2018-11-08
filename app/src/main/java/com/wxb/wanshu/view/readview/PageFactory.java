@@ -90,6 +90,7 @@ public class PageFactory {
     private Paint mPaint;
     private Paint mTitlePaint;
     private Bitmap mBookPageBg;
+    private int mBookPageBgColor;
 
     private DecimalFormat decimalFormat = new DecimalFormat("#0.00");
     private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -122,9 +123,9 @@ public class PageFactory {
         mHeight = height;
         mFontSize = fontSize;
         mLineSpace = mFontSize / 5 * 2;
-        mNumFontSize = ScreenUtils.dpToPxInt(16);
-        marginWidth = ScreenUtils.dpToPxInt(15);
-        marginHeight = ScreenUtils.dpToPxInt(15);
+        mNumFontSize = ScreenUtils.dpToPxInt(12);
+        marginWidth = ScreenUtils.dpToPxInt(18);
+        marginHeight = ScreenUtils.dpToPxInt(18);
         mVisibleHeight = mHeight - marginHeight * 2 - mNumFontSize * 2 - mLineSpace * 2;
         mVisibleWidth = mWidth - marginWidth * 2;
         mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
@@ -214,11 +215,11 @@ public class PageFactory {
         if (mLines.size() > 0) {
             int y = marginHeight + (mLineSpace << 1);
             // 绘制背景
-            if (mBookPageBg != null) {
-                canvas.drawBitmap(mBookPageBg, null, rectF, null);
-            } else {
-                canvas.drawColor(Color.WHITE);
-            }
+//            if (mBookPageBg != null) {
+//                canvas.drawBitmap(mBookPageBg, null, rectF, null);
+//            } else {
+            canvas.drawColor(mBookPageBgColor);
+//            }
             // 绘制标题
             canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);
             y += mLineSpace + mNumFontSize;
@@ -591,6 +592,10 @@ public class PageFactory {
 
     public void setBgBitmap(Bitmap BG) {
         mBookPageBg = BG;
+    }
+
+    public void setBgColor(int bgColor) {
+        mBookPageBgColor = bgColor;
     }
 
     public void setOnReadStateChangeListener(OnReadStateChangeListener listener) {

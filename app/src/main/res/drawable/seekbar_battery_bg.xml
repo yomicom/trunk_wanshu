@@ -6,14 +6,14 @@
             <size android:height="1dp" />
 
             <gradient
-                android:endColor="#a5a5a5"
-                android:startColor="#a5a5a5" />
+                android:endColor="@color/read_seekbar_battery"
+                android:startColor="@color/read_seekbar_battery" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <size android:height="3dp" />
+                <size android:height="2dp" />
 
                 <gradient
                     android:endColor="@android:color/white"
