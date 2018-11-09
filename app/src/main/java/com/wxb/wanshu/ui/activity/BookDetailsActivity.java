@@ -256,18 +256,18 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             case R.id.tv_add_book:
                 if (!bookDetails.on_shelf) {
                     mPresenter.addBookShelf(novel_id);
-                }else {
+                } else {
 
                 }
                 break;
             case R.id.tv_read_book:
-                ReadActivity.startActivity(this, bookDetails.getId());
+                ReadActivity.startActivity(this, bookDetails.getId(),bookDetails.on_shelf);
                 break;
             case R.id.book_menu:
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
             case R.id.item_last_chapter:
-                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, false);
+                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, false, bookDetails.on_shelf);
                 break;
         }
     }

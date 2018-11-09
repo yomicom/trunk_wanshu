@@ -34,6 +34,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     String novel_id;
     int curChapter;
     public static String INTENT_CHAPTER = "chapter";
+    public static String INTENT_ON_SHELF = "on_shelf";//是否在书架
     public static String INTENT_IS_READING = "isReading";
 
     @BindView(R.id.listview)
@@ -44,6 +45,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     BookMenuPresenter mPresenter;
     private BookMenuAdapter adapter;
     private boolean isReading = false;
+    private BookMenu menu;
 
     public static void startActivity(Context context, String novel_id, int curChapter, boolean isReading) {
         context.startActivity(new Intent(context, MenuActivity.class)
@@ -73,6 +75,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public void showBookMenu(BookMenu data) {
         adapter.addAll(data.getData().getChapters());
 
+        this.menu = data;
         listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
     }
 
@@ -117,7 +120,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
-                    ReadActivity.startActivity(mContext, novel_id, data.sort, true);
+                    ReadActivity.startActivity(mContext, novel_id, data.sort, true, menu.data.novel.on_self);
                 }
             }
         });

@@ -105,6 +105,7 @@ public class BookMenu extends Base {
             public String length_type;
             public String view_count;
             public String is_onsale;
+            public boolean on_self;
 
             public String getId() {
                 return id;

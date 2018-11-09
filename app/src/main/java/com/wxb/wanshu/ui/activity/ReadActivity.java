@@ -71,6 +71,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTER;
+import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_ON_SHELF;
 
 /**
  * 阅读页
@@ -144,7 +145,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private View decodeView;
 
-    boolean isCollected = false;//是否被添加书架
+    boolean isOnShelf = false;//是否被添加书架
 
     private List<BookMenu.DataBean.ChaptersBean> mChapterList = new ArrayList<>();
 
@@ -184,20 +185,21 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, String bookId) {
-        startActivity(context, bookId, false);
+        startActivity(context, bookId, true);
     }
 
-    public static void startActivity(Context context, String bookId, int currentChapter, boolean isFromMenu) {
+    public static void startActivity(Context context, String bookId, int currentChapter, boolean isFromMenu, boolean on_self) {
         context.startActivity(new Intent(context, ReadActivity.class)
                 .putExtra(INTENT_BEAN, bookId)
                 .putExtra(INTENT_CHAPTER, currentChapter)
+                .putExtra(INTENT_ON_SHELF, on_self)
                 .putExtra(INTENT_MENU, isFromMenu));
     }
 
-    public static void startActivity(Context context, String bookId, boolean isFromSD) {
+    public static void startActivity(Context context, String bookId, boolean on_self) {
         context.startActivity(new Intent(context, ReadActivity.class)
                 .putExtra(INTENT_BEAN, bookId)
-                .putExtra(INTENT_SD, isFromSD));
+                .putExtra(INTENT_ON_SHELF, on_self));
     }
 
     @Override
@@ -224,7 +226,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void initDatas() {
         novel_id = getIntent().getStringExtra(INTENT_BEAN);
         currentChapter = getIntent().getIntExtra(INTENT_CHAPTER, 1);
-        isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
+        isOnShelf = getIntent().getBooleanExtra(INTENT_ON_SHELF, false);
         isFromMenu = getIntent().getBooleanExtra(INTENT_MENU, false);
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
@@ -353,13 +355,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         });
     }
 
+    /**
+     * 设置阅读模式、字体
+     */
     private void initPagerWidget() {
 //        switch (SharedPreferencesUtil.getInstance().getInt(Constant.FLIP_STYLE, 0)) {
 //            case 0:
 //                mPageWidget = new PageWidget(this, novel_id + "", mChapterList, new ReadListener());
 //                break;
 //            case 1:
-        mPageWidget = new OverlappedWidget(this, novel_id + "", mChapterList, new ReadListener());
+        mPageWidget = new OverlappedWidget(this, novel_id, mChapterList, new ReadListener());
 //                break;
 //            case 2:
 //                mPageWidget = new NoAimWidget(this, novel_id + "", mChapterList, new ReadListener());
@@ -416,6 +421,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @Override
     public synchronized void showChapterRead(ChapterRead.DataBean data) { // 加载章节内容
         if (data != null) {
+            hideReadBar();
             switch (data.code) {
                 case 410://小说已下架
                     finish();
@@ -428,7 +434,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     break;
                 case 0:
                     CacheManager.getInstance().saveChapterFile(novel_id + "", currentChapter, data);
-                    isCollected = data.on_shelf;
+                    isOnShelf = data.on_shelf;
                     break;
             }
         }
@@ -471,7 +477,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             ToastUtils.showLongToast("添加书架成功");
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-            isCollected = true;
+            isOnShelf = true;
         }
     }
 
@@ -780,7 +786,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 } else if (isVisible(llBookReadBottom)) {
                     hideReadBar();
                     return true;
-                } else if (!isCollected) {//若未包含在书架中
+                } else if (!isOnShelf) {//若未包含在书架中
                     showJoinBookShelfDialog();
                     return true;
                 }
@@ -856,8 +862,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         public void onChapterChanged(int chapter) {
             LogUtils.i("onChapterChanged:" + chapter);
 
-            setChapterProgress(currentChapter);
             currentChapter = chapter;
+            setChapterProgress(currentChapter);
 //            mTocListAdapter.setCurrentChapter(currentChapter);
             // 加载前一节 与 后三节
             for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {

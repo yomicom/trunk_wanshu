@@ -150,7 +150,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
                     } else {//火热连载
                         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
                         rvHorizontal1.setLayoutManager(layoutManager);
-                        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 50, false));
+                        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(2, 40, false));
                         HomeHotAdapter adapter = new HomeHotAdapter(getActivity(), list, this);
                         rvHorizontal1.setAdapter(adapter);
                     }

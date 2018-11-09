@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,8 +18,7 @@ import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
-import com.wxb.wanshu.ui.adapter.easyadpater.NovelCategoryAdapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVHomePopularAdapter;
+import com.wxb.wanshu.ui.adapter.easyadpater.BookClassifyAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SelectBooksContract;
 import com.wxb.wanshu.ui.presenter.SelectBookPresenter;
@@ -48,9 +46,6 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     ImageView ivSearch;
     @BindView(R.id.recycleview)
     RecyclerView recycleview;
-
-    //    private List<NovelCategory.DataBean> categoryList;
-    private NovelCategoryAdapter categoryAdapter;
 
     private HeaderViewHolder headerViewHolder;
     String category_id = "";
@@ -185,9 +180,9 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
         List<NovelCategory.DataBean> data = categoryData.getData();
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
         recycleview.setLayoutManager(layoutManager);
-        recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
+        recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 30, false));
 
-        NovelCategoryAdapter adapter = new NovelCategoryAdapter(mContext, data, this);
+        BookClassifyAdapter adapter = new BookClassifyAdapter(mContext, data, this);
         recycleview.setAdapter(adapter);
 
     }
@@ -219,8 +214,6 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
                     category_id = "";
                     refreshData();
                     ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllCategory, R.color.gobal_color);
-
-                    categoryAdapter.selectNoAll();
                 }
                 break;
             case R.id.tv_all_status:
