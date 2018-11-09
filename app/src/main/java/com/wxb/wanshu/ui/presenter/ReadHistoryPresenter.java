@@ -2,6 +2,7 @@ package com.wxb.wanshu.ui.presenter;
 
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
+import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.utils.LogUtils;
@@ -47,5 +48,53 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
                     }
                 });
         addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void addBookShelf(String novel_id) {
+
+        Subscription subscribe = api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Base>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Base bookDetails) {
+                        mView.addBookResult(bookDetails);
+                    }
+                });
+        addSubscrebe(subscribe);
+    }
+
+    @Override
+    public void delHistory(String novel_ids) {
+
+        Subscription subscribe = api.delReadHistoryList(novel_ids).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Base>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Base bookDetails) {
+                        mView.addBookResult(bookDetails);
+                    }
+                });
+        addSubscrebe(subscribe);
     }
 }

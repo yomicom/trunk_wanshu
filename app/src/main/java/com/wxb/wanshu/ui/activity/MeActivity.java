@@ -57,7 +57,7 @@ public class MeActivity extends BaseActivity implements MeContract.View {
     @Override
     public void initDatas() {
         mPresenter.attachView(this);
-        mPresenter.getUserData();
+//        mPresenter.getUserData();
     }
 
     @Override

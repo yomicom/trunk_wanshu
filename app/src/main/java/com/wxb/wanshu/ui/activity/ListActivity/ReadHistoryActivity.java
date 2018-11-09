@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
+import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
@@ -74,6 +75,16 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     @Override
     public void showReadHistoryList(ReadHistoryList data) {
         mAdapter.addAll(data.getData());
+    }
+
+    @Override
+    public void addBookResult(Base result) {
+
+    }
+
+    @Override
+    public void delHistoryBookResult(Base result) {
+
     }
 
     @Override

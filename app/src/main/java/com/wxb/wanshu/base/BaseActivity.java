@@ -183,6 +183,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 隐藏状态栏
+     */
     protected void hideStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -192,6 +195,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 显示状态栏
+     */
     protected void showStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;

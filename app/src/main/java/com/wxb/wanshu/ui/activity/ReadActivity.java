@@ -91,7 +91,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     FrameLayout flReadWidget;
 
     @BindView(R.id.llBookReadTop)
-    LinearLayout mLlBookReadTop;
+    LinearLayout llBookReadTop;
     @BindView(R.id.tvBookReadTocTitle)
     TextView mTvBookReadTocTitle;
     //    @BindView(R.id.tvBookReadDownload)
@@ -269,9 +269,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void configViews() {
         hideStatusBar();
         decodeView = getWindow().getDecorView();
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mLlBookReadTop.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) llBookReadTop.getLayoutParams();
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
-        mLlBookReadTop.setLayoutParams(params);
+        llBookReadTop.setLayoutParams(params);
 
         initAASet();
 
@@ -486,19 +486,19 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     private synchronized void hideReadBar() {
-        gone(mTvDownloadProgress, llBookReadBottom, mLlBookReadTop, rlReadAaSet, rlReadMark, itemChapter);
+        gone(mTvDownloadProgress, llBookReadBottom, llBookReadTop, rlReadAaSet, rlReadMark, itemChapter);
         hideStatusBar();
         decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
     }
 
     private synchronized void showReadBar() { // 显示工具栏
-        visible(llBookReadBottom, mLlBookReadTop, itemChapter);
+        visible(llBookReadBottom, llBookReadTop, itemChapter);
         showStatusBar();
         decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     private synchronized void toggleReadBar() { // 切换工具栏 隐藏/显示 状态
-        if (isVisible(mLlBookReadTop)) {
+        if (isVisible(llBookReadTop)) {
             hideReadBar();
         } else {
             showReadBar();

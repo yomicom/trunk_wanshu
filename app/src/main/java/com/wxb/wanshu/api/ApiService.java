@@ -133,8 +133,17 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/index/readlog")
+    @GET("/client/bookshelf")
     Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page);
+
+    /**
+     * 删除阅读历史
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/client/bookshelf")
+    Observable<ReadHistoryList> delReadHistoryList(@Field("logs_ids") String logs_ids);
 
     /**
      * 获取书币明细

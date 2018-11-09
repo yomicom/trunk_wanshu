@@ -114,6 +114,10 @@ public class Api {
         return service.getReadHistoryList(page);
     }
 
+    public Observable<ReadHistoryList> delReadHistoryList(String log_ids) {
+        return service.delReadHistoryList(log_ids);
+    }
+
     public Observable<AmountRecordList> getAmountRecordList(int page) {
         return service.getAmountRecordList(page);
     }
@@ -122,12 +126,12 @@ public class Api {
         return service.getNotificationList(page);
     }
 
-    public Observable<BookList> getSelectBookList(String category_id,int page) {
-        return service.getSelectBookList( category_id, page);
+    public Observable<BookList> getSelectBookList(String category_id, int page) {
+        return service.getSelectBookList(category_id, page);
     }
 
-    public Observable<BookDetails> getBookDetail(String novel_id,int client_id,int user_id) {
-        return service.getBookDetail(novel_id,client_id,user_id);
+    public Observable<BookDetails> getBookDetail(String novel_id, int client_id, int user_id) {
+        return service.getBookDetail(novel_id, client_id, user_id);
     }
 
     public Observable<BookList> getSearchResult(String keyword, int page) {
@@ -162,14 +166,15 @@ public class Api {
     }
 
     public Observable<Base> addBookshelfList(String novel_id) {
-        return service.addBookshelfList(novel_id,0);
+        return service.addBookshelfList(novel_id, 0);
     }
+
     public Observable<NovelCategory> getCategoryList() {
         return service.getCategoryList();
     }
 
     public Observable<Base> delBookshelfList(String novel_ids) {
-        return service.delBookshelfList(novel_ids,1);
+        return service.delBookshelfList(novel_ids, 1);
     }
 
     public Observable<UploadPictureBean> uploadSinglePicture(MultipartBody.Part part) {
@@ -183,6 +188,7 @@ public class Api {
     public Observable<Base> rewardGift(String type, int number, int novel_id, String chapter_id) {
         return service.rewardGift(type, number, novel_id, chapter_id);
     }
+
     public Observable<ClientData> clientLaunch(String device_id, int type, String version, String os) {
         return service.clientLaunch(device_id, type, version, os);
     }
@@ -191,7 +197,7 @@ public class Api {
         return service.getBookMixAToc(novel_id);
     }
 
-    public Observable<ChapterRead> getChapterRead(String novel_id, int chapter_id,int next) {
-        return service.getChapterRead(novel_id, chapter_id,next);
+    public Observable<ChapterRead> getChapterRead(String novel_id, int chapter_id, int next) {
+        return service.getChapterRead(novel_id, chapter_id, next);
     }
 }

@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/touch_bg">
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/rl_image"
         style="@style/rl_normal">
 
         <ImageView
             android:id="@+id/iv_book"
-            android:layout_width="@dimen/book_cover_width"
-            android:layout_height="@dimen/book_cover_height"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
             android:layout_marginRight="@dimen/distance_image_text_15"
             android:src="@mipmap/defalt_book_cover" />
 
         <TextView
             android:id="@+id/tv_title"
             style="@style/text_novel_title"
+            android:layout_width="160dp"
+            android:ellipsize="end"
             android:layout_toRightOf="@id/iv_book"
-            android:lines="1"
+            android:maxLines="1"
             android:text="" />
 
         <TextView
@@ -34,11 +39,29 @@
             android:id="@+id/tv_time"
             style="@style/text_small_nomal"
             android:layout_below="@id/tv_introduce"
-            android:layout_marginTop="@dimen/distance_text_text_10"
+            android:layout_alignBottom="@id/iv_book"
+            android:layout_marginBottom="3dp"
+            android:gravity="bottom"
             android:layout_toRightOf="@id/iv_book"
             android:lines="1"
-            android:text=""
-            />
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/add_shelf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/add_shlef" />
+
+        <ImageView
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/no_select_history"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -8,21 +8,7 @@ import java.util.List;
 
 public class ReadHistoryList extends Base {
 
-    /**
-     * data : [{"novel_id":1943,"title":"都市无敌仙尊","author":"挥墨客","cover":"http://lily.sunshe.com/c/002/1068002_bkcjxioui0_o.jpg","summary":"莫云，曾经仙界最强的雷云战尊，叱咤仙界，所向无敌。 未曾想，在一次修炼时被人偷袭，重生到一个胆小怕事，性格懦弱的私生子身上。 \u201c骚年，就让本尊纠正你错误的人生吧！\u201d 无敌仙尊驰骋都市，重启牛逼闪闪的人生！ 财富手中握，美人怀里揉，敌人脚下踩！ \u201c待本尊重回仙界，搅你个天翻地覆！\u201d","chapter":2,"chapter_name":"第二章 活该被雷劈","latest_chapter":10,"link":"http://xs.yiwei.com/read/index?account_id=84&novel_id=1943&chapter=2","is_collect":1,"complete_status":0,"category":"玄幻仙侠","read":1943,"update_time":"2017-10-21 10:46:12"}]
-     * pager : {"page":1,"perpage":20,"numRecords":1,"numPages":1,"firstRecord":0,"lastRecord":0}
-     */
-
-    private PagerBean pager;
     private List<DataBean> data;
-
-    public PagerBean getPager() {
-        return pager;
-    }
-
-    public void setPager(PagerBean pager) {
-        this.pager = pager;
-    }
 
     public List<DataBean> getData() {
         return data;
@@ -32,127 +18,41 @@ public class ReadHistoryList extends Base {
         this.data = data;
     }
 
-    public static class PagerBean {
-        /**
-         * page : 1
-         * perpage : 20
-         * numRecords : 1
-         * numPages : 1
-         * firstRecord : 0
-         * lastRecord : 0
-         */
-
-        private int page;
-        private int perpage;
-        private int numRecords;
-        private int numPages;
-        private int firstRecord;
-        private int lastRecord;
-
-        public int getPage() {
-            return page;
-        }
-
-        public void setPage(int page) {
-            this.page = page;
-        }
-
-        public int getPerpage() {
-            return perpage;
-        }
-
-        public void setPerpage(int perpage) {
-            this.perpage = perpage;
-        }
-
-        public int getNumRecords() {
-            return numRecords;
-        }
-
-        public void setNumRecords(int numRecords) {
-            this.numRecords = numRecords;
-        }
-
-        public int getNumPages() {
-            return numPages;
-        }
-
-        public void setNumPages(int numPages) {
-            this.numPages = numPages;
-        }
-
-        public int getFirstRecord() {
-            return firstRecord;
-        }
-
-        public void setFirstRecord(int firstRecord) {
-            this.firstRecord = firstRecord;
-        }
-
-        public int getLastRecord() {
-            return lastRecord;
-        }
-
-        public void setLastRecord(int lastRecord) {
-            this.lastRecord = lastRecord;
-        }
-    }
-
     public static class DataBean {
         /**
-         * novel_id : 1943
-         * title : 都市无敌仙尊
-         * author : 挥墨客
-         * cover : http://lily.sunshe.com/c/002/1068002_bkcjxioui0_o.jpg
-         * summary : 莫云，曾经仙界最强的雷云战尊，叱咤仙界，所向无敌。 未曾想，在一次修炼时被人偷袭，重生到一个胆小怕事，性格懦弱的私生子身上。 “骚年，就让本尊纠正你错误的人生吧！” 无敌仙尊驰骋都市，重启牛逼闪闪的人生！ 财富手中握，美人怀里揉，敌人脚下踩！ “待本尊重回仙界，搅你个天翻地覆！”
-         * chapter : 2
-         * chapter_name : 第二章 活该被雷劈
-         * latest_chapter : 10
-         * link : http://xs.yiwei.com/read/index?account_id=84&novel_id=1943&chapter=2
-         * is_collect : 1
-         * complete_status : 0
-         * category : 玄幻仙侠
-         * read : 1943
-         * update_time : 2017-10-21 10:46:12
+         * id : 2
+         * name : 千金归来：老公，请走开
+         * cover : http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg
+         * description : 深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。“凌萱？”“陆董，我叫凌若，您是不是认错人了？”复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了……
+         * word_num : 33345
+         * author : 栀想
+         * category_name :
+         * is_complete : false
          */
 
-        private int novel_id;
-        private String title;
-        private String author;
+        private String id;
+        private String name;
         private String cover;
-        private String summary;
-        private int chapter;
-        private String chapter_name;
-        private int latest_chapter;
-        private String link;
-        private int is_collect;
-        private int complete_status;
-        private String category;
-        private int read;
-        private String update_time;
+        private String description;
+        private String word_num;
+        private String author;
+        private String category_name;
+        private boolean is_complete;
 
-        public int getNovel_id() {
-            return novel_id;
+        public String getId() {
+            return id;
         }
 
-        public void setNovel_id(int novel_id) {
-            this.novel_id = novel_id;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public String getTitle() {
-            return title;
+        public String getName() {
+            return name;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getCover() {
@@ -163,84 +63,44 @@ public class ReadHistoryList extends Base {
             this.cover = cover;
         }
 
-        public String getSummary() {
-            return summary;
+        public String getDescription() {
+            return description;
         }
 
-        public void setSummary(String summary) {
-            this.summary = summary;
+        public void setDescription(String description) {
+            this.description = description;
         }
 
-        public int getChapter() {
-            return chapter;
+        public String getWord_num() {
+            return word_num;
         }
 
-        public void setChapter(int chapter) {
-            this.chapter = chapter;
+        public void setWord_num(String word_num) {
+            this.word_num = word_num;
         }
 
-        public String getChapter_name() {
-            return chapter_name;
+        public String getAuthor() {
+            return author;
         }
 
-        public void setChapter_name(String chapter_name) {
-            this.chapter_name = chapter_name;
+        public void setAuthor(String author) {
+            this.author = author;
         }
 
-        public int getLatest_chapter() {
-            return latest_chapter;
+        public String getCategory_name() {
+            return category_name;
         }
 
-        public void setLatest_chapter(int latest_chapter) {
-            this.latest_chapter = latest_chapter;
+        public void setCategory_name(String category_name) {
+            this.category_name = category_name;
         }
 
-        public String getLink() {
-            return link;
+        public boolean isIs_complete() {
+            return is_complete;
         }
 
-        public void setLink(String link) {
-            this.link = link;
-        }
-
-        public int getIs_collect() {
-            return is_collect;
-        }
-
-        public void setIs_collect(int is_collect) {
-            this.is_collect = is_collect;
-        }
-
-        public int getComplete_status() {
-            return complete_status;
-        }
-
-        public void setComplete_status(int complete_status) {
-            this.complete_status = complete_status;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category = category;
-        }
-
-        public int getRead() {
-            return read;
-        }
-
-        public void setRead(int read) {
-            this.read = read;
-        }
-
-        public String getUpdate_time() {
-            return update_time;
-        }
-
-        public void setUpdate_time(String update_time) {
-            this.update_time = update_time;
+        public void setIs_complete(boolean is_complete) {
+            this.is_complete = is_complete;
         }
     }
 }
