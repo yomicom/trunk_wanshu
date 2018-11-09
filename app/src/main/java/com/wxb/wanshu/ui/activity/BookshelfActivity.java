@@ -103,6 +103,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         mRecyclerView.getEmptyView().findViewById(R.id.tv_take).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //去书城
+
             }
         });
         onRefresh();

@@ -145,6 +145,10 @@ public class SettingManager {
         return bookId + "-marks";
     }
 
+    /**
+     * 阅读页背景主题
+     * @param theme
+     */
     public void saveReadTheme(int theme) {
         SharedPreferencesUtil.getInstance().putInt("readTheme", theme);
     }
@@ -154,6 +158,18 @@ public class SettingManager {
             return ThemeManager.NIGHT;
         }
         return SharedPreferencesUtil.getInstance().getInt("readTheme", 0);
+    }
+
+    /**
+     * 阅读页亮屏时间
+     * @param time
+     */
+    public void setScreenLight(int time) {//系统时间 0 /5/10/20/永不 -1
+        SharedPreferencesUtil.getInstance().putInt("screen_light", time);
+    }
+
+    public int getScreenLight() {
+        return SharedPreferencesUtil.getInstance().getInt("screen_light", 0);
     }
 
     /**

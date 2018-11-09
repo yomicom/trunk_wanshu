@@ -292,6 +292,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
         mPresenter.getBookMixAToc(novel_id);
 
+        //设置屏幕常亮时间
+        int screenLight = SettingManager.getInstance().getScreenLight();
+        if (screenLight != 0) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            //取消屏幕常亮
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
 //        buyBookPopupWindow = new BuyBookPopupWindow((Activity) mContext, novel_id, currentChapter);
     }
 
@@ -421,7 +428,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @Override
     public synchronized void showChapterRead(ChapterRead.DataBean data) { // 加载章节内容
         if (data != null) {
-            hideReadBar();
+//            hideReadBar();
             switch (data.code) {
                 case 410://小说已下架
                     finish();

@@ -85,7 +85,7 @@ public class BannerFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish, R.id.search})
+    @OnClick({R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.item_rank:
@@ -99,9 +99,6 @@ public class BannerFragment extends BaseFragment {
                 break;
             case R.id.item_finish:
                 KindNovelActivity.startActivity(mContext,2);
-                break;
-            case R.id.search:
-                SearchActivity.startActivity(getActivity(),data_search);
                 break;
         }
     }

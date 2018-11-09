@@ -65,6 +65,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
     final static int POPULAR_LIST = 0;
     final static int HOT_LIST = 1;
+    private HomeData homeData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             //轮播图
-            bannerFragment = BannerFragment.newInstance(data.get(0),data.get(data.size()-1));
+            bannerFragment = BannerFragment.newInstance(data.get(0), data.get(data.size() - 1));
             transaction.replace(frameId[0], bannerFragment);
 
             //主编力荐
@@ -116,7 +117,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         }
     }
 
-    @OnClick({R.id.iv_to_top})
+    @OnClick({R.id.iv_to_top, R.id.search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_to_top://gh_8348fbc38b91 掌读宝
@@ -130,12 +131,19 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 //                    }
 //                });
                 break;
+            case R.id.search:
+                if (homeData != null) {
+                    List<HomeData.DataBeanX> data = homeData.getData();
+                    SearchActivity.startActivity(this, data.get(data.size() - 1));
+                }
+                break;
         }
     }
 
     @Override
     public void showHome(HomeData data) {
         if (data != null) {
+            homeData = data;
             showData(data.getData());
         }
     }

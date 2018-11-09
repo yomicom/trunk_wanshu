@@ -212,7 +212,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/detail")
-    Observable<BookDetails> getBookDetail(@Query("novel_id") String novel_id, @Query("client_id") int client_id, @Query("user_id") int user_id);
+    Observable<BookDetails> getBookDetail(@Query("novel_id") String novel_id, @Query("user_id") int user_id);
 
     /**
      * 获取书籍打赏

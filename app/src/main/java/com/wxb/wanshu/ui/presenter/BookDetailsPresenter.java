@@ -41,7 +41,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.showError();
                     }
 
                     @Override

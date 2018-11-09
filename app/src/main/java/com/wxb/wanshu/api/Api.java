@@ -131,7 +131,7 @@ public class Api {
     }
 
     public Observable<BookDetails> getBookDetail(String novel_id, int client_id, int user_id) {
-        return service.getBookDetail(novel_id, client_id, user_id);
+        return service.getBookDetail(novel_id, user_id);
     }
 
     public Observable<BookList> getSearchResult(String keyword, int page) {

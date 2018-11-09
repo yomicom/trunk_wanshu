@@ -240,8 +240,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_cancle_search:
-//                finish();
-                search(etSearch.getText().toString().trim());
+                finish();
+//                search(etSearch.getText().toString().trim());
                 break;
             case R.id.iv_del:
                 CacheManager.getInstance().saveSearchHistory(null);
