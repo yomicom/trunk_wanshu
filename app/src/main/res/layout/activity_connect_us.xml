@@ -33,6 +33,7 @@
             android:layout_marginTop="@dimen/distance_top_20">
 
             <TextView
+                android:id="@+id/kefu_phone"
                 style="@style/text_middle_nomal"
                 android:layout_centerVertical="true"
                 android:text="客服电话:400-9981236" />
@@ -53,6 +54,7 @@
             android:layout_marginTop="@dimen/distance_top_20">
 
             <TextView
+                android:id="@+id/ke_qq"
                 style="@style/text_middle_nomal"
                 android:layout_centerVertical="true"
                 android:text="客服QQ:3374397930" />
@@ -88,6 +90,7 @@
             android:layout_marginTop="@dimen/distance_top_20">
 
             <TextView
+                android:id="@+id/com_qq"
                 style="@style/text_middle_nomal"
                 android:layout_centerVertical="true"
                 android:text="十月老肥：2499931904" />

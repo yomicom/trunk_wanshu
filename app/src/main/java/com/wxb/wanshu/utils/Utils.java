@@ -1,13 +1,17 @@
 package com.wxb.wanshu.utils;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.base.Constant;
 
 import java.util.UUID;
 
@@ -48,6 +52,19 @@ public class Utils {
             String defautlUUID = "ARD_00000000-0d89-f9dd-ffff-" + String.valueOf(System.currentTimeMillis() / 10);
             SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.GET_CUSTOME_UUID, defautlUUID);
             return defautlUUID;
+        }
+    }
+    /**
+     * 跳转QQ聊天界面
+     */
+    public static void joinQQ(Activity mContext,String qqNum) {
+        try {
+            //第二种方式：可以跳转到添加好友，如果qq号是好友了，直接聊天
+            String url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qqNum;//uin是发送过去的qq号码
+            mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.showToast( "请检查是否安装QQ");
         }
     }
 

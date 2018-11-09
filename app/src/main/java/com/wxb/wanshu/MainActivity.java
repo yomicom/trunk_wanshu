@@ -29,7 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class MainActivity extends ActivityGroup implements View.OnClickListener{
+public class MainActivity extends ActivityGroup implements View.OnClickListener {
 
     TabHost tabHost;
     RelativeLayout ral_tab;
@@ -39,6 +39,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
 
     private Api api;
     protected CompositeSubscription mCompositeSubscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,8 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoIntentService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
         String clientid = PushManager.getInstance().getClientid(this);
-        if("".equals(clientid)){}
+        if ("".equals(clientid)) {
+        }
 
 //        clientLaunch();
     }
@@ -62,7 +64,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
     private void clientLaunch() {
         api = MyApplication.getsInstance().getAppComponent().getReaderApi();
         //MyApplication.getMyContext().getPackageManager().getPackageInfo(MyApplication.getMyContext().getPackageName()
-        Subscription subscribe = api.clientLaunch("",1,"","android").subscribeOn(Schedulers.io())
+        Subscription subscribe = api.clientLaunch("", 1, "", "android").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ClientData>() {
                     @Override
@@ -140,7 +142,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
             tabFunc.setImageResource(R.mipmap.ic_function_select);
             txtFunc.setTextColor(getResources().getColor(R.color.gobal_color));
             tabHost.setCurrentTabByTag(TAB_FUNC);
-        }else if (id == R.id.home_tab_art) {
+        } else if (id == R.id.home_tab_art) {
             MobclickAgent.onEvent(this, "ArticleTab");
             resetState();
             tabArticle.setImageResource(R.mipmap.ic_materical_select);
@@ -169,12 +171,15 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener{
     }
 
     @Subscriber
-    public void onEventMainThread(BookShelfStatus data){
-        if(data.editStatus){
+    public void onEventMainThread(BookShelfStatus data) {
+        if (data.editStatus == 0) {//去书城
+            setTab(R.id.home_tab_data);
+        } else if (data.editStatus == 1) {//显示Tab
             ral_tab.setVisibility(View.VISIBLE);
-        }else {
+        } else {//隐藏Tab
             ral_tab.setVisibility(View.GONE);
         }
+
     }
 
     @Override

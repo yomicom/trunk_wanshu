@@ -197,7 +197,7 @@ public class Api {
         return service.getBookMixAToc(novel_id);
     }
 
-    public Observable<ChapterRead> getChapterRead(String novel_id, int chapter_id, int next) {
-        return service.getChapterRead(novel_id, chapter_id, next);
+    public Observable<ChapterRead> getChapterRead(String novel_id, int sort, int next) {
+        return service.getChapterRead(novel_id, sort, next);
     }
 }

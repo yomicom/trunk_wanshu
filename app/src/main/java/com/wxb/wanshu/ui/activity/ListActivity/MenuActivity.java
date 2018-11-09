@@ -136,7 +136,9 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 10) {
+            int pos = curChapter - 1;
             Collections.reverse(list);
+            adapter.setSelectPos(list.size() - pos - 1);
             adapter.notifyDataSetChanged();
             return true;
         } else {

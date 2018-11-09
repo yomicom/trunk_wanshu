@@ -109,7 +109,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     public static void startActivity(Context context, String novel_id) {
         context.startActivity(new Intent(context, BookDetailsActivity.class)
-                .putExtra(INTENT_BOOK_ID, "2"));
+                .putExtra(INTENT_BOOK_ID, "1"));
     }
 
     @Inject
@@ -192,7 +192,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         lastChapter.setText("最新：" + data.getLatest_chapter().name);
         lastChapterTime.setText("更新时间：" + data.latest_chapter.publish_time);
         bookChapterNum.setText("共" + data.getChapter_num() + "章");
-        ViewToolUtils.setShowMoreContent(4, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
+        ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
 
     /**

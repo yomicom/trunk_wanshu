@@ -34,6 +34,7 @@
             style="@style/text_big_nomal"
             android:layout_centerVertical="true"
             android:text="管理"
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:textColor="@color/text_color_2"
             android:textSize="@dimen/text_middle" />

@@ -56,6 +56,7 @@ import com.wxb.wanshu.view.dialog.ShareBookDialog;
 import com.wxb.wanshu.view.readview.BaseReadView;
 import com.wxb.wanshu.view.readview.OnReadStateChangeListener;
 import com.wxb.wanshu.view.readview.OverlappedWidget;
+import com.wxb.wanshu.view.readview.PageWidget;
 
 import org.simple.eventbus.EventBus;
 
@@ -431,16 +432,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //            hideReadBar();
             switch (data.code) {
                 case 410://小说已下架
-                    finish();
+//                    finish();
                     break;
                 case 420://小说未完待续
-                    finish();
+//                    finish();
                     break;
                 case 430://小说完结
-                    finish();
+//                    finish();
                     break;
                 case 0:
-                    CacheManager.getInstance().saveChapterFile(novel_id + "", currentChapter, data);
+                    CacheManager.getInstance().saveChapterFile(data);
                     isOnShelf = data.on_shelf;
                     break;
             }
@@ -872,6 +873,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             currentChapter = chapter;
             setChapterProgress(currentChapter);
 //            mTocListAdapter.setCurrentChapter(currentChapter);
+
+            // 预加载
             // 加载前一节 与 后三节
             for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
                 if (i > 0 && i != chapter
@@ -891,7 +894,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.i("onLoadChapterFailure:" + chapter);
             startRead = false;
             if (CacheManager.getInstance().getChapterFile(novel_id + "", chapter) == null) {
-//                mPresenter.getChapterRead(novel_id, chapter);
+                mPresenter.getChapterRead(novel_id, chapter,0);
             }
         }
 

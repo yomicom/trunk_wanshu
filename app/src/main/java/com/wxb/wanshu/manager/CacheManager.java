@@ -144,8 +144,8 @@ public class CacheManager {
         return null;
     }
 
-    public void saveChapterFile(String bookId, int chapter, ChapterRead.DataBean data) {
-        File file = FileUtils.getChapterFile(bookId, chapter);
+    public void saveChapterFile(ChapterRead.DataBean data) {
+        File file = FileUtils.getChapterFile(data.novel.id, data.chapter.sort);
         FileUtils.writeFile(file.getAbsolutePath(), StringUtils.formatContent(data.chapter_content), false);
     }
 

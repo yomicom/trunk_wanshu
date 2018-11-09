@@ -104,9 +104,15 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             @Override
             public void onClick(View v) {
                 //去书城
-
+                EventBus.getDefault().post(new BookShelfStatus(0));
             }
         });
+//        onRefresh();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         onRefresh();
     }
 
@@ -135,7 +141,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             mAdapter.clear();
         }
         mAdapter.addAll(data0.getData());
-
+        visible(manage);
     }
 
     @Override
@@ -200,7 +206,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         }
         mAdapter.notifyDataSetChanged();
 
-        EventBus.getDefault().post(new BookShelfStatus(true));
+        EventBus.getDefault().post(new BookShelfStatus(1));
     }
 
     /**
@@ -221,7 +227,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         manage.setText("全选");
         manage.setTextColor(getResources().getColor(R.color.gobal_color));
 
-        EventBus.getDefault().post(new BookShelfStatus(false));
+        EventBus.getDefault().post(new BookShelfStatus(2));
     }
 
 

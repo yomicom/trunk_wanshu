@@ -122,7 +122,7 @@ public class ChapterRead extends Base {
             public String novel_id;
             public String volume_id;
             public String name;
-            public String sort;
+            public int sort;
             public String word_num;
             public String create_time;
             public String update_time;
@@ -161,11 +161,11 @@ public class ChapterRead extends Base {
                 this.name = name;
             }
 
-            public String getSort() {
+            public int getSort() {
                 return sort;
             }
 
-            public void setSort(String sort) {
+            public void setSort(int sort) {
                 this.sort = sort;
             }
 

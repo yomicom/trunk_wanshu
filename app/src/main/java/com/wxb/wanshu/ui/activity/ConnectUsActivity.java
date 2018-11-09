@@ -8,6 +8,7 @@ import android.view.View;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.component.AppComponent;
+import com.wxb.wanshu.utils.Utils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,6 +16,9 @@ import butterknife.OnClick;
 public class ConnectUsActivity extends BaseActivity {
 
 
+    public String KEFU_QQ = "3374397930";
+    public String KEFU_CALL = "400-9981236";
+    public String HEZUO_QQ = "2499931904";
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ConnectUsActivity.class));
     }
@@ -58,6 +62,7 @@ public class ConnectUsActivity extends BaseActivity {
             case R.id.tv_call:
                 break;
             case R.id.tv_qq:
+                Utils.joinQQ(this,KEFU_QQ);
                 break;
             case R.id.tv_cooperate:
                 break;

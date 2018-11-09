@@ -336,11 +336,11 @@ public interface ApiService {
      * 小说内容
      *
      * @param novel_id
-     * @param chapter_id
+     * @param sort
      * @return
      */
     @GET("/novel/read")
-    Observable<ChapterRead> getChapterRead(@Query("novel_id") String novel_id, @Query("chapter_id") int chapter_id, @Query("next") int next);
+    Observable<ChapterRead> getChapterRead(@Query("novel_id") String novel_id, @Query("sort") int sort, @Query("next") int next);
 
     /**
      * 搜索小说

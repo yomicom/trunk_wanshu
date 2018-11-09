@@ -75,4 +75,7 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
 
     }
 
+    public void setSelectPos(int selectPos) {
+        this.selectPos = selectPos;
+    }
 }

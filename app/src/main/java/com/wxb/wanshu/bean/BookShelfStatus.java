@@ -5,9 +5,9 @@ package com.wxb.wanshu.bean;
  */
 
 public class BookShelfStatus {
-    public BookShelfStatus(boolean editStatus) {
+    public BookShelfStatus(int editStatus) {
         this.editStatus = editStatus;
     }
 
-    public boolean editStatus;
+    public int editStatus;
 }
