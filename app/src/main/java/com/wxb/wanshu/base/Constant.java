@@ -69,6 +69,14 @@ public class Constant {
 
     public static final int SLIDABLE_DISABLE = 0;
     public static final int SLIDABLE_EDGE = 1;
+
+    /**
+     * 阅读书籍状态码
+     */
+    public static final int READ_DOWN_CODE = 410;//小说已下架
+    public static final int READ_ING_CODE = 420;//小说未完待续
+    public static final int READ_FINISH_CODE = 430;//小说完结
+
     /**
      * 支付宝支付业务：入参app_id
      */

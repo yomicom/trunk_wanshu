@@ -18,6 +18,7 @@ package com.wxb.wanshu.base;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.Book;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -32,13 +33,6 @@ public class ChapterRead extends Base {
      */
 
     public DataBean data;
-    /**
-     * code : 420
-     * recommend_list : [{"id":"3","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false},{"id":"4","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false},{"id":"5","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false}]
-     */
-
-    private List<DataBean.NovelBean> recommend_list;
-
     public DataBean getData() {
         return data;
     }
@@ -47,15 +41,12 @@ public class ChapterRead extends Base {
         this.data = data;
     }
 
-    public List<DataBean.NovelBean> getRecommend_list() {
-        return recommend_list;
-    }
+    /**
+     * code : 420
+     * recommend_list : [{"id":"3","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false},{"id":"4","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false},{"id":"5","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false}]
+     */
 
-    public void setRecommend_list(List<DataBean.NovelBean> recommend_list) {
-        this.recommend_list = recommend_list;
-    }
-
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * code : 0
          * novel : {"id":"2","name":"千金归来：老公，请走开","cover":"http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-a19d1ddedd8d32f32f97f71f9d4d9bca.jpg","description":"深爱之人毫无预兆地变脸：出轨，设计她父亲跳楼，逼她离婚，甚至还想要她的命！被伤到体无完肤的凌萱，落荒而逃。两年后，再相逢。\u201c凌萱？\u201d\u201c陆董，我叫凌若，您是不是认错人了？\u201d复仇的火焰在凌萱心底熊熊燃烧：陆庭轩，你的戏已落幕，该轮到我登场了\u2026\u2026","word_num":"33345","author":"栀想","category_name":"","is_complete":false}
@@ -69,6 +60,15 @@ public class ChapterRead extends Base {
         public boolean on_shelf;
         public String chapter_content;
 
+        public List<DataBean.NovelBean> recommend_list;
+
+        public List<DataBean.NovelBean> getRecommend_list() {
+            return recommend_list;
+        }
+
+        public void setRecommend_list(List<DataBean.NovelBean> recommend_list) {
+            this.recommend_list = recommend_list;
+        }
         public int getCode() {
             return code;
         }
@@ -104,7 +104,7 @@ public class ChapterRead extends Base {
         public static class NovelBean extends Book {
         }
 
-        public static class ChapterBean {
+        public static class ChapterBean implements Serializable{
             /**
              * id : 1
              * novel_id : 2

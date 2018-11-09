@@ -31,7 +31,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
         context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title));
     }
     public static void startActivity(Context context, String type,String category_id, String title) {
-        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title).putExtra("category", category_id));
+        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title).putExtra("category_id", category_id));
     }
 
     @Inject

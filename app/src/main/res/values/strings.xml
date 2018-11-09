@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">万书</string>
+    <string name="app_name">来点小说</string>
 
     <string name="login">登录</string>
     <string name="weixin_login">微信登录</string>
@@ -39,6 +39,7 @@
     <string name="no_web">网络不给力，请稍后再试～～</string>
     <string name="to_get_web">再试一次</string>
     <string name="no_book">马上去书城发现好书！</string>
+    <string name="novel_coding">未完待续，作者努力码字中...</string>
     <string name="to_get_book">去找书</string>
     <string name="no_login">登录后开启精彩阅读时间</string>
     <string name="to_login">马上登录</string>

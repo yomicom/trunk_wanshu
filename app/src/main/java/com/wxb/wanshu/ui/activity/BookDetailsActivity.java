@@ -109,7 +109,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     public static void startActivity(Context context, String novel_id) {
         context.startActivity(new Intent(context, BookDetailsActivity.class)
-                .putExtra(INTENT_BOOK_ID, "1"));
+                .putExtra(INTENT_BOOK_ID, novel_id));
     }
 
     @Inject
@@ -127,7 +127,8 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.details_books);
+        mCommonToolbar.setTitle("");
+//        mCommonToolbar.setTitle(R.string.details_books);
     }
 
     @Override
@@ -267,7 +268,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
             case R.id.item_last_chapter:
-                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, false, bookDetails.on_shelf);
+                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, true, bookDetails.on_shelf);
                 break;
         }
     }
@@ -275,7 +276,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 10, 0, "").setIcon(R.mipmap.menu_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        menu.add(0, 10, 0, "").setIcon(R.mipmap.menu_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 

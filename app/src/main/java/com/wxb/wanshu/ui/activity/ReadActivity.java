@@ -56,7 +56,6 @@ import com.wxb.wanshu.view.dialog.ShareBookDialog;
 import com.wxb.wanshu.view.readview.BaseReadView;
 import com.wxb.wanshu.view.readview.OnReadStateChangeListener;
 import com.wxb.wanshu.view.readview.OverlappedWidget;
-import com.wxb.wanshu.view.readview.PageWidget;
 
 import org.simple.eventbus.EventBus;
 
@@ -147,6 +146,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private View decodeView;
 
     boolean isOnShelf = false;//是否被添加书架
+    int fontChangeSize = 5;//字体调节度
 
     private List<BookMenu.DataBean.ChaptersBean> mChapterList = new ArrayList<>();
 
@@ -429,16 +429,19 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @Override
     public synchronized void showChapterRead(ChapterRead.DataBean data) { // 加载章节内容
         if (data != null) {
-//            hideReadBar();
+            hideDialog();
             switch (data.code) {
-                case 410://小说已下架
-//                    finish();
+                case Constant.READ_DOWN_CODE:
+                    finish();
+                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_DOWN_CODE, "", data);
                     break;
-                case 420://小说未完待续
+                case Constant.READ_ING_CODE:
 //                    finish();
+                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_ING_CODE, "", data);
                     break;
-                case 430://小说完结
+                case Constant.READ_FINISH_CODE:
 //                    finish();
+                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_FINISH_CODE, "", data);
                     break;
                 case 0:
                     CacheManager.getInstance().saveChapterFile(data);
@@ -654,6 +657,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     /***************Setting Menu*****************/
 
+    //亮度
     @OnClick(R.id.ivBrightnessMinus)
     public void brightnessMinus() {
         int curBrightness = SettingManager.getInstance().getReadBrightness();
@@ -672,16 +676,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
     }
 
+    //字体大小
     @OnClick(R.id.tvFontsizeMinus)
     public void fontsizeMinus() {
-        int font = Integer.parseInt(tvFontSize.getText().toString());
-        calcFontSize(font - 1);
+        calcFontSize(false);
     }
 
     @OnClick(R.id.tvFontsizePlus)
     public void fontsizePlus() {
-        int font = Integer.parseInt(tvFontSize.getText().toString());
-        calcFontSize(font + 1);
+        calcFontSize(true);
     }
 
     @OnClick(R.id.tvClear)
@@ -894,7 +897,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.i("onLoadChapterFailure:" + chapter);
             startRead = false;
             if (CacheManager.getInstance().getChapterFile(novel_id + "", chapter) == null) {
-                mPresenter.getChapterRead(novel_id, chapter,0);
+                mPresenter.getChapterRead(novel_id, chapter, 0);
             }
         }
 
@@ -902,6 +905,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         public void onCenterClick() {
             LogUtils.i("onCenterClick");
             toggleReadBar();
+        }
+
+        @Override
+        public void onPageFinish() {
+            showDialog();
+            mPresenter.getChapterRead(novel_id, currentChapter + 1, 0);
         }
 
         @Override
@@ -986,12 +995,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         seekbarLightness.setEnabled(true);
     }
 
-    private void calcFontSize(int fontSize) {
+    private void calcFontSize(boolean isAdd) {
+        int font = Integer.parseInt(tvFontSize.getText().toString());
+        int fontSize = isAdd == true ? (font += fontChangeSize) : (font -= fontChangeSize);
         // progress range 1 - 10
-        int progress = 1;
-        if (fontSize >= 20 && fontSize <= 60) {
-            seekbarFontSize.setProgress(progress);
-            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
+//        int progress = 1;
+        if (fontSize >= 10 && fontSize <= 100) {
+//            seekbarFontSize.setProgress(progress);
+//            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
             mPageWidget.setFontSize(fontSize);
             tvFontSize.setText(fontSize + "");
         }

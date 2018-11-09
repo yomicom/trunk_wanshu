@@ -25,6 +25,7 @@ import com.wxb.wanshu.utils.FileUtils;
 import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.StringUtils;
+import com.wxb.wanshu.utils.ToastUtils;
 
 import java.io.File;
 import java.util.List;
@@ -176,7 +177,7 @@ public class CacheManager {
      *
      * @param clearReadPos 是否删除阅读记录
      */
-    public synchronized void clearCache(boolean clearReadPos, boolean clearCollect) {
+    public synchronized void clearCache(boolean clearReadPos) {
         try {
             // 删除内存缓存
             String cacheDir = AppUtils.getAppContext().getCacheDir().getPath();
@@ -193,11 +194,12 @@ public class CacheManager {
                 SettingManager.getInstance().saveUserChooseSex(chooseSex);
             }
             // 清空书架
-            if (clearCollect) {
+//            if (clearCollect) {
 //                CollectionsManager.getInstance().clear();
-            }
+//            }
             // 清除其他缓存
             ACache.get(AppUtils.getAppContext()).clear();
+            ToastUtils.showToast("清除缓存成功");
         } catch (Exception e) {
             LogUtils.e(e.toString());
         }

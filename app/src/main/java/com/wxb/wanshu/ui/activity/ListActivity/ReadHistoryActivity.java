@@ -7,13 +7,18 @@ import android.view.MenuItem;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
+import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
+import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import javax.inject.Inject;
 
@@ -55,6 +60,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         mPresenter.attachView(this);
         onRefresh();
 
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -95,7 +101,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void onLoadMore() {
-        page ++;
+        page++;
         mPresenter.getReadHistoryList(page);
     }
 
@@ -117,11 +123,19 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         return super.onOptionsItemSelected(item);
     }
 
+    @Subscriber
+    public void onEventMainThread(AddShlef data) {
+        if (data.add >= 0) {
+            mAdapter.notifyItemChanged(data.add);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        EventBus.getDefault().unregister(this);
     }
 }

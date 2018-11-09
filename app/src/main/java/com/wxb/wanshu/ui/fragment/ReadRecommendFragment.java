@@ -11,15 +11,12 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseFragment;
-import com.wxb.wanshu.base.Constant;
+import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
-import com.wxb.wanshu.ui.activity.KindNovelActivity;
-import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
-import com.wxb.wanshu.ui.activity.NovelRankActivity;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVHomePopularAdapter;
+import com.wxb.wanshu.ui.adapter.easyadpater.ReadRecommendAdapter;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
 import butterknife.BindView;
@@ -31,7 +28,7 @@ import butterknife.Unbinder;
  * Created by qiming on 2017/11/30.
  */
 
-public class HomePopularityFragment extends BaseFragment implements OnRvItemClickListener {
+public class ReadRecommendFragment extends BaseFragment implements OnRvItemClickListener {
     @BindView(R.id.tv_tag)
     TextView tvTag;
     @BindView(R.id.tv_more)
@@ -40,15 +37,15 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
     RecyclerView rvHorizontal1;
     Unbinder unbinder;
 
-    private HomeData.DataBeanX data;
+    private ChapterRead.DataBean data;
 
     @Override
     public int getLayoutId() {
         return R.layout.frag_home_popular;
     }
 
-    public static HomePopularityFragment newInstance(HomeData.DataBeanX dataBeanX) {
-        HomePopularityFragment fragment = new HomePopularityFragment();
+    public static ReadRecommendFragment newInstance(ChapterRead.DataBean dataBeanX) {
+        ReadRecommendFragment fragment = new ReadRecommendFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", dataBeanX);
         fragment.setArguments(bundle);
@@ -68,19 +65,20 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
     @Override
     public void initDatas() {
         Bundle bundle = getArguments();
-        data = (HomeData.DataBeanX) bundle.getSerializable("data");
+        data = (ChapterRead.DataBean) bundle.getSerializable("data");
 
-        tvTag.setText(data.getName());
+
+        tvTag.setText("猜你喜欢");
     }
 
     @Override
     public void configViews() {
         if (data != null) {
-            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
+            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, false);
             rvHorizontal1.setLayoutManager(layoutManager);
-            rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
+            rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 30, false));
 
-            RVHomePopularAdapter adapter = new RVHomePopularAdapter(getActivity(), data.getData(), this);
+            ReadRecommendAdapter adapter = new ReadRecommendAdapter(getActivity(), data.getRecommend_list(), this);
             rvHorizontal1.setAdapter(adapter);
         }
 
@@ -88,15 +86,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
     }
 
     private void setMoreView() {
-        String type = data.getType();
-        String name = data.getName();
-        if (type.equals(Constant.BookType.POPULAR)) {//首页点更多到精品馆频道
-            tvMore.setOnClickListener(v ->
-                    KindNovelActivity.startActivity(mContext,0));
-        }else {
-            tvMore.setOnClickListener(v ->
-                    SelectBooksActivity.startActivity(mContext, type, name));
-        }
+        gone(tvMore);
     }
 
     @Override

@@ -190,7 +190,10 @@
         <activity
             android:name=".ui.activity.KindNovelActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.WelcomeActivity"></activity>
+        <activity android:name=".ui.activity.WelcomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ReadOtherStatusActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -67,8 +67,8 @@ public abstract class BaseReadView extends View {
         mScreenWidth = ScreenUtils.getScreenWidth();
         mScreenHeight = ScreenUtils.getScreenHeight();
 
-        mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
-        mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
+        mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
+        mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
         mCurrentPageCanvas = new Canvas(mCurPageBitmap);
         mNextPageCanvas = new Canvas(mNextPageBitmap);
 
@@ -161,7 +161,8 @@ public abstract class BaseReadView extends View {
                     } else if (actiondownX >= mScreenWidth / 2) {// 从右翻
                         BookStatus status = pagefactory.nextPage();
                         if (status == BookStatus.NO_NEXT_PAGE) {
-                            ToastUtils.showSingleToast("没有下一页啦");
+                            listener.onPageFinish();
+//                            ToastUtils.showSingleToast("没有下一页啦");
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();

@@ -23,7 +23,7 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
-import com.wxb.wanshu.ui.adapter.easyadpater.RVHorizontal1Adapter;
+import com.wxb.wanshu.ui.adapter.easyadpater.HomeRecommendAdapter;
 import com.wxb.wanshu.utils.ImageUtils;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
@@ -130,7 +130,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 //            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 //            rvHorizontal1.setLayoutManager(layoutManager);
 //            rvHorizontal1.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.white), 20));
-//            RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), recommend, this);
+//            HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), recommend, this);
 //            rvHorizontal1.setAdapter(adapter);
         } else {
             HomeData.DataBeanX data = (HomeData.DataBeanX) bundle.getSerializable("data");
@@ -167,7 +167,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
         rvHorizontal1.setLayoutManager(layoutManager);
         rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 20, false));
-        RVHorizontal1Adapter adapter = new RVHorizontal1Adapter(getActivity(), list, this);
+        HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), list, this);
         rvHorizontal1.setAdapter(adapter);
     }
 

@@ -10,9 +10,11 @@ import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
+import com.wxb.wanshu.manager.CacheManager;
 import com.wxb.wanshu.ui.activity.ListActivity.ReadHistoryActivity;
 import com.wxb.wanshu.ui.contract.MeContract;
 import com.wxb.wanshu.ui.presenter.MePresenter;
+import com.wxb.wanshu.utils.ToastUtils;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -58,6 +60,13 @@ public class MeActivity extends BaseActivity implements MeContract.View {
     public void initDatas() {
         mPresenter.attachView(this);
 //        mPresenter.getUserData();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clean.setText(CacheManager.getInstance().getCacheSize());
     }
 
     @Override
@@ -109,6 +118,8 @@ public class MeActivity extends BaseActivity implements MeContract.View {
             case R.id.item_read_screen_time:
                 break;
             case R.id.item_clean:
+                CacheManager.getInstance().clearCache(true);
+                clean.setText("");
                 break;
             case R.id.item_score:
                 break;

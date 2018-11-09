@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import com.wxb.wanshu.R;
+import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.view.recycleview.adapter.BaseViewHolder;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
+
+import org.simple.eventbus.EventBus;
 
 /**
  * Created by qiming on 2017/11/30.
@@ -25,10 +28,15 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
             @Override
             public void setData(ReadHistoryList.DataBean item) {
 
-                holder.setImageUrl(R.id.iv_book, item.getCover())
-                        .setText(R.id.tv_title, item.getName())
-                        .setText(R.id.tv_time, item.getCategory_name());
-
+                holder.setImageUrl(R.id.iv_book, item.novel.cover)
+                        .setText(R.id.tv_title, item.novel.name)
+                        .setText(R.id.tv_time, "上次阅读：" + item.last_read_time)
+                        .setText(R.id.tv_introduce, "已读：" + item.chapter.name);
+                if (item.isOn_shelf()) {
+                    holder.setImageResource(R.id.iv_book,R.mipmap.has_add_shlef);
+                } else {
+                    holder.setImageResource(R.id.iv_book,R.mipmap.add_shlef);
+                }
 //                int complete_status = item.getComplete_status();
 //                if (complete_status == 1) {
 //                    holder.setText(R.id.tv_introduce, "上次看到第" + item.getChapter_name() + "章 | 已完结共" + item.getLatest_chapter() + "章");
@@ -36,10 +44,10 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
 //                    holder.setText(R.id.tv_introduce, "上次看到第" + item.getChapter_name() + "章 | 更新到" + item.getLatest_chapter() + "章");
 //                }
 
-                holder.setOnClickListener(R.id.add_shelf,v -> {
-                    if (item.isIs_complete()){
-
-                    }else {
+                holder.setOnClickListener(R.id.add_shelf, v -> {
+                    if (item.isOn_shelf()) {
+                    } else {
+                        EventBus.getDefault().post(new AddShlef(0));
                     }
                 });
             }

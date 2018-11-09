@@ -106,7 +106,7 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
                 break;
             case R.id.store:
                 if (!type.equals(TYPE_4)) {
-                    changeStatus(click);
+                    changeStatus(store);
                     type = TYPE_4;
                     page = START_PAGE;
                     mPresenter.getNovelRank(type, page);

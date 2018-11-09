@@ -16,10 +16,10 @@ import java.util.List;
  * Created by qiming on 2017/11/30.
  */
 
-public class RVHorizontal1Adapter extends EasyRVAdapter<Book> {
+public class HomeRecommendAdapter extends EasyRVAdapter<Book> {
     private OnRvItemClickListener itemClickListener;
 
-    public RVHorizontal1Adapter(Context context, List<Book> list, OnRvItemClickListener listener) {
+    public HomeRecommendAdapter(Context context, List<Book> list, OnRvItemClickListener listener) {
         super(context, list, R.layout.include_item_easy_book);
         this.itemClickListener = listener;
     }

@@ -29,5 +29,7 @@ public interface OnReadStateChangeListener {
 
     void onCenterClick();
 
+    void onPageFinish();
+
     void onFlip();
 }

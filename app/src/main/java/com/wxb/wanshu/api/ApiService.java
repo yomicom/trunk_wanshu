@@ -133,7 +133,7 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("/client/bookshelf")
+    @GET("/client/readLog")
     Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page);
 
     /**
