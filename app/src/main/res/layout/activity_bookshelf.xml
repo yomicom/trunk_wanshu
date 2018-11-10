@@ -16,6 +16,13 @@
         android:paddingLeft="@dimen/distance_top"
         android:paddingRight="@dimen/distance_top">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ab_back"
+            android:layout_centerVertical="true"
+            android:id="@+id/back"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/finish"
             style="@style/text_big_nomal"
@@ -52,26 +59,7 @@
         android:paddingLeft="@dimen/distance_text_text_8"
         android:paddingRight="@dimen/distance_text_text_8"
         app:layout_empty="@layout/bookshelf_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay" />
-
-    <!--<GridView-->
-    <!--android:id="@+id/gridview"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@color/white"-->
-    <!--android:columnWidth="100dp"-->
-    <!--android:numColumns="3"-->
-    <!--android:paddingBottom="@dimen/distance_top_20"-->
-    <!--android:paddingLeft="@dimen/distance_left"-->
-    <!--android:paddingRight="@dimen/distance_left"-->
-    <!--android:paddingTop="@dimen/distance_top_20"-->
-    <!--android:scrollbars="none"-->
-    <!--android:stretchMode="spacingWidth"-->
-    <!--android:verticalSpacing="@dimen/distance_top_20"-->
-    <!--android:visibility="visible">-->
-
-    <!--</GridView>-->
+        app:layout_progress="@layout/common_progress_view"/>
 
     <RelativeLayout
         android:id="@+id/rl_no_content"

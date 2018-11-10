@@ -67,7 +67,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     @Override
     public void configViews() {
 
-        initAdapter(SelectBooksAdapter.class, false, true);
+        initAdapter(SelectBooksAdapter.class, false, false);
         mRecyclerView.removeAllItemDecoration();
     }
 

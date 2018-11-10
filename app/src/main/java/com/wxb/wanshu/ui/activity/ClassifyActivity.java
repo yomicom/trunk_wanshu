@@ -34,7 +34,7 @@ import butterknife.BindView;
 /**
  * 分类
  */
-public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View, View.OnClickListener, OnRvItemClickListener {
+public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View, OnRvItemClickListener {
 
     int MAN_TYPE = 10;
     int WOMAN_TYPE = 20;
@@ -47,9 +47,9 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     @BindView(R.id.recycleview)
     RecyclerView recycleview;
 
-    private HeaderViewHolder headerViewHolder;
-    String category_id = "";
-    String complete_status = "";
+//    private HeaderViewHolder headerViewHolder;
+//    String category_id = "";
+//    String complete_status = "";
 
     @Override
     public void onItemClick(View view, int position, Object data) {
@@ -58,34 +58,34 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     }
 
 
-    static class HeaderViewHolder {
-
-        private TextView tvComplete;
-        private TextView tvUpdating;
-        private TextView tvAllStatus;
-        private GridView gridview;
-        private TextView tvAllCategory;
-        private LinearLayout llChoose;
-        private TextView closeChoose;
-        private TextView tvMan;
-        private TextView tvWoman;
-
-        public HeaderViewHolder(View view) {
-            initView(view);
-        }
-
-        private void initView(View view) {
-            tvWoman = (TextView) view.findViewById(R.id.tv_woman);
-            tvMan = (TextView) view.findViewById(R.id.tv_man);
-            closeChoose = (TextView) view.findViewById(R.id.close_choose);
-            llChoose = (LinearLayout) view.findViewById(R.id.ll_choose);
-            tvAllCategory = (TextView) view.findViewById(R.id.tv_all_category);
-            gridview = (GridView) view.findViewById(R.id.gridview);
-            tvAllStatus = (TextView) view.findViewById(R.id.tv_all_status);
-            tvUpdating = (TextView) view.findViewById(R.id.tv_updating);
-            tvComplete = (TextView) view.findViewById(R.id.tv_complete);
-        }
-    }
+//    static class HeaderViewHolder {
+//
+//        private TextView tvComplete;
+//        private TextView tvUpdating;
+//        private TextView tvAllStatus;
+//        private GridView gridview;
+//        private TextView tvAllCategory;
+//        private LinearLayout llChoose;
+//        private TextView closeChoose;
+//        private TextView tvMan;
+//        private TextView tvWoman;
+//
+//        public HeaderViewHolder(View view) {
+//            initView(view);
+//        }
+//
+//        private void initView(View view) {
+//            tvWoman = (TextView) view.findViewById(R.id.tv_woman);
+//            tvMan = (TextView) view.findViewById(R.id.tv_man);
+//            closeChoose = (TextView) view.findViewById(R.id.close_choose);
+//            llChoose = (LinearLayout) view.findViewById(R.id.ll_choose);
+//            tvAllCategory = (TextView) view.findViewById(R.id.tv_all_category);
+//            gridview = (GridView) view.findViewById(R.id.gridview);
+//            tvAllStatus = (TextView) view.findViewById(R.id.tv_all_status);
+//            tvUpdating = (TextView) view.findViewById(R.id.tv_updating);
+//            tvComplete = (TextView) view.findViewById(R.id.tv_complete);
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,15 +113,21 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     @Override
     public void initDatas() {
         mPresenter.attachView(this);
+
+        onRefresh();
+//        refreshData();
+    }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
         mPresenter.getNovelCategory();
-
-        refreshData();
     }
 
-    private void refreshData() {
-        page = START_PAGE;
+    //    private void refreshData() {
+//        page = START_PAGE;
 //        mPresenter.getBookList(sex_type, category_id, complete_status, page, "");
-    }
+//    }
 
     @Override
     public void configViews() {
@@ -146,15 +152,15 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
 //        });
     }
 
-    private void setView() {
-        headerViewHolder.tvAllCategory.setOnClickListener(this);
-        headerViewHolder.tvAllStatus.setOnClickListener(this);
-        headerViewHolder.tvComplete.setOnClickListener(this);
-        headerViewHolder.tvUpdating.setOnClickListener(this);
-        headerViewHolder.closeChoose.setOnClickListener(this);
-        headerViewHolder.tvMan.setOnClickListener(this);
-        headerViewHolder.tvWoman.setOnClickListener(this);
-    }
+//    private void setView() {
+//        headerViewHolder.tvAllCategory.setOnClickListener(this);
+//        headerViewHolder.tvAllStatus.setOnClickListener(this);
+//        headerViewHolder.tvComplete.setOnClickListener(this);
+//        headerViewHolder.tvUpdating.setOnClickListener(this);
+//        headerViewHolder.closeChoose.setOnClickListener(this);
+//        headerViewHolder.tvMan.setOnClickListener(this);
+//        headerViewHolder.tvWoman.setOnClickListener(this);
+//    }
 
     @Override
     public void showError() {
@@ -206,69 +212,69 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_all_category:
-                if (!"".equals(category_id)) {
-                    category_id = "";
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllCategory, R.color.gobal_color);
-                }
-                break;
-            case R.id.tv_all_status:
-                if (!"".equals(complete_status)) {
-                    complete_status = "";
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.gobal_color);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.text_color_2);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.text_color_2);
-                }
-                break;
-            case R.id.tv_updating:
-                if (!"0".equals(complete_status)) {
-                    complete_status = "0";
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.text_color_2);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.gobal_color);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.text_color_2);
-                }
-                break;
-            case R.id.tv_complete:
-                if (!"1".equals(complete_status)) {
-                    complete_status = "1";
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.text_color_2);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.text_color_2);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.gobal_color);
-                }
-                break;
-            case R.id.close_choose:
-                if (isVisible(headerViewHolder.llChoose)) {
-                    gone(headerViewHolder.llChoose);
-                    headerViewHolder.closeChoose.setText("展开");
-                } else {
-                    visible(headerViewHolder.llChoose);
-                    headerViewHolder.closeChoose.setText("收起");
-                }
-                break;
-            case R.id.tv_woman:
-                if (sex_type != WOMAN_TYPE) {
-                    sex_type = WOMAN_TYPE;
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvWoman, R.color.gobal_color);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvMan, R.color.text_color_1);
-                }
-                break;
-            case R.id.tv_man:
-                if (sex_type != MAN_TYPE) {
-                    sex_type = MAN_TYPE;
-                    refreshData();
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvMan, R.color.gobal_color);
-                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvWoman, R.color.text_color_1);
-                }
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.tv_all_category:
+//                if (!"".equals(category_id)) {
+//                    category_id = "";
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllCategory, R.color.gobal_color);
+//                }
+//                break;
+//            case R.id.tv_all_status:
+//                if (!"".equals(complete_status)) {
+//                    complete_status = "";
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.gobal_color);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.text_color_2);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.text_color_2);
+//                }
+//                break;
+//            case R.id.tv_updating:
+//                if (!"0".equals(complete_status)) {
+//                    complete_status = "0";
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.text_color_2);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.gobal_color);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.text_color_2);
+//                }
+//                break;
+//            case R.id.tv_complete:
+//                if (!"1".equals(complete_status)) {
+//                    complete_status = "1";
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvAllStatus, R.color.text_color_2);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvUpdating, R.color.text_color_2);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvComplete, R.color.gobal_color);
+//                }
+//                break;
+//            case R.id.close_choose:
+//                if (isVisible(headerViewHolder.llChoose)) {
+//                    gone(headerViewHolder.llChoose);
+//                    headerViewHolder.closeChoose.setText("展开");
+//                } else {
+//                    visible(headerViewHolder.llChoose);
+//                    headerViewHolder.closeChoose.setText("收起");
+//                }
+//                break;
+//            case R.id.tv_woman:
+//                if (sex_type != WOMAN_TYPE) {
+//                    sex_type = WOMAN_TYPE;
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvWoman, R.color.gobal_color);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvMan, R.color.text_color_1);
+//                }
+//                break;
+//            case R.id.tv_man:
+//                if (sex_type != MAN_TYPE) {
+//                    sex_type = MAN_TYPE;
+//                    refreshData();
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvMan, R.color.gobal_color);
+//                    ViewToolUtils.getResourceColor(mContext, headerViewHolder.tvWoman, R.color.text_color_1);
+//                }
+//                break;
+//        }
+//    }
 
 }

@@ -98,6 +98,7 @@ public class ReadOtherStatusActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.push_right_in, 0);
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
     }

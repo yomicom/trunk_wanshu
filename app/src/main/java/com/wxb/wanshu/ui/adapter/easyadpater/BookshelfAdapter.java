@@ -31,9 +31,9 @@ public class BookshelfAdapter extends RecyclerArrayAdapter<BookselfList.DataBean
                         .setVisible(R.id.iv_book_choose, item.showCheckBox);
 
                 if (item.isSeleted) {
-                    holder.setImageDrawableRes(R.id.iv_book_choose, R.mipmap.ic_choose_book);
+                    holder.setImageDrawableRes(R.id.iv_book_choose, R.mipmap.select_history);
                 } else {
-                    holder.setImageDrawableRes(R.id.iv_book_choose, R.mipmap.ic_nochoose_book);
+                    holder.setImageDrawableRes(R.id.iv_book_choose, R.mipmap.no_select_history);
                 }
             }
         };

@@ -73,7 +73,7 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @Override
     public void configViews() {
-        initAdapter(NovelRankAdapter.class, false, true);
+        initAdapter(NovelRankAdapter.class, false, false);
         mRecyclerView.removeAllItemDecoration();
     }
 

@@ -5,6 +5,7 @@ import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookselfList;
 import com.wxb.wanshu.ui.contract.BookselfContract;
+import com.wxb.wanshu.utils.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -65,8 +66,12 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
                     }
 
                     @Override
-                    public void onNext(Base data) {
-                        mView.showDelSuccess(data);
+                    public void onNext(Base result) {
+                        if (result.errcode == 0) {
+                            mView.showDelSuccess(novel_ids);
+                        } else {
+                            ToastUtils.showToast(result.message);
+                        }
                     }
                 });
         addSubscrebe(rxSubscription);

@@ -2,7 +2,7 @@
 <resources>
 
     <!--app标题栏高度-->
-    <dimen name="app_title_height">45dp</dimen>
+    <dimen name="app_title_height">48dp</dimen>
 
     <!--应用内APP文字-->
     <dimen name="text_more_small">10sp</dimen>

@@ -32,6 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.HOME_HOT_TYPE;
+import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.HOME_RECOMMEND_TYPE;
+
 /**
  * 书城首页
  */
@@ -63,8 +66,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
-    final static int POPULAR_LIST = 0;
-    final static int HOT_LIST = 1;
     private HomeData homeData;
 
     @Override
@@ -96,7 +97,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             transaction.replace(frameId[0], bannerFragment);
 
             //主编力荐
-            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(1), POPULAR_LIST);
+            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(1), HOME_RECOMMEND_TYPE);
             transaction.replace(frameId[1], recommendFragment);
 
             HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(data.get(2));
@@ -107,7 +108,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             transaction.replace(frameId[3], homePopularityFragment);
 
             //火热连载
-            recommendFragment = HomeRecommendFragment.newInstance(data.get(4), HOT_LIST);
+            recommendFragment = HomeRecommendFragment.newInstance(data.get(4), HOME_HOT_TYPE);
             transaction.replace(frameId[4], recommendFragment);
 
             homeBookListFragment = HomeBookListFragment.newInstance(data.get(5));

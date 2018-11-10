@@ -18,11 +18,18 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
+
         <ImageView
             android:id="@+id/iv_wn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_no_novel" />
+            android:src="@mipmap/icon_no_novel"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/tv_toast"
@@ -31,7 +38,10 @@
             android:maxLines="3"
             android:text="@string/novel_coding"
             android:textColor="@color/text_color_2"
+            android:layout_alignBottom="@id/iv_wn"
+            android:layout_centerHorizontal="true"
             android:textSize="@dimen/text_middle" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/back"
@@ -53,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_view_item"
         android:background="@color/white"
-        android:paddingTop="@dimen/distance_left"
+        android:paddingTop="@dimen/distance_top"
         android:paddingBottom="@dimen/distance_left"
         android:visibility="gone"></FrameLayout>
 </LinearLayout>

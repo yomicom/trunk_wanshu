@@ -78,6 +78,10 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     ConstraintLayout lookMore;
     private int type;
 
+    public static int HOME_RECOMMEND_TYPE = 0;
+    public static int HOME_HOT_TYPE = 1;
+    public static int BOOK_DETAILS_TYPE = 2;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_horizontal01;
@@ -120,7 +124,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         Bundle bundle = getArguments();
         type = bundle.getInt("type");
 
-        if (type == 2) {
+        if (type == BOOK_DETAILS_TYPE) {
             tvTag.setText("同类作品");
             gone(tvMore, oneItem,lookMore);
             BookDetails.DataBean data = (BookDetails.DataBean) bundle.getSerializable("data");
@@ -145,7 +149,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
                         list.add(list0.get(i));
                     }
 
-                    if (type == 0) {//主编力荐
+                    if (type == HOME_RECOMMEND_TYPE) {//主编力荐
                         setHorinalList(list);
                     } else {//火热连载
                         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
@@ -208,6 +212,10 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
+        if (type == BOOK_DETAILS_TYPE){
+            BookDetailsActivity.startActivity(getActivity(), ((BookDetails.DataBean) data).getId());
+        }else {
+            BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
+        }
     }
 }

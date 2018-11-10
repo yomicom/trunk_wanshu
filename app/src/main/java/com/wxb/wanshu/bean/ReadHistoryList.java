@@ -30,6 +30,8 @@ public class ReadHistoryList extends Base {
         public ChapterBean chapter;
         public String last_read_time;
         public boolean on_shelf;
+        public boolean isSeleted;
+        public boolean showCheckBox;
 
         public NovelBean getNovel() {
             return novel;

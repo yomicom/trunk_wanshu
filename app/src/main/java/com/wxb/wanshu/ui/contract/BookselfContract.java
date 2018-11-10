@@ -14,7 +14,7 @@ public interface BookselfContract {
     interface View extends BaseContract.BaseView {
         void showData(BookselfList data);//显示书架列表
 
-        void showDelSuccess(Base base);
+        void showDelSuccess(String novel_ids);
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {

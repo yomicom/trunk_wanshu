@@ -509,7 +509,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     private synchronized void showReadBar() { // 显示工具栏
-        visible(llBookReadBottom, llBookReadTop, itemChapter);
+        visible(llBookReadBottom, llBookReadTop);
+//        visible(itemChapter);
         showStatusBar();
         decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
@@ -545,7 +546,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.tvBookReadIntroduce)
     public void addBook() {
         gone(rlReadAaSet, rlReadMark);
-        visible(itemChapter);
         mPresenter.addBookShelf(novel_id);
     }
 
@@ -564,7 +564,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.item_book_mode)
     public void onClickChangeMode() { // 日/夜间模式切换
         gone(rlReadAaSet, rlReadMark);
-        visible(itemChapter);
+//        visible(itemChapter);
 
         boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
         changedMode(isNight, -1);
@@ -605,7 +605,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (isVisible(llBookReadBottom)) {
             if (isVisible(rlReadAaSet)) {
                 gone(rlReadAaSet);
-                visible(itemChapter);
+//                visible(itemChapter);
             } else {
                 visible(rlReadAaSet);
                 gone(rlReadMark);
@@ -650,7 +650,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.item_book_menu)//目录
     public void onClickToc() {
         gone(rlReadAaSet, rlReadMark);
-        visible(itemChapter);
+//        visible(itemChapter);
         visible(mTvBookReadTocTitle);
         MenuActivity.startActivityFor(this, novel_id, currentChapter, true);
     }
@@ -792,7 +792,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             case KeyEvent.KEYCODE_BACK:
                 if (isVisible(rlReadAaSet)) {
                     gone(rlReadAaSet);
-                    visible(itemChapter);
+//                    visible(itemChapter);
                     return true;
                 } else if (isVisible(llBookReadBottom)) {
                     hideReadBar();

@@ -62,24 +62,6 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     }
 
     @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void complete() {
-
-    }
-
-    @Override
-    public void showBookMenu(BookMenu data) {
-        adapter.addAll(data.getData().getChapters());
-
-        this.menu = data;
-        listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_menu;
     }
@@ -101,6 +83,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         curChapter = getIntent().getIntExtra(INTENT_CHAPTER, 0);
         isReading = getIntent().getBooleanExtra(INTENT_IS_READING, false);
         mPresenter.attachView(this);
+        showDialog();
         mPresenter.getBookMenu(novel_id);
     }
 
@@ -126,6 +109,24 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         });
     }
 
+    @Override
+    public void showBookMenu(BookMenu data) {
+        hideDialog();
+        adapter.addAll(data.getData().getChapters());
+
+        this.menu = data;
+        listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
+    }
+
+    @Override
+    public void showError() {
+        hideDialog();
+    }
+
+    @Override
+    public void complete() {
+        hideDialog();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

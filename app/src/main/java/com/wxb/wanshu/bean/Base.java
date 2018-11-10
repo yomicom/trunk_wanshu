@@ -32,4 +32,14 @@ public class Base implements Serializable {
     public void setErrcode(int errcode) {
         this.errcode = errcode;
     }
+
+    public String message;
+
+    public String getMessage() {
+        return message == null ? "" : message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

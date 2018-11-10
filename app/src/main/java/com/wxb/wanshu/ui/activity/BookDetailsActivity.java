@@ -52,6 +52,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.BOOK_DETAILS_TYPE;
+
 /**
  * 书籍详情页
  */
@@ -207,7 +209,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance(data, 2);
+            HomeRecommendFragment type1Fragment = HomeRecommendFragment.newInstance(data, BOOK_DETAILS_TYPE);
             transaction.replace(R.id.fl_content_recommand, type1Fragment);
             transaction.commit();
         } else {

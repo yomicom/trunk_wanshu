@@ -27,6 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.HOME_RECOMMEND_TYPE;
+
 
 public class KindNovelActivity extends BaseActivity implements HomeContract.View {
 
@@ -114,7 +116,7 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(0), 0);
+            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(0), HOME_RECOMMEND_TYPE);
             transaction.replace(frameId[0], recommendFragment);
 
             HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(data.get(1));

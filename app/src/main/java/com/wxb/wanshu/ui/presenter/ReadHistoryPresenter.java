@@ -1,11 +1,13 @@
 package com.wxb.wanshu.ui.presenter;
 
+import com.wxb.wanshu.R;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.utils.LogUtils;
+import com.wxb.wanshu.utils.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -67,8 +69,12 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
                     }
 
                     @Override
-                    public void onNext(Base bookDetails) {
-                        mView.addBookResult(bookDetails);
+                    public void onNext(Base result) {
+                        if (result.errcode == 0) {
+                            mView.addBookResult(novel_id);
+                        } else {
+                            ToastUtils.showToast(R.string.add_shlef_fail + result.message);
+                        }
                     }
                 });
         addSubscrebe(subscribe);
@@ -91,8 +97,12 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
                     }
 
                     @Override
-                    public void onNext(Base bookDetails) {
-                        mView.addBookResult(bookDetails);
+                    public void onNext(Base result) {
+                        if (result.errcode == 0) {
+                            mView.delHistoryBookResult(novel_ids);
+                        } else {
+                            ToastUtils.showToast(result.message);
+                        }
                     }
                 });
         addSubscrebe(subscribe);

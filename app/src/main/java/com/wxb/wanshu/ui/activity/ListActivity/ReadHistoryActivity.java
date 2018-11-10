@@ -2,32 +2,67 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
+import com.wxb.wanshu.bean.BookselfList;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
+import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
+import com.wxb.wanshu.utils.ToastUtils;
+import com.wxb.wanshu.view.EmptyView;
+import com.wxb.wanshu.view.dialog.ConfirmDialog;
+import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 阅读历史页
  */
-public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean> implements ReadHistoryContract.View {
+public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean> implements ReadHistoryContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
 
-    int page;
+    @BindView(R.id.finish)
+    TextView finish;
+    @BindView(R.id.manage)
+    TextView manage;
+    @BindView(R.id.tool_bar)
+    RelativeLayout toolBar;
+    @BindView(R.id.rl_no_content)
+    RelativeLayout rlNoContent;
+    @BindView(R.id.tvDelete)
+    TextView tvDelete;
+    @BindView(R.id.llBatchManagement)
+    LinearLayout llBatchManagement;
+
+    @BindView(R.id.back)
+    ImageView back;
+
+    private boolean isSelectAll = false;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ReadHistoryActivity.class));
@@ -38,7 +73,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_common_recycleview;
+        return R.layout.activity_bookshelf;
     }
 
     @Override
@@ -51,8 +86,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("阅读历史");
-        mCommonToolbar.setNavigationIcon(R.mipmap.ab_back);
+//        mCommonToolbar.setTitle("阅读历史");
+//        mCommonToolbar.setNavigationIcon(R.mipmap.ab_back);
     }
 
     @Override
@@ -65,6 +100,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void configViews() {
+        visible(manage);
+        mRecyclerView.setEmptyView(R.layout.common_empty_view);
         initAdapter(ReadHistoryAdapter.class, false, true);
     }
 
@@ -84,13 +121,33 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     }
 
     @Override
-    public void addBookResult(Base result) {
-
+    public void addBookResult(String novel_ids) {
+        List<ReadHistoryList.DataBean> allData = mAdapter.getAllData();
+        for (int i = 0; i < allData.size(); i++) {
+            ReadHistoryList.DataBean bean = allData.get(i);
+//            ReadHistoryList.DataBean.NovelBean novel = bean.novel;
+            if (novel_ids.equals(bean.novel.id)) {
+                bean.on_shelf = true;
+                mAdapter.notifyItemChanged(i, bean);
+                break;
+            }
+        }
     }
 
     @Override
-    public void delHistoryBookResult(Base result) {
-
+    public void delHistoryBookResult(String novel_ids) {
+        String[] ids = novel_ids.split(",");
+        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+            for (int i = 0; i < ids.length; i++) {
+                if (ids[i].equals(bean.novel.id)) {
+                    mAdapter.remove(bean);
+                }
+            }
+        }
+        if (isVisible(llBatchManagement)) {
+            //批量管理完成后，隐藏批量管理布局并刷新页面
+            goneBatchManagementAndRefreshUI();
+        }
     }
 
     @Override
@@ -107,26 +164,128 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void onItemClick(int position) {
-    }
+        if (isVisible(finish)) { //批量管理时，点击选中某项
+            ReadHistoryList.DataBean item = mAdapter.getItem(position);
+            if (item.isSeleted) {
+                item.isSeleted = false;
+            } else {
+                item.isSeleted = true;
+            }
+            mAdapter.notifyDataSetChanged();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 10, 0, "清空").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == 10) {
-            return true;
+            List<ReadHistoryList.DataBean> removeList = new ArrayList<>();
+            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                if (bean.isSeleted) removeList.add(bean);
+            }
+        } else {
+            ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id);
         }
-        return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onItemLongClick(int position) {
+        //批量管理时，屏蔽长按事件
+        if (isVisible(llBatchManagement)) return false;
+        showBatchManagementLayout(position);
+        return false;
+    }
+
+    @OnClick({R.id.tvDelete, R.id.finish, R.id.manage, R.id.back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvDelete:
+                List<ReadHistoryList.DataBean> removeList = new ArrayList<>();
+                for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                    if (bean.isSeleted) removeList.add(bean);
+                }
+                if (removeList.isEmpty()) {
+                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
+                } else {
+                    showDeleteDialog(removeList);
+                }
+                break;
+            case R.id.finish://完成操作
+                goneBatchManagementAndRefreshUI();
+                break;
+            case R.id.manage:
+                if (isVisible(llBatchManagement)) {//全选操作
+                    isSelectAll = !isSelectAll;
+                    manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
+                    for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                        bean.isSeleted = isSelectAll;
+                    }
+                    mAdapter.notifyDataSetChanged();
+                } else {//管理操作
+                    showBatchManagementLayout(-1);
+                }
+                break;
+            case R.id.back:
+                break;
+        }
+    }
+
+    private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList) {
+        ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", "确定", "取消", new ConfirmDialog.SureCallback() {
+            @Override
+            public void exec() throws Exception {
+                StringBuilder novelIds = new StringBuilder();
+                for (ReadHistoryList.DataBean item : removeList) {
+                    novelIds.append(item.novel.id + ",");
+                }
+                if (novelIds.length() > 0) {
+                    mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1));
+                }
+
+            }
+        }, new ConfirmDialog.CancleCallback() {
+            @Override
+            public void exec() throws Exception {
+                finish();
+            }
+        });
+    }
+
+
+    /**
+     * 隐藏批量管理布局并刷新页面
+     */
+    public void goneBatchManagementAndRefreshUI() {
+        if (mAdapter == null) return;
+        gone(finish, llBatchManagement);
+        manage.setText("管理");
+        manage.setTextColor(getResources().getColor(R.color.text_color_2));
+        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+            bean.showCheckBox = false;
+            bean.isSeleted = false;
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 显示批量管理布局
+     *
+     * @param position
+     */
+    private void showBatchManagementLayout(int position) {
+        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+            bean.showCheckBox = true;
+        }
+        if (position > 0) {
+            mAdapter.getItem(position).isSeleted = true;
+        }
+        mAdapter.notifyDataSetChanged();
+
+        visible(finish, llBatchManagement);
+        manage.setText("全选");
+        manage.setTextColor(getResources().getColor(R.color.gobal_color));
+    }
+
 
     @Subscriber
     public void onEventMainThread(AddShlef data) {
-        if (data.add >= 0) {
-            mAdapter.notifyItemChanged(data.add);
+        if (data.item != null) {
+            mPresenter.addBookShelf(data.item.novel.id);
         }
     }
 
@@ -137,5 +296,11 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             mPresenter.detachView();
         }
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
     }
 }

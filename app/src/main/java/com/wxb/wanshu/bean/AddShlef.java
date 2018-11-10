@@ -6,4 +6,9 @@ public class AddShlef {
     public AddShlef(int add) {
         this.add = add;
     }
+
+    public ReadHistoryList.DataBean item;
+    public AddShlef(ReadHistoryList.DataBean item) {
+        this.item = item;
+    }
 }

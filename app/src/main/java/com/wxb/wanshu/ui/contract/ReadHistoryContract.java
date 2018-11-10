@@ -14,9 +14,9 @@ public interface ReadHistoryContract {
     interface View extends BaseContract.BaseView {
         void showReadHistoryList(ReadHistoryList data);
 
-        void addBookResult(Base result);
+        void addBookResult(String novel_ids);
 
-        void delHistoryBookResult(Base result);
+        void delHistoryBookResult(String novel_ids);
 
 
     }

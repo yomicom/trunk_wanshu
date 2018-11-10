@@ -142,7 +142,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/client/bookshelf")
+    @POST("/client/readLog")
     Observable<ReadHistoryList> delReadHistoryList(@Field("logs_ids") String logs_ids);
 
     /**

@@ -51,6 +51,8 @@
     <string name="delete_local_cache">同时删除本地缓存</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="add_shlef_fail">添加书架失败</string>
+    <string name="del_shlef_fail">删除书架失败</string>
 
     <string name="i_reader_finish">完成</string>
     <string name="i_reader_last_read">最近阅读</string>

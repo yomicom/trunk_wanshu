@@ -42,8 +42,8 @@ public abstract class BaseRVActivity<T> extends BaseActivity implements OnLoadMo
     protected EasyRecyclerView mRecyclerView;
     protected RecyclerArrayAdapter<T> mAdapter;
 
-    protected int page = 0;
-    protected int START_PAGE = 0;
+    protected int page = 1;
+    protected int START_PAGE = 1;
     protected int pageSize = 20;
 
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {
@@ -98,7 +98,7 @@ public abstract class BaseRVActivity<T> extends BaseActivity implements OnLoadMo
 
     @Override
     public void onRefresh() {
-        page = 0;
+        page = START_PAGE;
         if (!NetworkUtils.isConnected(getApplicationContext())) {
             mAdapter.pauseMore();
             return;

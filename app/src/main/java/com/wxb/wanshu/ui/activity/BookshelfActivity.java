@@ -20,12 +20,15 @@ import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.BookselfList;
+import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
+import com.wxb.wanshu.manager.CacheManager;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookshelfAdapter;
 import com.wxb.wanshu.ui.contract.BookselfContract;
 import com.wxb.wanshu.ui.presenter.BookselfPresenter;
 import com.wxb.wanshu.view.EmptyView;
+import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 import org.simple.eventbus.EventBus;
@@ -42,8 +45,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
 
     @BindView(R.id.emptyView)
     EmptyView emptyView;
-    @BindView(R.id.rl_no_content)
-    RelativeLayout rlNoContent;
 
     //    @BindView(R.id.tool_bar)
 //    RelativeLayout toolBar;
@@ -59,7 +60,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     private boolean isSelectAll = false;
     @Inject
     BookselfPresenter mPresenter;
-    private List<BookselfList.DataBean> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,8 +145,19 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     }
 
     @Override
-    public void showDelSuccess(Base base) {
-
+    public void showDelSuccess(String novel_ids) {
+        String[] ids = novel_ids.split(",");
+        for (BookselfList.DataBean bean : mAdapter.getAllData()) {
+            for (int i = 0; i < ids.length; i++) {
+                if (ids[i].equals(bean.id)) {
+                    mAdapter.remove(bean);
+                }
+            }
+        }
+        if (isVisible(llBatchManagement)) {
+            //批量管理完成后，隐藏批量管理布局并刷新页面
+            goneBatchManagementAndRefreshUI();
+        }
     }
 
     @Override
@@ -220,8 +231,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         }
         if (position > 0) {
             mAdapter.getItem(position).isSeleted = true;
-            mAdapter.notifyDataSetChanged();
         }
+        mAdapter.notifyDataSetChanged();
 
         visible(finish, llBatchManagement);
         manage.setText("全选");
@@ -243,7 +254,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                 if (removeList.isEmpty()) {
                     mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
-                    showDeleteCacheDialog(mContext, removeList);
+                    showDeleteCacheDialog(removeList);
                 }
                 break;
             case R.id.finish://完成操作
@@ -270,74 +281,27 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
      *
      * @param removeList
      */
-    private void showDeleteCacheDialog(Context activity, final List<BookselfList.DataBean> removeList) {
-        final boolean selected[] = {true};
-        new AlertDialog.Builder(activity)
-                .setTitle(activity.getString(R.string.remove_selected_book))
-//                .setMultiChoiceItems(new String[]{activity.getString(R.string.delete_local_cache)}, selected,
-//                        new DialogInterface.OnMultiChoiceClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                                selected[0] = isChecked;
-//                            }
-//                        })
-                .setPositiveButton(activity.getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-//                        new AsyncTask<String, String, String>() {
-//                            @Override
-//                            protected void onPreExecute() {
-//                                super.onPreExecute();
-//                                showDialog();
-//                            }
-//
-//                            @Override
-//                            protected String doInBackground(String... params) {//后台删除本地缓存
-////                                CollectionsManager.getInstance().removeSome(removeList, selected[0]);
-//                                return null;
-//                            }
-//
-//                            @Override
-//                            protected void onPostExecute(String s) {
-//                                super.onPostExecute(s);
-//                                mRecyclerView.showTipViewAndDelayClose("成功移除书籍");
-//                                for (BookselfList.DataBean bean : removeList) {
-//                                    mAdapter.remove(bean);
-//                                }
-//                                if (isVisible(llBatchManagement)) {
-//                                    //批量管理完成后，隐藏批量管理布局并刷新页面
-//                                    goneBatchManagementAndRefreshUI();
-//                                }
-//                                hideDialog();
-//                            }
-//                        }.execute();
+    private void showDeleteCacheDialog(final List<BookselfList.DataBean> removeList) {
 
-                        StringBuilder novelIds = new StringBuilder();
-                        for (BookselfList.DataBean item : removeList) {
-                            novelIds.append(item.getId());
-                        }
-                        if (novelIds.length() > 0)
-                            mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));
+        ConfirmDialog.showNotice(mContext, "提示", "确认要移出书架吗？", "确定", "取消", new ConfirmDialog.SureCallback() {
+            @Override
+            public void exec() throws Exception {
+                StringBuilder novelIds = new StringBuilder();
+                for (BookselfList.DataBean item : removeList) {
+                    novelIds.append(item.id + ",");
+//                    CacheManager.getInstance().removeTocList(mContext,item.id);
+                }
+                if (novelIds.length() > 0) {
+                    mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));
+                }
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mRecyclerView.showTipViewAndDelayClose("成功移除书籍");
-                                for (BookselfList.DataBean bean : removeList) {
-                                    mAdapter.remove(bean);
-                                }
-                                if (isVisible(llBatchManagement)) {
-                                    //批量管理完成后，隐藏批量管理布局并刷新页面
-                                    goneBatchManagementAndRefreshUI();
-                                }
-                                hideDialog();
-                            }
-                        }, 800);
-                    }
-                })
-                .setNegativeButton(activity.getString(R.string.cancel), null)
-                .create().show();
+            }
+        }, new ConfirmDialog.CancleCallback() {
+            @Override
+            public void exec() throws Exception {
+                finish();
+            }
+        });
     }
 
     private long exitTime = 0;
