@@ -414,7 +414,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
      */
     private void cleanFileCache(BookMenu.DataBean dataBean) {
         String lastUpdateTime = SettingManager.getInstance().getReadBookUpdateTime(novel_id);
-        if ( lastUpdateTime.equals(dataBean.novel.update_time)) {//根据书籍更新时间判断是否清除缓存
+        if (!"".equals(lastUpdateTime) && !lastUpdateTime.equals(dataBean.novel.update_time)) {//根据书籍更新时间判断是否清除缓存
             FileUtils.deleteBookFiles(novel_id, currentChapter);
             SettingManager.getInstance().saveBookUpdateTime(novel_id, dataBean.novel.update_time);
         }
