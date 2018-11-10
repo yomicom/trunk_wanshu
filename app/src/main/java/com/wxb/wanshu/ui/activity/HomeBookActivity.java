@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -23,6 +24,7 @@ import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.HomeBookPresenter;
 import com.wxb.wanshu.view.loadding.CustomDialog;
+import com.wxb.wanshu.view.recycleview.swipe.OnRefreshListener;
 
 import java.util.List;
 
@@ -63,6 +65,8 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     ScrollView scrollView;
     @BindView(R.id.iv_to_top)
     ImageView ivToTop;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
@@ -80,11 +84,21 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                 .build()
                 .inject(this);
 
+        int[] colors = {R.color.gobal_color,R.color.light_red};
+        swipeRefresh.setColorSchemeResources(colors);
+//        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.common_bg);
+        swipeRefresh.setOnRefreshListener(() -> {
+            if (homeData != null) {
+                mPresenter.getHomeData("");
+            }
+        });
+
         mPresenter.attachView(this);
         mPresenter.getHomeData("");
-        dialog = CustomDialog.instance(this);
-        dialog.setCancelable(true);
-        dialog.show();
+        swipeRefresh.setRefreshing(true);
+//        dialog = CustomDialog.instance(this);
+//        dialog.setCancelable(true);
+//        dialog.show();
     }
 
     private void showData(List<HomeData.DataBeanX> data) {
@@ -143,6 +157,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
     @Override
     public void showHome(HomeData data) {
+        swipeRefresh.setRefreshing(false);
         if (data != null) {
             homeData = data;
             showData(data.getData());
@@ -152,18 +167,21 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
     @Override
     public void netError() {
+        swipeRefresh.setRefreshing(false);
         if (dialog != null)
             dialog.hide();
     }
 
     @Override
     public void showError() {
+        swipeRefresh.setRefreshing(false);
         if (dialog != null)
             dialog.hide();
     }
 
     @Override
     public void complete() {
+        swipeRefresh.setRefreshing(false);
         if (dialog != null)
             dialog.hide();
     }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.BookRewardData;
@@ -293,9 +294,12 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     }
 
     @Subscriber
-    public void onEventMainThread(SimpleEventBus event) {
-        rewardPage = 1;
-        mPresenter.getBookReward(novel_id, rewardPage);
+    public void onEventMainThread(AddShlef event) {//阅读页加入书架成功
+        if (event.add == 1){
+            tvAddBook.setText("已加入书架");
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+            bookDetails.on_shelf = true;
+        }
     }
 
     @Override
@@ -316,7 +320,6 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 }

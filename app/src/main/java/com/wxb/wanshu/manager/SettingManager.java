@@ -65,7 +65,7 @@ public class SettingManager {
      * @param percent 亮度比例 0~100
      */
     public void saveReadBrightness(int percent) {
-        if(percent > 100){
+        if (percent > 100) {
             ToastUtils.showToast("saveReadBrightnessErr CheckRefs");
             percent = 100;
         }
@@ -83,6 +83,19 @@ public class SettingManager {
                 .putInt(getEndPosKey(bookId), m_mbBufEndPos);
     }
 
+    public synchronized void saveBookUpdateTime(String bookId, String update_time) {
+        SharedPreferencesUtil.getInstance().putString(getChapterUpdateTime(bookId), update_time);
+    }
+
+    /**
+     * 获取上次阅读改书更新时间
+     *
+     * @param bookId
+     * @return
+     */
+    public String getReadBookUpdateTime(String bookId) {
+        return SharedPreferencesUtil.getInstance().getString(getChapterUpdateTime(bookId), "");
+    }
     /**
      * 获取上次阅读章节及位置
      *
@@ -104,8 +117,17 @@ public class SettingManager {
                 .remove(getEndPosKey(bookId));
     }
 
+    public void removeReadUpdateTime(String bookId) {
+        SharedPreferencesUtil.getInstance()
+                .remove(getChapterUpdateTime(bookId));
+    }
+
     private String getChapterKey(String bookId) {
         return bookId + "-chapter";
+    }
+
+    private String getChapterUpdateTime(String bookId) {
+        return bookId + "-update_time";
     }
 
     private String getStartPosKey(String bookId) {
@@ -147,6 +169,7 @@ public class SettingManager {
 
     /**
      * 阅读页背景主题
+     *
      * @param theme
      */
     public void saveReadTheme(int theme) {
@@ -162,6 +185,7 @@ public class SettingManager {
 
     /**
      * 阅读页亮屏时间
+     *
      * @param time
      */
     public void setScreenLight(int time) {//系统时间 0 /5/10/20/永不 -1

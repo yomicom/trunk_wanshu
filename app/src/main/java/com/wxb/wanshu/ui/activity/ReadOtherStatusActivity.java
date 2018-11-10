@@ -35,11 +35,6 @@ public class ReadOtherStatusActivity extends BaseActivity {
     @BindView(R.id.common_toolbar)
     Toolbar commonToolbar;
 
-    public static void startActivity(Context context, int code, String title) {
-        context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
-                .putExtra("code", code).putExtra("title", title));
-    }
-
     public static void startActivity(Context context, int code, String title, ChapterRead.DataBean dataBean) {
         context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
                 .putExtra("code", code).putExtra("title", title).putExtra("data", dataBean));
@@ -98,7 +93,7 @@ public class ReadOtherStatusActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        overridePendingTransition(R.anim.push_right_in, 0);
+//        overridePendingTransition(R.anim.push_left_in, R.anim.push_right_out);
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
     }

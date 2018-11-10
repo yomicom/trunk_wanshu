@@ -17,34 +17,49 @@
         android:paddingRight="@dimen/distance_top">
 
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ab_back"
             android:layout_centerVertical="true"
-            android:id="@+id/back"
-            android:visibility="gone"/>
+            android:src="@mipmap/ab_back"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/finish"
             style="@style/text_big_nomal"
-            android:text="完成"
-            android:visibility="gone"
             android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="完成"
             android:textColor="@color/text_color_2"
-            android:textSize="@dimen/text_middle" />
+            android:textSize="@dimen/text_middle"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text_big_nomal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/distance_image_text_15"
+            android:layout_toRightOf="@id/back"
+            android:text="书架"
+            android:textSize="@dimen/text_huge"
+            android:visibility="gone" />
+
         <TextView
             style="@style/text_big_nomal"
             android:layout_centerInParent="true"
             android:text="书架"
             android:textSize="@dimen/text_huge" />
+
         <TextView
             android:id="@+id/manage"
             style="@style/text_big_nomal"
-            android:layout_centerVertical="true"
-            android:text="管理"
-            android:visibility="gone"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="管理"
             android:textColor="@color/text_color_2"
-            android:textSize="@dimen/text_middle" />
+            android:textSize="@dimen/text_middle"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -55,11 +70,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="visible"
         android:paddingLeft="@dimen/distance_text_text_8"
         android:paddingRight="@dimen/distance_text_text_8"
+        android:visibility="visible"
         app:layout_empty="@layout/bookshelf_empty_view"
-        app:layout_progress="@layout/common_progress_view"/>
+        app:layout_progress="@layout/common_progress_view" />
 
     <RelativeLayout
         android:id="@+id/rl_no_content"

@@ -2,6 +2,8 @@ package com.wxb.wanshu.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -118,8 +120,13 @@ public class MeActivity extends BaseActivity implements MeContract.View {
             case R.id.item_read_screen_time:
                 break;
             case R.id.item_clean:
-                CacheManager.getInstance().clearCache(true);
-                clean.setText("");
+                showDialog();
+//                CacheManager.getInstance().clearCache(true);
+                new Handler().postDelayed(() -> {
+                    clean.setText("");
+                    hideDialog();
+                    ToastUtils.showToast("清除缓存成功");
+                }, 1000);
                 break;
             case R.id.item_score:
                 break;

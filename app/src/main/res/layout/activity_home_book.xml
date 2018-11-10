@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.wxb.wanshu.ui.activity.HomeBookActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +16,7 @@
         <LinearLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="@dimen/distance_top_20"
             android:layout_marginTop="@dimen/distance_text_text_12"
             android:layout_marginRight="@dimen/distance_top_20"
@@ -33,11 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="搜索"
+                android:hint="搜索书名"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="@dimen/text_middle" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -46,94 +46,101 @@
                 android:src="@mipmap/ic_search" />
         </LinearLayout>
     </LinearLayout>
-    <ScrollView
-        android:id="@+id/scrollView"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/ll_to_top"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/fl_banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                <LinearLayout
+                    android:id="@+id/ll_to_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_content1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_main_top"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                </FrameLayout>
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_main_top"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_content2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_main_item"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                </FrameLayout>
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_main_item"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_content3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_main_item"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                </FrameLayout>
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_main_item"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_content4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_main_item"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                </FrameLayout>
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_content4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_main_item"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_content5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_main_item"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                </FrameLayout>
 
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+                <FrameLayout
+                    android:id="@+id/fl_content5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_main_item"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/iv_to_top"

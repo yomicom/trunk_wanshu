@@ -56,6 +56,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     RelativeLayout rlNoContent;
     @BindView(R.id.tvDelete)
     TextView tvDelete;
+    @BindView(R.id.title)
+    TextView title;
     @BindView(R.id.llBatchManagement)
     LinearLayout llBatchManagement;
 
@@ -100,7 +102,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void configViews() {
-        visible(manage);
+        visible(manage, back, title);
+        title.setText("阅读历史");
         mRecyclerView.setEmptyView(R.layout.common_empty_view);
         initAdapter(ReadHistoryAdapter.class, false, true);
     }
@@ -221,6 +224,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 }
                 break;
             case R.id.back:
+                finish();
                 break;
         }
     }

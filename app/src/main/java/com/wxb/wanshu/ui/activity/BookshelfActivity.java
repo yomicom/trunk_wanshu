@@ -289,7 +289,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                 StringBuilder novelIds = new StringBuilder();
                 for (BookselfList.DataBean item : removeList) {
                     novelIds.append(item.id + ",");
-//                    CacheManager.getInstance().removeTocList(mContext,item.id);
+                    CacheManager.clearBookCache(item.id);//删除书籍缓存
                 }
                 if (novelIds.length() > 0) {
                     mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));

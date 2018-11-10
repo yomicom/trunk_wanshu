@@ -30,6 +30,7 @@ import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.base.Constant;
+import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.bean.ReadTheme;
@@ -402,6 +403,21 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         chapter_num = dataBean.novel.chapter_num;
         seekbarChapter.setMax(chapter_num);
         readCurrentChapter(currentChapter);
+
+        cleanFileCache(dataBean);
+    }
+
+    /**
+     * 清除除当前章其它缓存章节内容
+     *
+     * @param dataBean
+     */
+    private void cleanFileCache(BookMenu.DataBean dataBean) {
+        String lastUpdateTime = SettingManager.getInstance().getReadBookUpdateTime(novel_id);
+        if ( lastUpdateTime.equals(dataBean.novel.update_time)) {//根据书籍更新时间判断是否清除缓存
+            FileUtils.deleteBookFiles(novel_id, currentChapter);
+            SettingManager.getInstance().saveBookUpdateTime(novel_id, dataBean.novel.update_time);
+        }
     }
 
     /**
@@ -431,21 +447,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (data != null) {
             hideDialog();
             switch (data.code) {
-                case Constant.READ_DOWN_CODE:
-                    finish();
-                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_DOWN_CODE, "", data);
-                    break;
-                case Constant.READ_ING_CODE:
-//                    finish();
-                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_ING_CODE, "", data);
-                    break;
-                case Constant.READ_FINISH_CODE:
-//                    finish();
-                    ReadOtherStatusActivity.startActivity(mContext, Constant.READ_FINISH_CODE, "", data);
-                    break;
                 case 0:
                     CacheManager.getInstance().saveChapterFile(data);
                     isOnShelf = data.on_shelf;
+                    break;
+                default:
+                    startActivity(new Intent(mContext, ReadOtherStatusActivity.class)
+                            .putExtra("code", data.code).putExtra("title", "").putExtra("data", data));
+                    overridePendingTransition(R.anim.push_left_in, R.anim.anim_no);
                     break;
             }
         }
@@ -489,6 +498,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
             isOnShelf = true;
+            EventBus.getDefault().post(new AddShlef(1));
         }
     }
 
@@ -878,8 +888,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //            mTocListAdapter.setCurrentChapter(currentChapter);
 
             // 预加载
-            // 加载前一节 与 后三节
-            for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
+            // 加载前一节 与 后一节
+
+            for (int i = chapter - 1; i <= chapter + 2 && i <= mChapterList.size(); i++) {
+
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(novel_id + "", i) == null) {
                     mPresenter.getChapterRead(novel_id, i, 0);
@@ -1006,5 +1018,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             mPageWidget.setFontSize(fontSize);
             tvFontSize.setText(fontSize + "");
         }
+    }
+
+    @Override
+    public void finish() {
+        overridePendingTransition(R.anim.anim_no, R.anim.push_right_out);
+        super.finish();
     }
 }

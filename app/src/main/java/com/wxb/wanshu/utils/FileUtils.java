@@ -66,6 +66,7 @@ public class FileUtils {
         return Constant.PATH_TXT + bookId + File.separator + chapter + ".txt";
     }
 
+    //获取某书单章缓存
     public static File getChapterFile(String bookId, int chapter) {
         File file = new File(getChapterPath(bookId, chapter));
         if (!file.exists())
@@ -73,6 +74,7 @@ public class FileUtils {
         return file;
     }
 
+    //获取某书所有缓存
     public static File getBookDir(String bookId) {
         return new File(Constant.PATH_TXT + bookId);
     }
@@ -466,7 +468,7 @@ public class FileUtils {
      * @return
      * @throws IOException
      */
-    public static boolean deleteFileOrDirectory(File file) throws IOException {
+    public static boolean deleteFileOrDirectory(File file) {
         try {
             if (file != null && file.isFile()) {
                 return file.delete();
@@ -482,6 +484,38 @@ public class FileUtils {
                     deleteFileOrDirectory(childFiles[i]);
                 }
                 return file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 删除除指定章节之外的其他章节
+     *
+     * @param novel_id
+     * @param chapter
+     * @return
+     */
+    public static boolean deleteBookFiles(String novel_id, int chapter) {
+        try {
+            File file = FileUtils.getBookDir(novel_id);
+            if (file != null && file.isDirectory()) {
+                File[] childFiles = file.listFiles();
+                // 递归删除文件夹下的子文件
+                for (int i = 0; i < childFiles.length; i++) {
+                    File childFile = childFiles[i];
+                    if (childFile != null && childFile.isFile()) {
+                        if (getChapterPath(novel_id, chapter).equals(childFile.getAbsolutePath())) {
+                            return true;
+                        } else {
+                            final File to = new File(childFile.getAbsolutePath() + System.currentTimeMillis());
+                            childFile.renameTo(to);
+                            to.delete();
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -707,7 +741,7 @@ public class FileUtils {
                     values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
                     imageFilePath = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFilePath); //这样就将文件的存储方式和uri指定到了Camera应用中
-                    ((Activity)(context)).startActivityForResult(intent, requestCode);
+                    ((Activity) (context)).startActivityForResult(intent, requestCode);
                 }
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(context, "error", Toast.LENGTH_LONG).show();
@@ -724,14 +758,14 @@ public class FileUtils {
      * @param context
      * @return
      */
-    public static void toPhotoAction(Context context,int requestCode) {
+    public static void toPhotoAction(Context context, int requestCode) {
         File sd = Environment.getExternalStorageDirectory();
         if (!sd.canWrite())
             getReadFilePermission(context);
         else {
             try {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                ((Activity)(context)).startActivityForResult(intent, requestCode);
+                ((Activity) (context)).startActivityForResult(intent, requestCode);
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(context, "error", Toast.LENGTH_LONG).show();
             } catch (SecurityException e) {

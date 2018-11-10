@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_view_item"
         android:background="@color/white"
-        android:paddingTop="@dimen/distance_top"
+        android:paddingTop="@dimen/distance_view_item"
         android:paddingBottom="@dimen/distance_left"
         android:visibility="gone"></FrameLayout>
 </LinearLayout>

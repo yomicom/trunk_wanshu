@@ -22,7 +22,8 @@
             android:text="11"
             android:layout_marginTop="5dp"
             android:layout_below="@id/tv_chapter_title"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_chapter_status"

@@ -147,7 +147,7 @@ public class CacheManager {
 
     public void saveChapterFile(ChapterRead.DataBean data) {
         File file = FileUtils.getChapterFile(data.novel.id, data.chapter.sort);
-        FileUtils.writeFile(file.getAbsolutePath(), StringUtils.formatContent(data.chapter_content), false);
+        FileUtils.writeFile(file.getAbsolutePath(), StringUtils.formatContent(data.chapter.content), false);
     }
 
     /**
@@ -199,10 +199,22 @@ public class CacheManager {
 //            }
             // 清除其他缓存
             ACache.get(AppUtils.getAppContext()).clear();
-            ToastUtils.showToast("清除缓存成功");
         } catch (Exception e) {
             LogUtils.e(e.toString());
         }
     }
 
+
+    public static void clearBookCache(String novle_id){
+        try {
+            // 移除章节文件
+            FileUtils.deleteFileOrDirectory(FileUtils.getBookDir(novle_id));
+            // 移除目录缓存
+//            CacheManager.getInstance().removeTocList(AppUtils.getAppContext(), novle_id);
+            // 移除阅读进度
+            SettingManager.getInstance().removeReadProgress(novle_id);
+        } catch (Exception e) {
+            LogUtils.e(e.toString());
+        }
+    }
 }

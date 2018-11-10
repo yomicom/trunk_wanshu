@@ -58,7 +58,6 @@ public class ChapterRead extends Base {
         public NovelBean novel;
         public ChapterBean chapter;
         public boolean on_shelf;
-        public String chapter_content;
 
         public List<DataBean.NovelBean> recommend_list;
 
@@ -93,15 +92,8 @@ public class ChapterRead extends Base {
             this.chapter = chapter;
         }
 
-        public String getChapter_content() {
-            return chapter_content;
-        }
-
-        public void setChapter_content(String chapter_content) {
-            this.chapter_content = chapter_content;
-        }
-
         public static class NovelBean extends Book {
+            public  String update_time;
         }
 
         public static class ChapterBean implements Serializable{
@@ -128,6 +120,7 @@ public class ChapterRead extends Base {
             public String update_time;
             public String publish_time;
             public String view_count;
+            public String content;
 
             public String getId() {
                 return id;
@@ -209,5 +202,211 @@ public class ChapterRead extends Base {
                 this.view_count = view_count;
             }
         }
+
+//        public static class LastChapterBean implements Serializable {
+//
+//            public String id;
+//            public String novel_id;
+//            public String volume_id;
+//            public String name;
+//            public String sort;
+//            public String word_num;
+//            public String create_time;
+//            public String update_time;
+//            public String publish_time;
+//            public String view_count;
+//            public String content;
+//
+//            public String getId() {
+//                return id;
+//            }
+//
+//            public void setId(String id) {
+//                this.id = id;
+//            }
+//
+//            public String getNovel_id() {
+//                return novel_id;
+//            }
+//
+//            public void setNovel_id(String novel_id) {
+//                this.novel_id = novel_id;
+//            }
+//
+//            public String getVolume_id() {
+//                return volume_id;
+//            }
+//
+//            public void setVolume_id(String volume_id) {
+//                this.volume_id = volume_id;
+//            }
+//
+//            public String getName() {
+//                return name;
+//            }
+//
+//            public void setName(String name) {
+//                this.name = name;
+//            }
+//
+//            public String getSort() {
+//                return sort;
+//            }
+//
+//            public void setSort(String sort) {
+//                this.sort = sort;
+//            }
+//
+//            public String getWord_num() {
+//                return word_num;
+//            }
+//
+//            public void setWord_num(String word_num) {
+//                this.word_num = word_num;
+//            }
+//
+//            public String getCreate_time() {
+//                return create_time;
+//            }
+//
+//            public void setCreate_time(String create_time) {
+//                this.create_time = create_time;
+//            }
+//
+//            public String getUpdate_time() {
+//                return update_time;
+//            }
+//
+//            public void setUpdate_time(String update_time) {
+//                this.update_time = update_time;
+//            }
+//
+//            public String getPublish_time() {
+//                return publish_time;
+//            }
+//
+//            public void setPublish_time(String publish_time) {
+//                this.publish_time = publish_time;
+//            }
+//
+//            public String getView_count() {
+//                return view_count;
+//            }
+//
+//            public void setView_count(String view_count) {
+//                this.view_count = view_count;
+//            }
+//
+//            public String getContent() {
+//                return content;
+//            }
+//
+//            public void setContent(String content) {
+//                this.content = content;
+//            }
+//        }
+//
+//        public static class NextChapterBean implements Serializable {
+//
+//            public String id;
+//            public String novel_id;
+//            public String volume_id;
+//            public String name;
+//            public String sort;
+//            public String word_num;
+//            public String create_time;
+//            public String update_time;
+//            public String publish_time;
+//            public String view_count;
+//            public String content;
+//
+//            public String getId() {
+//                return id;
+//            }
+//
+//            public void setId(String id) {
+//                this.id = id;
+//            }
+//
+//            public String getNovel_id() {
+//                return novel_id;
+//            }
+//
+//            public void setNovel_id(String novel_id) {
+//                this.novel_id = novel_id;
+//            }
+//
+//            public String getVolume_id() {
+//                return volume_id;
+//            }
+//
+//            public void setVolume_id(String volume_id) {
+//                this.volume_id = volume_id;
+//            }
+//
+//            public String getName() {
+//                return name;
+//            }
+//
+//            public void setName(String name) {
+//                this.name = name;
+//            }
+//
+//            public String getSort() {
+//                return sort;
+//            }
+//
+//            public void setSort(String sort) {
+//                this.sort = sort;
+//            }
+//
+//            public String getWord_num() {
+//                return word_num;
+//            }
+//
+//            public void setWord_num(String word_num) {
+//                this.word_num = word_num;
+//            }
+//
+//            public String getCreate_time() {
+//                return create_time;
+//            }
+//
+//            public void setCreate_time(String create_time) {
+//                this.create_time = create_time;
+//            }
+//
+//            public String getUpdate_time() {
+//                return update_time;
+//            }
+//
+//            public void setUpdate_time(String update_time) {
+//                this.update_time = update_time;
+//            }
+//
+//            public String getPublish_time() {
+//                return publish_time;
+//            }
+//
+//            public void setPublish_time(String publish_time) {
+//                this.publish_time = publish_time;
+//            }
+//
+//            public String getView_count() {
+//                return view_count;
+//            }
+//
+//            public void setView_count(String view_count) {
+//                this.view_count = view_count;
+//            }
+//
+//            public String getContent() {
+//                return content;
+//            }
+//
+//            public void setContent(String content) {
+//                this.content = content;
+//            }
+//        }
     }
 }
