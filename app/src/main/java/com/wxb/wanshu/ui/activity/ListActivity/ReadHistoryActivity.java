@@ -3,8 +3,6 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,9 +12,6 @@ import android.widget.TextView;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.AddShlef;
-import com.wxb.wanshu.bean.Base;
-import com.wxb.wanshu.bean.BookShelfStatus;
-import com.wxb.wanshu.bean.BookselfList;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
@@ -24,7 +19,6 @@ import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
-import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
@@ -58,11 +52,17 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     TextView tvDelete;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.main_title)
+    TextView main_title;
     @BindView(R.id.llBatchManagement)
     LinearLayout llBatchManagement;
 
     @BindView(R.id.back)
     ImageView back;
+    @BindView(R.id.item)
+    View item;
+    @BindView(R.id.emptyView)
+    EmptyView emptyView;
 
     private boolean isSelectAll = false;
 
@@ -102,6 +102,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void configViews() {
+        gone(item, main_title);
         visible(manage, back, title);
         title.setText("阅读历史");
         mRecyclerView.setEmptyView(R.layout.common_empty_view);
@@ -256,7 +257,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
      */
     public void goneBatchManagementAndRefreshUI() {
         if (mAdapter == null) return;
-        gone(finish, llBatchManagement);
+        gone(finish, llBatchManagement, title);
         manage.setText("管理");
         manage.setTextColor(getResources().getColor(R.color.text_color_2));
         for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
@@ -280,7 +281,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         }
         mAdapter.notifyDataSetChanged();
 
-        visible(finish, llBatchManagement);
+        visible(finish, llBatchManagement, title);
         manage.setText("全选");
         manage.setTextColor(getResources().getColor(R.color.gobal_color));
     }

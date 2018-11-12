@@ -248,4 +248,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             dialog = null;
         }
     }
+
+
 }

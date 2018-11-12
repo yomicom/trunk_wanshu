@@ -71,7 +71,7 @@ public class WelcomeActivity extends BaseActivity {
 //        }
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.3F, 1.0F);
-        alphaAnimation.setDuration(2000);
+        alphaAnimation.setDuration(1000);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

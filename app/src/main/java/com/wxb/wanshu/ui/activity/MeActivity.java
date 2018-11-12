@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
@@ -16,6 +17,7 @@ import com.wxb.wanshu.manager.CacheManager;
 import com.wxb.wanshu.ui.activity.ListActivity.ReadHistoryActivity;
 import com.wxb.wanshu.ui.contract.MeContract;
 import com.wxb.wanshu.ui.presenter.MePresenter;
+import com.wxb.wanshu.utils.MarketUtils;
 import com.wxb.wanshu.utils.ToastUtils;
 
 import org.simple.eventbus.EventBus;
@@ -98,6 +100,11 @@ public class MeActivity extends BaseActivity implements MeContract.View {
     public void showUserData(UserInfo data) {
     }
 
+    @Override
+    public void showLastVersion(Base data) {
+
+    }
+
     @Subscriber
 
 
@@ -129,6 +136,7 @@ public class MeActivity extends BaseActivity implements MeContract.View {
                 }, 1000);
                 break;
             case R.id.item_score:
+                MarketUtils.yingyongbao("com.wxb.wanshu", "com.tencent.android.qqdownloader", this);
                 break;
             case R.id.item_update:
                 break;

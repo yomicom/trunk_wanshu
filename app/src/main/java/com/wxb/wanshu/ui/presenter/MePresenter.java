@@ -45,4 +45,9 @@ public class MePresenter extends RxPresenter<MeContract.View> implements MeContr
                 });
         addSubscrebe(rxSubscription);
     }
+
+    @Override
+    public void getLastVersion() {
+
+    }
 }

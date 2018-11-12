@@ -313,7 +313,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                 goneBatchManagementAndRefreshUI();
             } else {
                 if ((System.currentTimeMillis() - exitTime) > 2000) {
-                    Toast.makeText(getApplicationContext(), "再按一次退出万书",
+                    Toast.makeText(getApplicationContext(), "再按一次退出",
                             Toast.LENGTH_SHORT).show();
                     exitTime = System.currentTimeMillis();
                 } else {

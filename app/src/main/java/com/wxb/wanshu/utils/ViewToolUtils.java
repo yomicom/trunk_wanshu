@@ -1,10 +1,19 @@
 package com.wxb.wanshu.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
+import android.renderscript.Type;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -192,4 +201,86 @@ public class ViewToolUtils {
         });
     }
 
+    /**
+     * 高斯模糊
+     * @param context
+     * @param source
+     * @param radius
+     * @param scale
+     * @return
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Bitmap rsBlur(Context context, Bitmap source, int radius, float scale){
+
+//        Log.i(TAG,"origin size:"+source.getWidth()+"*"+source.getHeight());
+        int width = Math.round(source.getWidth() * scale);
+        int height = Math.round(source.getHeight() * scale);
+
+        Bitmap inputBmp = Bitmap.createScaledBitmap(source,width,height,false);
+
+        RenderScript renderScript =  RenderScript.create(context);
+
+//        Log.i(TAG,"scale size:"+inputBmp.getWidth()+"*"+inputBmp.getHeight());
+
+        // Allocate memory for Renderscript to work with
+
+        final Allocation input = Allocation.createFromBitmap(renderScript,inputBmp);
+        final Allocation output = Allocation.createTyped(renderScript,input.getType());
+
+        // Load up an instance of the specific script that we want to use.
+        ScriptIntrinsicBlur scriptIntrinsicBlur = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
+        scriptIntrinsicBlur.setInput(input);
+
+        // Set the blur radius
+        scriptIntrinsicBlur.setRadius(radius);
+
+        // Start the ScriptIntrinisicBlur
+        scriptIntrinsicBlur.forEach(output);
+
+        // Copy the output to the blurred bitmap
+        output.copyTo(inputBmp);
+
+
+        renderScript.destroy();
+        return inputBmp;
+    }
+    /**
+     * 模糊图片
+     * @param bitmap 原图片
+     * @param radius 模糊度  0~25
+     * @param context
+     * @return 模糊后的图片
+     */
+    public static Bitmap blurBitmap(Bitmap bitmap, float radius, Context context) {
+        //Create renderscript
+        RenderScript rs = RenderScript.create(context);
+
+        //Create allocation from Bitmap
+        Allocation allocation = Allocation.createFromBitmap(rs, bitmap);
+
+        Type t = allocation.getType();
+
+        //Create allocation with the same type
+        Allocation blurredAllocation = Allocation.createTyped(rs, t);
+
+        //Create script
+        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        //Set blur radius (maximum 25.0)
+        blurScript.setRadius(radius);
+        //Set input for script
+        blurScript.setInput(allocation);
+        //Call script for output allocation
+        blurScript.forEach(blurredAllocation);
+
+        //Copy script result into bitmap
+        blurredAllocation.copyTo(bitmap);
+
+        //Destroy everything to free memory
+        allocation.destroy();
+        blurredAllocation.destroy();
+        blurScript.destroy();
+        t.destroy();
+        rs.destroy();
+        return bitmap;
+    }
 }

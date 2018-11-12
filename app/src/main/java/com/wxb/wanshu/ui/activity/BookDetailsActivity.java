@@ -2,6 +2,8 @@ package com.wxb.wanshu.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
@@ -45,6 +50,10 @@ import com.wxb.wanshu.view.recycleview.decoration.DividerDecoration;
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -61,6 +70,8 @@ import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.BOOK_DETAILS_TYPE
 public class BookDetailsActivity extends BaseActivity implements BookDetailsContract.View, OnRvItemClickListener {
 
     public static String INTENT_BOOK_ID = "bookId";
+//    @BindView(R.id.background)
+//    ImageView background;
     @BindView(R.id.iv_book)
     ImageView ivBook;
     @BindView(R.id.iv_is_free)
@@ -181,6 +192,18 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     }
 
     private void showBookData(BookDetails.DataBean data) {
+//        try {
+//            Glide.with(mContext).asBitmap().load("https://www.google.com.hk/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwia8Jmsw87eAhVTNrwKHfi6CgAQjRx6BAgBEAU&url=http%3A%2F%2Fwww.epochtimes.com%2Fgb%2F17%2F6%2F12%2Fn9254057.htm&psig=AOvVaw2BlL1H9ImQ92sKxgerG_T7&ust=1542100791090688").into(new SimpleTarget<Bitmap>() {
+//                @Override
+//                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                    ViewToolUtils.blurBitmap(getBitMBitmap(data.cover), 10, mContext);
+//                }
+//            });
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
+
         ImageUtils.displayImage(this, ivBook, data.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
         tvTitle.setText(data.getName());
         author.setText(data.getAuthor());
@@ -199,6 +222,20 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
 
+    public static Bitmap getBitMBitmap(String urlpath) {
+        Bitmap map = null;
+        try {
+            URL url = new URL(urlpath);
+            URLConnection conn = url.openConnection();
+            conn.connect();
+            InputStream in;
+            in = conn.getInputStream();
+            map = BitmapFactory.decodeStream(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
     /**
      * 显示推荐书籍
      *
@@ -265,7 +302,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 }
                 break;
             case R.id.tv_read_book:
-                ReadActivity.startActivity(this, bookDetails.getId(),bookDetails.on_shelf);
+                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
                 break;
             case R.id.book_menu:
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
@@ -295,7 +332,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Subscriber
     public void onEventMainThread(AddShlef event) {//阅读页加入书架成功
-        if (event.add == 1){
+        if (event.add == 1) {
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
             bookDetails.on_shelf = true;

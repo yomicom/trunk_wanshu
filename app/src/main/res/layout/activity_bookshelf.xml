@@ -9,7 +9,8 @@
     tools:context="com.wxb.wanshu.ui.activity.BookshelfActivity">
 
     <View android:layout_width="match_parent"
-        android:layout_height="25dp"/>
+        android:layout_height="25dp"
+        android:id="@+id/item"/>
 
     <RelativeLayout
         android:id="@+id/tool_bar"
@@ -47,6 +48,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/main_title"
             style="@style/text_big_nomal"
             android:layout_centerInParent="true"
             android:text="书架"

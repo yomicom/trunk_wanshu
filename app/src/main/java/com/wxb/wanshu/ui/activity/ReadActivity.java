@@ -8,6 +8,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
@@ -61,10 +62,13 @@ import com.wxb.wanshu.view.readview.OverlappedWidget;
 import org.simple.eventbus.EventBus;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -299,7 +303,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (screenLight != 0) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             //取消屏幕常亮
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         }
 //        buyBookPopupWindow = new BuyBookPopupWindow((Activity) mContext, novel_id, currentChapter);
     }
@@ -1018,6 +1023,75 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             mPageWidget.setFontSize(fontSize);
             tvFontSize.setText(fontSize + "");
         }
+    }
+
+    //*********************亮屏时间********************/
+
+    private Timer mTimer = null;
+    private TimerTask mTimerTask = null;
+
+    private Handler mHandler = null;
+
+    private static int count = 0;
+    private boolean isPause = false;
+    private boolean isStop = true;
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                stopTimer();
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    /**
+     * 开始亮屏计时
+     * @param delay 亮屏时间
+     */
+    private void startTimer(int delay) {
+        if (mTimer == null) {
+            mTimer = new Timer();
+        }
+
+        if (mTimerTask == null) {
+            mTimerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    Message message = new Message();
+                    message.what = 1;
+                    handler.sendMessage(message);
+
+                    do {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                        }
+                    } while (isPause);
+
+                    count++;
+                }
+            };
+        }
+
+        if (mTimer != null && mTimerTask != null)
+            mTimer.schedule(mTimerTask, 1000, 1500);
+
+    }
+
+    private void stopTimer() {
+
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+
+        if (mTimerTask != null) {
+            mTimerTask.cancel();
+            mTimerTask = null;
+        }
+
+        count = 0;
+
     }
 
     @Override
