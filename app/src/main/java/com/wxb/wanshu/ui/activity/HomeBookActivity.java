@@ -1,29 +1,30 @@
 package com.wxb.wanshu.ui.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
 import com.wxb.wanshu.ImageActivity;
-import com.wxb.wanshu.MainActivity;
-import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
@@ -33,11 +34,11 @@ import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.HomeBookPresenter;
 import com.wxb.wanshu.utils.ImageUtils;
-import com.wxb.wanshu.view.CustomerBanner;
+import com.wxb.wanshu.view.AdvanceSwipeRefreshLayout;
+import com.wxb.wanshu.view.AlphaTitleScrollView;
 import com.wxb.wanshu.view.loadding.CustomDialog;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -71,18 +72,22 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     @BindView(R.id.fl_content5)
     FrameLayout flContent5;
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    AlphaTitleScrollView scrollView;
     @BindView(R.id.iv_to_top)
     ImageView ivToTop;
     @BindView(R.id.swipeRefresh)
-    SwipeRefreshLayout swipeRefresh;
+    AdvanceSwipeRefreshLayout swipeRefresh;
     @BindView(R.id.vp_banner)
     BGABanner banner;
+    @BindView(R.id.bg_search)
+    RelativeLayout bgSearch;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
     private HomeData homeData;
 
+    @SuppressLint("ClickableViewAccessibility")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,10 +112,50 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
         mPresenter.attachView(this);
         mPresenter.getHomeData("");
-        swipeRefresh.setRefreshing(true);
-//        dialog = CustomDialog.instance(this);
-//        dialog.setCancelable(true);
-//        dialog.show();
+//        swipeRefresh.setRefreshing(true);
+        dialog = CustomDialog.instance(this);
+        dialog.setCancelable(true);
+        dialog.show();
+
+        scrollView.setTitleAndHead(bgSearch, banner);
+//        bgSearch.setBackgroundColor(ContextCompat.getColor(mContext, R.color.no_gobal_color));   //初始化搜索栏背景颜色
+
+
+//        swipeRefresh.setOnPreInterceptTouchEventDelegate(ev -> false);
+//        scrollView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                float initTouchY = 0;
+//
+//                switch (event.getAction()) {
+//                    //放下监听
+//                    case MotionEvent.ACTION_DOWN:
+//                        initTouchY = event.getY();
+//                        break;
+//                    //手指抬起监听
+//                    case MotionEvent.ACTION_UP:
+////                        mSlidingPlayView.setLayoutParams(new RelativeLayout.LayoutParams(diaplayWidth, AbViewUtil.dip2px(DetailA.this, imagHeight)));
+//
+//                        break;
+//                    //移动监听
+//                    case MotionEvent.ACTION_MOVE:
+//                        int upY = v.getScrollY();
+//                        float touchY = event.getY();
+//                        //对图片放大的处理
+//                        if (upY == 0) {  //scrollview在顶部
+//                            float deltaY = touchY - initTouchY;// 滑动距离
+//                            if (deltaY < 80) {
+//                                crossfadeToContentView(bgSearch);
+//                            }
+//                        }
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+
     }
 
     private void showData(List<HomeData.DataBeanX> data) {
@@ -210,6 +255,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
     @Override
     public void showHome(HomeData data) {
+        crossfadeToProgressView(bgSearch);
         swipeRefresh.setRefreshing(false);
         if (data != null) {
             homeData = data;
@@ -249,5 +295,30 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         }
     }
 
+    int mAnimationTime = 1000;
 
+    private void crossfadeToContentView(View progressView) {
+        // 加载progressView开始动画逐渐变为0%的不透明度，
+        // 动画结束后，设置可见性为GONE（消失）作为一个优化步骤
+        // （它将不再参与布局的传递等过程）
+        progressView.animate().alpha(0f).setDuration(mAnimationTime)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        progressView.setVisibility(View.GONE);
+                    }
+                });
+    }
+
+    private void crossfadeToProgressView(View progressView) {
+
+        // 设置progressView为0%的不透明度，但是状态为“可见”，
+        // 因此在动画过程中是一直可见的（但是为全透明）。
+        progressView.setAlpha(0f);
+        progressView.setVisibility(View.VISIBLE);
+
+        // 开始动画progressView到100%的不透明度，然后清除所有设置在View上的动画监听器。
+        progressView.animate().alpha(1f).setDuration(mAnimationTime)
+                .setListener(null);
+    }
 }

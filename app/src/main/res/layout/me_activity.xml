@@ -204,7 +204,7 @@
             android:src="@mipmap/read_history" />
 
         <View
-            android:layout_width="35dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent" />
 
         <ImageView

@@ -107,6 +107,36 @@
         <item name="android:layout_width">wrap_content</item>
     </style>
 
+    <!--TextView 有点击效果-->
+    <style name="text_small_nomal_click" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/text_color_2</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="text_middle_nomal_click" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+    <style name="text_big_nomal_click" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:textSize">@dimen/text_big</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
     <!--文章标题样式-->
     <style name="text_novel_title">
         <item name="android:textColor">@color/text_color_1</item>
@@ -169,6 +199,7 @@
         <item name="android:paddingRight">@dimen/setting_right</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/item_click_bg</item>
     </style>
 
     <style name="style_me_next_content">

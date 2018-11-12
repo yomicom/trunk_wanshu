@@ -1,6 +1,9 @@
 package com.wxb.wanshu.ui.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,15 +14,18 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.wxb.wanshu.MainActivity;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.component.AppComponent;
+import com.wxb.wanshu.ui.presenter.PermissionUtils;
 import com.wxb.wanshu.utils.LogUtils;
 
 import java.io.File;
@@ -31,6 +37,26 @@ public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.welcome)
     RelativeLayout welcome;
+    private AlphaAnimation alphaAnimation;
+    private static final String TAG = "SplashActivity";
+
+    final private static int PERMISSIONS_CODE = 29; // 请求码
+
+    static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.INTERNET,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.CHANGE_NETWORK_STATE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_SETTINGS,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    private PermissionsChecker permissionsChecker;
 
     @Override
     public int getLayoutId() {
@@ -48,6 +74,45 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+        permissionsChecker = new PermissionsChecker(this);
+    }
+
+    @Override
+    protected void onResume() {
+//        if (permissionsChecker.lacksPermissions(PERMISSIONS)) {
+//            startPermissionsActivity();
+//        } else {
+//            showMainActivity();
+//            finish();
+//        }
+        super.onResume();
+    }
+
+    private void startPermissionsActivity() {
+        PermissionsActivity.startActivityForResult(this, PERMISSIONS_CODE, PERMISSIONS);
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+    // 拒绝时, 关闭页面, 缺少主要权限, 无法运行
+//        if (requestCode == PERMISSIONS_CODE &&
+//                resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
+//        } else {
+//            showMainActivity();
+//        }
+//        finish();
+//    }
+
+    private void showMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public void initDatas() {
 
     }
@@ -55,22 +120,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void configViews() {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
-                    10);
-        } else {
-
-        }
-//        if (PermissionUtils.CheckPermission(PermissionUtils.READ_EXTERNAL_STORAGE, (Activity) mContext)
-//                && PermissionUtils.CheckPermission(PermissionUtils.WRITE_EXTERNAL_STORAGE, (Activity) mContext)) {
-//        } else {
-//            PermissionUtils.verifyStoragePermissions((Activity) mContext);
-//        }
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.3F, 1.0F);
+        alphaAnimation = new AlphaAnimation(0.3F, 1.0F);
         alphaAnimation.setDuration(1000);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -88,7 +138,20 @@ public class WelcomeActivity extends BaseActivity {
 
             }
         });
-        welcome.startAnimation(alphaAnimation);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
+                    10);
+        } else {
+            writeSettingsPermission();
+        }
+//        if (PermissionUtils.CheckPermission(PermissionUtils.READ_EXTERNAL_STORAGE, (Activity) mContext)
+//                && PermissionUtils.CheckPermission(PermissionUtils.WRITE_EXTERNAL_STORAGE, (Activity) mContext)) {
+//        } else {
+//            PermissionUtils.verifyStoragePermissions((Activity) mContext);
+//        }
+
     }
 
     public void jumpToMain() {
@@ -96,6 +159,52 @@ public class WelcomeActivity extends BaseActivity {
         startActivity(intent);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    int REQUEST_CODE_WRITE_SETTINGS = 10;
+
+    @TargetApi(23)
+    private void writeSettingsPermission() {
+        if (!Settings.System.canWrite(this)) {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("WRITE_SETTINGS权限申请")
+                    .setMessage("点击OK进入设置界面授予权限")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //核心代码
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                                    Uri.parse("package:" + getPackageName()));
+                            startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .create();
+            dialog.show();
+        } else {
+            welcome.startAnimation(alphaAnimation);
+        }
+    }
+
+
+    @Override
+    @TargetApi(23)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
+            writeSettingsPermission();
+        }
+        if (Settings.System.canWrite(this) && requestCode == REQUEST_CODE_WRITE_SETTINGS) {
+            welcome.startAnimation(alphaAnimation);
+//            Toast.makeText(this, "WRITE_SETTINGS permission granted", Toast.LENGTH_SHORT).show();
+        } else {
+//            Toast.makeText(this, "WRITE_SETINGS permission denied", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**
@@ -151,38 +260,32 @@ public class WelcomeActivity extends BaseActivity {
         Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
         startActivityForResult(intent, 1);
     }
+    //        }
+    //            }
+    ////                showApkInstallDialog();
+    //
+    //                LogUtils.e("", "从安装页面回到欢迎页面--拒绝安装");
+    //                // CnPeng 2018/8/2 下午4:31 在安装页面中退出安装了
+    //            } else if (requestCode == 2) {
+    //                }
+    //                    }
+    ////                        showUnKnowResourceDialog();
+    //                        LogUtils.e("", "没有赋予 未知来源安装权限");
+    //                    if (!hasInstallPermission) {
+    //                    boolean hasInstallPermission = getPackageManager().canRequestPackageInstalls();
+    //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    //                //CnPeng 2018/8/2 下午4:31 8.0手机位置来源安装权限
+    //            if (requestCode == 1) {
+    //        } else {
+    //            }
+    //                openAPKFile();
+    //            if (requestCode == 1) {
+    //        if (resultCode == RESULT_OK) {
+    //        super.onActivityResult(requestCode, resultCode, data);
+    //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    @Override
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                openAPKFile();
-            }
-        } else {
-            if (requestCode == 1) {
-                //CnPeng 2018/8/2 下午4:31 8.0手机位置来源安装权限
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    boolean hasInstallPermission = getPackageManager().canRequestPackageInstalls();
-                    if (!hasInstallPermission) {
-                        LogUtils.e("", "没有赋予 未知来源安装权限");
-//                        showUnKnowResourceDialog();
-                    }
-                }
-            } else if (requestCode == 2) {
-                // CnPeng 2018/8/2 下午4:31 在安装页面中退出安装了
-                LogUtils.e("", "从安装页面回到欢迎页面--拒绝安装");
-
-//                showApkInstallDialog();
-            }
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
+//    }
 
 //    /**
 //     * 作者：CnPeng

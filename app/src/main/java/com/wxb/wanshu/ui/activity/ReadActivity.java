@@ -866,11 +866,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.e("Receiver not registered");
         }
 
-        if (isAutoLightness) {
-            ScreenUtils.startAutoBrightness(ReadActivity.this);
-        } else {
-            ScreenUtils.stopAutoBrightness(ReadActivity.this);
-        }
+//        if (isAutoLightness) {
+//            ScreenUtils.startAutoBrightness(ReadActivity.this);
+//        } else {
+//            ScreenUtils.stopAutoBrightness(ReadActivity.this);
+//        }
 
         if (mPresenter != null) {
             mPresenter.detachView();
@@ -971,9 +971,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 SettingManager.getInstance().saveVolumeFlipEnable(isChecked);
             } else if (buttonView.getId() == cbAutoBrightness.getId()) {
                 if (isChecked) {
-                    startAutoLightness();
+//                    startAutoLightness();
                 } else {
-                    stopAutoLightness();
+//                    stopAutoLightness();
                     ScreenUtils.saveScreenBrightnessInt255(ScreenUtils.getScreenBrightnessInt255(), AppUtils.getAppContext());
                 }
             }

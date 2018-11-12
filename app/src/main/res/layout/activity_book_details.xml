@@ -23,60 +23,61 @@
             android:orientation="vertical">
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/background"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:src="@mipmap/ic_launcher"-->
-                    <!--android:scaleType="fitXY"/>-->
-                <RelativeLayout
-                    android:id="@+id/rl_image"
-                    style="@style/rl_normal">
-                    <ImageView
-                        android:id="@+id/iv_book"
-                        android:layout_width="@dimen/book_cover_width"
-                        android:layout_height="@dimen/book_cover_height"
-                        android:layout_marginRight="@dimen/distance_image_text_15"
-                        android:src="@mipmap/defalt_book_cover" />
+            <!--<ImageView-->
+            <!--android:id="@+id/background"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@mipmap/ic_launcher"-->
+            <!--android:scaleType="fitXY"/>-->
+            <RelativeLayout
+                android:id="@+id/rl_image"
+                style="@style/rl_normal">
 
-                    <ImageView
-                        android:id="@+id/iv_is_free"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/tag_free"
-                        android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/iv_book"
+                    android:layout_width="@dimen/book_cover_width"
+                    android:layout_height="@dimen/book_cover_height"
+                    android:layout_marginRight="@dimen/distance_image_text_15"
+                    android:src="@mipmap/defalt_book_cover" />
 
-                    <TextView
-                        android:id="@+id/tv_title"
-                        style="@style/text_novel_title"
-                        android:layout_toRightOf="@id/iv_book"
-                        android:lines="2"
-                        android:text=""
-                        android:textSize="@dimen/text_less_huge" />
+                <ImageView
+                    android:id="@+id/iv_is_free"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/tag_free"
+                    android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/author"
-                        style="@style/text_small_nomal"
-                        android:layout_below="@id/tv_title"
-                        android:layout_marginTop="@dimen/distance_text_text_12"
-                        android:layout_toRightOf="@id/iv_book"
-                        android:lines="1"
-                        android:text=""
-                        android:textColor="@color/gobal_color" />
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/text_novel_title"
+                    android:layout_toRightOf="@id/iv_book"
+                    android:lines="2"
+                    android:text=""
+                    android:textSize="@dimen/text_less_huge" />
 
-                    <TextView
-                        android:id="@+id/tv_read"
-                        style="@style/text_small_nomal"
-                        android:layout_below="@id/author"
-                        android:layout_marginTop="@dimen/distance_text_text_10"
-                        android:layout_toRightOf="@id/iv_book"
-                        android:lines="1"
-                        android:text="" />
+                <TextView
+                    android:id="@+id/author"
+                    style="@style/text_small_nomal"
+                    android:layout_below="@id/tv_title"
+                    android:layout_marginTop="@dimen/distance_text_text_12"
+                    android:layout_toRightOf="@id/iv_book"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@color/gobal_color" />
 
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_read"
+                    style="@style/text_small_nomal"
+                    android:layout_below="@id/author"
+                    android:layout_marginTop="@dimen/distance_text_text_10"
+                    android:layout_toRightOf="@id/iv_book"
+                    android:lines="1"
+                    android:text="" />
+
+            </RelativeLayout>
             <!--</RelativeLayout>-->
 
 
@@ -87,16 +88,16 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/distance_left"
-                android:paddingBottom="@dimen/distance_top"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:paddingBottom="@dimen/distance_top">
 
                 <TextView
                     android:id="@+id/tv_account_intro"
                     style="@style/text_small_nomal"
                     android:layout_width="match_parent"
                     android:gravity="left"
-                    android:maxLines="3"
                     android:lineSpacingExtra="@dimen/line_small_space"
+                    android:maxLines="3"
                     android:textSize="14sp"></TextView>
 
                 <ImageView
@@ -124,13 +125,11 @@
 
                 <RelativeLayout
                     android:id="@+id/item_last_chapter"
+                    style="@style/style_me_next_item"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/distance_left"
-                    android:paddingRight="@dimen/distance_left">
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/last_chapter"
@@ -155,12 +154,10 @@
 
                 <RelativeLayout
                     android:id="@+id/book_menu"
+                    style="@style/style_me_next_item"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/distance_left"
-                    android:paddingRight="@dimen/distance_left">
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/menu"
@@ -178,7 +175,8 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <View style="@style/item_divide"/>
+            <View style="@style/item_divide" />
+
             <TextView
                 android:id="@+id/tv_tag"
                 style="@style/text_big_nomal"
@@ -202,7 +200,8 @@
                 android:paddingBottom="@dimen/distance_top"
                 android:visibility="visible" />
 
-            <View style="@style/item_divide"/>
+            <View style="@style/item_divide" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -290,7 +289,7 @@
                 android:textColor="@color/text_color_2"
                 android:visibility="gone" />
 
-            <View style="@style/item_divide"/>
+            <View style="@style/item_divide" />
         </LinearLayout>
     </ScrollView>
 
@@ -304,7 +303,7 @@
 
         <TextView
             android:id="@+id/tv_add_book"
-            style="@style/text_big_nomal"
+            style="@style/text_big_nomal_click"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -312,7 +311,7 @@
 
         <TextView
             android:id="@+id/tv_read_book"
-            style="@style/text_big_nomal"
+            style="@style/text_big_nomal_click"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

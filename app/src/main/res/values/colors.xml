@@ -6,6 +6,8 @@
     <color name="text_color_1">#1C1C1C</color>
     <color name="text_color_2">#8E8E93</color>
 
+    <color name="no_gobal_color">#00276EFF</color>
+
     <color name="text_hint_color">#888999</color>
     <color name="text_hint_color0">#666777</color>
 
