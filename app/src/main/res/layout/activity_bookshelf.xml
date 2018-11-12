@@ -8,11 +8,13 @@
     android:orientation="vertical"
     tools:context="com.wxb.wanshu.ui.activity.BookshelfActivity">
 
+    <View android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
     <RelativeLayout
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_title_height"
-        android:background="@color/main_title_color"
         android:paddingLeft="@dimen/distance_top"
         android:paddingRight="@dimen/distance_top">
 
@@ -62,8 +64,6 @@
             android:visibility="gone" />
 
     </RelativeLayout>
-
-    <View style="@style/line_divide" />
 
     <com.wxb.wanshu.view.recycleview.EasyRecyclerView
         android:id="@+id/recyclerview"

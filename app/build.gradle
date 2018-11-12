@@ -117,6 +117,7 @@ android {
             exclude module: 'support-annotations'
             exclude module: 'butterknife-annotations'
         }
+        compile rootProject.ext.dependencies["banner"]
         //test
 
         //eventbus

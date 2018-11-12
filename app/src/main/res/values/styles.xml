@@ -160,6 +160,7 @@
         <item name="android:textSize">@dimen/text_big</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="style_me_next_item">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/setting_height</item>
@@ -169,6 +170,7 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="style_me_next_content">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -328,4 +330,12 @@
         <item name="atg_horizontalPadding">12dp</item>
         <item name="atg_verticalPadding">6dp</item>
     </style>
+
+    <style name="AppTheme.Image" parent="AppTheme" />
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="fullScreen" parent="Theme.AppCompat.DayNight.NoActionBar"></style>
 </resources>

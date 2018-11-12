@@ -8,10 +8,12 @@
     android:orientation="vertical"
     tools:context="com.wxb.wanshu.ui.activity.ClassifyActivity">
 
+    <View android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_title_height"
-        android:background="@color/main_title_color">
+        android:layout_height="@dimen/app_title_height">
 
         <TextView
             style="@style/text_big_nomal"
@@ -30,7 +32,6 @@
             android:visibility="gone"/>
     </RelativeLayout>
 
-    <View style="@style/line_divide" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"

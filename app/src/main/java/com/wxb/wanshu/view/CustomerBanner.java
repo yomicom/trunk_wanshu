@@ -30,12 +30,10 @@ public class CustomerBanner extends FrameLayout {
     private static final int DELAY = 3000;
     private Context mContext;
     //存放图片的ImageView
-    private List<View> mPagesIV;
+    private List<ImageView> mPagesIV;
     //存放圆点的ImageView
     private List<ImageView> mDotsIV;
     //待显示图片的资源ID
-//    private int[] mDrawableIds = {R.drawable.red, R.drawable.green, R.drawable.yellow,
-//            R.drawable.orange, R.drawable.blue};
     private ViewPager mVP;
     private boolean isAutoPlay;
     private int currentItem;
@@ -88,35 +86,32 @@ public class CustomerBanner extends FrameLayout {
         if (list != null && list.size() > 0) {
             initContent(list.size());
             for (int i = 0; i < list.size(); i++) {
-                View item = View.inflate(mContext, R.layout.item_vp_banner, null);
+                View item = View.inflate(mContext, R.layout.image_banner, null);
                 ImageView iv = item.findViewById(R.id.iv_banner);
-//                TextView tvTitle = item.findViewById(R.id.tv_banner_title);
-//                TextView tvIntro = item.findViewById(R.id.tv_banner_intro);
 
                 HomeData.DataBeanX.DataBean bean = list.get(i);
                 ImageUtils.displayImage(mContext, iv, bean.getCover(), 0, 0);
-//                tvTitle.setText(bean.getName());
-//                tvIntro.setText(bean.getDescription());
-                String type = bean.type;
 
                 item.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if ("page".equals(bean.type)) {
-                            WebViewActivity.startActivity(mContext,"",bean.url);
+                            WebViewActivity.startActivity(mContext, "", bean.url);
                         } else {
                             BookDetailsActivity.startActivity(mContext, bean.getId());
                         }
                     }
                 });
 
-                mPagesIV.add(item);
+                mPagesIV.add(iv);
             }
 
 
             mVP.setAdapter(new TopPagerAdapter());
             mVP.setFocusable(true);
-            mVP.setCurrentItem(currentItem);
+            int item = Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2 % mPagesIV.size());
+            mVP.setCurrentItem(item);
+//            mVP.setCurrentItem(currentItem);
             mVP.addOnPageChangeListener(new TopOnPageChangeListener());
             startCarousel();
         }
@@ -139,7 +134,7 @@ public class CustomerBanner extends FrameLayout {
 
         @Override
         public int getCount() {
-            return mPagesIV.size();
+            return Integer.MAX_VALUE;
         }
 
         @Override
@@ -149,13 +144,21 @@ public class CustomerBanner extends FrameLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(mPagesIV.get(position));
-            return mPagesIV.get(position);
+            //拿着position位置 % 集合.size
+            int newposition = position % mPagesIV.size();
+            //获取到条目要显示的内容imageview
+            ImageView iv = mPagesIV.get(newposition);
+            //要把 iv加入到 container 中
+
+            if (iv.getParent() != null)
+                ((ViewGroup) iv.getParent()).removeView(iv);
+            container.addView(iv);
+            return iv;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
+            container.removeView((ImageView) object);
         }
 
     }
@@ -164,7 +167,15 @@ public class CustomerBanner extends FrameLayout {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+//            if (positionOffset == 0.0) {
+//                if (position == 0) {
+//                    //当滑到第一张图时显示最后一张图并将postion跳至"D"位置
+//                    mVP.setCurrentItem(mPagesIV.size() - 2, false);
+//                }//当滑到最后一张图时显示第一张图并将position跳至"A"位置
+//                else if (position == mPagesIV.size() - 1) {
+//                    mVP.setCurrentItem(1, false);
+//                }
+//            }
         }
 
         @Override

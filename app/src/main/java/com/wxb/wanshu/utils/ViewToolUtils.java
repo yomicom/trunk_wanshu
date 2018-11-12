@@ -21,6 +21,7 @@ public class ViewToolUtils {
     public static void getResourceColor(Context context, TextView view, int color) {
         view.setTextColor(ContextCompat.getColor(context, color));
     }
+
     public static void setBackgroundResourceColor(Context context, TextView view, int color) {
         view.setBackgroundColor(ContextCompat.getColor(context, color));
     }
@@ -33,6 +34,17 @@ public class ViewToolUtils {
         } else {
             imageView.setVisibility(View.VISIBLE);
         }
+    }
+
+    //获取系统状态栏高度
+    public static int getstatusBarHeight() {
+        int height = 0;
+        int resourceId = AppUtils.getAppContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+            height = AppUtils.getAppContext().getResources().getDimensionPixelSize(resourceId);
+        if (height > 0)
+            return height;
+        else return 25;
     }
 
     //EditText设置清除图标是否可见 并设置Image清除文字

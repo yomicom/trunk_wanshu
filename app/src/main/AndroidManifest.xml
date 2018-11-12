@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -97,8 +98,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop">
+        </activity>
+        <activity
+            android:name=".ui.activity.WelcomeActivity"
+            android:theme="@style/fullScreen"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -191,10 +198,12 @@
         <activity
             android:name=".ui.activity.KindNovelActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.WelcomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.ReadOtherStatusActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.activity.ReadOtherStatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ImageActivity"
+            android:label="@string/title_activity_image"></activity>
     </application>
 
 </manifest>

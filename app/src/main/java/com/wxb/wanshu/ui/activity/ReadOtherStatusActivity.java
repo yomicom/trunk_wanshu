@@ -77,13 +77,15 @@ public class ReadOtherStatusActivity extends BaseActivity {
 
     private void showRecomend() {
         ChapterRead.DataBean data = (ChapterRead.DataBean) getIntent().getSerializableExtra("data");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (data.recommend_list.size() > 0) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        ReadRecommendFragment fragment = ReadRecommendFragment.newInstance(data);
-        transaction.replace(R.id.recommend, fragment);
-        transaction.commit();
-        visible(recommend);
+            ReadRecommendFragment fragment = ReadRecommendFragment.newInstance(data);
+            transaction.replace(R.id.recommend, fragment);
+            transaction.commit();
+            visible(recommend);
+        }
     }
 
     @Override

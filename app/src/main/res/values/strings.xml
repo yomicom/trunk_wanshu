@@ -77,5 +77,6 @@
 
     <string name="first_chapter">已经是第一章了</string>
     <string name="last_chapter">已经是最后一章了</string>
+    <string name="title_activity_image">ImageActivity</string>
 
 </resources>

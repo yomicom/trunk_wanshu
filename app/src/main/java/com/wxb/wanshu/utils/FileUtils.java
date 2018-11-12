@@ -451,14 +451,16 @@ public class FileUtils {
     }
 
     /**
-     * 删除指定文件
+     * 删除指定文件(可继续重新创建，解决错误：java.io.FileNotFoundException: /storage/emulated/0/Android/data/com.wxb.wanshu/cache/cache/book/23/6.txt: open failed: EBUSY (Device or resource busy))
      *
      * @param file
      * @return
      * @throws IOException
      */
-    public static boolean deleteFile(File file) throws IOException {
-        return deleteFileOrDirectory(file);
+    public static boolean deleteFile(File file) {
+        final File to = new File(file.getAbsolutePath() + System.currentTimeMillis());
+        file.renameTo(to);
+        return to.delete();
     }
 
     /**
@@ -471,19 +473,19 @@ public class FileUtils {
     public static boolean deleteFileOrDirectory(File file) {
         try {
             if (file != null && file.isFile()) {
-                return file.delete();
+                return deleteFile(file);
             }
             if (file != null && file.isDirectory()) {
                 File[] childFiles = file.listFiles();
                 // 删除空文件夹
                 if (childFiles == null || childFiles.length == 0) {
-                    return file.delete();
+                    return deleteFile(file);
                 }
                 // 递归删除文件夹下的子文件
                 for (int i = 0; i < childFiles.length; i++) {
                     deleteFileOrDirectory(childFiles[i]);
                 }
-                return file.delete();
+                return deleteFile(file);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -510,9 +512,7 @@ public class FileUtils {
                         if (getChapterPath(novel_id, chapter).equals(childFile.getAbsolutePath())) {
                             return true;
                         } else {
-                            final File to = new File(childFile.getAbsolutePath() + System.currentTimeMillis());
-                            childFile.renameTo(to);
-                            to.delete();
+                            deleteFile(file);
                         }
                     }
                 }
