@@ -25,6 +25,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Checkable;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -120,6 +122,12 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     public BaseViewHolder setText(int viewId, String value) {
         TextView view = getView(viewId);
         view.setText(value);
+        return this;
+    }
+
+    public BaseViewHolder setText(int viewId, String value, boolean isHtml) {
+        TextView view = getView(viewId);
+        view.setText(Html.fromHtml(value));
         return this;
     }
 

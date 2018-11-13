@@ -175,7 +175,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/boutiqueList")
-    Observable<BookList> getBoutiqueList(@Query("type") int type, @Query("page") int page);
+    Observable<BookList> getBoutiqueList(@Query("type") int type, @Query("page") int page, @Query("pageSize") int pageSize);
 
     /**
      * 短篇频道-更多列表
@@ -183,7 +183,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/shortStoryList")
-    Observable<BookList> getShortStoryList(@Query("category_id") int category_id, @Query("page") int page);
+    Observable<BookList> getShortStoryList(@Query("category_id") int category_id, @Query("page") int page, @Query("pageSize") int pageSize);
 
     /**
      * 完本频道-更多列表
@@ -194,7 +194,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/finishedList")
-    Observable<BookList> getFinishedList(@Query("sort") String sort, @Query("status") int status, @Query("page") int page);
+    Observable<BookList> getFinishedList(@Query("sort") String sort, @Query("status") int status, @Query("page") int page, @Query("pageSize") int pageSize);
 
     /**
      * 获取排行榜列表
@@ -286,7 +286,7 @@ public interface ApiService {
      * @return
      */
     @POST("/client/launch")
-    Observable<ClientData> clientLaunch(@Query("device_id") String device_id, @Query("type") int type,
+    Observable<ClientData> clientLaunch(@Query("deviceboutiqueList_id") String device_id, @Query("type") int type,
                                         @Query("version") String version, @Query("os") String os);
 
     /**

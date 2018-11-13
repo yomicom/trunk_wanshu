@@ -32,6 +32,7 @@ import com.wxb.wanshu.ui.adapter.easyadpater.HotNovelAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.ui.presenter.SearchPresenter;
+import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.TagGroup;
 
 import java.io.Serializable;
@@ -104,22 +105,25 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
         HomeData.DataBeanX data = (HomeData.DataBeanX) getIntent().getSerializableExtra("data");
         List<String> list = new ArrayList<>();
-        List<HomeData.DataBeanX.DataBean> HotBookData = data.getData();
-        for (int i = 0; i < HotBookData.size(); i++) {
-            list.add(HotBookData.get(i).getName());
-        }
-        HotGroup.setTags(list);
-        HotGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
-            @Override
-            public void onTagClick(String tag) {
-                for (int i = 0; i < HotBookData.size(); i++) {
-                    if (tag.equals(HotBookData.get(i).getName())) {
-                        BookDetailsActivity.startActivity(mContext, HotBookData.get(i).getId());
+        List<HomeData.DataBeanX.DataBean> hotBookData = data.getData();
+
+        if (hotBookData != null && hotBookData.size() > 0) {
+            etSearch.setText(hotBookData.get(0).getName());
+            ViewToolUtils.setTextLast(etSearch);
+            visible(ivClean);
+            for (int i = 0; i < hotBookData.size(); i++) {
+                list.add(hotBookData.get(i).getName());
+            }
+            HotGroup.setTags(list);
+            HotGroup.setOnTagClickListener(tag -> {
+                for (int i = 0; i < hotBookData.size(); i++) {
+                    if (tag.equals(hotBookData.get(i).getName())) {
+                        BookDetailsActivity.startActivity(mContext, hotBookData.get(i).getId());
                         break;
                     }
                 }
-            }
-        });
+            });
+        }
 
         initSearchHistory();
     }
@@ -141,6 +145,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
                 }
                 etSearch.setText(tag);
                 search(tag);
+                ViewToolUtils.setTextLast(etSearch);
             }
         });
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -214,10 +219,11 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
     @Override
     public void showBookList(BookList data) {
-        if (page == 0) {
+        if (page == START_PAGE) {
             mAdapter.clear();
         }
         mAdapter.addAll(data.getData());
+        ((SelectBooksAdapter)mAdapter).setSelected(keyword);
     }
 
     @Override

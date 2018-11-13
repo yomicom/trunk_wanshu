@@ -5,9 +5,9 @@
     android:id="@+id/ll_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@color/common_bg"
     tools:context="com.wxb.wanshu.ui.activity.BookDetailsActivity">
 
     <include layout="@layout/common_toolbar" />
@@ -20,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/common_bg">
 
             <!--<RelativeLayout-->
             <!--android:layout_width="match_parent"-->
@@ -80,16 +81,13 @@
             </RelativeLayout>
             <!--</RelativeLayout>-->
 
-
             <LinearLayout
                 android:id="@+id/description_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/distance_left"
-                android:paddingTop="5dp"
-                android:paddingBottom="@dimen/distance_top">
+                android:paddingTop="5dp">
 
                 <TextView
                     android:id="@+id/tv_account_intro"
@@ -97,6 +95,8 @@
                     android:layout_width="match_parent"
                     android:gravity="left"
                     android:lineSpacingExtra="@dimen/line_small_space"
+                    android:paddingLeft="@dimen/distance_left"
+                    android:paddingRight="@dimen/distance_left"
                     android:maxLines="3"
                     android:textSize="14sp"></TextView>
 
@@ -110,12 +110,15 @@
                     android:paddingRight="5dp"
                     android:src="@mipmap/icon_open_nomal"
                     android:visibility="gone" />
+
+                <View
+                    style="@style/line_divide"
+                    android:layout_marginLeft="@dimen/distance_left"
+                    android:layout_marginRight="@dimen/distance_left"
+                    android:layout_marginTop="@dimen/distance_top"
+                    android:paddingBottom="@dimen/distance_top" />
             </LinearLayout>
 
-            <View
-                style="@style/line_divide"
-                android:layout_marginLeft="@dimen/distance_left"
-                android:layout_marginRight="@dimen/distance_left" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,14 +138,16 @@
                         android:id="@+id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
-                        android:text="最新：" />
+                        android:text="最新："
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/last_chapter"
                         android:layout_toRightOf="@id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
-                        android:text="" />
+                        android:text=""
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/last_chapter_time"

@@ -19,6 +19,7 @@
         <TextView
             android:id="@+id/title"
             style="@style/text_middle_nomal"
+            android:gravity="left"
             android:maxLines="2"
             android:text="-" />
 

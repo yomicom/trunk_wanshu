@@ -169,6 +169,7 @@ public class Constant {
 
     @StringDef({
             BookType.ALL,
+            BookType.Banner,
             BookType.EDITOR,
             BookType.FRESH,
             BookType.POPULAR,
@@ -190,6 +191,8 @@ public class Constant {
     public @interface BookType {
         String ALL = "all";
 
+        String Banner = "homepage:big_cover";//Banner
+
         String EDITOR = "homepage:editor";//编辑力荐
 
         String FRESH = "homepage:fresh";//新书速递
@@ -197,6 +200,7 @@ public class Constant {
         String POPULAR = "homepage:popular";//人气佳作
 
         String PUBLISHING = "homepage:publishing";//火爆连载
+
         String MID_BANNER = "homepage:mid_banner";//首页图片
 
         String FINISH = "homepage:complete";//完本精选
@@ -224,6 +228,7 @@ public class Constant {
 
     public static List<String> bookTypeList = new ArrayList<String>() {{
         add(BookType.ALL);
+        add(BookType.Banner);
         add(BookType.EDITOR);
         add(BookType.FRESH);
         add(BookType.POPULAR);

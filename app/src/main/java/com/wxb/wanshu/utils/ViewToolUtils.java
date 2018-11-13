@@ -12,6 +12,8 @@ import android.renderscript.Type;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +46,16 @@ public class ViewToolUtils {
             imageView.setVisibility(View.GONE);
         } else {
             imageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //将EditText的光标置于最后
+    public static void setTextLast(EditText editText) {
+        editText.postInvalidate();
+        CharSequence charSequence = editText.getText();
+        if (charSequence instanceof Spannable) {
+            Spannable spannable = (Spannable) charSequence;
+            Selection.setSelection(spannable, charSequence.length());
         }
     }
 

@@ -143,8 +143,8 @@ public abstract class BaseDynamicInterceptor<R extends BaseDynamicInterceptor> i
             Utils.checkNotNull(newParams, "newParams==null");
             //Logc.i("======post请求参数===========");
             for (Map.Entry<String, String> entry : newParams.entrySet()) {
-                String value = URLEncoder.encode(entry.getValue(), "utf8");
-                bodyBuilder.addEncoded(entry.getKey(), value);
+//                String value = URLEncoder.encode(entry.getValue(), "utf8");
+                bodyBuilder.addEncoded(entry.getKey(), entry.getValue());
                 //Logc.i(entry.getKey() + " -> " + value);
             }
 //            String url = HttpUtil.createUrlFromParams(httpUrl.url().toString(), newParams);

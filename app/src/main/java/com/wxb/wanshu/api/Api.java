@@ -152,17 +152,15 @@ public class Api {
     }
 
     public Observable<BookList> getBoutiqueList(int type, int page) {
-        return service.getBoutiqueList(type, page);
-//        return service.getRankBookList();
+        return service.getBoutiqueList(type, page, 20);
     }
 
     public Observable<BookList> getShortStoryList(int category_id, int page) {
-        return service.getShortStoryList(category_id, page);
-//        return service.getRankBookList();
+        return service.getShortStoryList(category_id, page, 20);
     }
 
     public Observable<BookList> getFinishedList(String sort, int status, int page) {
-        return service.getFinishedList(sort, status, page);
+        return service.getFinishedList(sort, status, page, 20);
     }
 
     public Observable<Base> addBookshelfList(String novel_id) {
