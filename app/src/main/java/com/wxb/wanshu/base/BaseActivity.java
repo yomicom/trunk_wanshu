@@ -1,6 +1,7 @@
 package com.wxb.wanshu.base;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
+import com.wxb.wanshu.utils.StatusBarUtils;
 import com.wxb.wanshu.utils.Utils;
 import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.loadding.CustomDialog;
@@ -56,8 +58,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        } else if (statusBarColor != -1) {
 //            statusBarView = StatusBarCompat.compat(this, statusBarColor);
 //        }
-        transparent19and20();
+//        transparent19and20();
 //        setStatusBarView();
+//        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
 
         ButterKnife.bind(this);
         setupActivityComponent(MyApplication.getsInstance().getAppComponent());
@@ -104,11 +107,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void transparent19and20() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-//                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            //透明状态栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

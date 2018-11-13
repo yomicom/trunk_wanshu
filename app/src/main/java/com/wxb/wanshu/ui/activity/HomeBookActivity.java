@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import com.wxb.wanshu.ImageActivity;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
@@ -235,7 +236,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             case R.id.search:
                 if (homeData != null) {
                     List<HomeData.DataBeanX> data = homeData.getData();
-                    SearchActivity.startActivity(this, data.get(data.size() - 1));
+                    SearchActivity.startActivity(this, getItemData(data, Constant.BookType.SEARCH_HOT));
                 }
                 break;
             case R.id.item_rank:
@@ -251,6 +252,18 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                 KindNovelActivity.startActivity(mContext, 2);
                 break;
         }
+    }
+
+    //获取当前的Item数据
+    private HomeData.DataBeanX getItemData(List<HomeData.DataBeanX> data, String type) {
+        HomeData.DataBeanX bean = new HomeData.DataBeanX();
+        for (int i = 0; i < data.size(); i++) {
+            HomeData.DataBeanX dataBeanX = data.get(i);
+            if (dataBeanX.type.equals(type)) {
+                return dataBeanX;
+            }
+        }
+        return bean;
     }
 
     @Override

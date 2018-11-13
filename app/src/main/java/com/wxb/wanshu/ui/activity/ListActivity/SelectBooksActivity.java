@@ -104,7 +104,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
                 String category_id = getIntent().getStringExtra("category_id");
                 mPresenter.getBookList( category_id,  page);
                 break;
-            case Constant.BookType.Boutique_All:
+            case Constant.BookType.Boutique_All://精选
                 mPresenter.getBoutiqueList(0, page);
                 break;
             case Constant.BookType.Boutique_Publishing:
@@ -113,7 +113,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
             case Constant.BookType.Boutique_Finished:
                 mPresenter.getBoutiqueList(2, page);
                 break;
-            case Constant.BookType.Short_AncientRomance:
+            case Constant.BookType.Short_AncientRomance://短文
                 mPresenter.getShortStoryList(1, page);
                 break;
             case Constant.BookType.Short_ModernRomance:
@@ -122,7 +122,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
             case Constant.BookType.Short_All:
                 mPresenter.getShortStoryList(0, page);
                 break;
-            case Constant.BookType.Finished_All:
+            case Constant.BookType.Finished_All://完结
                 mPresenter.getFinishList("read", 1, page);
                 break;
             case Constant.BookType.Finished_Popular:
@@ -133,10 +133,10 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
                 break;
 
             case Constant.BookType.PUBLISHING://首页-火爆连载
-                mPresenter.getBoutiqueList(1, page);
+                mPresenter.getFinishList("time", 0, page);
                 break;
             case Constant.BookType.FINISH://首页-完本精选
-                mPresenter.getBoutiqueList(2, page);
+                mPresenter.getFinishList("time", 1, page);
                 break;
         }
     }

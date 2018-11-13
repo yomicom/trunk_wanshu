@@ -89,7 +89,7 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
     private void setMoreView() {
         String type = data.getType();
         String name = data.getName();
-        if (type.equals(Constant.BookType.EDITOR)) {
+        if (type.equals(Constant.BookType.FRESH)) {
             tvMore.setVisibility(View.GONE);
         }
         tvMore.setOnClickListener(v ->

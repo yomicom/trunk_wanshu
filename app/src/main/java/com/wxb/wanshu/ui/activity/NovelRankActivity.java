@@ -79,6 +79,7 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @OnClick({R.id.read, R.id.search, R.id.click, R.id.store})
     public void onViewClicked(View view) {
+        showDialog();
         switch (view.getId()) {
             case R.id.read:
                 if (!type.equals(TYPE_1)) {
@@ -140,17 +141,18 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @Override
     public void showError() {
-
+        hideDialog();
     }
 
     @Override
     public void complete() {
-
+        hideDialog();
     }
 
     @Override
     public void showNovelRank(BookList data) {
         if (page == START_PAGE) {
+            hideDialog();
             mAdapter.clear();
         }
         mAdapter.addAll(data.getData());

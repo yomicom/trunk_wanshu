@@ -172,6 +172,7 @@ public class Constant {
             BookType.POPULAR,
             BookType.PUBLISHING,
             BookType.FINISH,
+            BookType.SEARCH_HOT,
             BookType.Boutique_All,
             BookType.Boutique_Publishing,
             BookType.Boutique_Finished,
@@ -196,14 +197,24 @@ public class Constant {
 
         String FINISH = "homepage:complete";//完本精选
 
+        String SEARCH_HOT = "search:hot";//搜索推荐
+
         String Boutique_All = "boutique:all";//畅读精品
+
         String Boutique_Publishing = "boutique:publishing";//连载好文
+
         String Boutique_Finished = "boutique:finished";//完结精选
+
         String Short_ModernRomance = "short:modernRomance";//现代言情
+
         String Short_AncientRomance = "short:ancientRomance";//古代言情
+
         String Short_All = "short:all";//精选短篇
+
         String Finished_All = "finished:all";//完结精选
+
         String Finished_Popular = "finished:popular";//人气红文
+
         String Finished_Latest = "finished:latest";//最新完结
     }
 
@@ -214,6 +225,7 @@ public class Constant {
         add(BookType.POPULAR);
         add(BookType.PUBLISHING);
         add(BookType.FINISH);
+        add(BookType.SEARCH_HOT);
         add(BookType.Boutique_All);
         add(BookType.Boutique_Publishing);
         add(BookType.Boutique_Finished);

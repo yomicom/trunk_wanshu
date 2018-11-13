@@ -95,7 +95,7 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
     @Override
     public void initDatas() {
         mPresenter.attachView(this);
-        mPresenter.getHomeData("");
+        mPresenter.getHomeData(key);
         showDialog();
     }
 
