@@ -20,14 +20,6 @@
         android:paddingLeft="@dimen/distance_top"
         android:paddingRight="@dimen/distance_top">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ab_back"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/finish"
             style="@style/text_big_nomal"
@@ -43,7 +35,8 @@
             style="@style/text_big_nomal"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/distance_image_text_15"
-            android:layout_toRightOf="@id/back"
+            android:drawableLeft="@mipmap/ab_back"
+            android:drawablePadding="8dp"
             android:text="书架"
             android:textSize="@dimen/text_huge"
             android:visibility="gone" />

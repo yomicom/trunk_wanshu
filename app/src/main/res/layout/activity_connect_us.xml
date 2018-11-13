@@ -36,7 +36,7 @@
                 android:id="@+id/kefu_phone"
                 style="@style/text_middle_nomal"
                 android:layout_centerVertical="true"
-                android:text="客服电话:400-9981236" />
+                android:text="客服电话：400-9981236" />
 
             <TextView
                 android:id="@+id/tv_call"
@@ -57,7 +57,7 @@
                 android:id="@+id/ke_qq"
                 style="@style/text_middle_nomal"
                 android:layout_centerVertical="true"
-                android:text="客服QQ:3374397930" />
+                android:text="客服QQ：3374397930" />
 
             <TextView
                 android:id="@+id/tv_qq"

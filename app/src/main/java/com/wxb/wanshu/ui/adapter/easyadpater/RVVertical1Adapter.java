@@ -8,6 +8,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.ui.adapter.base.EasyRVAdapter;
 import com.wxb.wanshu.ui.adapter.base.EasyRVHolder;
+import com.wxb.wanshu.utils.FormatUtils;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class RVVertical1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBea
                 .setText(R.id.article_title, item.getName())
                 .setText(R.id.tv_article_intro, item.getDescription())
                 .setText(R.id.author, item.getAuthor())
-                .setText(R.id.tv_word_nums, item.getWord_num() + "字")
+                .setText(R.id.tv_word_nums, FormatUtils.formatWordCount(item.word_num) )
                 .setText(R.id.tv_category, item.getCategory_name());
 
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {

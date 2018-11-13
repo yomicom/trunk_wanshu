@@ -35,9 +35,9 @@ public class ReadOtherStatusActivity extends BaseActivity {
     @BindView(R.id.common_toolbar)
     Toolbar commonToolbar;
 
-    public static void startActivity(Context context, int code, String title, ChapterRead.DataBean dataBean) {
+    public static void startActivity(Context context, int code) {
         context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
-                .putExtra("code", code).putExtra("title", title).putExtra("data", dataBean));
+                .putExtra("code", code));
     }
 
     @Override
@@ -76,15 +76,17 @@ public class ReadOtherStatusActivity extends BaseActivity {
     }
 
     private void showRecomend() {
-        ChapterRead.DataBean data = (ChapterRead.DataBean) getIntent().getSerializableExtra("data");
-        if (data.recommend_list.size() > 0) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (getIntent().hasExtra("data")) {
+            ChapterRead.DataBean data = (ChapterRead.DataBean) getIntent().getSerializableExtra("data");
+            if (data.recommend_list.size() > 0) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            ReadRecommendFragment fragment = ReadRecommendFragment.newInstance(data);
-            transaction.replace(R.id.recommend, fragment);
-            transaction.commit();
-            visible(recommend);
+                ReadRecommendFragment fragment = ReadRecommendFragment.newInstance(data);
+                transaction.replace(R.id.recommend, fragment);
+                transaction.commit();
+                visible(recommend);
+            }
         }
     }
 

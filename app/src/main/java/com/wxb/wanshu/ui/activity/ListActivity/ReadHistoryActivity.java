@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerAccountComponent;
 import com.wxb.wanshu.ui.activity.ReadActivity;
+import com.wxb.wanshu.ui.activity.ReadOtherStatusActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
@@ -56,9 +58,6 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     TextView main_title;
     @BindView(R.id.llBatchManagement)
     LinearLayout llBatchManagement;
-
-    @BindView(R.id.back)
-    ImageView back;
     @BindView(R.id.item)
     View item;
     @BindView(R.id.emptyView)
@@ -103,7 +102,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     @Override
     public void configViews() {
         gone(item, main_title);
-        visible(manage, back, title);
+        visible(manage, title);
         title.setText("阅读历史");
         mRecyclerView.setEmptyView(R.layout.common_empty_view);
         initAdapter(ReadHistoryAdapter.class, false, true);
@@ -183,7 +182,11 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 if (bean.isSeleted) removeList.add(bean);
             }
         } else {
-            ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id);
+            if (Constant.BOOK_IS_NOT_ONSALE.equals(mAdapter.getItem(position).novel.is_onsale)) {//书籍已下架
+                ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
+            } else {
+                ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id);
+            }
         }
     }
 
@@ -195,7 +198,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         return false;
     }
 
-    @OnClick({R.id.tvDelete, R.id.finish, R.id.manage, R.id.back})
+    @OnClick({R.id.tvDelete, R.id.finish, R.id.manage, R.id.title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvDelete:
@@ -213,18 +216,19 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 goneBatchManagementAndRefreshUI();
                 break;
             case R.id.manage:
-                if (isVisible(llBatchManagement)) {//全选操作
-                    isSelectAll = !isSelectAll;
-                    manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
-                    for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
-                        bean.isSeleted = isSelectAll;
+                if (mAdapter.getAllData() != null)
+                    if (isVisible(llBatchManagement)) {//全选操作
+                        isSelectAll = !isSelectAll;
+                        manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
+                        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                            bean.isSeleted = isSelectAll;
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    } else {//管理操作
+                        showBatchManagementLayout(-1);
                     }
-                    mAdapter.notifyDataSetChanged();
-                } else {//管理操作
-                    showBatchManagementLayout(-1);
-                }
                 break;
-            case R.id.back:
+            case R.id.title:
                 finish();
                 break;
         }
@@ -257,7 +261,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
      */
     public void goneBatchManagementAndRefreshUI() {
         if (mAdapter == null) return;
-        gone(finish, llBatchManagement, title);
+        gone(finish, llBatchManagement);
+        visible(title);
         manage.setText("管理");
         manage.setTextColor(getResources().getColor(R.color.text_color_2));
         for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
@@ -281,7 +286,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         }
         mAdapter.notifyDataSetChanged();
 
-        visible(finish, llBatchManagement, title);
+        visible(finish, llBatchManagement);
+        gone(title);
         manage.setText("全选");
         manage.setTextColor(getResources().getColor(R.color.gobal_color));
     }

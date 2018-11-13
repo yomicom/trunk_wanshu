@@ -15,8 +15,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.anarchy.classify.util.L;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
 import com.wxb.wanshu.bean.BookList;
@@ -62,6 +64,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     LinearLayout llOther;
     @BindView(R.id.rootLayout)
     LinearLayout rootLayout;
+    @BindView(R.id.history)
+    RelativeLayout history;
     @BindView(R.id.tag_group)
     TagGroup RecordGroup;
 
@@ -132,6 +136,9 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
         RecordGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
             @Override
             public void onTagClick(String tag) {
+                if (tag.length() > 10 && tag.endsWith("...")) {
+                    tag = tag.replace("...", "");
+                }
                 etSearch.setText(tag);
                 search(tag);
             }
@@ -161,7 +168,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
                 etSearch.setText("");
                 etSearch.requestFocus();
 
-                visible(llOther);
+                visible(llOther, history);
                 gone(mRecyclerView);
             }
         });
@@ -246,17 +253,20 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             case R.id.iv_del:
                 CacheManager.getInstance().saveSearchHistory(null);
                 initSearchHistory();
-                gone(ivDel);
+                gone(history);
                 break;
         }
     }
 
     /**
-     * 保存搜索记录.不重复，最多保存20条
+     * 保存搜索记录.不重复，最多保存10条
      *
      * @param query
      */
     private void saveSearchHistory(String query) {
+        if (query.length() > 10) {//搜索关键词超过10个字符省略号
+            query = query.substring(0, 10) + "...";
+        }
         List<String> list = CacheManager.getInstance().getSearchHistory();
         if (list == null) {
             list = new ArrayList<>();
@@ -272,8 +282,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             list.add(0, query);
         }
         int size = list.size();
-        if (size > 20) { // 最多保存20条
-            for (int i = size - 1; i >= 20; i--) {
+        if (size > 10) { // 最多保存20条
+            for (int i = size - 1; i >= 10; i--) {
                 list.remove(i);
             }
         }
@@ -285,9 +295,9 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
         List<String> list = CacheManager.getInstance().getSearchHistory();
         if (list != null && list.size() > 0) {
             RecordGroup.setTags(list);
-            visible(ivDel, RecordGroup);
+            visible(history, RecordGroup);
         } else {
-            gone(ivDel, RecordGroup);
+            gone(history, RecordGroup);
         }
     }
 

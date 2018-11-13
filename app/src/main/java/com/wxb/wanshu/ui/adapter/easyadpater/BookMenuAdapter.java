@@ -64,10 +64,11 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
 
         //若该章节已缓存，则高亮显示
 //        if (CacheManager.getInstance().getChapterFile(novel_id, data.sort) != null) {
-        holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_1);
-//        } else {
-//            holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_2);
-//        }
+        if (data.has_been_read) {//已读章节（多缓存一章）
+            holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_1);
+        } else {
+            holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_2);
+        }
 
         if (position == selectPos) {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.gobal_color);

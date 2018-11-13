@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,14 +12,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.wxb.wanshu.ImageActivity;
 import com.wxb.wanshu.MyApplication;
@@ -76,12 +73,16 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     AlphaTitleScrollView scrollView;
     @BindView(R.id.iv_to_top)
     ImageView ivToTop;
+    @BindView(R.id.iv_book)
+    ImageView iv_book;
     @BindView(R.id.swipeRefresh)
     AdvanceSwipeRefreshLayout swipeRefresh;
     @BindView(R.id.vp_banner)
     BGABanner banner;
     @BindView(R.id.bg_search)
     RelativeLayout bgSearch;
+    @BindView(R.id.et_article_search)
+    TextView etArticleSearch;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
@@ -180,13 +181,28 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             transaction.replace(frameId[2], homePopularityFragment);
 
             //火热连载
-            recommendFragment = HomeRecommendFragment.newInstance(data.get(4), HOME_HOT_TYPE);
+            recommendFragment = HomeRecommendFragment.newInstance(data.get(5), HOME_HOT_TYPE);
             transaction.replace(frameId[3], recommendFragment);
 
-            homeBookListFragment = HomeBookListFragment.newInstance(data.get(5));
+            homeBookListFragment = HomeBookListFragment.newInstance(data.get(6));
             transaction.replace(frameId[4], homeBookListFragment);
 
             transaction.commit();
+
+            //设置首页图片
+            iv_book.setVisibility(View.VISIBLE);
+            HomeData.DataBeanX itemData = getItemData(data, Constant.BookType.MID_BANNER);
+            ImageUtils.displayImage(mContext, iv_book, itemData.data.get(0).cover);
+
+            iv_book.setOnClickListener(v ->
+                    BookDetailsActivity.startActivity(mContext, itemData.data.get(0).novel_id));
+
+            //设置搜索提示
+            if (homeData != null) {
+                HomeData.DataBeanX data1 = getItemData(data, Constant.BookType.SEARCH_HOT);
+                if (data1.getData().size() > 0)
+                    etArticleSearch.setHint(data1.getData().get(0).name);
+            }
         }
     }
 

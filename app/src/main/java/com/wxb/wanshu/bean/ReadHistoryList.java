@@ -87,6 +87,7 @@ public class ReadHistoryList extends Base {
             public String author;
             public String category_name;
             public boolean is_complete;
+            public int is_onsale;
 
             public String getId() {
                 return id;

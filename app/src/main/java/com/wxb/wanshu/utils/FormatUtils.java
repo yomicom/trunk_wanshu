@@ -17,6 +17,7 @@ package com.wxb.wanshu.utils;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -146,13 +147,19 @@ public class FormatUtils {
 
     public static String formatWordCount(int wordCount) {
         if (wordCount / 10000 > 0) {
-            return (int) ((wordCount / 10000f) + 0.5) + "万字";
-        } else if (wordCount / 1000 > 0) {
-            return (int) ((wordCount / 1000f) + 0.5) + "千字";
-        } else {
+            double count = (double) wordCount / 10000;
+            BigDecimal b = new BigDecimal(count);
+            double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return f1 + "万字";
+        }
+//        else if (wordCount / 1000 > 0) {
+//            return (int) ((wordCount / 1000f) + 0.5) + "千字";
+//        }
+        else {
             return wordCount + "字";
         }
     }
+
     /**
      * 时间戳转日期字符串
      *

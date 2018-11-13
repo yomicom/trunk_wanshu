@@ -37,6 +37,8 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public static String INTENT_ON_SHELF = "on_shelf";//是否在书架
     public static String INTENT_IS_READING = "isReading";
 
+    Menu menu;
+
     @BindView(R.id.listview)
     ListView listView;
     List<BookMenu.DataBean.ChaptersBean> list = new ArrayList<>();
@@ -45,7 +47,9 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     BookMenuPresenter mPresenter;
     private BookMenuAdapter adapter;
     private boolean isReading = false;
-    private BookMenu menu;
+    private BookMenu bookMenu;
+
+    boolean menuSort = true;//正序
 
     public static void startActivity(Context context, String novel_id, int curChapter, boolean isReading) {
         context.startActivity(new Intent(context, MenuActivity.class)
@@ -103,7 +107,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
-                    ReadActivity.startActivity(mContext, novel_id, data.sort, true, menu.data.novel.on_self);
+                    ReadActivity.startActivity(mContext, novel_id, data.sort, true, bookMenu.data.novel.on_self);
                 }
             }
         });
@@ -114,7 +118,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         hideDialog();
         adapter.addAll(data.getData().getChapters());
 
-        this.menu = data;
+        this.bookMenu = data;
         listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
     }
 
@@ -130,6 +134,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         menu.add(0, 10, 0, "").setIcon(R.mipmap.menu_down_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
@@ -137,6 +142,15 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 10) {
+            if (menu != null) {
+                if (menuSort) {
+                    menu.findItem(10).setIcon(R.mipmap.menu_up_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                    menuSort = false;
+                } else {
+                    menuSort = true;
+                    menu.findItem(10).setIcon(R.mipmap.menu_down_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                }
+            }
             int pos = curChapter - 1;
             Collections.reverse(list);
             adapter.setSelectPos(list.size() - pos - 1);

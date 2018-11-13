@@ -148,7 +148,7 @@ public class Api {
 
     public Observable<BookList> getRankBookList(String type, int page) {
 //        return service.getRankBookList(type, page);
-        return service.getRankBookList();
+        return service.getRankBookList(type);
     }
 
     public Observable<BookList> getBoutiqueList(int type, int page) {

@@ -79,7 +79,7 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @OnClick({R.id.read, R.id.search, R.id.click, R.id.store})
     public void onViewClicked(View view) {
-        showDialog();
+//        showDialog();
         switch (view.getId()) {
             case R.id.read:
                 if (!type.equals(TYPE_1)) {

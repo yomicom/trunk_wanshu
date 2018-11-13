@@ -60,7 +60,7 @@ public class BookDetails extends Base {
         public Object complete_time;
         public String category_id;
         public String sex_type;
-        public String word_num;
+        public int word_num;
         public int sort;
         public String chapter_num;
         public String free_chapter_num;
@@ -155,11 +155,11 @@ public class BookDetails extends Base {
             this.sex_type = sex_type;
         }
 
-        public String getWord_num() {
+        public int getWord_num() {
             return word_num;
         }
 
-        public void setWord_num(String word_num) {
+        public void setWord_num(int word_num) {
             this.word_num = word_num;
         }
 

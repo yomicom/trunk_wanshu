@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Scroller;
 
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.manager.SettingManager;
 import com.wxb.wanshu.manager.ThemeManager;
@@ -141,8 +142,10 @@ public abstract class BaseReadView extends View {
                 actiondownY = dy;
                 touch_down = 0;
                 pagefactory.onDraw(mCurrentPageCanvas);
-                if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
-                        && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
+
+                //阅读页是否翻页点击区域
+                if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3) {
+//                        && actiondownY >= mScreenHeight / 8 && actiondownY <= mScreenHeight * 7 / 8) {
                     center = true;
                 } else {
                     center = false;
@@ -294,7 +297,7 @@ public abstract class BaseReadView extends View {
     public void nextPage() {
         BookStatus status = pagefactory.nextPage();
         if (status == BookStatus.NO_NEXT_PAGE) {
-            ToastUtils.showSingleToast("没有下一页啦");
+            ToastUtils.showSingleToast(R.string.first_chapter);
             return;
         } else if (status == BookStatus.LOAD_SUCCESS) {
             if (isPrepared) {
@@ -311,7 +314,7 @@ public abstract class BaseReadView extends View {
     public void prePage() {
         BookStatus status = pagefactory.prePage();
         if (status == BookStatus.NO_PRE_PAGE) {
-            ToastUtils.showSingleToast("没有上一页啦");
+            ToastUtils.showSingleToast(R.string.first_chapter);
             return;
         } else if (status == BookStatus.LOAD_SUCCESS) {
             if (isPrepared) {

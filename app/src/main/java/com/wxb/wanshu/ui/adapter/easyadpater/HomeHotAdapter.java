@@ -8,6 +8,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.ui.adapter.base.EasyRVAdapter;
 import com.wxb.wanshu.ui.adapter.base.EasyRVHolder;
+import com.wxb.wanshu.utils.FormatUtils;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class HomeHotAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
         viewHolder.setImageUrl(R.id.cover, item.getCover())
                 .setText(R.id.title, item.getName())
-                .setText(R.id.word_num, item.getWord_num() + "字");
+                .setText(R.id.word_num, FormatUtils.formatWordCount(item.word_num));
 
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override

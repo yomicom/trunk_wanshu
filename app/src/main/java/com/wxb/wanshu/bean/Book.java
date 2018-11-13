@@ -16,10 +16,12 @@ public class Book implements Serializable {
      */
 
     public String id;
+    public String novel_id;
     public String name;
     public String cover;
     public String description;
     public int word_num;
+    public int is_onsale;
     public String author;
     public String type;
     public String url;

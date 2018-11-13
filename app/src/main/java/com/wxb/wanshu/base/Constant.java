@@ -77,6 +77,8 @@ public class Constant {
     public static final int READ_ING_CODE = 420;//小说未完待续
     public static final int READ_FINISH_CODE = 430;//小说完结
 
+    public static final String BOOK_IS_NOT_ONSALE = "0";//小说下架
+
     /**
      * 支付宝支付业务：入参app_id
      */
@@ -172,6 +174,7 @@ public class Constant {
             BookType.POPULAR,
             BookType.PUBLISHING,
             BookType.FINISH,
+            BookType.MID_BANNER,
             BookType.SEARCH_HOT,
             BookType.Boutique_All,
             BookType.Boutique_Publishing,
@@ -194,6 +197,7 @@ public class Constant {
         String POPULAR = "homepage:popular";//人气佳作
 
         String PUBLISHING = "homepage:publishing";//火爆连载
+        String MID_BANNER = "homepage:mid_banner";//首页图片
 
         String FINISH = "homepage:complete";//完本精选
 
@@ -225,6 +229,7 @@ public class Constant {
         add(BookType.POPULAR);
         add(BookType.PUBLISHING);
         add(BookType.FINISH);
+        add(BookType.MID_BANNER);
         add(BookType.SEARCH_HOT);
         add(BookType.Boutique_All);
         add(BookType.Boutique_Publishing);

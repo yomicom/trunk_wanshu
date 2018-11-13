@@ -60,7 +60,7 @@
 
                 <TextView
                     android:id="@+id/author"
-                    style="@style/text_small_nomal"
+                    style="@style/text_middle_nomal"
                     android:layout_below="@id/tv_title"
                     android:layout_marginTop="@dimen/distance_text_text_12"
                     android:layout_toRightOf="@id/iv_book"
@@ -70,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/tv_read"
-                    style="@style/text_small_nomal"
+                    style="@style/text_middle_nomal"
                     android:layout_below="@id/author"
                     android:layout_marginTop="@dimen/distance_text_text_10"
                     android:layout_toRightOf="@id/iv_book"
@@ -132,10 +132,17 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:id="@+id/last_chapter"
+                        android:id="@+id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
-                        android:text="最新" />
+                        android:text="最新：" />
+
+                    <TextView
+                        android:id="@+id/last_chapter"
+                        android:layout_toRightOf="@id/last_chapter_intro"
+                        style="@style/text_big_nomal"
+                        android:maxLines="1"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/last_chapter_time"
@@ -143,12 +150,13 @@
                         android:layout_below="@id/last_chapter"
                         android:layout_marginTop="8dp"
                         android:maxLines="1"
-                        android:text="----" />
+                        android:layout_alignLeft="@id/last_chapter"
+                        android:text="" />
                 </RelativeLayout>
 
                 <View
                     android:layout_width="@dimen/line_divide"
-                    android:layout_height="33dp"
+                    android:layout_height="36dp"
                     android:layout_gravity="center_vertical"
                     android:background="@color/divider" />
 
@@ -169,36 +177,44 @@
                         android:id="@+id/book_chapter_num"
                         style="@style/text_small_nomal"
                         android:layout_below="@id/menu"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="6dp"
                         android:maxLines="1"
-                        android:text="----" />
+                        android:text="" />
                 </RelativeLayout>
             </LinearLayout>
 
-            <View style="@style/item_divide" />
-
-            <TextView
-                android:id="@+id/tv_tag"
-                style="@style/text_big_nomal"
-                android:layout_width="match_parent"
-                android:background="@color/white"
-                android:gravity="left"
-                android:paddingLeft="@dimen/distance_left"
-                android:paddingTop="@dimen/distance_left"
-                android:paddingRight="@dimen/distance_left"
-                android:text="同类作品"
-                android:textSize="@dimen/text_huge" />
-
-            <FrameLayout
-                android:id="@+id/fl_content_recommand"
+            <LinearLayout
+                android:id="@+id/recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingTop="@dimen/distance_top"
-                android:paddingBottom="@dimen/distance_top"
-                android:visibility="visible" />
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View style="@style/item_divide" />
+
+                <TextView
+                    android:id="@+id/tv_tag"
+                    style="@style/text_big_nomal"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/distance_left"
+                    android:paddingTop="@dimen/distance_left"
+                    android:paddingRight="@dimen/distance_left"
+                    android:text="同类作品"
+                    android:textSize="@dimen/text_huge" />
+
+                <FrameLayout
+                    android:id="@+id/fl_content_recommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/distance_top"
+                    android:paddingBottom="@dimen/distance_top"
+                    android:visibility="visible" />
+            </LinearLayout>
 
             <View style="@style/item_divide" />
 

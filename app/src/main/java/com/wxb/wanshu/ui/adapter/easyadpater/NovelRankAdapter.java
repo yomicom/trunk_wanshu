@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.BookList;
+import com.wxb.wanshu.utils.FormatUtils;
 import com.wxb.wanshu.view.recycleview.adapter.BaseViewHolder;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
@@ -26,7 +27,7 @@ public class NovelRankAdapter extends RecyclerArrayAdapter<BookList.DataBean> {
                 holder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.mipmap.defalt_book_cover)
                         .setText(R.id.article_title, item.getName())
                         .setText(R.id.tv_article_intro, item.getDescription())
-                        .setText(R.id.word_num, item.getWord_num() + "字")
+                        .setText(R.id.word_num, FormatUtils.formatWordCount(item.word_num) )
                         .setText(R.id.author, item.getAuthor());
 
             }

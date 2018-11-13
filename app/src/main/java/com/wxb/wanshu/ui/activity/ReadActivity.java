@@ -281,6 +281,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         llBookReadTop.setLayoutParams(params);
 
+        if (isOnShelf) {
+            tvAddBook.setText("已加入书架");
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+        } else {
+            tvAddBook.setText("加入书架");
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
+        }
+
         initAASet();
 
         initPagerWidget();
@@ -456,9 +464,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     CacheManager.getInstance().saveChapterFile(data);
                     isOnShelf = data.on_shelf;
                     break;
-                default:
+                case Constant.READ_DOWN_CODE:
                     startActivity(new Intent(mContext, ReadOtherStatusActivity.class)
                             .putExtra("code", data.code).putExtra("title", "").putExtra("data", data));
+                    overridePendingTransition(R.anim.push_left_in, R.anim.anim_no);
+                    finish();
+                    break;
+                default:
+                    startActivity(new Intent(mContext, ReadOtherStatusActivity.class)
+                            .putExtra("code", data.code).putExtra("title", data.novel.name).putExtra("data", data));
                     overridePendingTransition(R.anim.push_left_in, R.anim.anim_no);
                     break;
             }
@@ -562,6 +576,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void addBook() {
         gone(rlReadAaSet, rlReadMark);
         mPresenter.addBookShelf(novel_id);
+        showDialog();
     }
 
     /**
@@ -771,6 +786,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             @Override
             public void exec() throws Exception {
                 mPresenter.addBookShelf(novel_id);
+                showDialog();
             }
         }, new ConfirmDialog.CancleCallback() {
             @Override
@@ -1017,7 +1033,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         int fontSize = isAdd == true ? (font += fontChangeSize) : (font -= fontChangeSize);
         // progress range 1 - 10
 //        int progress = 1;
-        if (fontSize >= 10 && fontSize <= 100) {
+        if (fontSize >= 20 && fontSize <= 80) {
 //            seekbarFontSize.setProgress(progress);
 //            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
             mPageWidget.setFontSize(fontSize);
@@ -1046,6 +1062,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     /**
      * 开始亮屏计时
+     *
      * @param delay 亮屏时间
      */
     private void startTimer(int delay) {

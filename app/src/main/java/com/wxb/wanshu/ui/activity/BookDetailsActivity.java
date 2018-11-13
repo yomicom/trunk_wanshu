@@ -24,6 +24,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
@@ -38,6 +39,7 @@ import com.wxb.wanshu.ui.adapter.easyadpater.BookRewardAdapter;
 import com.wxb.wanshu.ui.contract.BookDetailsContract;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.BookDetailsPresenter;
+import com.wxb.wanshu.utils.FormatUtils;
 import com.wxb.wanshu.utils.ImageUtils;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.ToastUtils;
@@ -70,7 +72,7 @@ import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.BOOK_DETAILS_TYPE
 public class BookDetailsActivity extends BaseActivity implements BookDetailsContract.View, OnRvItemClickListener {
 
     public static String INTENT_BOOK_ID = "bookId";
-//    @BindView(R.id.background)
+    //    @BindView(R.id.background)
 //    ImageView background;
     @BindView(R.id.iv_book)
     ImageView ivBook;
@@ -84,8 +86,6 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     TextView author;
     @BindView(R.id.rl_image)
     RelativeLayout rlImage;
-    @BindView(R.id.fl_content_recommand)
-    FrameLayout flContentRecommand;
     @BindView(R.id.tv_dashang)
     TextView tvDashang;
     @BindView(R.id.tv_dashang_record)
@@ -108,6 +108,8 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     View descriptionLayout;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
+    @BindView(R.id.recommend)
+    LinearLayout recommend;
 
     String novel_id;
     @BindView(R.id.last_chapter)
@@ -177,7 +179,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Override
     public void complete() {
-
+        hideDialog();
     }
 
     @Override
@@ -207,7 +209,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         ImageUtils.displayImage(this, ivBook, data.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
         tvTitle.setText(data.getName());
         author.setText(data.getAuthor());
-        tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + data.getWord_num() + "字");
+        tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + FormatUtils.formatWordCount(data.word_num));
         if (bookDetails.on_shelf) {
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
@@ -216,8 +218,8 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
         }
 
-        lastChapter.setText("最新：" + data.getLatest_chapter().name);
-        lastChapterTime.setText("更新时间：" + data.latest_chapter.publish_time);
+        lastChapter.setText(data.getLatest_chapter().name);
+        lastChapterTime.setText(data.latest_chapter.publish_time);
         bookChapterNum.setText("共" + data.getChapter_num() + "章");
         ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
@@ -236,6 +238,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         }
         return map;
     }
+
     /**
      * 显示推荐书籍
      *
@@ -243,7 +246,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
      */
     private void showRecommandData(BookDetails.DataBean data) {
         if (data.getRecommend().size() > 0) {
-            visible(flContentRecommand);
+            visible(recommend);
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
@@ -251,7 +254,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             transaction.replace(R.id.fl_content_recommand, type1Fragment);
             transaction.commit();
         } else {
-            gone(flContentRecommand);
+            gone(recommend);
         }
     }
 
@@ -285,6 +288,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.tv_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
     public void onViewClicked(View view) {
+        String is_onsale = bookDetails.is_onsale;
         switch (view.getId()) {
             case R.id.tv_to_dashang:
                 showDialog();
@@ -296,19 +300,28 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 break;
             case R.id.tv_add_book:
                 if (!bookDetails.on_shelf) {
+                    showDialog();
                     mPresenter.addBookShelf(novel_id);
                 } else {
 
                 }
                 break;
-            case R.id.tv_read_book:
-                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
+            case R.id.tv_read_book://开始阅读
+                if (Constant.BOOK_IS_NOT_ONSALE.equals(is_onsale)) {//书籍已下架
+                    ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
+                } else {
+                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
+                }
                 break;
             case R.id.book_menu:
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
-            case R.id.item_last_chapter:
-                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, true, bookDetails.on_shelf);
+            case R.id.item_last_chapter://查看最新章节
+                if (Constant.BOOK_IS_NOT_ONSALE.equals(is_onsale)) {
+                    ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
+                } else {
+                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, true, bookDetails.on_shelf);
+                }
                 break;
         }
     }

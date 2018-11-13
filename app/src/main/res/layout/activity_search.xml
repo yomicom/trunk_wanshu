@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingRight="@dimen/distance_left"
+        android:paddingLeft="@dimen/distance_left"
+        android:paddingTop="12dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -73,10 +75,10 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_empty="@layout/common_empty_view"
         app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay"
-        android:visibility="gone"/>
+        app:scrollbarStyle="insideOverlay" />
 
 
     <LinearLayout
@@ -86,7 +88,9 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <RelativeLayout style="@style/rl_normal"
+        <RelativeLayout
+            android:id="@+id/history"
+            style="@style/rl_normal"
             android:layout_marginTop="@dimen/line_big_space">
 
             <TextView
@@ -105,26 +109,27 @@
             android:id="@+id/tag_group"
             style="@style/TagGroup"
             android:layout_marginLeft="@dimen/distance_left"
-            android:layout_marginTop="@dimen/distance_top"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/distance_left"
             app:atg_backgroundColor="@color/bg_tag_group"
-            app:atg_pressedBackgroundColor="@color/text_pressed"/>
+            app:atg_pressedBackgroundColor="@color/text_pressed" />
 
-        <RelativeLayout style="@style/rl_normal"
+        <RelativeLayout
+            style="@style/rl_normal"
             android:layout_marginTop="@dimen/distance_top">
 
             <TextView
                 style="@style/text_big_nomal"
-                android:text="热门搜索" />
+                android:text="热门推荐" />
         </RelativeLayout>
 
         <com.wxb.wanshu.view.TagGroup
             android:id="@+id/hot_group"
             style="@style/TagGroup"
             android:layout_marginLeft="@dimen/distance_left"
-            android:layout_marginTop="@dimen/distance_top"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/distance_left"
             app:atg_backgroundColor="@color/bg_tag_group"
-            app:atg_pressedBackgroundColor="@color/text_pressed"/>
+            app:atg_pressedBackgroundColor="@color/text_pressed" />
     </LinearLayout>
 </LinearLayout>

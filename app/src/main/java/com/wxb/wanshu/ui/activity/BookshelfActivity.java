@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.BookselfList;
@@ -141,8 +142,12 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         if (page == START_PAGE) {
             mAdapter.clear();
         }
-        mAdapter.addAll(data0.getData());
-        visible(manage);
+        if (data0.getData().size() > 0) {
+            mAdapter.addAll(data0.getData());
+            visible(manage);
+        } else {
+            gone(manage, finish);
+        }
     }
 
     @Override
@@ -190,7 +195,11 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             }
 //            tvSelectedBooks.setText("已选择" + removeList.size() + "");
         } else {
-            ReadActivity.startActivity(this, mAdapter.getItem(position).getId());
+            if (Constant.BOOK_IS_NOT_ONSALE.equals(mAdapter.getItem(position).is_onsale)) {//书籍已下架
+                ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
+            } else {
+                ReadActivity.startActivity(this, mAdapter.getItem(position).getId());
+            }
         }
     }
 
@@ -283,7 +292,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
      * @param removeList
      */
     private void showDeleteCacheDialog(final List<BookselfList.DataBean> removeList) {
-
         ConfirmDialog.showNotice(mContext, "提示", "确认要移出书架吗？", "确定", "取消", new ConfirmDialog.SureCallback() {
             @Override
             public void exec() throws Exception {
@@ -300,7 +308,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         }, new ConfirmDialog.CancleCallback() {
             @Override
             public void exec() throws Exception {
-                finish();
             }
         });
     }

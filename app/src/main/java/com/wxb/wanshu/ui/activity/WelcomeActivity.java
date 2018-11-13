@@ -28,6 +28,7 @@ import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.presenter.PermissionUtils;
 import com.wxb.wanshu.utils.LogUtils;
+import com.wxb.wanshu.utils.ToastUtils;
 
 import java.io.File;
 
@@ -169,7 +170,7 @@ public class WelcomeActivity extends BaseActivity {
             if (!Settings.System.canWrite(this)) {
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("WRITE_SETTINGS权限申请")
-                        .setMessage("点击OK进入设置界面授予权限")
+                        .setMessage("点击OK进入设置界面，授予允许修改系统设置权限")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -181,7 +182,8 @@ public class WelcomeActivity extends BaseActivity {
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {writeSettingsPermission();
+                            public void onClick(DialogInterface dialog, int which) {
+                                ToastUtils.showLongToast("进入设置-应用权限页面，由于阅读书籍需要，请授予允许修改系统设置权限");
                             }
                         })
                         .create();
@@ -189,7 +191,7 @@ public class WelcomeActivity extends BaseActivity {
             } else {
                 welcome.startAnimation(alphaAnimation);
             }
-        }else {
+        } else {
             welcome.startAnimation(alphaAnimation);
         }
     }
@@ -213,11 +215,12 @@ public class WelcomeActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 10:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){ //同意权限申请
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { //同意权限申请
                     writeSettingsPermission();
-                }else { //拒绝权限申请
+                } else { //拒绝权限申请
 //                    Toast.makeText(this,"权限被拒绝了",Toast.LENGTH_SHORT).show();
-                    writeSettingsPermission();}
+                    writeSettingsPermission();
+                }
                 break;
             default:
                 break;

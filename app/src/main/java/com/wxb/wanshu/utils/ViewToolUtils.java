@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 /**
  * Created by qiming on 2017/11/29.
  */
@@ -42,6 +44,24 @@ public class ViewToolUtils {
             imageView.setVisibility(View.GONE);
         } else {
             imageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void dealNumber(String str, TextView textView) {
+        if (str.equals("-")) {
+            textView.setText("" + str);
+        } else if (str.contains("+") || str.equals("100000")) {
+            textView.setText("" + "10万+");
+        } else {
+            int num = Integer.parseInt(str);
+            if (num > 9999) {
+                double count = (double) num / 10000;
+                BigDecimal b = new BigDecimal(count);
+                double f1 = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+                textView.setText("" + f1 + "万");
+            } else {
+                textView.setText("" + str);
+            }
         }
     }
 

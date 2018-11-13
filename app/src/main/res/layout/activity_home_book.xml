@@ -73,6 +73,16 @@
 
                 </FrameLayout>
 
+                <ImageView
+                    android:id="@+id/iv_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="@dimen/distance_left"
+                    android:layout_marginTop="@dimen/distance_left"
+                    android:layout_marginRight="@dimen/distance_left"
+                    android:visibility="gone"
+                    android:scaleType="fitXY"/>
+
                 <FrameLayout
                     android:id="@+id/fl_content4"
                     android:layout_width="match_parent"

@@ -24,6 +24,7 @@ import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeRecommendAdapter;
+import com.wxb.wanshu.utils.FormatUtils;
 import com.wxb.wanshu.utils.ImageUtils;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
@@ -190,7 +191,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         articleTitle.setText(item.getName());
         tvArticleIntro.setText(item.getDescription());
         author.setText(item.getAuthor());
-        tvWordNums.setText(item.getWord_num() + "字");
+        tvWordNums.setText(FormatUtils.formatWordCount(item.word_num) );
         tvCategory.setText(item.getCategory_name());
 
         rlMaterialItem.setOnClickListener(v ->

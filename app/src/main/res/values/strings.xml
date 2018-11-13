@@ -75,8 +75,8 @@
     <string name="home_finished">完本精选</string>
 
 
-    <string name="first_chapter">已经是第一章了</string>
-    <string name="last_chapter">已经是最后一章了</string>
+    <string name="first_chapter">已翻至第一页</string>
+    <string name="last_chapter">已翻至z最后一页</string>
     <string name="title_activity_image">ImageActivity</string>
 
 </resources>
