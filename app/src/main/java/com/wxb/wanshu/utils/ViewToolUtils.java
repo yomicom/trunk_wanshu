@@ -46,7 +46,7 @@ public class ViewToolUtils {
     }
 
     //获取系统状态栏高度
-    public static int getstatusBarHeight() {
+    public static int getStatusBarHeight() {
         int height = 0;
         int resourceId = AppUtils.getAppContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0)

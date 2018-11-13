@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ViewUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.r0adkll.slidr.Slidr;
@@ -19,6 +22,8 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
+import com.wxb.wanshu.utils.Utils;
+import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.loadding.CustomDialog;
 
 import butterknife.ButterKnife;
@@ -44,6 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        mContext = this;
 
 //        if (statusBarColor == 0) {
 //            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.gobal_color));
@@ -51,7 +57,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 //            statusBarView = StatusBarCompat.compat(this, statusBarColor);
 //        }
         transparent19and20();
-        mContext = this;
+//        setStatusBarView();
+
         ButterKnife.bind(this);
         setupActivityComponent(MyApplication.getsInstance().getAppComponent());
         mCommonToolbar = findViewById(R.id.common_toolbar);
@@ -69,16 +76,39 @@ public abstract class BaseActivity extends AppCompatActivity {
         initSlidable();
     }
 
+    private void setStatusBarView() {
+        //标题栏与状态栏颜色一致 xml中配置
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.white));
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            ViewGroup systemContent = findViewById(android.R.id.content);
+            View statusBarView = new View(this);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewToolUtils.getStatusBarHeight());
+            statusBarView.setBackgroundColor(getResources().getColor(R.color.white));
+            systemContent.getChildAt(0).setFitsSystemWindows(true);
+            systemContent.addView(statusBarView, 0, lp);
+        }
+
+        //设置状态栏文字的颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView()
+                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
     protected void setCanSlide(boolean canSlide) {
         this.canSlide = canSlide;
     }
 
     protected void transparent19and20() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+//                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

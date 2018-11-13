@@ -166,12 +166,12 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
 
     @Override
     public void showError() {
-
+        hideDialog();
     }
 
     @Override
     public void complete() {
-
+        hideDialog();
     }
 
     @Override

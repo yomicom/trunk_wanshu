@@ -255,12 +255,14 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
     @Override
     public void showHome(HomeData data) {
-        crossfadeToProgressView(bgSearch);
+//        crossfadeToProgressView(bgSearch);
         swipeRefresh.setRefreshing(false);
         if (data != null) {
             homeData = data;
             showData(data.getData());
         }
+        if (dialog != null)
+            dialog.hide();
     }
 
 

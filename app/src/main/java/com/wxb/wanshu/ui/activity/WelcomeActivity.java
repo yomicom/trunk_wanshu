@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -163,48 +164,64 @@ public class WelcomeActivity extends BaseActivity {
 
     int REQUEST_CODE_WRITE_SETTINGS = 10;
 
-    @TargetApi(23)
     private void writeSettingsPermission() {
-        if (!Settings.System.canWrite(this)) {
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("WRITE_SETTINGS权限申请")
-                    .setMessage("点击OK进入设置界面授予权限")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //核心代码
-                            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
-                                    Uri.parse("package:" + getPackageName()));
-                            startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .create();
-            dialog.show();
-        } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(this)) {
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("WRITE_SETTINGS权限申请")
+                        .setMessage("点击OK进入设置界面授予权限")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //核心代码
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                                        Uri.parse("package:" + getPackageName()));
+                                startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {writeSettingsPermission();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            } else {
+                welcome.startAnimation(alphaAnimation);
+            }
+        }else {
             welcome.startAnimation(alphaAnimation);
         }
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    @TargetApi(23)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
-            writeSettingsPermission();
-        }
-        if (Settings.System.canWrite(this) && requestCode == REQUEST_CODE_WRITE_SETTINGS) {
+        if (Settings.System.canWrite(this) && requestCode == REQUEST_CODE_WRITE_SETTINGS) {//屏幕亮度权限
             welcome.startAnimation(alphaAnimation);
 //            Toast.makeText(this, "WRITE_SETTINGS permission granted", Toast.LENGTH_SHORT).show();
         } else {
 //            Toast.makeText(this, "WRITE_SETINGS permission denied", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 10:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){ //同意权限申请
+                    writeSettingsPermission();
+                }else { //拒绝权限申请
+//                    Toast.makeText(this,"权限被拒绝了",Toast.LENGTH_SHORT).show();
+                    writeSettingsPermission();}
+                break;
+            default:
+                break;
+        }
     }
 
     /**

@@ -118,6 +118,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
 
     @Override
     public void showError() {
+        gone(manage, finish);
         emptyView.setVisibility(View.VISIBLE);
         emptyView.setEnterText(R.string.to_get_web);
         emptyView.setWnToast(R.string.no_web);
