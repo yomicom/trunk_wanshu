@@ -88,6 +88,8 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     TextView etArticleSearch;
     @BindView(R.id.rank)
     LinearLayout rank;
+    @BindView(R.id.search)
+    LinearLayout search;
     @BindView(R.id.divide)
     View divide;
     private BannerFragment bannerFragment;
@@ -126,7 +128,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         dialog.setCancelable(true);
         dialog.show();
 
-        scrollView.setTitleAndHead(bgSearch, banner);
+        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, banner);
 //        bgSearch.setBackgroundColor(ContextCompat.getColor(mContext, R.color.no_gobal_color));   //初始化搜索栏背景颜色
 
 
@@ -211,7 +213,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                 case Constant.BookType.MID_BANNER://设置首页图片
                     if (item.data.size() > 0) {
                         iv_book.setVisibility(View.VISIBLE);
-                        ImageUtils.displayImage(mContext, iv_book, item.data.get(0).cover);
+                        ImageUtils.displayImage(mContext, iv_book, item.data.get(0).cover, R.mipmap.mid_image, R.mipmap.mid_image);
 
                         iv_book.setOnClickListener(v ->
                                 BookDetailsActivity.startActivity(mContext, item.data.get(0).novel_id, 1));
@@ -258,7 +260,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             tips.add("");
         }
         banner.setAdapter((BGABanner.Adapter<ImageView, String>) (banner, itemView, model, position) ->
-                ImageUtils.displayImage(mContext, itemView, model));
+                ImageUtils.displayImage(mContext, itemView, model, R.mipmap.default_banner, R.mipmap.default_banner));
 
         banner.setData(imgs, tips);
         banner.setDelegate((BGABanner.Delegate<ImageView, String>) (banner, itemView, model, position) -> {

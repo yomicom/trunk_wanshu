@@ -42,7 +42,7 @@
                     android:layout_width="@dimen/book_cover_width"
                     android:layout_height="@dimen/book_cover_height"
                     android:layout_marginRight="@dimen/distance_image_text_15"
-                    android:src="@mipmap/defalt_book_cover" />
+                    android:src="@drawable/defalt_book_cover" />
 
                 <ImageView
                     android:id="@+id/iv_is_free"
@@ -145,6 +145,7 @@
                         android:layout_toRightOf="@id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
+                        android:ellipsize="end"
                         android:text=""/>
 
                     <TextView
@@ -326,6 +327,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
+            android:background="@drawable/item_click_bg"
             android:text="加入书架" />
 
         <TextView
@@ -335,7 +338,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="开始阅读"
-            android:textColor="@color/gobal_color" />
+            android:background="@color/gobal_color"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

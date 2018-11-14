@@ -26,7 +26,7 @@ public class HomeRecommendAdapter extends EasyRVAdapter<Book> {
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, Book item) {
-        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.mipmap.defalt_book_cover)
+        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.drawable.defalt_book_cover)
                 .setText(R.id.tv_title, item.getName());
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override

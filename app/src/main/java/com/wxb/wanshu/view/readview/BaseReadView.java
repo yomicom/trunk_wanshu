@@ -327,14 +327,19 @@ public abstract class BaseReadView extends View {
         }
     }
 
-    public synchronized void setFontSize(final int fontSizePx) {
+    /**
+     * @param fontSizePx      章节内容字体
+     * @param chpaterFontSize 章节大标题字体
+     */
+    public synchronized void setFontSize(final int fontSizePx, int chpaterFontSize) {
         resetTouchPoint();
-        pagefactory.setTextFont(fontSizePx);
+        pagefactory.setTextFont(fontSizePx, chpaterFontSize);
         if (isPrepared) {
             pagefactory.onDraw(mCurrentPageCanvas);
             pagefactory.onDraw(mNextPageCanvas);
             //SettingManager.getInstance().saveFontSize(bookId, fontSizePx);
             SettingManager.getInstance().saveFontSize(fontSizePx);
+            SettingManager.getInstance().saveChapterFontSize(chpaterFontSize);
             postInvalidate();
         }
     }

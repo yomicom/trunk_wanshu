@@ -188,7 +188,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     }
 
     private void setOneBookData(HomeData.DataBeanX.DataBean item) {
-        ImageUtils.displayImage(getActivity(), ivArticlePic, item.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
+        ImageUtils.displayImage(getActivity(), ivArticlePic, item.getCover(), R.drawable.defalt_book_cover, R.drawable.defalt_book_cover);
         articleTitle.setText(item.getName());
         tvArticleIntro.setText(item.getDescription());
         author.setText(item.getAuthor());

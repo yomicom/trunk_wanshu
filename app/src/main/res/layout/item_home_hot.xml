@@ -37,5 +37,5 @@
         android:layout_width="40dp"
         android:layout_height="53dp"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/defalt_book_cover" />
+        android:src="@drawable/defalt_book_cover" />
 </LinearLayout>

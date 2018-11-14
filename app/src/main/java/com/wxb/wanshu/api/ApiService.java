@@ -46,6 +46,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import rx.Completable;
 import rx.Observable;
 
 /**
@@ -175,7 +176,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/boutiqueList")
-    Observable<BookList> getBoutiqueList(@Query("type") int type, @Query("page") int page, @Query("pageSize") int pageSize);
+    Observable<BookList> getBoutiqueList(@Query("type") int type, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 短篇频道-更多列表
@@ -183,7 +184,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/shortStoryList")
-    Observable<BookList> getShortStoryList(@Query("category_id") int category_id, @Query("page") int page, @Query("pageSize") int pageSize);
+    Observable<BookList> getShortStoryList(@Query("category_id") int category_id, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 完本频道-更多列表
@@ -194,7 +195,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/finishedList")
-    Observable<BookList> getFinishedList(@Query("sort") String sort, @Query("status") int status, @Query("page") int page, @Query("pageSize") int pageSize);
+    Observable<BookList> getFinishedList(@Query("sort") String sort, @Query("status") int status, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 获取排行榜列表
@@ -334,13 +335,19 @@ public interface ApiService {
 
     /**
      * 小说内容
+     * <p>
+     * novel_id:小说id,如2
+     * user_id:用户id，默认为0
+     * sort:章节序号，如1表示第一章，优先该字段。当该字段非0的时候，chapter_id和next参数无效.
+     * chapter_id:章节id，默认值为0，表示最近读的一章
+     * next:上/下一章，1表示下一章，-1表示上一章
+     * preview:是否预读，1表示是，0表示否。预读情况下只是单纯返回章节内容，不涉及数据更新和统计，需要app端调用/novel/reportRead接口主动上报read数据。
      *
-     * @param novel_id
-     * @param sort
      * @return
      */
     @GET("/novel/read")
-    Observable<ChapterRead> getChapterRead(@Query("novel_id") String novel_id, @Query("sort") int sort, @Query("next") int next);
+    Observable<ChapterRead> getChapterRead(@Query("novel_id") String novel_id, @Query("sort") int sort,
+                                           @Query("next") int next, @Query("preview") int preview);
 
     /**
      * 搜索小说
@@ -352,110 +359,6 @@ public interface ApiService {
     @GET("/novel/search")
     Observable<BookList> getSearchResult(@Query("keyword") String keyword, @Query("page") int page);
 
-//    @GET("/post/post-count-by-book")
-//    Observable<PostCount> postCountByBook(@Query("bookId") String bookId);
-//
-//    @GET("/post/total-count")
-//    Observable<PostCount> postTotalCount(@Query("books") String bookId);
-//
-//    @GET("/book/hot-word")
-//    Observable<HotWord> getHotWord();
-//
-//    /**
-//     * 关键字自动补全
-//     *
-//     * @param query
-//     * @return
-//     */
-//    @GET("/book/auto-complete")
-//    Observable<AutoComplete> autoComplete(@Query("query") String query);
-//
-//    /**
-//     * 书籍查询
-//     *
-//     * @param query
-//     * @return
-//     */
-//    @GET("/book/fuzzy-search")
-//    Observable<SearchDetail> searchBooks(@Query("query") String query);
-//
-//    /**
-//     * 通过作者查询书名
-//     *
-//     * @param author
-//     * @return
-//     */
-//    @GET("/book/accurate-search")
-//    Observable<BooksByTag> searchBooksByAuthor(@Query("author") String author);
-//
-//    /**
-//     * 热门评论
-//     *
-//     * @param book
-//     * @return
-//     */
-//    @GET("/post/review/best-by-book")
-//    Observable<HotReview> getHotReview(@Query("book") String book);
-//
-//    @GET("/book-list/{bookId}/recommend")
-//    Observable<RecommendBookList> getRecommendBookList(@Path("bookId") String bookId, @Query("limit") String limit);
-//
-//    @GET("/book/{bookId}")
-//    Observable<BookDetail> getBookDetail(@Path("bookId") String bookId);
-//
-//    @GET("/book/by-tags")
-//    Observable<BooksByTag> getBooksByTag(@Query("tags") String tags, @Query("start") String start, @Query("limit") String limit);
-//
-//    /**
-//     * 获取所有排行榜
-//     *
-//     * @return
-//     */
-//    @GET("/ranking/gender")
-//    Observable<RankingList> getRanking();
-//
-//    /**
-//     * 获取单一排行榜
-//     * 周榜：rankingId->_id
-//     * 月榜：rankingId->monthRank
-//     * 总榜：rankingId->totalRank
-//     *
-//     * @return
-//     */
-//    @GET("/ranking/{rankingId}")
-//    Observable<Rankings> getRanking(@Path("rankingId") String rankingId);
-//
-//    /**
-//     * 获取主题书单列表
-//     * 本周最热：duration=last-seven-days&sort=collectorCount
-//     * 最新发布：duration=all&sort=created
-//     * 最多收藏：duration=all&sort=collectorCount
-//     *
-//     * @param tag    都市、古代、架空、重生、玄幻、网游
-//     * @param gender male、female
-//     * @param limit  20
-//     * @return
-//     */
-//    @GET("/book-list")
-//    Observable<BookLists> getBookLists(@Query("duration") String duration, @Query("sort") String sort, @Query("start") String start, @Query("limit") String limit, @Query("tag") String tag, @Query("gender") String gender);
-//
-//    /**
-//     * 获取主题书单标签列表
-//     *
-//     * @return
-//     */
-//    @GET("/book-list/tagType")
-//    Observable<BookListTags> getBookListTags();
-//
-//    /**
-//     * 获取书单详情
-//     *
-//     * @return
-//     */
-//    @GET("/book-list/{bookListId}")
-//    Observable<BookListDetail> getBookListDetail(@Path("bookListId") String bookListId);
-//
-
     /**
      * 获取分类
      *
@@ -463,6 +366,18 @@ public interface ApiService {
      */
     @GET("/novel/categories")
     Observable<NovelCategory> getCategoryList();
+
+    /**
+     * 上报阅读
+     *
+     * @param novel_id
+     * @param chapter
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/novel/reportRead")
+    Observable<Base> reportRead(@Field("novel_id") String novel_id, @Field("sort") int chapter);
+
 
 //    /**
 //     * 获取二级分类

@@ -15,7 +15,7 @@
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:src="@mipmap/defalt_book_cover"/>
+            android:src="@drawable/defalt_book_cover"/>
 
         <TextView
             android:id="@+id/tv_title"

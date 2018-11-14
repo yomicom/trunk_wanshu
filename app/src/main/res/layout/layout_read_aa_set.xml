@@ -127,7 +127,7 @@
 
     <GridView
         android:id="@+id/gvTheme"
-        android:layout_width="150dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_text_text_12"
         android:columnWidth="32dp"

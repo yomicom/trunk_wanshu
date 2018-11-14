@@ -43,8 +43,16 @@ public class SettingManager {
         saveFontSize("", fontSizePx);
     }
 
+    public void saveChapterFontSize(int fontSizePx) {
+        SharedPreferencesUtil.getInstance().putInt(getFontSizeKey(""), fontSizePx);
+    }
+
     public int getReadFontSize(String bookId) {
         return SharedPreferencesUtil.getInstance().getInt(getFontSizeKey(bookId), ScreenUtils.dpToPxInt(16));
+    }
+
+    public int getChapterFontSize() {
+        return SharedPreferencesUtil.getInstance().getInt(getChapterFontSizeKey(""), ScreenUtils.dpToPxInt(21));
     }
 
     public int getReadFontSize() {
@@ -53,6 +61,11 @@ public class SettingManager {
 
     private String getFontSizeKey(String bookId) {
         return bookId + "-readFontSize";
+    }
+
+    //获得首页大标题字号
+    private String getChapterFontSizeKey(String bookId) {
+        return bookId + "-readChapterFontSize";
     }
 
     public int getReadBrightness() {
@@ -96,6 +109,7 @@ public class SettingManager {
     public String getReadBookUpdateTime(String bookId) {
         return SharedPreferencesUtil.getInstance().getString(getChapterUpdateTime(bookId), "");
     }
+
     /**
      * 获取上次阅读章节及位置
      *

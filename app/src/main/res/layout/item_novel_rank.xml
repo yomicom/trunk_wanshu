@@ -24,7 +24,7 @@
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@mipmap/defalt_book_cover"
+                android:src="@drawable/defalt_book_cover"
                 android:visibility="visible" />
 
         </RelativeLayout>

@@ -31,11 +31,13 @@ public interface BookReadContract {
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
         void getBookMixAToc(String bookId);
 
-        void getChapterRead(String novel_id, int chapter,int next);
+        void getChapterRead(String novel_id, int chapter,int next,int preview);
 
         void getRewardType();
 
         void addBookShelf(String novel_id);
+
+        void reportRead(String novel_id,int chapter);
 
 //        void getShareBook(int novel_id);
     }

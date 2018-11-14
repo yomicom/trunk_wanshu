@@ -30,7 +30,6 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.bean.HotNovelList;
 import com.wxb.wanshu.bean.NotificationList;
 import com.wxb.wanshu.bean.NovelCategory;
-import com.wxb.wanshu.bean.BookList;
 import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.bean.ReaderSigninData;
 import com.wxb.wanshu.bean.RechargeAmount;
@@ -195,7 +194,11 @@ public class Api {
         return service.getBookMixAToc(novel_id);
     }
 
-    public Observable<ChapterRead> getChapterRead(String novel_id, int sort, int next) {
-        return service.getChapterRead(novel_id, sort, next);
+    public Observable<ChapterRead> getChapterRead(String novel_id, int sort, int next,int preview) {
+        return service.getChapterRead(novel_id, sort, next,preview);
+    }
+
+    public Observable<Base> reportRead(String novel_id, int chapter) {
+        return service.reportRead(novel_id,chapter);
     }
 }

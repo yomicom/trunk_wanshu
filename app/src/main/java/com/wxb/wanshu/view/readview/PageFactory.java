@@ -65,6 +65,13 @@ public class PageFactory {
      */
     private int mFontSize, mNumFontSize;
     /**
+     * 字体颜色
+     */
+    /**
+     * 首页章节字体大小
+     */
+    private int mChapterFontSize;
+    /**
      * 每页行数
      */
     private int mPageLineCount;
@@ -89,6 +96,7 @@ public class PageFactory {
 
     private Paint mPaint;
     private Paint mTitlePaint;
+    private Paint mBigTitlePaint;
     private Bitmap mBookPageBg;
     private int mBookPageBgColor;
 
@@ -113,16 +121,18 @@ public class PageFactory {
         this(context, ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(),
                 //SettingManager.getInstance().getReadFontSize(bookId),
                 SettingManager.getInstance().getReadFontSize(),
+                SettingManager.getInstance().getChapterFontSize(),
                 bookId, chaptersList);
     }
 
-    public PageFactory(Context context, int width, int height, int fontSize, String bookId,
+    public PageFactory(Context context, int width, int height, int fontSize,int chapterFontSize, String bookId,
                        List<BookMenu.DataBean.ChaptersBean> chaptersList) {
         mContext = context;
         mWidth = width;
         mHeight = height;
         mFontSize = fontSize;
-        mLineSpace = mFontSize / 5 * 2;
+        mChapterFontSize = chapterFontSize;
+        mLineSpace = mFontSize / 5 * 3;
         mNumFontSize = ScreenUtils.dpToPxInt(12);
         marginWidth = ScreenUtils.dpToPxInt(18);
         marginHeight = ScreenUtils.dpToPxInt(18);
@@ -138,6 +148,9 @@ public class PageFactory {
         mTitlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTitlePaint.setTextSize(mNumFontSize);
         mTitlePaint.setColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.read_title_white));
+        mBigTitlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBigTitlePaint.setTextSize(mChapterFontSize);
+        mBigTitlePaint.setColor(Color.BLACK);
         timeLen = (int) mTitlePaint.measureText("00:00");
         percentLen = (int) mTitlePaint.measureText("00.00%");
         // Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/FZBYSK.TTF");
@@ -221,8 +234,16 @@ public class PageFactory {
             canvas.drawColor(mBookPageBgColor);
 //            }
             // 绘制标题
-            canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);
-            y += mLineSpace + mNumFontSize;
+            if (currentPage == 1) {//某章第一页章节显示明显变大
+                canvas.drawText("哈哈哈哈哈哈", marginWidth, y, mTitlePaint);//小说章节
+                y += mLineSpace + mNumFontSize;
+
+                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
+                y += mLineSpace * 4 + mChapterFontSize;
+            } else {
+                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
+                y += mLineSpace + mNumFontSize;
+            }
             // 绘制阅读页面文字
             for (String line : mLines) {
                 y += mLineSpace;
@@ -303,7 +324,11 @@ public class PageFactory {
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         int paraSpace = 0;
-        mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        if (currentPage == 1){
+            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        }else {
+            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        }
         while ((lines.size() < mPageLineCount) && (curEndPos < mbBufferLen)) {
             byte[] parabuffer = readParagraphForward(curEndPos);
             curEndPos += parabuffer.length;
@@ -467,7 +492,7 @@ public class PageFactory {
                     return BookStatus.NEXT_CHAPTER_LOAD_FAILURE;
                 } else {
                     currentPage = 0;
-                    onChapterChanged(currentChapter);
+//                    onChapterChanged(currentChapter);//11.14 上报阅读删掉
                 }
             } else {
                 curBeginPos = curEndPos; // 起始指针移到结束位置
@@ -547,12 +572,16 @@ public class PageFactory {
      * 设置字体大小
      *
      * @param fontsize 单位：px
+     * @param chpaterFontSize
      */
-    public void setTextFont(int fontsize) {
+    public void setTextFont(int fontsize, int chpaterFontSize) {
         LogUtils.i("fontSize=" + fontsize);
         mFontSize = fontsize;
-        mLineSpace = mFontSize / 5 * 2;
+        mLineSpace = mFontSize / 5 * 3;
         mPaint.setTextSize(mFontSize);
+
+        mChapterFontSize = chpaterFontSize;
+        mBigTitlePaint.setTextSize(mChapterFontSize);
         mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         curEndPos = curBeginPos;
         nextPage();
@@ -566,6 +595,7 @@ public class PageFactory {
      */
     public void setTextColor(int textColor, int titleColor) {
         mPaint.setColor(textColor);
+        mBigTitlePaint.setColor(textColor);
         mTitlePaint.setColor(titleColor);
     }
 

@@ -26,7 +26,7 @@ public class RVVertical1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBea
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.mipmap.defalt_book_cover)
+        viewHolder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.drawable.defalt_book_cover)
                 .setText(R.id.article_title, item.getName())
                 .setText(R.id.tv_article_intro, item.getDescription())
                 .setText(R.id.author, item.getAuthor())

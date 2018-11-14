@@ -58,6 +58,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     private BookMenu bookMenu;
 
     boolean menuSort = true;//正序
+    private boolean on_self = false;
 
     public static void startActivity(Context context, String novel_id, int curChapter, boolean isReading) {
         context.startActivity(new Intent(context, MenuActivity.class)
@@ -104,19 +105,6 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter - 1);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((adapterView, view, position, l) -> {
-            BookMenu.DataBean.ChaptersBean data = adapter.getData(position);
-            if (isReading) {
-                Intent intent = getIntent();
-                intent.putExtra("chapter", data.sort);
-
-                setResult(RESULT_OK, intent);
-                finish();
-            } else {
-                ReadActivity.startActivity(mContext, novel_id, data.sort, true, bookMenu.data.novel.on_self);
-            }
-        });
-
         back.setOnClickListener(v -> finish());
 
         menu.setOnClickListener(v -> {//切换menu状态
@@ -134,16 +122,34 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
             adapter.setSelectPos(list.size() - pos - 1);
             adapter.notifyDataSetChanged();
         });
+
+
+        listView.setOnItemClickListener((adapterView, view, position, l) -> {
+            BookMenu.DataBean.ChaptersBean bean = adapter.getData(position);
+            if (isReading) {
+                Intent intent = getIntent();
+                intent.putExtra("chapter", bean.sort);
+                intent.putExtra("on_self", on_self);
+
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {
+                ReadActivity.startActivity(mContext, novel_id, bean.sort, true, on_self);
+            }
+        });
     }
 
     @Override
     public void showBookMenu(BookMenu data) {
         hideDialog();
-        adapter.addAll(data.getData().getChapters());
-        title.setText(data.data.novel.name);
+        if (data != null) {
+            adapter.addAll(data.getData().getChapters());
+            title.setText(data.data.novel.name);
 
-        this.bookMenu = data;
-        listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
+            this.bookMenu = data;
+            on_self = data.data.novel.on_self;
+            listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
+        }
     }
 
     @Override

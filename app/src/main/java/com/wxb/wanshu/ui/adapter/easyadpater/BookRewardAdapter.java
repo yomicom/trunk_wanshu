@@ -30,7 +30,7 @@ public class BookRewardAdapter extends EasyRVAdapter<BookRewardData.DataBean> {
         viewHolder.setCircleImageUrl(R.id.iv_user, item.getAvatar(), 0)
                 .setText(R.id.tv_user, item.getNick_name())
                 .setText(R.id.tv_gift, "×" + item.getGift_num() + "个")
-                .setImageUrl(R.id.iv_gift,item.getIcon(),R.mipmap.defalt_book_cover)
+                .setImageUrl(R.id.iv_gift,item.getIcon(),R.drawable.defalt_book_cover)
                 .setText(R.id.tv_time, FormatUtils.formatDataTime(item.getCtime(), "yyyy-MM-dd HH:mm"));
 
 

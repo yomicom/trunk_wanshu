@@ -161,6 +161,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                 }
             }
         }
+        if (mAdapter.getAllData().size() == 0)
+            gone(manage);
         if (isVisible(llBatchManagement)) {
             //批量管理完成后，隐藏批量管理布局并刷新页面
             goneBatchManagementAndRefreshUI();

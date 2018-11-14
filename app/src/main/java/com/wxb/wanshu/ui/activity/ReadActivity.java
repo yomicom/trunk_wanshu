@@ -182,6 +182,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isFromMenu = false;
     private ShareBookDialog shareBookDialog;
     private int chapter_num = 0;
+    private int chpaterFontSizePx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,7 +288,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
         } else {
             tvAddBook.setText(R.string.add_shlef);
-            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.white);
         }
 
         initAASet();
@@ -342,6 +343,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //        seekbarFontSize.setMax(10);
         //int fontSizePx = SettingManager.getInstance().getReadFontSize(novel_id);
         int fontSizePx = SettingManager.getInstance().getReadFontSize();
+        chpaterFontSizePx = SettingManager.getInstance().getChapterFontSize();
 //        int progress = (int) ((ScreenUtils.pxToDpInt(fontSizePx) - 12) / 1.7f);
 //        seekbarFontSize.setProgress(progress);
 //        seekbarFontSize.setOnSeekBarChangeListener(new SeekBarChangeListener());
@@ -452,7 +454,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             showChapterRead(null);
         } else {
             showDialog();
-            mPresenter.getChapterRead(novel_id, chapter, 0);
+            mPresenter.getChapterRead(novel_id, chapter, 0, 0);
         }
     }
 
@@ -804,6 +806,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     break;
                 case 100:
                     currentChapter = data.getIntExtra("chapter", 1);
+                    isOnShelf = data.getBooleanExtra("on_self", false);
                     startRead = false;
                     readCurrentChapter(currentChapter);
                     hideReadBar();
@@ -903,6 +906,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
             currentChapter = chapter;
             setChapterProgress(currentChapter);
+
+            //上报小说阅读
+            mPresenter.reportRead(novel_id, chapter);
+
 //            mTocListAdapter.setCurrentChapter(currentChapter);
 
             // 预加载
@@ -912,7 +919,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(novel_id + "", i) == null) {
-                    mPresenter.getChapterRead(novel_id, i, 0);
+                    mPresenter.getChapterRead(novel_id, i, 0, 1);
                 }
             }
         }
@@ -927,7 +934,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.i("onLoadChapterFailure:" + chapter);
             startRead = false;
             if (CacheManager.getInstance().getChapterFile(novel_id + "", chapter) == null) {
-                mPresenter.getChapterRead(novel_id, chapter, 0);
+                mPresenter.getChapterRead(novel_id, chapter, 0, 0);
             }
         }
 
@@ -940,7 +947,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onPageFinish() {
             showDialog();
-            mPresenter.getChapterRead(novel_id, currentChapter + 1, 0);
+            mPresenter.getChapterRead(novel_id, currentChapter + 1, 0, 0);
         }
 
         @Override
@@ -1028,12 +1035,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private void calcFontSize(boolean isAdd) {
         int font = Integer.parseInt(tvFontSize.getText().toString());
         int fontSize = isAdd == true ? (font += fontChangeSize) : (font -= fontChangeSize);
+        int chpaterFontSize = isAdd == true ? (chpaterFontSizePx += fontChangeSize) : (chpaterFontSizePx -= fontChangeSize);
         // progress range 1 - 10
 //        int progress = 1;
-        if (fontSize >= 20 && fontSize <= 80) {
+
+        int max = ScreenUtils.dpToPxInt(16) + 5 * 3;
+        int min = ScreenUtils.dpToPxInt(16) - 5 * 3;
+        if (fontSize >= min && fontSize <= max) {
 //            seekbarFontSize.setProgress(progress);
 //            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
-            mPageWidget.setFontSize(fontSize);
+            mPageWidget.setFontSize(fontSize, chpaterFontSize);
             tvFontSize.setText(fontSize + "");
         }
     }

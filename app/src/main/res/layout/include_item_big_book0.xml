@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:visibility="visible"
-                android:src="@mipmap/defalt_book_cover" />
+                android:src="@drawable/defalt_book_cover" />
 
             <ImageView
                 android:id="@+id/iv_free"

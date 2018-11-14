@@ -28,7 +28,7 @@ public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> 
         return new BaseViewHolder<BookList.DataBean>(parent, R.layout.include_item_big_book) {
             @Override
             public void setData(BookList.DataBean item) {
-                holder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.mipmap.defalt_book_cover)
+                holder.setImageUrl(R.id.iv_article_pic, item.getCover(), R.drawable.defalt_book_cover)
                         .setText(R.id.article_title, item.getName())
                         .setText(R.id.tv_article_intro, item.getDescription())
                         .setText(R.id.author, item.getAuthor())

@@ -19,7 +19,7 @@
             android:layout_height="@dimen/book_cover_height"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:src="@mipmap/defalt_book_cover" />
+            android:src="@drawable/defalt_book_cover" />
 
         <ImageView
             android:layout_width="wrap_content"

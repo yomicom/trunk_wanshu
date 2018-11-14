@@ -81,6 +81,7 @@
                     android:layout_marginTop="@dimen/distance_left"
                     android:layout_marginRight="@dimen/distance_left"
                     android:visibility="gone"
+                    android:src="@mipmap/mid_image"
                     android:scaleType="fitXY"/>
 
                 <FrameLayout
@@ -118,7 +119,7 @@
         <LinearLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="28dp"
             android:layout_marginLeft="@dimen/distance_top_20"
             android:layout_marginTop="38dp"
             android:layout_marginRight="@dimen/distance_top_20"

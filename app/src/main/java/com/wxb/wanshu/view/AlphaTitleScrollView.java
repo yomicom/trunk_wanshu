@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -13,6 +15,8 @@ public class AlphaTitleScrollView extends ScrollView {
     public static final String TAG = "AlphaTitleScrollView";
     private int mSlop;
     private RelativeLayout mytitleview;
+    LinearLayout bg;
+    TextView text;
     private BGABanner banner;
 
     public AlphaTitleScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -33,9 +37,12 @@ public class AlphaTitleScrollView extends ScrollView {
         // mSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
         mSlop = 10;
     }
+
     //Activity中调用,获取了本自定义View的控件id,就可调用.
-    public void setTitleAndHead(RelativeLayout mytitleview, BGABanner banner) {
+    public void setTitleAndHead(RelativeLayout mytitleview, LinearLayout bg, TextView text, BGABanner banner) {
         this.mytitleview = mytitleview;  //搜索栏,头布局
+        this.bg = bg;  //搜索栏背景
+        this.text = text;  //搜索栏提示字
         this.banner = banner;   //需要和搜索栏对比滑动高度的bannerbuju,这里最上边的布局是banner,别的也行
     }
 
@@ -48,7 +55,7 @@ public class AlphaTitleScrollView extends ScrollView {
             alpha = 255;
         if (alpha <= mSlop)
             alpha = 0;
-        mytitleview.setBackgroundColor(Color.argb(alpha, 39,110,255));
+        mytitleview.setBackgroundColor(Color.argb(alpha, 39, 110, 255));
 
         super.onScrollChanged(l, t, oldl, oldt);
     }

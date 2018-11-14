@@ -95,7 +95,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
                     @Override
                     public void onNext(BookDetails data) {
                         bookDetails = data.getData();
-                        ImageUtils.displayImage(context, ivBook, bookDetails.getCover(), R.mipmap.defalt_book_cover, R.mipmap.defalt_book_cover);
+                        ImageUtils.displayImage(context, ivBook, bookDetails.getCover(), R.drawable.defalt_book_cover, R.drawable.defalt_book_cover);
                         tvTitle.setText("把《" + bookDetails.getName() + "》");
                     }
                 });

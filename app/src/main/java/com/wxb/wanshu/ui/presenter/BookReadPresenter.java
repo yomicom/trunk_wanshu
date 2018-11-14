@@ -117,8 +117,8 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     @Override
-    public void getChapterRead(String novel_id, final int sort, int next) {
-        Subscription rxSubscription = api.getChapterRead(novel_id, sort, next).subscribeOn(Schedulers.io())
+    public void getChapterRead(String novel_id, final int sort, int next, int preview) {
+        Subscription rxSubscription = api.getChapterRead(novel_id, sort, next, preview).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ChapterRead>() {
                     @Override
@@ -184,6 +184,30 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                     @Override
                     public void onNext(Base bookDetails) {
                         mView.addBookResult(bookDetails);
+                    }
+                });
+    }
+
+    @Override
+    public void reportRead(String novel_id, int chapter) {
+        api.reportRead(novel_id, chapter).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Base>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.getMessage();
+                    }
+
+                    @Override
+                    public void onNext(Base result) {
+                        if (result!=null){
+
+                        }
                     }
                 });
     }

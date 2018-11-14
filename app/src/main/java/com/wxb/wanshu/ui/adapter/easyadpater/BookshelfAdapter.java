@@ -26,7 +26,7 @@ public class BookshelfAdapter extends RecyclerArrayAdapter<BookselfList.DataBean
             public void setData(BookselfList.DataBean item) {
                 super.setData(item);
                 holder.setText(R.id.tv_title, item.getName())
-                        .setImageUrl(R.id.iv_book_cover, item.getCover(), R.mipmap.defalt_book_cover)
+                        .setImageUrl(R.id.iv_book_cover, item.getCover(), R.drawable.defalt_book_cover)
 //                        .setVisible(R.id.iv_book_update, item.getIs_updated() == 1)
                         .setVisible(R.id.iv_book_choose, item.showCheckBox);
 
