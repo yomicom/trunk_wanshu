@@ -3,35 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/touch_bg">
+    android:background="@color/white">
 
     <RelativeLayout
         style="@style/ll_horizontal_normal"
         android:layout_height="60dp"
+        android:background="@drawable/touch_bg"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_chapter_title"
             style="@style/text_middle_nomal"
+            android:layout_centerVertical="true"
             android:lines="1"
-            android:text="11"
-            android:layout_centerVertical="true" />
+            android:text="11" />
+
         <TextView
             android:id="@+id/tv_chapter_time"
             style="@style/text_small_nomal"
-            android:text="11"
-            android:layout_marginTop="5dp"
             android:layout_below="@id/tv_chapter_title"
             android:layout_centerVertical="true"
-            android:visibility="gone"/>
+            android:layout_marginTop="5dp"
+            android:text="11"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_chapter_status"
             style="@style/text_middle_nomal"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text=""
-            android:textColor="@color/text_color_2"
-            android:layout_centerVertical="true" />
+            android:textColor="@color/text_color_2" />
 
         <ImageView
             android:id="@+id/iv_locked_chapter"
@@ -40,6 +42,10 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/ic_chapter_locked"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
+
+    <View
+        style="@style/line_divide"
+        android:layout_marginLeft="@dimen/distance_left" />
 </LinearLayout>

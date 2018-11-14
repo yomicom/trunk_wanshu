@@ -79,40 +79,42 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @OnClick({R.id.read, R.id.search, R.id.click, R.id.store})
     public void onViewClicked(View view) {
-//        showDialog();
-        switch (view.getId()) {
-            case R.id.read:
-                if (!type.equals(TYPE_1)) {
-                    changeStatus(read);
-                    type = TYPE_1;
-                    page = START_PAGE;
-                    mPresenter.getNovelRank(type, page);
-                }
-                break;
-            case R.id.search:
-                if (!type.equals(TYPE_2)) {
-                    changeStatus(search);
-                    type = TYPE_2;
-                    page = START_PAGE;
-                    mPresenter.getNovelRank(type, page);
-                }
-                break;
-            case R.id.click:
-                if (!type.equals(TYPE_3)) {
-                    changeStatus(click);
-                    type = TYPE_3;
-                    page = START_PAGE;
-                    mPresenter.getNovelRank(type, page);
-                }
-                break;
-            case R.id.store:
-                if (!type.equals(TYPE_4)) {
-                    changeStatus(store);
-                    type = TYPE_4;
-                    page = START_PAGE;
-                    mPresenter.getNovelRank(type, page);
-                }
-                break;
+        if (mAdapter.getAllData() != null) {
+            showDialog();
+            switch (view.getId()) {
+                case R.id.read:
+                    if (!type.equals(TYPE_1)) {
+                        changeStatus(read);
+                        type = TYPE_1;
+                        page = START_PAGE;
+                        mPresenter.getNovelRank(type, page);
+                    }
+                    break;
+                case R.id.search:
+                    if (!type.equals(TYPE_2)) {
+                        changeStatus(search);
+                        type = TYPE_2;
+                        page = START_PAGE;
+                        mPresenter.getNovelRank(type, page);
+                    }
+                    break;
+                case R.id.click:
+                    if (!type.equals(TYPE_3)) {
+                        changeStatus(click);
+                        type = TYPE_3;
+                        page = START_PAGE;
+                        mPresenter.getNovelRank(type, page);
+                    }
+                    break;
+                case R.id.store:
+                    if (!type.equals(TYPE_4)) {
+                        changeStatus(store);
+                        type = TYPE_4;
+                        page = START_PAGE;
+                        mPresenter.getNovelRank(type, page);
+                    }
+                    break;
+            }
         }
     }
 
@@ -160,7 +162,7 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(mContext, mAdapter.getItem(position).getId());
+        BookDetailsActivity.startActivity(mContext, mAdapter.getItem(position).getId(), mAdapter.getItem(position).is_onsale);
     }
 
     @Override

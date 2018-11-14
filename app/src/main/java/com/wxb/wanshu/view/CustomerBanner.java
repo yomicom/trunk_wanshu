@@ -98,7 +98,7 @@ public class CustomerBanner extends FrameLayout {
                         if ("page".equals(bean.type)) {
                             WebViewActivity.startActivity(mContext, "", bean.url);
                         } else {
-                            BookDetailsActivity.startActivity(mContext, bean.getId());
+                            BookDetailsActivity.startActivity(mContext, bean.getId(),1);
                         }
                     }
                 });

@@ -21,6 +21,7 @@ import com.wxb.wanshu.ui.activity.ReadOtherStatusActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
+import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
@@ -102,10 +103,12 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     @Override
     public void configViews() {
         gone(item, main_title);
-        visible(manage, title);
+        visible(title);
         title.setText("阅读历史");
         mRecyclerView.setEmptyView(R.layout.common_empty_view);
+
         initAdapter(ReadHistoryAdapter.class, false, true);
+        mRecyclerView.removeAllItemDecoration();
     }
 
     @Override
@@ -120,7 +123,10 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void showReadHistoryList(ReadHistoryList data) {
-        mAdapter.addAll(data.getData());
+        if (data != null && data.data.size() > 0) {
+            visible(manage);
+            mAdapter.addAll(data.getData());
+        }
     }
 
     @Override
@@ -142,7 +148,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         String[] ids = novel_ids.split(",");
         for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
             for (int i = 0; i < ids.length; i++) {
-                if (ids[i].equals(bean.novel.id)) {
+                if (ids[i].equals(bean.log.id)) {
                     mAdapter.remove(bean);
                 }
             }
@@ -182,12 +188,10 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 if (bean.isSeleted) removeList.add(bean);
             }
         } else {
-            if (Constant.BOOK_IS_NOT_ONSALE.equals(mAdapter.getItem(position).novel.is_onsale)) {//书籍已下架
-                ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
-            } else {
+            if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).novel.is_onsale))
                 ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id);
-            }
         }
+
     }
 
     @Override
@@ -207,7 +211,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                     if (bean.isSeleted) removeList.add(bean);
                 }
                 if (removeList.isEmpty()) {
-                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
+//                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
+                    ToastUtils.showToast(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
                     showDeleteDialog(removeList);
                 }
@@ -240,7 +245,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             public void exec() throws Exception {
                 StringBuilder novelIds = new StringBuilder();
                 for (ReadHistoryList.DataBean item : removeList) {
-                    novelIds.append(item.novel.id + ",");
+                    novelIds.append(item.log.id + ",");
                 }
                 if (novelIds.length() > 0) {
                     mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1));

@@ -44,11 +44,11 @@ public class ReadThemeAdapter extends EasyLVAdapter<ReadTheme> {
     public void convert(EasyLVHolder holder, int position, ReadTheme readTheme) {
         if (readTheme != null) {
             ThemeManager.setReaderThemeDemo(readTheme.theme, holder.getView(R.id.ivThemeBg));
-            if (position == 0) {//白色背景
-                holder.setImageResource(R.id.ivSelected,R.mipmap.ic_theme_selected);
-            } else {
-                holder.setImageResource(R.id.ivSelected,R.mipmap.ic_theme_selected2);
-            }
+//            if (position == 0) {//白色背景
+            holder.setImageResource(R.id.ivSelected, R.mipmap.ic_theme_selected);
+//            } else {
+//                holder.setImageResource(R.id.ivSelected,R.mipmap.ic_theme_selected2);
+//            }
             if (selected == position) {
                 holder.setVisible(R.id.ivSelected, true);
             } else {

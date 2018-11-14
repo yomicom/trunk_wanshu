@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".ui.activity.ConnectUsActivity">
 
+    <include layout="@layout/common_toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +22,8 @@
 
         <TextView
             style="@style/text_big_nomal"
-            android:text="在线客服" />
+            android:text="在线客服"
+            android:textSize="@dimen/text_less_huge" />
 
         <TextView
             style="@style/text_middle_nomal"
@@ -42,7 +45,6 @@
                 android:id="@+id/tv_call"
                 style="@style/text_middle_nomal"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="70dp"
                 android:background="@drawable/bg_connect_us"
                 android:text="拨打电话"
                 android:textColor="@color/gobal_color" />
@@ -63,26 +65,27 @@
                 android:id="@+id/tv_qq"
                 style="@style/text_middle_nomal"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="70dp"
                 android:background="@drawable/bg_connect_us"
                 android:text="QQ交谈"
                 android:textColor="@color/gobal_color" />
         </RelativeLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_image_text_15"
         android:background="@color/white"
         android:orientation="vertical"
         android:paddingLeft="@dimen/distance_top_20"
         android:paddingTop="30dp"
-        android:layout_marginTop="@dimen/distance_image_text_15"
         android:paddingRight="@dimen/distance_top_20"
         android:paddingBottom="30dp">
 
         <TextView
             style="@style/text_big_nomal"
-            android:text="版权合作" />
+            android:text="版权合作"
+            android:textSize="@dimen/text_less_huge" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -99,7 +102,6 @@
                 android:id="@+id/tv_cooperate"
                 style="@style/text_middle_nomal"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="70dp"
                 android:background="@drawable/bg_connect_us"
                 android:text="QQ交谈"
                 android:textColor="@color/gobal_color" />

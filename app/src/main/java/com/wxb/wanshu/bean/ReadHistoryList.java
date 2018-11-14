@@ -27,6 +27,7 @@ public class ReadHistoryList extends Base {
          */
 
         public NovelBean novel;
+        public LogBean log;
         public ChapterBean chapter;
         public String last_read_time;
         public boolean on_shelf;
@@ -65,17 +66,21 @@ public class ReadHistoryList extends Base {
             this.on_shelf = on_shelf;
         }
 
+        public static class LogBean {
+            public String id;
+        }
+
         public static class NovelBean {
             /**
              * id : 33
              * name : 你的爱情说了谎
              * cover : http://wenxin-novel.oss-cn-hangzhou.aliyuncs.com/novel-cover-eaf226fec1f878563ce7cd3c67d65dd5.jpg
              * description : 南泽见不得江蓝沁好，夺走了她的第一次不说，用的还是情-趣玩具。
-             他不屑碰她，却能用各种手段让她身心俱疲。
-             人生有两件事逃不过，一是病一是死，而江蓝沁逃不过的始终是个南泽罢了……
+             * 他不屑碰她，却能用各种手段让她身心俱疲。
+             * 人生有两件事逃不过，一是病一是死，而江蓝沁逃不过的始终是个南泽罢了……
              * word_num : 54397
              * author : 抹茶奈奈
-             * category_name : 
+             * category_name :
              * is_complete : true
              */
 

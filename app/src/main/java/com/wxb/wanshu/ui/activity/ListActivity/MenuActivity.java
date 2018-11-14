@@ -3,11 +3,14 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
@@ -26,6 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.wxb.wanshu.ui.activity.BookDetailsActivity.INTENT_BOOK_ID;
 
@@ -37,14 +41,18 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public static String INTENT_ON_SHELF = "on_shelf";//是否在书架
     public static String INTENT_IS_READING = "isReading";
 
-    Menu menu;
-
     @BindView(R.id.listview)
     ListView listView;
     List<BookMenu.DataBean.ChaptersBean> list = new ArrayList<>();
 
     @Inject
     BookMenuPresenter mPresenter;
+    @BindView(R.id.back)
+    TextView back;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.menu)
+    ImageView menu;
     private BookMenuAdapter adapter;
     private boolean isReading = false;
     private BookMenu bookMenu;
@@ -96,20 +104,35 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter - 1);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                BookMenu.DataBean.ChaptersBean data = adapter.getData(position);
-                if (isReading) {
-                    Intent intent = getIntent();
-                    intent.putExtra("chapter", data.sort);
+        listView.setOnItemClickListener((adapterView, view, position, l) -> {
+            BookMenu.DataBean.ChaptersBean data = adapter.getData(position);
+            if (isReading) {
+                Intent intent = getIntent();
+                intent.putExtra("chapter", data.sort);
 
-                    setResult(RESULT_OK, intent);
-                    finish();
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {
+                ReadActivity.startActivity(mContext, novel_id, data.sort, true, bookMenu.data.novel.on_self);
+            }
+        });
+
+        back.setOnClickListener(v -> finish());
+
+        menu.setOnClickListener(v -> {//切换menu状态
+            if (menu != null) {
+                if (menuSort) {
+                    menu.setImageResource(R.mipmap.menu_up_sort);
+                    menuSort = false;
                 } else {
-                    ReadActivity.startActivity(mContext, novel_id, data.sort, true, bookMenu.data.novel.on_self);
+                    menu.setImageResource(R.mipmap.menu_down_sort);
+                    menuSort = true;
                 }
             }
+            int pos = curChapter - 1;
+            Collections.reverse(list);
+            adapter.setSelectPos(list.size() - pos - 1);
+            adapter.notifyDataSetChanged();
         });
     }
 
@@ -117,6 +140,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public void showBookMenu(BookMenu data) {
         hideDialog();
         adapter.addAll(data.getData().getChapters());
+        title.setText(data.data.novel.name);
 
         this.bookMenu = data;
         listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
@@ -134,7 +158,6 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
         menu.add(0, 10, 0, "").setIcon(R.mipmap.menu_down_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
@@ -142,19 +165,19 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 10) {
-            if (menu != null) {
-                if (menuSort) {
-                    menu.findItem(10).setIcon(R.mipmap.menu_up_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-                    menuSort = false;
-                } else {
-                    menuSort = true;
-                    menu.findItem(10).setIcon(R.mipmap.menu_down_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-                }
-            }
-            int pos = curChapter - 1;
-            Collections.reverse(list);
-            adapter.setSelectPos(list.size() - pos - 1);
-            adapter.notifyDataSetChanged();
+//            if (menu != null) {
+//                if (menuSort) {
+//                    menu.findItem(10).setIcon(R.mipmap.menu_up_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//                    menuSort = false;
+//                } else {
+//                    menuSort = true;
+//                    menu.findItem(10).setIcon(R.mipmap.menu_down_sort).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//                }
+//            }
+//            int pos = curChapter - 1;
+//            Collections.reverse(list);
+//            adapter.setSelectPos(list.size() - pos - 1);
+//            adapter.notifyDataSetChanged();
             return true;
         } else {
         }
@@ -165,5 +188,11 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
     }
 }

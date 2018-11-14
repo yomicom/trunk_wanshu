@@ -115,10 +115,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void toolbarSetElevation(float elevation) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mCommonToolbar.setElevation(elevation);
-        }
+    private void toolbarSetElevation(float elevation) {//去掉阴影
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            mCommonToolbar.setElevation(elevation);
+//        }
     }
 
     @Override

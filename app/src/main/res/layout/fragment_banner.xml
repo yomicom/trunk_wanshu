@@ -39,10 +39,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:id="@+id/rank"
+        android:layout_height="102dp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/line_big_space"
-        android:paddingRight="@dimen/line_big_space">
+        android:paddingLeft="@dimen/setting_cut_10"
+        android:paddingRight="@dimen/setting_cut_10"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/item_rank"
@@ -129,5 +131,6 @@
         android:id="@+id/divide"
         style="@style/line_main_divide"
         android:layout_marginLeft="@dimen/distance_top_20"
-        android:layout_marginRight="@dimen/distance_top_20" />
+        android:layout_marginRight="@dimen/distance_top_20"
+        android:visibility="gone"/>
 </LinearLayout>

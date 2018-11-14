@@ -67,7 +67,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     @Override
     public void configViews() {
 
-        initAdapter(SelectBooksAdapter.class, false, false);
+        initAdapter(SelectBooksAdapter.class, false, true);
         mRecyclerView.removeAllItemDecoration();
     }
 
@@ -143,7 +143,7 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId());
+        BookDetailsActivity.startActivity(this, mAdapter.getAllData().get(position).getId(), mAdapter.getAllData().get(position).is_onsale);
     }
 
     @Override

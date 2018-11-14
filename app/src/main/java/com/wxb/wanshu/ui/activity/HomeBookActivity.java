@@ -12,12 +12,15 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wxb.wanshu.ImageActivity;
 import com.wxb.wanshu.MyApplication;
@@ -83,6 +86,10 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     RelativeLayout bgSearch;
     @BindView(R.id.et_article_search)
     TextView etArticleSearch;
+    @BindView(R.id.rank)
+    LinearLayout rank;
+    @BindView(R.id.divide)
+    View divide;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
@@ -161,6 +168,10 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     }
 
     private void showData(HomeData homeData) {
+
+        divide.setVisibility(View.VISIBLE);
+        rank.setVisibility(View.VISIBLE);
+
         this.homeData = homeData;
         List<HomeData.DataBeanX> data = homeData.getData();
 
@@ -173,47 +184,59 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                     setBanner(item);
                     break;
 
-                case Constant.BookType.Boutique_All://主编力荐
-                    flContent1.setVisibility(View.VISIBLE);
-                    HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(item, HOME_RECOMMEND_TYPE);
-                    transaction.replace(frameId[0], recommendFragment);
+                case Constant.BookType.EDITOR://主编力荐
+                    if (item.data.size() > 0) {
+                        flContent1.setVisibility(View.VISIBLE);
+                        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(item, HOME_RECOMMEND_TYPE);
+                        transaction.replace(frameId[0], recommendFragment);
+                    }
                     break;
 
                 case Constant.BookType.FRESH:
-                    flContent2.setVisibility(View.VISIBLE);
-                    HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(item);
-                    transaction.replace(frameId[1], homeBookListFragment);
+                    if (item.data.size() > 0) {
+                        flContent2.setVisibility(View.VISIBLE);
+                        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(item);
+                        transaction.replace(frameId[1], homeBookListFragment);
+                    }
                     break;
 
                 case Constant.BookType.POPULAR://人气佳作
-                    flContent3.setVisibility(View.VISIBLE);
-                    HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(item);
-                    transaction.replace(frameId[2], homePopularityFragment);
+                    if (item.data.size() > 0) {
+                        flContent3.setVisibility(View.VISIBLE);
+                        HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(item);
+                        transaction.replace(frameId[2], homePopularityFragment);
+                    }
                     break;
 
                 case Constant.BookType.MID_BANNER://设置首页图片
-                    iv_book.setVisibility(View.VISIBLE);
-                    ImageUtils.displayImage(mContext, iv_book, item.data.get(0).cover);
+                    if (item.data.size() > 0) {
+                        iv_book.setVisibility(View.VISIBLE);
+                        ImageUtils.displayImage(mContext, iv_book, item.data.get(0).cover);
 
-                    iv_book.setOnClickListener(v ->
-                            BookDetailsActivity.startActivity(mContext, item.data.get(0).novel_id));
+                        iv_book.setOnClickListener(v ->
+                                BookDetailsActivity.startActivity(mContext, item.data.get(0).novel_id, 1));
+                    }
                     break;
 
                 case Constant.BookType.PUBLISHING://火热连载
-                    flContent4.setVisibility(View.VISIBLE);
-                    recommendFragment = HomeRecommendFragment.newInstance(item, HOME_HOT_TYPE);
-                    transaction.replace(frameId[3], recommendFragment);
+                    if (item.data.size() > 0) {
+                        flContent4.setVisibility(View.VISIBLE);
+                        HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(item, HOME_HOT_TYPE);
+                        transaction.replace(frameId[3], recommendFragment);
+                    }
                     break;
 
                 case Constant.BookType.FINISH:
-                    flContent5.setVisibility(View.VISIBLE);
-                    homeBookListFragment = HomeBookListFragment.newInstance(item);
-                    transaction.replace(frameId[4], homeBookListFragment);
+                    if (item.data.size() > 0) {
+                        flContent5.setVisibility(View.VISIBLE);
+                        HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(item);
+                        transaction.replace(frameId[4], homeBookListFragment);
+                    }
                     break;
 
                 case Constant.BookType.SEARCH_HOT://热门推荐
                     if (item.getData().size() > 0)
-                    etArticleSearch.setHint(item.getData().get(0).name);
+                        etArticleSearch.setHint(item.getData().get(0).name);
                     break;
             }
         }
@@ -241,9 +264,9 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         banner.setDelegate((BGABanner.Delegate<ImageView, String>) (banner, itemView, model, position) -> {
                     HomeData.DataBeanX.DataBean bean = list.get(position);
                     if ("page".equals(bean.type)) {
-                        WebViewActivity.startActivity(mContext, "", bean.url);
+                        WebViewActivity.startActivity(mContext, "详情", bean.url);
                     } else {
-                        BookDetailsActivity.startActivity(mContext, bean.novel_id);
+                        BookDetailsActivity.startActivity(mContext, bean.novel_id, 1);
                     }
                 }
         );
@@ -341,6 +364,25 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     }
 
     int mAnimationTime = 1000;
+
+    private long exitTime = 0;
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                // 退出代码
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     private void crossfadeToContentView(View progressView) {
         // 加载progressView开始动画逐渐变为0%的不透明度，

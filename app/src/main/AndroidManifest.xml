@@ -100,7 +100,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ui.activity.WelcomeActivity"

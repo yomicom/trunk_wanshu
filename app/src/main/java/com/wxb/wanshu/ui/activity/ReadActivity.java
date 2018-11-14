@@ -256,7 +256,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             isFromSD = true;
         }
         EventBus.getDefault().register(this);
-        showDialog();
 
 //        mTvBookReadTocTitle.setText(bookDetails.getTitle());
 
@@ -281,11 +280,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         llBookReadTop.setLayoutParams(params);
 
+        showDialog();
+
         if (isOnShelf) {
-            tvAddBook.setText("已加入书架");
+            tvAddBook.setText(R.string.has_add_shlef);
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
         } else {
-            tvAddBook.setText("加入书架");
+            tvAddBook.setText(R.string.add_shlef);
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
         }
 
@@ -417,19 +418,19 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         seekbarChapter.setMax(chapter_num);
         readCurrentChapter(currentChapter);
 
-        cleanFileCache(dataBean);
+        cleanFileCache(dataBean.novel.update_time);
     }
 
     /**
      * 清除除当前章其它缓存章节内容
      *
-     * @param dataBean
+     * @param update_time
      */
-    private void cleanFileCache(BookMenu.DataBean dataBean) {
+    private void cleanFileCache(String update_time) {
         String lastUpdateTime = SettingManager.getInstance().getReadBookUpdateTime(novel_id);
-        if (!"".equals(lastUpdateTime) && !lastUpdateTime.equals(dataBean.novel.update_time)) {//根据书籍更新时间判断是否清除缓存
+        if (!"".equals(lastUpdateTime) && !lastUpdateTime.equals(update_time)) {//根据书籍更新时间判断是否清除缓存
             FileUtils.deleteBookFiles(novel_id, currentChapter);
-            SettingManager.getInstance().saveBookUpdateTime(novel_id, dataBean.novel.update_time);
+            SettingManager.getInstance().saveBookUpdateTime(novel_id, update_time);
         }
     }
 
@@ -556,7 +557,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @OnClick(R.id.ivBack)
     public void onClickBack() {
-        finish();
+        if (!isOnShelf) {//若未包含在书架中
+            showJoinBookShelfDialog();
+        } else {
+            finish();
+        }
     }
 
     /**
@@ -782,18 +787,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
      * 显示加入书架对话框
      */
     private void showJoinBookShelfDialog() {
-        ConfirmDialog.showNotice(mContext, "提示", "确认将此书加入书架？", "确定", "取消", new ConfirmDialog.SureCallback() {
-            @Override
-            public void exec() throws Exception {
-                mPresenter.addBookShelf(novel_id);
-                showDialog();
-            }
-        }, new ConfirmDialog.CancleCallback() {
-            @Override
-            public void exec() throws Exception {
-                finish();
-            }
-        });
+        ConfirmDialog.showNotice(mContext, "提示", "确认将此书加入书架？", "确定", "取消", () -> {
+            mPresenter.addBookShelf(novel_id);
+            showDialog();
+        }, () -> finish());
     }
 
     @Override
@@ -911,7 +908,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             // 预加载
             // 加载前一节 与 后一节
 
-            for (int i = chapter - 1; i <= chapter + 2 && i <= mChapterList.size(); i++) {
+            for (int i = chapter - 1; i <= chapter + 1 && i <= mChapterList.size(); i++) {
 
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(novel_id + "", i) == null) {

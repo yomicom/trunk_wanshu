@@ -143,7 +143,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/client/readLog")
-    Observable<ReadHistoryList> delReadHistoryList(@Field("logs_ids") String logs_ids);
+    Observable<ReadHistoryList> delReadHistoryList(@Field("log_ids") String logs_ids);
 
     /**
      * 获取书币明细

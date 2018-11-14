@@ -51,17 +51,9 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        //全屏保留状态栏文字(页面上部有Banner图)
-        Window window = getWindow();
-        //默认API 最低19
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            ViewGroup contentView = window.getDecorView().findViewById(Window.ID_ANDROID_CONTENT);
-            contentView.getChildAt(0).setFitsSystemWindows(false);
-        }
-
         initView();
         setTabHost();
+        setBannerStatus();
 
         EventBus.getDefault().register(this);
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoIntentService.class);
@@ -71,6 +63,17 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         }
 
 //        clientLaunch();
+    }
+
+    //全屏保留状态栏文字(页面上部有Banner图)
+    private void setBannerStatus() {
+        Window window = getWindow();
+        //默认API 最低19
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            ViewGroup contentView = window.getDecorView().findViewById(Window.ID_ANDROID_CONTENT);
+            contentView.getChildAt(0).setFitsSystemWindows(false);
+        }
     }
 
     /**
@@ -133,9 +136,9 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         tabHost.addTab(tabHost.newTabSpec(TAB_ME).setIndicator(TAB_ME)
                 .setContent(new Intent(this, MeActivity.class)));
 
-        tabData.setImageResource(R.mipmap.ic_data_select);
-        txtData.setTextColor(getResources().getColor(R.color.gobal_color));
-        tabHost.setCurrentTabByTag(TAB_DATA);
+        tabFunc.setImageResource(R.mipmap.ic_function_select);
+        txtFunc.setTextColor(getResources().getColor(R.color.gobal_color));
+        tabHost.setCurrentTabByTag(TAB_FUNC);
     }
 
     @Override

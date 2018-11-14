@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
@@ -128,7 +130,7 @@ public class MeActivity extends BaseActivity implements MeContract.View {
                 break;
             case R.id.item_clean:
                 showDialog();
-//                CacheManager.getInstance().clearCache(true);
+                CacheManager.getInstance().clearCache(true);
                 new Handler().postDelayed(() -> {
                     clean.setText("");
                     hideDialog();
@@ -144,5 +146,24 @@ public class MeActivity extends BaseActivity implements MeContract.View {
                 AboutUsActivity.startActivity(this);
                 break;
         }
+    }
+
+    private long exitTime = 0;
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                // 退出代码
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

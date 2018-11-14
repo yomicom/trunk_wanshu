@@ -35,9 +35,13 @@ public class ReadOtherStatusActivity extends BaseActivity {
     @BindView(R.id.common_toolbar)
     Toolbar commonToolbar;
 
-    public static void startActivity(Context context, int code) {
-        context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
-                .putExtra("code", code));
+    public static boolean startActivity(Context context,int is_onsale) {
+        if (Constant.BOOK_IS_NOT_ONSALE == is_onsale) {
+            context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
+                    .putExtra("code", Constant.READ_DOWN_CODE));
+            return true;
+        }
+        return false;
     }
 
     @Override

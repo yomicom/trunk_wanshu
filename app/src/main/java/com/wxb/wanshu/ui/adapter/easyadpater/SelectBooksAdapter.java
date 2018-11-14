@@ -17,7 +17,7 @@ import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 public class SelectBooksAdapter extends RecyclerArrayAdapter<BookList.DataBean> {
 
-    String selected;
+    String selected = "";
 
     public SelectBooksAdapter(Context context) {
         super(context);

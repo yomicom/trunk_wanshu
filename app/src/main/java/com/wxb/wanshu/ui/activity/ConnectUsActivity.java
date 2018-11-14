@@ -43,8 +43,8 @@ public class ConnectUsActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-
-        mCommonToolbar.setTitle("关于");
+        mCommonToolbar.setTitle("联系客服");
+        mCommonToolbar.setNavigationIcon(R.mipmap.ab_back);
     }
 
     @Override

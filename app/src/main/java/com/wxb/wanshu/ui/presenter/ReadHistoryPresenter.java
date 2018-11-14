@@ -93,7 +93,7 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.getMessage();
                     }
 
                     @Override

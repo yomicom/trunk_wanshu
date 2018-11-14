@@ -28,6 +28,7 @@ import com.wxb.wanshu.manager.CacheManager;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookshelfAdapter;
 import com.wxb.wanshu.ui.contract.BookselfContract;
 import com.wxb.wanshu.ui.presenter.BookselfPresenter;
+import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
@@ -195,11 +196,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             }
 //            tvSelectedBooks.setText("已选择" + removeList.size() + "");
         } else {
-            if (Constant.BOOK_IS_NOT_ONSALE.equals(mAdapter.getItem(position).is_onsale)) {//书籍已下架
-                ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
-            } else {
+            if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).is_onsale))
                 ReadActivity.startActivity(this, mAdapter.getItem(position).getId());
-            }
         }
     }
 
@@ -262,7 +260,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                     if (bean.isSeleted) removeList.add(bean);
                 }
                 if (removeList.isEmpty()) {
-                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
+                    ToastUtils.showToast(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
                     showDeleteCacheDialog(removeList);
                 }

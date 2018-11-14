@@ -77,7 +77,7 @@ public class Constant {
     public static final int READ_ING_CODE = 420;//小说未完待续
     public static final int READ_FINISH_CODE = 430;//小说完结
 
-    public static final String BOOK_IS_NOT_ONSALE = "0";//小说下架
+    public static final int BOOK_IS_NOT_ONSALE = 0;//小说下架
 
     /**
      * 支付宝支付业务：入参app_id

@@ -114,7 +114,7 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
+        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId(), ((HomeData.DataBeanX.DataBean) data).is_onsale);
     }
 
 }

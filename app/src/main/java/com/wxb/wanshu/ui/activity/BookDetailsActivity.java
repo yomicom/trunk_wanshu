@@ -128,6 +128,13 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 .putExtra(INTENT_BOOK_ID, novel_id));
     }
 
+    public static void startActivity(Context context, String novel_id, int is_onsale) {
+        if (!ReadOtherStatusActivity.startActivity(context, is_onsale)) {
+            context.startActivity(new Intent(context, BookDetailsActivity.class)
+                    .putExtra(INTENT_BOOK_ID, novel_id));
+        }
+    }
+
     @Inject
     BookDetailsPresenter mPresenter;
 
@@ -185,12 +192,13 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     @Override
     public void showBookDetails(BookDetails.DataBean data) {
         hideDialog();
-        visible(llContent);
+        if (data != null) {
+            visible(llContent);
 
-        bookDetails = data;
-        showBookData(data);
-        showRecommandData(data);
-
+            bookDetails = data;
+            showBookData(data);
+            showRecommandData(data);
+        }
     }
 
     private void showBookData(BookDetails.DataBean data) {
@@ -288,7 +296,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.tv_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
     public void onViewClicked(View view) {
-        String is_onsale = bookDetails.is_onsale;
+        int is_onsale = bookDetails.is_onsale;
         switch (view.getId()) {
             case R.id.tv_to_dashang:
                 showDialog();
@@ -307,21 +315,15 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 }
                 break;
             case R.id.tv_read_book://开始阅读
-                if (Constant.BOOK_IS_NOT_ONSALE.equals(is_onsale)) {//书籍已下架
-                    ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
-                } else {
-                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
-                }
+                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
+                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
                 break;
             case R.id.book_menu:
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
             case R.id.item_last_chapter://查看最新章节
-                if (Constant.BOOK_IS_NOT_ONSALE.equals(is_onsale)) {
-                    ReadOtherStatusActivity.startActivity(this, Constant.READ_DOWN_CODE);
-                } else {
+                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
                     ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, true, bookDetails.on_shelf);
-                }
                 break;
         }
     }

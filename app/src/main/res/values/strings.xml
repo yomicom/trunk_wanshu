@@ -49,10 +49,12 @@
     <string name="has_not_selected_delete_book">你没有选择要删的书哦</string>
     <string name="remove_selected_book">移除所选书籍</string>
     <string name="delete_local_cache">同时删除本地缓存</string>
-    <string name="confirm">确定</string>
+    <string name="confirm">确定</string>Re
     <string name="cancel">取消</string>
     <string name="add_shlef_fail">添加书架失败</string>
     <string name="del_shlef_fail">删除书架失败</string>
+    <string name="add_shlef">加入书架</string>
+    <string name="has_add_shlef">已加入书架</string>
 
     <string name="i_reader_finish">完成</string>
     <string name="i_reader_last_read">最近阅读</string>
@@ -76,7 +78,7 @@
 
 
     <string name="first_chapter">已翻至第一页</string>
-    <string name="last_chapter">已翻至z最后一页</string>
+    <string name="last_chapter">已翻至最后一页</string>
     <string name="title_activity_image">ImageActivity</string>
 
 </resources>

@@ -104,7 +104,7 @@ public class ReadRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((ChapterRead.DataBean.NovelBean) data).id);
+        BookDetailsActivity.startActivity(getActivity(), ((ChapterRead.DataBean.NovelBean) data).id, ((ChapterRead.DataBean.NovelBean) data).is_onsale);
     }
 
 }

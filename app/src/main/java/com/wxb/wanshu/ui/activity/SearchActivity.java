@@ -32,6 +32,7 @@ import com.wxb.wanshu.ui.adapter.easyadpater.HotNovelAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SearchContract;
 import com.wxb.wanshu.ui.presenter.SearchPresenter;
+import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.TagGroup;
 
@@ -108,17 +109,17 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
         List<HomeData.DataBeanX.DataBean> hotBookData = data.getData();
 
         if (hotBookData != null && hotBookData.size() > 0) {
-            etSearch.setText(hotBookData.get(0).getName());
+            etSearch.setHint(hotBookData.get(0).getName());
             ViewToolUtils.setTextLast(etSearch);
             visible(ivClean);
-            for (int i = 0; i < hotBookData.size(); i++) {
+            for (int i = 1; i < hotBookData.size(); i++) {
                 list.add(hotBookData.get(i).getName());
             }
             HotGroup.setTags(list);
             HotGroup.setOnTagClickListener(tag -> {
                 for (int i = 0; i < hotBookData.size(); i++) {
                     if (tag.equals(hotBookData.get(i).getName())) {
-                        BookDetailsActivity.startActivity(mContext, hotBookData.get(i).getId());
+                        BookDetailsActivity.startActivity(mContext, hotBookData.get(i).getId(), hotBookData.get(i).is_onsale);
                         break;
                     }
                 }
@@ -132,7 +133,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     public void configViews() {
 
         mPresenter.attachView(this);
-
+        ViewToolUtils.showSoftInputDelay(mContext);
         setView();
     }
 
@@ -177,15 +178,18 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
                 gone(mRecyclerView);
             }
         });
-        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (!TextUtils.isEmpty(etSearch.getText())) {
                     search(etSearch.getText().toString().trim());
-                    return true;
+                } else if (!TextUtils.isEmpty(etSearch.getHint())) {
+                    search(etSearch.getHint().toString());
+                } else {
+                    ToastUtils.showToast("请输入需要搜索的小说标题");
                 }
-                return false;
+                return true;
             }
+            return false;
         });
     }
 
@@ -223,7 +227,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             mAdapter.clear();
         }
         mAdapter.addAll(data.getData());
-        ((SelectBooksAdapter)mAdapter).setSelected(keyword);
+        ((SelectBooksAdapter) mAdapter).setSelected(keyword);
     }
 
     @Override
@@ -234,7 +238,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
     @Override
     public void onItemClick(int position) {
-        BookDetailsActivity.startActivity(mContext, mAdapter.getAllData().get(position).getId());
+        BookDetailsActivity.startActivity(mContext, mAdapter.getAllData().get(position).getId(), mAdapter.getAllData().get(position).is_onsale);
     }
 
     @Override

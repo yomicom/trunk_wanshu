@@ -68,7 +68,7 @@ public class BookDetails extends Base {
         public String update_time;
         public String length_type;
         public String view_count;
-        public String is_onsale;
+        public int is_onsale;
         public String category_name;
         public boolean on_shelf;
         public FirstChapterBean first_chapter;
@@ -219,11 +219,11 @@ public class BookDetails extends Base {
             this.view_count = view_count;
         }
 
-        public String getIs_onsale() {
+        public int getIs_onsale() {
             return is_onsale;
         }
 
-        public void setIs_onsale(String is_onsale) {
+        public void setIs_onsale(int is_onsale) {
             this.is_onsale = is_onsale;
         }
 

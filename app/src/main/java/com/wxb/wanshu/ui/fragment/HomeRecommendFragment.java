@@ -22,6 +22,7 @@ import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
 import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
+import com.wxb.wanshu.ui.activity.ReadOtherStatusActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeHotAdapter;
 import com.wxb.wanshu.ui.adapter.easyadpater.HomeRecommendAdapter;
 import com.wxb.wanshu.utils.FormatUtils;
@@ -127,7 +128,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
         if (type == BOOK_DETAILS_TYPE) {
             tvTag.setText("同类作品");
-            gone(tvMore, oneItem,lookMore);
+            gone(tvMore, oneItem, lookMore);
             BookDetails.DataBean data = (BookDetails.DataBean) bundle.getSerializable("data");
             List<BookDetails.DataBean.RecommendBean> recommend = data.getRecommend();
             setHorinalList(recommend);
@@ -191,11 +192,11 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
         articleTitle.setText(item.getName());
         tvArticleIntro.setText(item.getDescription());
         author.setText(item.getAuthor());
-        tvWordNums.setText(FormatUtils.formatWordCount(item.word_num) );
+        tvWordNums.setText(FormatUtils.formatWordCount(item.word_num));
         tvCategory.setText(item.getCategory_name());
 
         rlMaterialItem.setOnClickListener(v ->
-                BookDetailsActivity.startActivity(getActivity(), (item.getId())));
+                BookDetailsActivity.startActivity(getActivity(), item.getId(), item.is_onsale));
     }
 
     @Override
@@ -213,10 +214,10 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        if (type == BOOK_DETAILS_TYPE){
-            BookDetailsActivity.startActivity(getActivity(), ((BookDetails.DataBean.RecommendBean) data).getId());
-        }else {
-            BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
+        if (type == BOOK_DETAILS_TYPE) {
+            BookDetailsActivity.startActivity(getActivity(), ((BookDetails.DataBean.RecommendBean) data).getId(), ((BookDetails.DataBean.RecommendBean) data).is_onsale);
+        } else {
+            BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId(), ((HomeData.DataBeanX.DataBean) data).is_onsale);
         }
     }
 }

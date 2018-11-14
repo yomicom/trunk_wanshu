@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- *
  * Created by qiming on 2017/11/30.
  */
 
@@ -111,7 +110,7 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
 
     @Override
     public void onItemClick(View view, int position, Object data) {
-        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId());
+        BookDetailsActivity.startActivity(getActivity(), ((HomeData.DataBeanX.DataBean) data).getId(), ((HomeData.DataBeanX.DataBean) data).is_onsale);
     }
 
 }

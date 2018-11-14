@@ -11,13 +11,13 @@
 
     <View android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:id="@+id/item"/>
+        android:id="@+id/item"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_title_height"
-        android:paddingLeft="@dimen/distance_top"
         android:paddingRight="@dimen/distance_top">
 
         <TextView
@@ -26,6 +26,7 @@
             android:layout_centerVertical="true"
             android:padding="5dp"
             android:text="完成"
+            android:layout_marginLeft="@dimen/distance_top"
             android:textColor="@color/text_color_2"
             android:textSize="@dimen/text_middle"
             android:visibility="gone" />
@@ -36,7 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/distance_image_text_15"
             android:drawableLeft="@mipmap/ab_back"
-            android:drawablePadding="8dp"
+            android:drawablePadding="15dp"
             android:text="书架"
             android:textSize="@dimen/text_huge"
             android:visibility="gone" />

@@ -509,10 +509,8 @@ public class FileUtils {
                 for (int i = 0; i < childFiles.length; i++) {
                     File childFile = childFiles[i];
                     if (childFile != null && childFile.isFile()) {
-                        if (getChapterPath(novel_id, chapter).equals(childFile.getAbsolutePath())) {
-                            return true;
-                        } else {
-                            deleteFile(file);
+                        if (!getChapterPath(novel_id, chapter).equals(childFile.getAbsolutePath())) {
+                            deleteFile(childFile);
                         }
                     }
                 }

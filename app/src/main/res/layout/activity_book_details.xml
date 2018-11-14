@@ -95,8 +95,8 @@
                     android:layout_width="match_parent"
                     android:gravity="left"
                     android:lineSpacingExtra="@dimen/line_small_space"
-                    android:paddingLeft="@dimen/distance_left"
-                    android:paddingRight="@dimen/distance_left"
+                    android:layout_marginLeft="@dimen/distance_left"
+                    android:layout_marginRight="@dimen/distance_left"
                     android:maxLines="3"
                     android:textSize="14sp"></TextView>
 
@@ -138,16 +138,14 @@
                         android:id="@+id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
-                        android:text="最新："
-                        android:textStyle="bold"/>
+                        android:text="最新："/>
 
                     <TextView
                         android:id="@+id/last_chapter"
                         android:layout_toRightOf="@id/last_chapter_intro"
                         style="@style/text_big_nomal"
                         android:maxLines="1"
-                        android:text=""
-                        android:textStyle="bold"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/last_chapter_time"

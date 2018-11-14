@@ -20,11 +20,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.Transformation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by qiming on 2017/11/29.
@@ -231,6 +234,45 @@ public class ViewToolUtils {
                 descriptionView.startAnimation(animation);
             }
         });
+    }
+
+    //弹出键盘
+    public static void showSoftInput(Context context) {
+//        etSearch.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.RESULT_SHOWN);
+    }
+
+    //打开页面弹出键盘
+    public static void showSoftInputDelay(final Context context) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }, 500); // 秒后自动弹出
+    }
+
+    public static void KeyBoardCancle(Context context) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
+        if (imm.isActive()) {//如果开启
+            //关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+
+    /**
+     * 隐藏软键盘
+     *
+     * @param view
+     */
+    public static void hideSoftKeyboard(View view) {
+        Context context = view.getContext();
+        InputMethodManager imm = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     /**

@@ -187,9 +187,9 @@
         android:text="@string/chongzhi_record"
         android:visibility="gone" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/distance_left"
         android:layout_marginTop="10dp"
         android:layout_marginRight="@dimen/distance_left"
@@ -197,25 +197,23 @@
 
         <ImageView
             android:id="@+id/history"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:src="@mipmap/read_history" />
 
-        <View
-            android:layout_width="30dp"
-            android:layout_height="match_parent" />
+        <!--<View-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="match_parent" />-->
 
         <ImageView
             android:id="@+id/comment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@mipmap/comment_us" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/item_read_screen_time"
