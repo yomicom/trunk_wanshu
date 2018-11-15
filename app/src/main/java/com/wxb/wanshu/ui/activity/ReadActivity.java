@@ -121,6 +121,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     ImageView tvFontsizeMinus;
     @BindView(R.id.tv_fontSize)
     TextView tvFontSize;
+    @BindView(R.id.tv_chapter_fontSize)
+    TextView tvChapterFontSize;
     @BindView(R.id.seekbarFontSize)
     SeekBar seekbarFontSize;
     @BindView(R.id.tvFontsizePlus)
@@ -182,7 +184,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isFromMenu = false;
     private ShareBookDialog shareBookDialog;
     private int chapter_num = 0;
-    private int chpaterFontSizePx;
     private String novelTitle = "";
 
     @Override
@@ -282,7 +283,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         llBookReadTop.setLayoutParams(params);
 
-        showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showDialog();
+            }
+        }, 500);
 
         if (isOnShelf) {
             tvAddBook.setText(R.string.has_add_shlef);
@@ -344,11 +350,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //        seekbarFontSize.setMax(10);
         //int fontSizePx = SettingManager.getInstance().getReadFontSize(novel_id);
         int fontSizePx = SettingManager.getInstance().getReadFontSize();
-        chpaterFontSizePx = SettingManager.getInstance().getChapterFontSize();
+        int chpaterFontSizePx = SettingManager.getInstance().getChapterFontSize();
 //        int progress = (int) ((ScreenUtils.pxToDpInt(fontSizePx) - 12) / 1.7f);
 //        seekbarFontSize.setProgress(progress);
 //        seekbarFontSize.setOnSeekBarChangeListener(new SeekBarChangeListener());
         tvFontSize.setText(fontSizePx + "");
+        tvChapterFontSize.setText(chpaterFontSizePx + "");
 
         seekbarLightness.setMax(100);
         seekbarLightness.setOnSeekBarChangeListener(new SeekBarChangeListener());
@@ -1052,8 +1059,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private void calcFontSize(boolean isAdd) {
         int font = Integer.parseInt(tvFontSize.getText().toString());
+        int chapterFont = Integer.parseInt(tvChapterFontSize.getText().toString());
         int fontSize = isAdd == true ? (font += fontChangeSize) : (font -= fontChangeSize);
-        int chpaterFontSize = isAdd == true ? (chpaterFontSizePx += fontChangeSize) : (chpaterFontSizePx -= fontChangeSize);
+        int chpaterFontSize = isAdd == true ? (chapterFont += fontChangeSize) : (chapterFont -= fontChangeSize);
         // progress range 1 - 10
 //        int progress = 1;
 
@@ -1064,6 +1072,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //            mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
             mPageWidget.setFontSize(fontSize, chpaterFontSize);
             tvFontSize.setText(fontSize + "");
+            tvChapterFontSize.setText(chpaterFontSize + "");
         }
     }
 

@@ -203,7 +203,7 @@
                     android:paddingLeft="@dimen/distance_left"
                     android:paddingTop="@dimen/distance_left"
                     android:paddingRight="@dimen/distance_left"
-                    android:text="同类作品"
+                    android:text="同类推荐"
                     android:textSize="@dimen/text_huge" />
 
                 <FrameLayout

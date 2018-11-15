@@ -20,19 +20,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color_2"
-            android:textSize="@dimen/text_big"
+            android:textSize="@dimen/text_middle"
             android:maxLines="3"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/distance_text_text_12"
             android:text="@string/no_book"
             android:id="@+id/tv_toast" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="27dp"
-            android:textColor="@color/gobal_color"
+            android:layout_width="160dp"
+            android:layout_height="44dp"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_middle"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_no_web"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_finid_book"
             android:text="@string/to_get_book"
             android:gravity="center"
             android:id="@+id/tv_take" />

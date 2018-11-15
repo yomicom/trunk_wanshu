@@ -7,8 +7,8 @@
     android:background="@color/reader_menu_bg_color"
     android:clickable="true"
     android:orientation="vertical"
-    android:visibility="gone"
-    android:paddingTop="@dimen/distance_text_text_10">
+    android:paddingTop="@dimen/distance_text_text_10"
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:progressDrawable="@drawable/seekbar_bg"
             android:thumb="@drawable/seekbar_thumb"
             android:thumbOffset="10dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_fontSize"
@@ -88,7 +88,17 @@
             android:text="18"
             android:textColor="@color/white"
             android:textSize="@dimen/text_less_huge"
-            android:visibility="visible"/>
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_chapter_fontSize"
+            style="@style/text_big_nomal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="18"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_less_huge"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/tvFontsizePlus"
@@ -129,9 +139,9 @@
         android:id="@+id/gvTheme"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/distance_text_text_12"
         android:columnWidth="32dp"
-        android:layout_gravity="center_horizontal"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
         android:scrollbars="none"
