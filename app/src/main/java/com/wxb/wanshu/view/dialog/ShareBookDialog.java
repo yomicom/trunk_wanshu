@@ -118,9 +118,10 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        UMImage image = new UMImage(context, bookDetails.getCover());
+        UMImage image = new UMImage(context, "https://avatar.csdn.net/F/1/D/3_huanglin_developer.jpg");
+//        UMImage image = new UMImage(context, bookDetails.getCover());
         UMWeb web = new UMWeb("url");
-        web.setTitle(bookDetails.getName());//标题
+        web.setTitle("");//标题
         web.setThumb(image);  //缩略图
         web.setDescription(bookDetails.getDescription());//描述
 

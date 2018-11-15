@@ -125,8 +125,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     public void showReadHistoryList(ReadHistoryList data) {
         if (data != null && data.data.size() > 0) {
             visible(manage);
-            mAdapter.addAll(data.getData());
         }
+        mAdapter.addAll(data.getData());
     }
 
     @Override
@@ -240,22 +240,13 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     }
 
     private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList) {
-        ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", "确定", "取消", new ConfirmDialog.SureCallback() {
-            @Override
-            public void exec() throws Exception {
-                StringBuilder novelIds = new StringBuilder();
-                for (ReadHistoryList.DataBean item : removeList) {
-                    novelIds.append(item.log.id + ",");
-                }
-                if (novelIds.length() > 0) {
-                    mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1));
-                }
-
+        ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", () -> {
+            StringBuilder novelIds = new StringBuilder();
+            for (ReadHistoryList.DataBean item : removeList) {
+                novelIds.append(item.log.id + ",");
             }
-        }, new ConfirmDialog.CancleCallback() {
-            @Override
-            public void exec() throws Exception {
-                finish();
+            if (novelIds.length() > 0) {
+                mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1));
             }
         });
     }

@@ -135,7 +135,7 @@ public interface ApiService {
      * @return
      */
     @GET("/client/readLog")
-    Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page);
+    Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page,@Query("pagesize") int pagesize);
 
     /**
      * 删除阅读历史
@@ -287,7 +287,7 @@ public interface ApiService {
      * @return
      */
     @POST("/client/launch")
-    Observable<ClientData> clientLaunch(@Query("deviceboutiqueList_id") String device_id, @Query("type") int type,
+    Observable<ClientData> clientLaunch(@Query("device_id") String device_id, @Query("type") int type,
                                         @Query("version") String version, @Query("os") String os);
 
     /**

@@ -402,25 +402,49 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
         flReadWidget.removeAllViews();
         flReadWidget.addView(mPageWidget);
+
+        boolean isNight = SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
+        //初始化是否夜间模式
+        initNight(isNight);
+    }
+
+    private void initNight(boolean isNight) {
+        if (!isNight) {
+            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[curTheme]),
+                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[curTheme]));
+            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_night_normal);
+            tvBookMode.setText("夜间");
+        } else {
+            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]),
+                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]));
+            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_day_manual);
+            tvBookMode.setText("日间");
+        }
     }
 
     /**
      * 加载章节列表
      *
-     * @param dataBean
+     * @param data
      */
     @Override
-    public void showBookToc(BookMenu.DataBean dataBean) {
-        List<BookMenu.DataBean.ChaptersBean> list = dataBean.getChapters();
-        mChapterList.clear();
-        mChapterList.addAll(list);
+    public void showBookToc(BookMenu data) {
+        if (data.errcode == 0) {
+            BookMenu.DataBean dataBean = data.getData();
+            List<BookMenu.DataBean.ChaptersBean> list = dataBean.getChapters();
+            mChapterList.clear();
+            mChapterList.addAll(list);
 
-        //总章节数
-        chapter_num = dataBean.novel.chapter_num;
-        seekbarChapter.setMax(chapter_num);
-        readCurrentChapter(currentChapter);
+            //总章节数
+            chapter_num = dataBean.novel.chapter_num;
+            seekbarChapter.setMax(chapter_num);
+            readCurrentChapter(currentChapter);
 
-        cleanFileCache(dataBean.novel.update_time);
+            cleanFileCache(dataBean.novel.update_time);
+        } else if (data.errcode == 1) {//书籍已下架
+            finish();
+            ReadOtherStatusActivity.startActivity(mContext, 0);
+        }
     }
 
     /**
@@ -622,17 +646,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
         mPageWidget.setTheme(isNight ? ThemeManager.NIGHT : curTheme);
 
-        if (!isNight) {
-            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[curTheme]),
-                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[curTheme]));
-            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_night_normal);
-            tvBookMode.setText("夜间");
-        } else {
-            mPageWidget.setTextColor(ContextCompat.getColor(mContext, ThemeManager.THEME_CONTENT_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]),
-                    ContextCompat.getColor(mContext, ThemeManager.THEME_TITLE_COLOR[ThemeManager.THEME_CONTENT_COLOR.length - 1]));
-            ivBookMode.setImageResource(R.mipmap.ic_menu_mode_day_manual);
-            tvBookMode.setText("日间");
-        }
+        initNight(isNight);
 
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
     }

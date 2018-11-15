@@ -12,9 +12,7 @@
 
     <ImageView
         android:id="@+id/cover"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:src="@drawable/defalt_book_cover" />
+        style="@style/classify_big_cover"  />
 
     <TextView
         android:id="@+id/classify"

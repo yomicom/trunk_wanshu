@@ -36,6 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/line_big_space"
             android:text="@string/novel_coding"
             android:textColor="@color/text_color_2"
             android:layout_alignBottom="@id/iv_wn"

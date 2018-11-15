@@ -213,6 +213,7 @@ public final class LoggingInterceptor implements Interceptor {
 
         ResponseBody responseBody = response.body();
         long contentLength = responseBody.contentLength();
+//        String resStr = responseBody.string();
         String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
         logger.log("<-- "
                 + response.code()

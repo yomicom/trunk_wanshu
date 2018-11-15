@@ -46,7 +46,7 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
                     @Override
                     public void onNext(BookDetails bookDetails) {
-                        mView.showBookDetails(bookDetails.getData());
+                        mView.showBookDetails(bookDetails);
                     }
                 });
         addSubscrebe(subscribe);

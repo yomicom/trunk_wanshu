@@ -115,7 +115,6 @@ public class PayMoneyPopWindow extends PopupWindow implements View.OnClickListen
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
                 int height = mPopView.findViewById(R.id.id_pop_layout).getTop();
                 int y = (int) event.getY();
                 if (event.getAction() == MotionEvent.ACTION_UP) {

@@ -24,6 +24,7 @@ import com.wxb.wanshu.ui.activity.BookshelfActivity;
 import com.wxb.wanshu.ui.activity.ClassifyActivity;
 import com.wxb.wanshu.ui.activity.HomeBookActivity;
 import com.wxb.wanshu.ui.activity.MeActivity;
+import com.wxb.wanshu.utils.Utils;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -51,9 +52,10 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        setBannerStatus();
+
         initView();
         setTabHost();
-        setBannerStatus();
 
         EventBus.getDefault().register(this);
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoIntentService.class);
@@ -62,7 +64,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         if ("".equals(clientid)) {
         }
 
-//        clientLaunch();
+        clientLaunch();
     }
 
     //全屏保留状态栏文字(页面上部有Banner图)
@@ -81,8 +83,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
      */
     private void clientLaunch() {
         api = MyApplication.getsInstance().getAppComponent().getReaderApi();
-        //MyApplication.getMyContext().getPackageManager().getPackageInfo(MyApplication.getMyContext().getPackageName()
-        Subscription subscribe = api.clientLaunch("", 1, "", "android").subscribeOn(Schedulers.io())
+        Subscription subscribe = api.clientLaunch(Utils.getUUID(), 1, Utils.getVersionName(), Utils.getOsMessage()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ClientData>() {
                     @Override
@@ -91,7 +92,7 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.getMessage();
                     }
 
                     @Override

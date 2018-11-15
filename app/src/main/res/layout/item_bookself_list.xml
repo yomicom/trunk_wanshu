@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="200dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/touch_bg"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="@dimen/distance_text_text_10"
-    android:paddingRight="@dimen/distance_text_text_10"
-    android:paddingTop="@dimen/distance_left"
-    android:background="@drawable/touch_bg"
-    android:gravity="center_horizontal">
+    android:paddingTop="@dimen/distance_top"
+    android:paddingRight="@dimen/distance_text_text_10">
 
     <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="133dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_book_border">
 
         <ImageView
             android:id="@+id/iv_book_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/defalt_book_cover" />
+            style="@style/novel_big_cover" />
+
         <ImageView
             android:id="@+id/iv_book_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_book_refresh"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_book_choose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_nochoose_book"
             android:layout_alignParentRight="true"
             android:layout_marginTop="7dp"
             android:layout_marginRight="7dp"
-            android:visibility="gone"/>
+            android:src="@mipmap/ic_nochoose_book"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_title"
         style="@style/text_novel_title"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/text_middle"
-        android:layout_marginTop="@dimen/distance_text_text_8" />
+        android:layout_marginTop="@dimen/distance_text_text_8"
+        android:textSize="@dimen/text_middle" />
 </LinearLayout>

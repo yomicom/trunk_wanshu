@@ -76,6 +76,8 @@
     <string name="home_continue">火热连载</string>
     <string name="home_finished">完本精选</string>
 
+    <string name="no_more_data">小说已加载完毕！</string>
+
 
     <string name="first_chapter">已翻至第一页</string>
     <string name="last_chapter">已翻至最后一页</string>

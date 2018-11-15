@@ -100,7 +100,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                     public void onNext(BookMenu data) {
 //                        List<BookMenu.DataBean.ChaptersBean> list = data.getData().chapters;
 //                        if (list != null && !list.isEmpty() && mView != null) {
-                        mView.showBookToc(data.getData());
+                        mView.showBookToc(data);
 //                        }
                     }
 

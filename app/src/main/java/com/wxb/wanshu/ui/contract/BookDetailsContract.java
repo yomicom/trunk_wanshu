@@ -12,7 +12,7 @@ import com.wxb.wanshu.bean.RewardType;
 
 public interface BookDetailsContract {
     interface View extends BaseContract.BaseView {
-        void showBookDetails(BookDetails.DataBean data);
+        void showBookDetails(BookDetails data);
 
         void showBookReward(BookRewardData data);
 

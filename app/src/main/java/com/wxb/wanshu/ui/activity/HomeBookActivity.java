@@ -76,6 +76,8 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     AlphaTitleScrollView scrollView;
     @BindView(R.id.iv_to_top)
     ImageView ivToTop;
+    @BindView(R.id.iv_search)
+    ImageView iv_search;
     @BindView(R.id.iv_book)
     ImageView iv_book;
     @BindView(R.id.swipeRefresh)
@@ -116,19 +118,19 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         swipeRefresh.setColorSchemeResources(colors);
 //        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.common_bg);
         swipeRefresh.setOnRefreshListener(() -> {
-            if (homeData != null) {
-                mPresenter.getHomeData("");
-            }
+//            if (homeData != null) {
+            mPresenter.getHomeData("");
+//            }
         });
 
         mPresenter.attachView(this);
-        mPresenter.getHomeData("");
-//        swipeRefresh.setRefreshing(true);
-        dialog = CustomDialog.instance(this);
-        dialog.setCancelable(true);
-        dialog.show();
+        swipeRefresh.setRefreshing(true);
+//        mPresenter.getHomeData("");
+//        dialog = CustomDialog.instance(this);
+//        dialog.setCancelable(true);
+//        dialog.show();
 
-        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, banner);
+        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
 //        bgSearch.setBackgroundColor(ContextCompat.getColor(mContext, R.color.no_gobal_color));   //初始化搜索栏背景颜色
 
 

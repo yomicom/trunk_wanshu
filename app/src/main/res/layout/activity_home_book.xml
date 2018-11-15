@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:layout_marginLeft="@dimen/distance_top_20"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="33dp"
             android:layout_marginRight="@dimen/distance_top_20"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_search_home"
@@ -136,17 +136,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@null"
                 android:hint="搜索书名"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="@dimen/text_middle" />
 
             <ImageView
+                android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_search" />
+                android:src="@mipmap/ic_search_white" />
         </LinearLayout>
     </RelativeLayout>
 

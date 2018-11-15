@@ -15,17 +15,13 @@
         <RelativeLayout
             android:id="@+id/rl_article_pic"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp">
 
             <ImageView
                 android:id="@+id/iv_article_pic"
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/defalt_book_cover"
-                android:visibility="visible" />
+                style="@style/novel_middle_cover"/>
 
         </RelativeLayout>
 

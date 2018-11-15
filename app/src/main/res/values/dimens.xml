@@ -13,6 +13,7 @@
     <dimen name="text_huge">20sp</dimen>
 
     <dimen name="line_divide">0.5dp</dimen>
+    <dimen name="novel_stroke_divide">0.5dp</dimen>
     <dimen name="line_main_divide">0.5dp</dimen>
     <dimen name="btn_line_divide">0.5dp</dimen>
     <dimen name="drawable_padding_normal">8dp</dimen>
@@ -50,6 +51,12 @@
     <!--书籍封面大小-->
     <dimen name="book_cover_width">90dp</dimen>
     <dimen name="book_cover_height">120dp</dimen>
+    <dimen name="book_cover_width_history">60dp</dimen>
+    <dimen name="book_cover_height_history">80dp</dimen>
+    <dimen name="book_cover_width_middle">75dp</dimen>
+    <dimen name="book_cover_height_middle">100dp</dimen>
+    <dimen name="book_cover_width_small">40dp</dimen>
+    <dimen name="book_cover_height_small">53dp</dimen>
 
     <!--文字间隔-->
     <dimen name="line_small_space">3dp</dimen>

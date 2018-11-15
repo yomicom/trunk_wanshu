@@ -110,7 +110,7 @@ public class Api {
     }
 
     public Observable<ReadHistoryList> getReadHistoryList(int page) {
-        return service.getReadHistoryList(page);
+        return service.getReadHistoryList(page,20);
     }
 
     public Observable<ReadHistoryList> delReadHistoryList(String log_ids) {

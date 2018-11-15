@@ -190,14 +190,17 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     }
 
     @Override
-    public void showBookDetails(BookDetails.DataBean data) {
+    public void showBookDetails(BookDetails data) {
         hideDialog();
-        if (data != null) {
+        if (data.errcode == 0) {
             visible(llContent);
 
-            bookDetails = data;
-            showBookData(data);
-            showRecommandData(data);
+            bookDetails = data.getData();
+            showBookData(bookDetails);
+            showRecommandData(bookDetails);
+        } else if (data.errcode == 1) {//书籍已下架
+            finish();
+            ReadOtherStatusActivity.startActivity(mContext, 0);
         }
     }
 
@@ -316,7 +319,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 break;
             case R.id.tv_read_book://开始阅读
                 if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
-                ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
+                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
                 break;
             case R.id.book_menu:
                 MenuActivity.startActivity(this, bookDetails.getId(), 0, false);

@@ -125,7 +125,7 @@ public class PageFactory {
                 bookId, chaptersList);
     }
 
-    public PageFactory(Context context, int width, int height, int fontSize,int chapterFontSize, String bookId,
+    public PageFactory(Context context, int width, int height, int fontSize, int chapterFontSize, String bookId,
                        List<BookMenu.DataBean.ChaptersBean> chaptersList) {
         mContext = context;
         mWidth = width;
@@ -234,16 +234,16 @@ public class PageFactory {
             canvas.drawColor(mBookPageBgColor);
 //            }
             // 绘制标题
-            if (currentPage == 1) {//某章第一页章节显示明显变大
-                canvas.drawText("哈哈哈哈哈哈", marginWidth, y, mTitlePaint);//小说章节
-                y += mLineSpace + mNumFontSize;
-
-                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
-                y += mLineSpace * 4 + mChapterFontSize;
-            } else {
-                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
-                y += mLineSpace + mNumFontSize;
-            }
+//            if (currentPage == 1) {//某章第一页章节显示明显变大
+//                canvas.drawText("哈哈哈哈哈哈", marginWidth, y, mTitlePaint);//小说章节
+//                y += mLineSpace + mNumFontSize;
+//
+//                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
+//                y += mLineSpace * 4 + mChapterFontSize;
+//            } else {
+            canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
+            y += mLineSpace + mNumFontSize;
+//            }
             // 绘制阅读页面文字
             for (String line : mLines) {
                 y += mLineSpace;
@@ -324,9 +324,9 @@ public class PageFactory {
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         int paraSpace = 0;
-        if (currentPage == 1){
+        if (currentPage == 1) {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
-        }else {
+        } else {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         }
         while ((lines.size() < mPageLineCount) && (curEndPos < mbBufferLen)) {
@@ -571,7 +571,7 @@ public class PageFactory {
     /**
      * 设置字体大小
      *
-     * @param fontsize 单位：px
+     * @param fontsize        单位：px
      * @param chpaterFontSize
      */
     public void setTextFont(int fontsize, int chpaterFontSize) {

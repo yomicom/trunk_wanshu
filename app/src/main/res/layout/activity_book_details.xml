@@ -39,10 +39,8 @@
 
                 <ImageView
                     android:id="@+id/iv_book"
-                    android:layout_width="@dimen/book_cover_width"
-                    android:layout_height="@dimen/book_cover_height"
                     android:layout_marginRight="@dimen/distance_image_text_15"
-                    android:src="@drawable/defalt_book_cover" />
+                    style="@style/novel_big_cover"/>
 
                 <ImageView
                     android:id="@+id/iv_is_free"

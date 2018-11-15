@@ -213,9 +213,9 @@ public class Constant {
 
         String Boutique_Finished = "boutique:finished";//完结精选
 
-        String Short_ModernRomance = "short:modernRomance";//现代言情
+        String Short_ModernRomance = "short:modernRomance";//现代言情 1
 
-        String Short_AncientRomance = "short:ancientRomance";//古代言情
+        String Short_AncientRomance = "short:ancientRomance";//古代言情 2
 
         String Short_All = "short:all";//精选短篇
 

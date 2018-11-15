@@ -114,10 +114,10 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
                 mPresenter.getBoutiqueList(2, page);
                 break;
             case Constant.BookType.Short_AncientRomance://短文
-                mPresenter.getShortStoryList(1, page);
+                mPresenter.getShortStoryList(2, page);
                 break;
             case Constant.BookType.Short_ModernRomance:
-                mPresenter.getShortStoryList(2, page);
+                mPresenter.getShortStoryList(1, page);
                 break;
             case Constant.BookType.Short_All:
                 mPresenter.getShortStoryList(0, page);

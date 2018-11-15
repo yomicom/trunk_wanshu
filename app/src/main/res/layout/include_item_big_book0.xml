@@ -19,11 +19,7 @@
 
             <ImageView
                 android:id="@+id/iv_article_pic"
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:visibility="visible"
-                android:src="@drawable/defalt_book_cover" />
+                style="@style/novel_middle_cover"  />
 
             <ImageView
                 android:id="@+id/iv_free"

@@ -35,6 +35,7 @@ import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 import org.simple.eventbus.EventBus;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -292,22 +293,14 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
      * @param removeList
      */
     private void showDeleteCacheDialog(final List<BookselfList.DataBean> removeList) {
-        ConfirmDialog.showNotice(mContext, "提示", "确认要移出书架吗？", "确定", "取消", new ConfirmDialog.SureCallback() {
-            @Override
-            public void exec() throws Exception {
-                StringBuilder novelIds = new StringBuilder();
-                for (BookselfList.DataBean item : removeList) {
-                    novelIds.append(item.id + ",");
-                    CacheManager.clearBookCache(item.id);//删除书籍缓存
-                }
-                if (novelIds.length() > 0) {
-                    mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));
-                }
-
+        ConfirmDialog.showNotice(mContext, "提示", "确认要移出书架吗？", () -> {
+            StringBuilder novelIds = new StringBuilder();
+            for (BookselfList.DataBean item : removeList) {
+                novelIds.append(item.id + ",");
+                CacheManager.clearBookCache(item.id);//删除书籍缓存
             }
-        }, new ConfirmDialog.CancleCallback() {
-            @Override
-            public void exec() throws Exception {
+            if (novelIds.length() > 0) {
+                mPresenter.delBooks(novelIds.substring(0, novelIds.length() - 1));
             }
         });
     }

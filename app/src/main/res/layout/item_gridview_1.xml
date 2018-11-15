@@ -17,15 +17,13 @@
 
             <ImageView
                 android:id="@+id/iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/defalt_book_cover"/>
+                style="@style/novel_big_cover"/>
             <ImageView
                 android:id="@+id/iv_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/top_1" />
+                android:src="@mipmap/top_1"
+                android:visibility="gone"/>
         </RelativeLayout>
 
 

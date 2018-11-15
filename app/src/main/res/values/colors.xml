@@ -4,11 +4,12 @@
 
     <color name="gobal_color">#276EFF</color>
     <color name="text_color_1">#1C1C1C</color>
-    <color name="text_color_2">#8E8E93</color>
+    <color name="text_color_2">#888999</color>
+    <color name="text_color_3">#666777</color>
+    <color name="text_hint_color">#555666</color>
 
     <color name="no_gobal_color">#00276EFF</color>
 
-    <color name="text_hint_color">#888999</color>
     <color name="text_hint_color0">#666777</color>
 
     <color name="main_title_color">#fcfcfc</color>
@@ -54,6 +55,8 @@
     <color name="common_bg">#f2f2f2</color>
     <!--通用触摸背景色-->
     <color name="common_touch_bg">#E3E3E3</color>
+    <!--书籍背景框颜色-->
+    <color name="novel_stroke">#DDDDDD</color>
     <!--通用背景色-->
     <color name="common_gray_bg">#EEEEEE</color>
     <!--通用一级标题的颜色-->

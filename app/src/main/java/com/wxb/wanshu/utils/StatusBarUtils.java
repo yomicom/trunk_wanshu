@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ public class StatusBarUtils {
 
     //*******************一.改变状态栏颜色**********************//
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     static void setStatusBarColor(Activity activity, int statusColor) {
         Window window = activity.getWindow();
         //取消状态栏透明
@@ -45,6 +47,7 @@ public class StatusBarUtils {
 
     //*******************四.更改状态栏字体颜色**********************//
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void setStatusBarLightMode(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色

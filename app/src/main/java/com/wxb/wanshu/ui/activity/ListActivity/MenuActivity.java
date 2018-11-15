@@ -147,7 +147,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
             title.setText(data.data.novel.name);
 
             this.bookMenu = data;
-            on_self = data.data.novel.on_self;
+            on_self = data.data.novel.on_shelf;
             listView.setSelection(curChapter - 1);//位置从0开始 对应第一章
         }
     }

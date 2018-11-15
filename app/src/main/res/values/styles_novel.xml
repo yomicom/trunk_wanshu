@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--书籍封面-->
+    <style name="novel_big_cover">
+        <item name="android:layout_width">@dimen/book_cover_width</item>
+        <item name="android:layout_height">@dimen/book_cover_height</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/defalt_book_cover</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+    </style>
+
+    <style name="classify_big_cover">
+        <item name="android:layout_width">@dimen/book_cover_width_history</item>
+        <item name="android:layout_height">@dimen/book_cover_height_history</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/defalt_book_cover</item>
+    </style>
+
+    <style name="novel_middle_cover">
+        <item name="android:layout_width">@dimen/book_cover_width_middle</item>
+        <item name="android:layout_height">@dimen/book_cover_height_middle</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/defalt_book_cover</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+    </style>
+
+    <style name="novel_small_cover">
+        <item name="android:layout_width">@dimen/book_cover_width_small</item>
+        <item name="android:layout_height">@dimen/book_cover_height_small</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/defalt_book_cover</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+    </style>
+</resources>
