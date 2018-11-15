@@ -95,9 +95,14 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     @Override
     public void initDatas() {
         mPresenter.attachView(this);
-        onRefresh();
 
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onRefresh();
     }
 
     @Override
@@ -126,6 +131,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         if (data != null && data.data.size() > 0) {
             visible(manage);
         }
+        if (page == START_PAGE)
+            mAdapter.clear();
         mAdapter.addAll(data.getData());
     }
 

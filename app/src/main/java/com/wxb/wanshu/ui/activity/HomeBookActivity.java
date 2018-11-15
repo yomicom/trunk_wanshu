@@ -125,7 +125,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
         mPresenter.attachView(this);
         swipeRefresh.setRefreshing(true);
-//        mPresenter.getHomeData("");
+        mPresenter.getHomeData("");
 //        dialog = CustomDialog.instance(this);
 //        dialog.setCancelable(true);
 //        dialog.show();
@@ -172,7 +172,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     }
 
     private void showData(HomeData homeData) {
-
+        bgSearch.setVisibility(View.VISIBLE);
         divide.setVisibility(View.VISIBLE);
         rank.setVisibility(View.VISIBLE);
 

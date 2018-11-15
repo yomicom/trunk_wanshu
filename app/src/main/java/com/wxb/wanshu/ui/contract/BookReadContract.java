@@ -23,7 +23,7 @@ public interface BookReadContract {
 
         void showRewardType(RewardType data);
 
-        void addBookResult(Base result);
+        void addBookResult(Base result,boolean needExit);
 
 //        void showShareBook(BookDetails.DataBean data);
     }
@@ -35,7 +35,7 @@ public interface BookReadContract {
 
         void getRewardType();
 
-        void addBookShelf(String novel_id);
+        void addBookShelf(String novel_id,boolean needExit);
 
         void reportRead(String novel_id,int chapter);
 

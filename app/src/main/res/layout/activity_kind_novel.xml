@@ -16,7 +16,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/content"
+            android:visibility="gone">
 
             <!--<View-->
                 <!--android:layout_width="match_parent"-->
@@ -46,6 +50,8 @@
                 android:layout_marginTop="@dimen/distance_left"
                 android:layout_marginBottom="@dimen/distance_left"
                 android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:visibility="visible">
 
             </FrameLayout>

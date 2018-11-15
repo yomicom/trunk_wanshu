@@ -20,6 +20,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.ClientData;
+import com.wxb.wanshu.manager.SettingManager;
 import com.wxb.wanshu.ui.activity.BookshelfActivity;
 import com.wxb.wanshu.ui.activity.ClassifyActivity;
 import com.wxb.wanshu.ui.activity.HomeBookActivity;
@@ -137,9 +138,16 @@ public class MainActivity extends ActivityGroup implements View.OnClickListener 
         tabHost.addTab(tabHost.newTabSpec(TAB_ME).setIndicator(TAB_ME)
                 .setContent(new Intent(this, MeActivity.class)));
 
-        tabFunc.setImageResource(R.mipmap.ic_function_select);
-        txtFunc.setTextColor(getResources().getColor(R.color.gobal_color));
-        tabHost.setCurrentTabByTag(TAB_FUNC);
+        if(SettingManager.getInstance().getFirstEnter()){//第一次进入查看书城
+            tabData.setImageResource(R.mipmap.ic_data_select);
+            txtData.setTextColor(getResources().getColor(R.color.gobal_color));
+            tabHost.setCurrentTabByTag(TAB_DATA);
+            SettingManager.getInstance().saveFirstEnter();
+        }else {
+            tabFunc.setImageResource(R.mipmap.ic_function_select);
+            txtFunc.setTextColor(getResources().getColor(R.color.gobal_color));
+            tabHost.setCurrentTabByTag(TAB_FUNC);
+        }
     }
 
     @Override

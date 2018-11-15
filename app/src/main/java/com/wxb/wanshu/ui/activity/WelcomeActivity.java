@@ -183,7 +183,8 @@ public class WelcomeActivity extends BaseActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ToastUtils.showLongToast("进入设置-应用权限页面，由于阅读书籍需要，请授予允许修改系统设置权限");
+//                                ToastUtils.showLongToast("进入设置-应用权限页面，由于阅读书籍需要，请授予允许修改系统设置权限");
+                                finish();
                             }
                         })
                         .create();

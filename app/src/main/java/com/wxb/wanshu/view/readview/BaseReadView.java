@@ -24,7 +24,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
-import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.manager.SettingManager;
@@ -162,7 +161,7 @@ public abstract class BaseReadView extends View {
                             return false;
                         }
                     } else if (actiondownX >= mScreenWidth / 2) {// 从右翻
-                        BookStatus status = pagefactory.nextPage();
+                        BookStatus status = pagefactory.nextPage(true);
                         if (status == BookStatus.NO_NEXT_PAGE) {
                             listener.onPageFinish();
 //                            ToastUtils.showSingleToast("没有下一页啦");
@@ -295,7 +294,7 @@ public abstract class BaseReadView extends View {
     }
 
     public void nextPage() {
-        BookStatus status = pagefactory.nextPage();
+        BookStatus status = pagefactory.nextPage(true);
         if (status == BookStatus.NO_NEXT_PAGE) {
             ToastUtils.showSingleToast(R.string.first_chapter);
             return;
@@ -364,6 +363,10 @@ public abstract class BaseReadView extends View {
 
     public void setTime(String time) {
         pagefactory.setTime(time);
+    }
+
+    public void setTitle(String novelTitle) {
+        pagefactory.setTitle(novelTitle);
     }
 
     public void setPosition(int[] pos) {

@@ -38,9 +38,10 @@
 
     <string name="no_web">网络不给力，请稍后再试～～</string>
     <string name="to_get_web">再试一次</string>
-    <string name="no_book">马上去书城发现好书！</string>
+    <string name="no_book">书架还没有书哦</string>
+    <string name="no_history">暂无阅读记录</string>
     <string name="novel_coding">未完待续，作者努力码字中...</string>
-    <string name="to_get_book">去找书</string>
+    <string name="to_get_book">去书城逛逛</string>
     <string name="no_login">登录后开启精彩阅读时间</string>
     <string name="to_login">马上登录</string>
 

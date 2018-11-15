@@ -37,7 +37,7 @@ public class BookClassifyAdapter extends EasyRVAdapter<NovelCategory.DataBean> {
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, NovelCategory.DataBean item) {
 
-        viewHolder.setImageUrl(R.id.cover,item.getCover()).setText(R.id.classify, item.getName());
+        viewHolder.setImageUrl(R.id.cover,item.getCover(),R.drawable.defalt_book_cover).setText(R.id.classify, item.getName());
         viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

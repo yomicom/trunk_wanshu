@@ -44,7 +44,7 @@ public class SettingManager {
     }
 
     public void saveChapterFontSize(int fontSizePx) {
-        SharedPreferencesUtil.getInstance().putInt(getFontSizeKey(""), fontSizePx);
+        SharedPreferencesUtil.getInstance().putInt(getChapterFontSizeKey(""), fontSizePx);
     }
 
     public int getReadFontSize(String bookId) {
@@ -195,6 +195,17 @@ public class SettingManager {
             return ThemeManager.NIGHT;
         }
         return SharedPreferencesUtil.getInstance().getInt("readTheme", 0);
+    }
+
+    /**
+     * 第一次进入书城
+     */
+    public void saveFirstEnter() {
+        SharedPreferencesUtil.getInstance().putBoolean("FirstEnter", false);
+    }
+
+    public boolean getFirstEnter() {
+        return SharedPreferencesUtil.getInstance().getBoolean("FirstEnter", true);
     }
 
     /**

@@ -166,8 +166,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
     }
 
     @Override
-    public void addBookShelf(String novel_id) {
-
+    public void addBookShelf(String novel_id,boolean needExit) {
         api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
@@ -183,7 +182,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 
                     @Override
                     public void onNext(Base bookDetails) {
-                        mView.addBookResult(bookDetails);
+                        mView.addBookResult(bookDetails,needExit);
                     }
                 });
     }

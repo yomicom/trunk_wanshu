@@ -34,12 +34,12 @@ import java.util.List;
  */
 public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBean> {
 
-    int selectPos;
+    int selectChapter;
     String novel_id;
 
-    public BookMenuAdapter(Context context, List<BookMenu.DataBean.ChaptersBean> list, String novel_id, int selectPos) {
+    public BookMenuAdapter(Context context, List<BookMenu.DataBean.ChaptersBean> list, String novel_id, int selectChapter) {
         super(context, list, R.layout.item_book_menu);
-        this.selectPos = selectPos;
+        this.selectChapter = selectChapter;
         this.novel_id = novel_id;
     }
 
@@ -70,13 +70,13 @@ public class BookMenuAdapter extends EasyLVAdapter<BookMenu.DataBean.ChaptersBea
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.text_color_2);
         }
 
-        if (position == selectPos) {
+        if (data.sort == selectChapter) {
             holder.setTextColorRes(R.id.tv_chapter_title, R.color.gobal_color);
         }
 
     }
 
-    public void setSelectPos(int selectPos) {
-        this.selectPos = selectPos;
+    public void setSelectPos(int selectChapter) {
+        this.selectChapter = selectChapter;
     }
 }

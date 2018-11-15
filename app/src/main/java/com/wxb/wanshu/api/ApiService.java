@@ -135,7 +135,7 @@ public interface ApiService {
      * @return
      */
     @GET("/client/readLog")
-    Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page,@Query("pagesize") int pagesize);
+    Observable<ReadHistoryList> getReadHistoryList(@Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 删除阅读历史
@@ -203,7 +203,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/rankList")
-    Observable<BookList> getRankBookList(@Query("type") String type);
+    Observable<BookList> getRankBookList(@Query("type") String type, @Query("page") int page, @Query("pagesize") int pageSize);
 //    @GET("/novel/finishedList?sort=time")
 //    Observable<BookList> getRankBookList();
 

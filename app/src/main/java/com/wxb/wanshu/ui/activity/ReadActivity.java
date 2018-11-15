@@ -183,6 +183,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private ShareBookDialog shareBookDialog;
     private int chapter_num = 0;
     private int chpaterFontSizePx;
+    private String novelTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -434,7 +435,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             List<BookMenu.DataBean.ChaptersBean> list = dataBean.getChapters();
             mChapterList.clear();
             mChapterList.addAll(list);
+//            novelTitle = data.data.novel.name;
 
+            mPageWidget.setTitle(data.data.novel.name);
             //总章节数
             chapter_num = dataBean.novel.chapter_num;
             seekbarChapter.setMax(chapter_num);
@@ -538,13 +541,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     @Override
-    public void addBookResult(Base result) {
+    public void addBookResult(Base result, boolean needExit) {
         if (result.getErrcode() == 0) {
             ToastUtils.showLongToast("添加书架成功");
             tvAddBook.setText("已加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
             isOnShelf = true;
             EventBus.getDefault().post(new AddShlef(1));
+            if (needExit) finish();
         }
     }
 
@@ -606,7 +610,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @OnClick(R.id.tvBookReadIntroduce)
     public void addBook() {
         gone(rlReadAaSet, rlReadMark);
-        mPresenter.addBookShelf(novel_id);
+        mPresenter.addBookShelf(novel_id, false);
         showDialog();
     }
 
@@ -804,7 +808,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
      */
     private void showJoinBookShelfDialog() {
         ConfirmDialog.showNotice(mContext, "提示", "确认将此书加入书架？", "确定", "取消", () -> {
-            mPresenter.addBookShelf(novel_id);
+            mPresenter.addBookShelf(novel_id, true);
             showDialog();
         }, () -> finish());
     }

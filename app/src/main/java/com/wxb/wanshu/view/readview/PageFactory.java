@@ -110,6 +110,7 @@ public class PageFactory {
     private Bitmap batteryBitmap;
 
     private String bookId;
+    private String novelTitle = "";
     private List<BookMenu.DataBean.ChaptersBean> chaptersList;
     private int chapterSize = 0;
     private int currentPage = 1;
@@ -223,7 +224,7 @@ public class PageFactory {
     public synchronized void onDraw(Canvas canvas) {
         if (mLines.size() == 0) {
             curEndPos = curBeginPos;
-            mLines = pageDown();
+            mLines = pageDown(0);
         }
         if (mLines.size() > 0) {
             int y = marginHeight + (mLineSpace << 1);
@@ -234,16 +235,17 @@ public class PageFactory {
             canvas.drawColor(mBookPageBgColor);
 //            }
             // 绘制标题
-//            if (currentPage == 1) {//某章第一页章节显示明显变大
-//                canvas.drawText("哈哈哈哈哈哈", marginWidth, y, mTitlePaint);//小说章节
-//                y += mLineSpace + mNumFontSize;
-//
-//                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
-//                y += mLineSpace * 4 + mChapterFontSize;
-//            } else {
-            canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
-            y += mLineSpace + mNumFontSize;
-//            }
+            if (currentPage == 1) {//某章第一页章节显示明显变大
+                canvas.drawText(novelTitle, marginWidth, y, mTitlePaint);//小说章节
+                y += mLineSpace + mNumFontSize;
+                y += mLineSpace;
+
+                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
+                y += mLineSpace * 4 + mChapterFontSize;
+            } else {
+                canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
+                y += mLineSpace + mNumFontSize;
+            }
             // 绘制阅读页面文字
             for (String line : mLines) {
                 y += mLineSpace;
@@ -277,10 +279,17 @@ public class PageFactory {
      * 指针移到上一页页首
      */
     private void pageUp() {
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+
         String strParagraph = "";
         Vector<String> lines = new Vector<>(); // 页面行
         int paraSpace = 0;
-        mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+
+        if (currentPage == 2) {//第二页，上页为首页
+            mPageLineCount = (mVisibleHeight - chapterNameSpace) / (mFontSize + mLineSpace);
+        } else {
+            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        }
         while ((lines.size() < mPageLineCount) && (curBeginPos > 0)) {
             Vector<String> paraLines = new Vector<>(); // 段落行
             byte[] parabuffer = readParagraphBack(curBeginPos); // 1.读取上一个段落
@@ -311,24 +320,42 @@ public class PageFactory {
             }
             curEndPos = curBeginPos; // 6.最后结束指针指向下一段的开始处
             paraSpace += mLineSpace;
-            mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace); // 添加段落间距，实时更新容纳行数
+//            mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace); // 添加段落间距，实时更新容纳行数
+
+            if (currentPage == 2) {
+                mPageLineCount = (mVisibleHeight - chapterNameSpace - paraSpace) / (mFontSize + mLineSpace);
+            } else {
+                mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+            }
         }
     }
 
     /**
      * 根据起始位置指针，读取一页内容
      *
+     * @param status 状态 0 刚打开 1向上翻 2向下翻 4不作处理
      * @return
      */
-    private Vector<String> pageDown() {
+    private Vector<String> pageDown(int status) {
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        if (status == 0) {
+            if (currentPage != 1) chapterNameSpace = 0;//刚打开，不是章节首页
+        } else if (status == 1) {
+            if (currentPage != 2) {//上翻 仅次页加大标题
+                chapterNameSpace = 0;
+            }
+        } else if (status == 2) {
+            if (currentPage != 0) {//下翻 仅末页加大标题
+                chapterNameSpace = 0;
+            }
+        } else {
+            chapterNameSpace = 0;
+        }
+
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         int paraSpace = 0;
-        if (currentPage == 1) {
-            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
-        } else {
-            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
-        }
+        mPageLineCount = (mVisibleHeight - chapterNameSpace) / (mFontSize + mLineSpace);
         while ((lines.size() < mPageLineCount) && (curEndPos < mbBufferLen)) {
             byte[] parabuffer = readParagraphForward(curEndPos);
             curEndPos += parabuffer.length;
@@ -344,6 +371,9 @@ public class PageFactory {
                 int paintSize = mPaint.breakText(strParagraph, true, mVisibleWidth, null);
                 lines.add(strParagraph.substring(0, paintSize));
                 strParagraph = strParagraph.substring(paintSize);
+//                if (currentPage == 1 && lines.size() >= mPageLineCount - 8) {//章节首页
+//                    break;
+//                }
                 if (lines.size() >= mPageLineCount) {
                     break;
                 }
@@ -357,7 +387,7 @@ public class PageFactory {
                 }
             }
             paraSpace += mLineSpace;
-            mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+            mPageLineCount = (mVisibleHeight - chapterNameSpace - paraSpace) / (mFontSize + mLineSpace);
         }
         return lines;
     }
@@ -368,12 +398,17 @@ public class PageFactory {
      * @return
      */
     public Vector<String> pageLast() {
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         currentPage = 0;
         while (curEndPos < mbBufferLen) {
             int paraSpace = 0;
-            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+            if (currentPage == 0) {
+                mPageLineCount = (mVisibleHeight - chapterNameSpace) / (mFontSize + mLineSpace);
+            } else {
+                mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+            }
             curBeginPos = curEndPos;
             while ((lines.size() < mPageLineCount) && (curEndPos < mbBufferLen)) {
                 byte[] parabuffer = readParagraphForward(curEndPos);
@@ -404,7 +439,11 @@ public class PageFactory {
                     }
                 }
                 paraSpace += mLineSpace;
-                mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+                if (currentPage == 0) {
+                    mPageLineCount = (mVisibleHeight - chapterNameSpace - paraSpace) / (mFontSize + mLineSpace);
+                } else {
+                    mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+                }
             }
             if (curEndPos < mbBufferLen) {
                 lines.clear();
@@ -474,7 +513,7 @@ public class PageFactory {
     /**
      * 跳转下一页
      */
-    public BookStatus nextPage() {
+    public BookStatus nextPage(boolean isSetting) {
         if (!hasNextPage()) { // 最后一章的结束页
             return BookStatus.NO_NEXT_PAGE;
         } else {
@@ -498,8 +537,9 @@ public class PageFactory {
                 curBeginPos = curEndPos; // 起始指针移到结束位置
             }
             mLines.clear();
-            mLines = pageDown(); // 读取一页内容
-            onPageChanged(currentChapter, ++currentPage);
+            mLines = pageDown(2); //下翻 读取一页内容
+            if (isSetting)
+                onPageChanged(currentChapter, ++currentPage);
         }
         return BookStatus.LOAD_SUCCESS;
     }
@@ -532,7 +572,7 @@ public class PageFactory {
             }
             mLines.clear();
             pageUp(); // 起始指针移到上一页开始处
-            mLines = pageDown(); // 读取一页内容
+            mLines = pageDown(1); // 上翻 读取一页内容
             onPageChanged(currentChapter, --currentPage);
         }
         return BookStatus.LOAD_SUCCESS;
@@ -549,7 +589,7 @@ public class PageFactory {
             return;
         }
         mLines.clear();
-        mLines = pageDown();
+        mLines = pageDown(4);
     }
 
     /**
@@ -582,9 +622,15 @@ public class PageFactory {
 
         mChapterFontSize = chpaterFontSize;
         mBigTitlePaint.setTextSize(mChapterFontSize);
-        mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        if (currentPage == 1) {
+            mPageLineCount = (mVisibleHeight - chapterNameSpace) / (mFontSize + mLineSpace);
+        } else {
+            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        }
         curEndPos = curBeginPos;
-        nextPage();
+        nextPage(false);
     }
 
     /**
@@ -612,11 +658,11 @@ public class PageFactory {
         float a = (float) (mbBufferLen * persent) / 100;
         curEndPos = (int) a;
         if (curEndPos == 0) {
-            nextPage();
+            nextPage(true);
         } else {
-            nextPage();
+            nextPage(true);
             prePage();
-            nextPage();
+            nextPage(true);
         }
     }
 
@@ -672,6 +718,10 @@ public class PageFactory {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setTitle(String title) {
+        this.novelTitle = title;
     }
 
     public void recycle() {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.wxb.wanshu.R;
@@ -41,6 +42,8 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
     FrameLayout flContent2;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.content)
+    LinearLayout content;
 
     int frameId[] = {R.id.fl_content0, R.id.fl_content1, R.id.fl_content2};
 
@@ -107,6 +110,7 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
     public void showHome(HomeData data) {
         if (data != null) {
             showData(data.getData());
+            visible(content);
         }
     }
 

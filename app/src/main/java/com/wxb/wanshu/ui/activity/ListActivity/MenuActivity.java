@@ -102,7 +102,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
 
     @Override
     public void configViews() {
-        adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter - 1);
+        adapter = new BookMenuAdapter(mContext, list, novel_id, curChapter);
         listView.setAdapter(adapter);
 
         back.setOnClickListener(v -> finish());
@@ -117,9 +117,9 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                     menuSort = true;
                 }
             }
-            int pos = curChapter - 1;
+
             Collections.reverse(list);
-            adapter.setSelectPos(list.size() - pos - 1);
+//            listView.setSelection(pos);
             adapter.notifyDataSetChanged();
         });
 
@@ -200,5 +200,10 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
