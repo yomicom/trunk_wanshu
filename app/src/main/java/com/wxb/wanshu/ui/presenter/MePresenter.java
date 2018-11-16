@@ -2,6 +2,8 @@ package com.wxb.wanshu.ui.presenter;
 
 import com.wxb.wanshu.api.Api;
 import com.wxb.wanshu.base.RxPresenter;
+import com.wxb.wanshu.bean.AppVersion;
+import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.ui.contract.MeContract;
 
@@ -47,7 +49,24 @@ public class MePresenter extends RxPresenter<MeContract.View> implements MeContr
     }
 
     @Override
-    public void getLastVersion() {
+    public void getLastVersion(boolean isClick) {
+        Subscription rxSubscription = api.getVersion().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<AppVersion>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(AppVersion data) {
+                        mView.showLastVersion(data,isClick);
+                    }
+                });
+        addSubscrebe(rxSubscription);
     }
 }

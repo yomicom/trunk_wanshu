@@ -241,7 +241,7 @@ public class PageFactory {
                 y += mLineSpace;
 
                 canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mBigTitlePaint);//小说名称
-                y += mLineSpace * 4 + mChapterFontSize;
+                y += mLineSpace * 3 + mChapterFontSize;
             } else {
                 canvas.drawText(chaptersList.get(currentChapter - 1).name, marginWidth, y, mTitlePaint);//小说章节
                 y += mLineSpace + mNumFontSize;
@@ -279,7 +279,7 @@ public class PageFactory {
      * 指针移到上一页页首
      */
     private void pageUp() {
-        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 3;//章节首页标题和间距
 
         String strParagraph = "";
         Vector<String> lines = new Vector<>(); // 页面行
@@ -337,7 +337,7 @@ public class PageFactory {
      * @return
      */
     private Vector<String> pageDown(int status) {
-        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 3;//章节首页标题和间距
         if (status == 0) {
             if (currentPage != 1) chapterNameSpace = 0;//刚打开，不是章节首页
         } else if (status == 1) {
@@ -398,7 +398,7 @@ public class PageFactory {
      * @return
      */
     public Vector<String> pageLast() {
-        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 3;//章节首页标题和间距
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         currentPage = 0;
@@ -623,7 +623,7 @@ public class PageFactory {
         mChapterFontSize = chpaterFontSize;
         mBigTitlePaint.setTextSize(mChapterFontSize);
 
-        int chapterNameSpace = mChapterFontSize + mLineSpace * 4;//章节首页标题和间距
+        int chapterNameSpace = mChapterFontSize + mLineSpace * 3;//章节首页标题和间距
         if (currentPage == 1) {
             mPageLineCount = (mVisibleHeight - chapterNameSpace) / (mFontSize + mLineSpace);
         } else {

@@ -87,5 +87,6 @@
     <string name="first_chapter">已翻至第一页</string>
     <string name="last_chapter">已翻至最后一页</string>
     <string name="title_activity_image">ImageActivity</string>
+    <string name="about_intro">全方位数字阅读平台。拥有丰富正版小说，个性化内容推荐机制，方便快捷的搜书功能，带你免费畅读所有优质原创内容，让你感受最极致的阅读体验。</string>
 
 </resources>

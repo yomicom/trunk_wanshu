@@ -19,6 +19,7 @@ import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AmountRecordList;
 import com.wxb.wanshu.bean.AmountRecordType;
+import com.wxb.wanshu.bean.AppVersion;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.BookList;
@@ -204,5 +205,8 @@ public class Api {
 
     public Observable<Base> reportRead(String novel_id, int chapter) {
         return service.reportRead(novel_id,chapter);
+    }
+    public Observable<AppVersion> getVersion() {
+        return service.getVersion();
     }
 }

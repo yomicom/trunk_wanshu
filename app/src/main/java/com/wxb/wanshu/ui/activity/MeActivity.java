@@ -1,6 +1,7 @@
 package com.wxb.wanshu.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.bean.AppVersion;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.UserInfo;
 import com.wxb.wanshu.component.AppComponent;
@@ -21,9 +23,13 @@ import com.wxb.wanshu.ui.contract.MeContract;
 import com.wxb.wanshu.ui.presenter.MePresenter;
 import com.wxb.wanshu.utils.MarketUtils;
 import com.wxb.wanshu.utils.ToastUtils;
+import com.wxb.wanshu.utils.Utils;
+import com.wxb.wanshu.view.dialog.ConfirmDialog;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -72,6 +78,7 @@ public class MeActivity extends BaseActivity implements MeContract.View {
     @Override
     protected void onResume() {
         super.onResume();
+        mPresenter.getLastVersion(false);
         clean.setText(CacheManager.getInstance().getCacheSize());
     }
 
@@ -90,12 +97,12 @@ public class MeActivity extends BaseActivity implements MeContract.View {
 
     @Override
     public void showError() {
-
+        hideDialog();
     }
 
     @Override
     public void complete() {
-
+        hideDialog();
     }
 
     @Override
@@ -103,8 +110,31 @@ public class MeActivity extends BaseActivity implements MeContract.View {
     }
 
     @Override
-    public void showLastVersion(Base data) {
+    public void showLastVersion(AppVersion data, boolean isClick) {
+        hideDialog();
+        AppVersion.DataBean bean = data.data;
+        int old_version = Utils.getVersionNumber();
+        int new_version = bean.version_code;
 
+        if (old_version == new_version) {
+            if (isClick) {
+                ToastUtils.showToast("已是最新版本");
+            }
+            gone(update);
+        } else {
+            if (old_version < new_version) {//有新版本
+                visible(update);
+                update.setText("点击更新V" + bean.version + "版本");
+                if (isClick) {//弹框去更新
+                    ConfirmDialog.showNotice(mContext, "提醒", bean.msg, () -> {
+                        Uri content_url = Uri.parse(bean.package_path);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, content_url);
+                        intent.setData(content_url);
+                        startActivity(intent);
+                    });
+                }
+            }
+        }
     }
 
     @Subscriber
@@ -141,6 +171,8 @@ public class MeActivity extends BaseActivity implements MeContract.View {
                 MarketUtils.yingyongbao("com.wxb.wanshu", "com.tencent.android.qqdownloader", this);
                 break;
             case R.id.item_update:
+                showDialog();
+                mPresenter.getLastVersion(true);
                 break;
             case R.id.about_us:
                 AboutUsActivity.startActivity(this);

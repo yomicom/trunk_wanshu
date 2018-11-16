@@ -28,6 +28,7 @@ import com.wxb.wanshu.manager.CacheManager;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookshelfAdapter;
 import com.wxb.wanshu.ui.contract.BookselfContract;
 import com.wxb.wanshu.ui.presenter.BookselfPresenter;
+import com.wxb.wanshu.utils.FileUtils;
 import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
@@ -147,6 +148,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             for (int i = 0; i < ids.length; i++) {
                 if (ids[i].equals(bean.id)) {
                     mAdapter.remove(bean);
+                    FileUtils.deleteBookFiles(bean.id, 0);
+                    break;
                 }
             }
         }

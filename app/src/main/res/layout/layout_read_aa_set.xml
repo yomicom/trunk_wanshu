@@ -8,7 +8,7 @@
     android:clickable="true"
     android:orientation="vertical"
     android:paddingTop="@dimen/distance_text_text_10"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,10 +85,10 @@
             style="@style/text_big_nomal"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="18"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_less_huge"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/tv_chapter_fontSize"

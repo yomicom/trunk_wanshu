@@ -18,6 +18,7 @@ package com.wxb.wanshu.api;
 import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.bean.AmountRecordList;
 import com.wxb.wanshu.bean.AmountRecordType;
+import com.wxb.wanshu.bean.AppVersion;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.BookList;
@@ -334,6 +335,14 @@ public interface ApiService {
      */
     @GET("/novel/catalogs")
     Observable<BookMenu> getBookMixAToc(@Query("novel_id") String novel_id);
+
+    /**
+     * 小说目录
+     *
+     * @return
+     */
+    @GET("/client/androidCommonVersion")
+    Observable<AppVersion> getVersion();
 
     //    @GET("/mix-toc/{bookId}")
 //    Observable<BookRead> getBookRead(@Path("bookId") String bookId);

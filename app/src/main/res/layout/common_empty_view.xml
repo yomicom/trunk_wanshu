@@ -37,12 +37,7 @@
 
         <TextView
             android:id="@+id/tvEmptyView"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="@string/no_data"
-            android:textColor="@color/common_h2" />
+            style="@style/tv_empty"/>
     </LinearLayout>
 </RelativeLayout>

@@ -22,6 +22,7 @@ import com.wxb.wanshu.ui.activity.ReadOtherStatusActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
+import com.wxb.wanshu.utils.FileUtils;
 import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
@@ -155,6 +156,10 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             for (int i = 0; i < ids.length; i++) {
                 if (ids[i].equals(bean.log.id)) {
                     mAdapter.remove(bean);
+                    if (!bean.on_shelf) {
+                        FileUtils.deleteBookFiles(bean.novel.id, 0);
+                    }
+                    break;
                 }
             }
         }

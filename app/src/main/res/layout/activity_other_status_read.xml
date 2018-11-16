@@ -29,7 +29,8 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingLeft="50dp"
-                android:paddingRight="50dp">
+                android:paddingRight="50dp"
+                android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/image"
@@ -55,8 +56,7 @@
             <LinearLayout
                 android:id="@+id/down"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="500dp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
-                    android:layout_marginBottom="28dp"
+                    android:layout_marginBottom="38dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -96,7 +96,6 @@
                     android:id="@+id/back"
                     android:layout_width="160dp"
                     android:layout_height="44dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_back_home"
                     android:gravity="center"
                     android:text="返回书城"
@@ -111,6 +110,7 @@
                 android:id="@+id/divide"
                 android:visibility="gone"
                 android:layout_height="@dimen/distance_text_text_12"/>
+
             <FrameLayout
                 android:id="@+id/recommend"
                 android:layout_width="match_parent"

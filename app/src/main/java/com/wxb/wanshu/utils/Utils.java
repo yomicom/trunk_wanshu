@@ -81,6 +81,19 @@ public class Utils {
             return "";
         }
     }
+    /**
+     * 获取APP版本号
+     *
+     * @return
+     */
+    public static int getVersionNumber() {
+        try {
+            return MyApplication.getsInstance().getPackageManager().getPackageInfo(MyApplication.getsInstance().getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
 
     /**
      * 获取操作系统信息

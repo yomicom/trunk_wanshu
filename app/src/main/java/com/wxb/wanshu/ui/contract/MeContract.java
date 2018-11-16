@@ -1,6 +1,7 @@
 package com.wxb.wanshu.ui.contract;
 
 import com.wxb.wanshu.base.BaseContract;
+import com.wxb.wanshu.bean.AppVersion;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.bean.UserInfo;
@@ -14,12 +15,12 @@ public interface MeContract {
     interface View extends BaseContract.BaseView {
         void showUserData(UserInfo data);
 
-        void showLastVersion(Base data);
+        void showLastVersion(AppVersion data,boolean isClick);
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
         void getUserData();
 
-        void getLastVersion();
+        void getLastVersion(boolean isClick);
     }
 }
