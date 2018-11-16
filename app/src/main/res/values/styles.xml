@@ -267,6 +267,29 @@
         <item name="android:background">@color/divider</item>
     </style>
 
+    <!--空页面文字提示-->
+    <style name="tv_empty">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">@color/text_color_3</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
+
+    <style name="btn_empty">
+        <item name="android:text">@string/to_get_web</item>
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/bg_back_home</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
 
     <!-- 自定义loading dialog -->
     <style name="loading_dialog" parent="android:style/Theme.Dialog">

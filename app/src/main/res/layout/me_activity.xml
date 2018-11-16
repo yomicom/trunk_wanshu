@@ -234,6 +234,7 @@
 
     <View
         style="@style/line_divide"
+        android:visibility="gone"
         android:layout_marginLeft="@dimen/setting_left"
         android:layout_marginRight="@dimen/setting_right" />
 

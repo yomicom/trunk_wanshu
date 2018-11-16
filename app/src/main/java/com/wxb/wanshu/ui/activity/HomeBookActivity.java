@@ -239,8 +239,13 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
                     break;
 
                 case Constant.BookType.SEARCH_HOT://热门推荐
-                    if (item.getData().size() > 0)
-                        etArticleSearch.setHint(item.getData().get(0).name);
+                    if (item.getData().size() > 0) {
+                        if (!"".equals(item.getData().get(0).name)) {
+                            etArticleSearch.setHint(item.getData().get(0).name);
+                        } else {
+                            etArticleSearch.setHint(getResources().getString(R.string.hint_search));
+                        }
+                    }
                     break;
             }
         }

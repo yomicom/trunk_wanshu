@@ -29,6 +29,7 @@ import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.presenter.PermissionUtils;
 import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.ToastUtils;
+import com.wxb.wanshu.view.dialog.ConfirmDialog;
 
 import java.io.File;
 
@@ -168,27 +169,14 @@ public class WelcomeActivity extends BaseActivity {
     private void writeSettingsPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.System.canWrite(this)) {
-                AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setTitle("WRITE_SETTINGS权限申请")
-                        .setMessage("点击OK进入设置界面，授予允许修改系统设置权限")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //核心代码
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
-                                        Uri.parse("package:" + getPackageName()));
-                                startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-//                                ToastUtils.showLongToast("进入设置-应用权限页面，由于阅读书籍需要，请授予允许修改系统设置权限");
-                                finish();
-                            }
-                        })
-                        .create();
-                dialog.show();
+                ConfirmDialog.showNotice(mContext, "权限申请", "点击去授权进入设置界面，授予允许修改系统设置权限", "确定", "取消", () -> {
+
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                            Uri.parse("package:" + getPackageName()));
+                    startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
+                }, () -> {
+                    finish();
+                });
             } else {
                 welcome.startAnimation(alphaAnimation);
             }

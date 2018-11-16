@@ -2,46 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/touch_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/distance_text_text_10"
-    android:paddingTop="@dimen/distance_top"
-    android:paddingRight="@dimen/distance_text_text_10">
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical">
 
-    <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-    <RelativeLayout
-        android:layout_width="@dimen/book_cover_width"
-        android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="2dp"
+        app:cardElevation="12dp"
+        android:layout_marginRight="@dimen/distance_text_text_10"
+        android:layout_marginLeft="@dimen/distance_text_text_10"
+        android:layout_marginTop="@dimen/distance_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
 
-        <ImageView
-            android:id="@+id/iv_book_cover"
-            style="@style/novel_big_cover" />
+        <!--android:foreground="?android:attr/selectableItemBackground"-->
+        <!--android:clickable="true"-->
+        <RelativeLayout
+            android:layout_width="@dimen/book_cover_width"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_book_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_book_refresh"
-            android:visibility="gone" />
+            <ImageView
+                android:id="@+id/iv_book_cover"
+                style="@style/novel_big_cover" />
 
-        <ImageView
-            android:id="@+id/iv_book_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="7dp"
-            android:layout_marginRight="7dp"
-            android:src="@mipmap/ic_nochoose_book"
-            android:visibility="gone" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_book_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_book_refresh"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_book_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="7dp"
+                android:src="@mipmap/ic_nochoose_book"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/tv_title"
         style="@style/text_novel_title"
         android:layout_centerHorizontal="true"
+        android:maxLines="2"
+        android:layout_marginRight="@dimen/distance_text_text_10"
+        android:layout_marginLeft="@dimen/distance_text_text_10"
         android:layout_marginTop="@dimen/distance_text_text_8"
-        android:textSize="@dimen/text_middle" />
+        android:textSize="13sp" />
 </LinearLayout>

@@ -36,7 +36,7 @@
     <string name="select_books">小说精选</string>
     <string name="details_books">书籍详情</string>
 
-    <string name="no_web">网络不给力，请稍后再试～～</string>
+    <string name="no_web">网络不给力，请稍后再试～</string>
     <string name="to_get_web">再试一次</string>
     <string name="no_book">书架还没有书哦</string>
     <string name="no_history">暂无阅读记录</string>

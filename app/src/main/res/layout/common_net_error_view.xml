@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 JustWayward Team
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -36,11 +36,11 @@
 
         <TextView
             android:id="@+id/tvEmptyView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="网络连接失败..."
-            android:textColor="@color/common_h2" />
+            style="@style/tv_empty"
+            android:text="网络连接失败..." />
+
+        <TextView
+            android:id="@+id/get"
+            style="@style/btn_empty" />
     </LinearLayout>
 </RelativeLayout>

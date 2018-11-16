@@ -72,22 +72,8 @@
         android:paddingBottom="@dimen/distance_top"
         android:visibility="visible"
         app:layout_empty="@layout/bookshelf_empty_view"
+        app:layout_error="@layout/common_net_error_view"
         app:layout_progress="@layout/common_progress_view" />
-
-    <RelativeLayout
-        android:id="@+id/rl_no_content"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/common_bg"
-        android:visibility="gone">
-
-        <com.wxb.wanshu.view.EmptyView
-            android:id="@+id/emptyView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"></com.wxb.wanshu.view.EmptyView>
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llBatchManagement"

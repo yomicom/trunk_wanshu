@@ -283,11 +283,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         llBookReadTop.setLayoutParams(params);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
+            if (mChapterList.size() == 0)
                 showDialog();
-            }
         }, 500);
 
         if (isOnShelf) {
@@ -488,7 +486,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             showChapterRead(null);
         } else {
             showDialog();
-            mPresenter.getChapterRead(novel_id, chapter, 0, 0);
+            mPresenter.getChapterRead(novel_id, chapter, 0, 1);
         }
     }
 
@@ -959,7 +957,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.i("onLoadChapterFailure:" + chapter);
             startRead = false;
             if (CacheManager.getInstance().getChapterFile(novel_id + "", chapter) == null) {
-                mPresenter.getChapterRead(novel_id, chapter, 0, 0);
+                mPresenter.getChapterRead(novel_id, chapter, 0, 1);
             }
         }
 
@@ -972,7 +970,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onPageFinish() {
             showDialog();
-            mPresenter.getChapterRead(novel_id, currentChapter + 1, 0, 0);
+            mPresenter.getChapterRead(novel_id, currentChapter + 1, 0, 1);
         }
 
         @Override

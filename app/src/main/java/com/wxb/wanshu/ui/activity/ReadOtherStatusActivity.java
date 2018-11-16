@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.wxb.wanshu.MainActivity;
@@ -34,8 +37,20 @@ public class ReadOtherStatusActivity extends BaseActivity {
     FrameLayout recommend;
     @BindView(R.id.common_toolbar)
     Toolbar commonToolbar;
+    @BindView(R.id.image)
+    ImageView image;
+    @BindView(R.id.tip)
+    TextView tip;
+    @BindView(R.id.other)
+    LinearLayout other;
+    @BindView(R.id.down)
+    LinearLayout down;
+    @BindView(R.id.divide)
+    View divide;
+    @BindView(R.id.scroll)
+    ScrollView scrollView;
 
-    public static boolean startActivity(Context context,int is_onsale) {
+    public static boolean startActivity(Context context, int is_onsale) {
         if (Constant.BOOK_IS_NOT_ONSALE == is_onsale) {
             context.startActivity(new Intent(context, ReadOtherStatusActivity.class)
                     .putExtra("code", Constant.READ_DOWN_CODE));
@@ -68,14 +83,15 @@ public class ReadOtherStatusActivity extends BaseActivity {
                 gone(commonToolbar);
                 ivWn.setImageResource(R.mipmap.load_lock);
                 tvToast.setText("为响应先进文化“净网行动”号召，维持绿色的网络环境，部分书籍已下架。");
-                visible(back);
+                visible(back, down);
+                gone(other);
                 break;
             case Constant.READ_ING_CODE:
                 showRecomend();
                 break;
             case Constant.READ_FINISH_CODE:
-                ivWn.setImageResource(R.mipmap.read_finish);
-                tvToast.setText("全书完，快去寻找你的下一本书吧！");
+                image.setImageResource(R.mipmap.read_finish);
+                tip.setText("全书完，快去寻找你的下一本书吧！");
                 showRecomend();
                 break;
         }
@@ -91,14 +107,14 @@ public class ReadOtherStatusActivity extends BaseActivity {
                 ReadRecommendFragment fragment = ReadRecommendFragment.newInstance(data);
                 transaction.replace(R.id.recommend, fragment);
                 transaction.commit();
-                visible(recommend);
+                visible(recommend, divide);
             }
         }
     }
 
     @Override
     public void configViews() {
-
+        scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_UP));
     }
 
     @Override

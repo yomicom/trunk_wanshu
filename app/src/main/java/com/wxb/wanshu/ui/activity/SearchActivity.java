@@ -111,12 +111,12 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
         List<HomeData.DataBeanX.DataBean> hotBookData = data.getData();
 
         if (hotBookData != null && hotBookData.size() > 0) {
-            if (!"".equals(hotBookData.get(0))) {
+            if (!"".equals(hotBookData.get(0).name)) {
                 etSearch.setHint(hotBookData.get(0).getName());
                 ViewToolUtils.setTextLast(etSearch);
                 visible(ivClean);
             }
-            if (hotBookData.size()>1) {
+            if (hotBookData.size() > 1) {
                 visible(recommend);
                 for (int i = 1; i < hotBookData.size(); i++) {
                     list.add(hotBookData.get(i).getName());

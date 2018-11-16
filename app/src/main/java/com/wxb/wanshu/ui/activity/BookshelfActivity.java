@@ -46,11 +46,6 @@ import butterknife.OnClick;
 
 public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> implements BookselfContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
 
-    @BindView(R.id.emptyView)
-    EmptyView emptyView;
-
-    //    @BindView(R.id.tool_bar)
-//    RelativeLayout toolBar;
     @BindView(R.id.finish)
     TextView finish;
     @BindView(R.id.manage)
@@ -122,16 +117,9 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     @Override
     public void showError() {
         gone(manage, finish);
-        emptyView.setVisibility(View.VISIBLE);
-        emptyView.setEnterText(R.string.to_get_web);
-        emptyView.setWnToast(R.string.no_web);
-        emptyView.setWnImage(R.mipmap.icon_no_web);
-        emptyView.setEnterListener(new EmptyView.Callback() {
-            @Override
-            public void exec() {
-                mPresenter.getData();
-            }
-        });
+        View errorView = mRecyclerView.getErrorView();
+        errorView.findViewById(R.id.get).setOnClickListener(v -> onRefresh());
+        mRecyclerView.showError();
     }
 
     @Override

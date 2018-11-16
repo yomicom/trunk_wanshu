@@ -24,7 +24,6 @@ import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
 import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.utils.ViewToolUtils;
-import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
@@ -51,8 +50,6 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     TextView manage;
     @BindView(R.id.tool_bar)
     RelativeLayout toolBar;
-    @BindView(R.id.rl_no_content)
-    RelativeLayout rlNoContent;
     @BindView(R.id.tvDelete)
     TextView tvDelete;
     @BindView(R.id.title)
@@ -63,8 +60,6 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     LinearLayout llBatchManagement;
     @BindView(R.id.item)
     View item;
-    @BindView(R.id.emptyView)
-    EmptyView emptyView;
 
     private boolean isSelectAll = false;
 
@@ -113,6 +108,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         visible(title);
         title.setText("阅读历史");
         ViewToolUtils.setEmptyView(mRecyclerView, R.mipmap.no_read_history, R.string.no_history);
+        mRecyclerView.getEmptyView().findViewById(R.id.tv_take).setVisibility(View.GONE);
 
         initAdapter(ReadHistoryAdapter.class, false, true);
         mRecyclerView.removeAllItemDecoration();
@@ -162,6 +158,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 }
             }
         }
+        if (mAdapter.getAllData().size() == 0) gone(manage);
         if (isVisible(llBatchManagement)) {
             //批量管理完成后，隐藏批量管理布局并刷新页面
             goneBatchManagementAndRefreshUI();
