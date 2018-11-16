@@ -171,6 +171,14 @@ public interface ApiService {
     Observable<BookList> getSelectBookList(@Query("category_id") String category_id, @Query("page") int page);
 
     /**
+     * 获取猜你喜欢更多
+     *
+     * @return
+     */
+    @GET("/novel/mayLikeBooks")
+    Observable<BookList> getLikeBooks(@Query("novel_id") String category_id, @Query("page") int page);
+
+    /**
      * 精品馆频道-更多列表
      *
      * @return

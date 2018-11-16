@@ -81,15 +81,15 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
         int type = getIntent().getIntExtra("type", 0);
         switch (type) {
             case 0://精选
-                mCommonToolbar.setTitle("精品馆频道");
+                mCommonToolbar.setTitle("精品馆");
                 key = "boutique:all,boutique:publishing,finished:all";
                 break;
             case 1://短篇
-                mCommonToolbar.setTitle("短篇频道");
+                mCommonToolbar.setTitle("短篇");
                 key = "short:modernRomance,short:ancientRomance,short:all";
                 break;
             case 2://完本
-                mCommonToolbar.setTitle("完本频道");
+                mCommonToolbar.setTitle("完本");
                 key = "finished:all,finished:popular,finished:latest";
                 break;
         }

@@ -218,7 +218,8 @@
     <RelativeLayout
         android:id="@+id/item_read_screen_time"
         style="@style/style_me_next_item"
-        android:layout_marginTop="@dimen/distance_image_text_15">
+        android:layout_marginTop="@dimen/distance_image_text_15"
+        android:visibility="gone">
 
         <TextView
             style="@style/text_middle_nomal"

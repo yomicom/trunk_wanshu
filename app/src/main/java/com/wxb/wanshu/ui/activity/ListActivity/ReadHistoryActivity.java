@@ -3,6 +3,7 @@ package com.wxb.wanshu.ui.activity.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.ViewUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.wxb.wanshu.ui.adapter.easyadpater.ReadHistoryAdapter;
 import com.wxb.wanshu.ui.contract.ReadHistoryContract;
 import com.wxb.wanshu.ui.presenter.ReadHistoryPresenter;
 import com.wxb.wanshu.utils.ToastUtils;
+import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
@@ -110,7 +112,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         gone(item, main_title);
         visible(title);
         title.setText("阅读历史");
-        mRecyclerView.setEmptyView(R.layout.common_empty_view);
+        ViewToolUtils.setEmptyView(mRecyclerView, R.mipmap.no_read_history, R.string.no_history);
 
         initAdapter(ReadHistoryAdapter.class, false, true);
         mRecyclerView.removeAllItemDecoration();

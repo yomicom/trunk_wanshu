@@ -103,6 +103,7 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         mRecyclerView.removeAllItemDecoration();
 
         mAdapter.setOnItemLongClickListener(this);
+//        mRecyclerView.getEmptyView().findViewById(R.id.tv_take).setVisibility(View.VISIBLE);
         mRecyclerView.getEmptyView().findViewById(R.id.tv_take).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +111,6 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
                 EventBus.getDefault().post(new BookShelfStatus(0));
             }
         });
-//        onRefresh();
     }
 
     @Override

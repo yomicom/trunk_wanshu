@@ -68,6 +68,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
     LinearLayout rootLayout;
     @BindView(R.id.history)
     RelativeLayout history;
+    @BindView(R.id.recommend)
+    RelativeLayout recommend;
     @BindView(R.id.tag_group)
     TagGroup RecordGroup;
 
@@ -109,21 +111,26 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
         List<HomeData.DataBeanX.DataBean> hotBookData = data.getData();
 
         if (hotBookData != null && hotBookData.size() > 0) {
-            etSearch.setHint(hotBookData.get(0).getName());
-            ViewToolUtils.setTextLast(etSearch);
-            visible(ivClean);
-            for (int i = 1; i < hotBookData.size(); i++) {
-                list.add(hotBookData.get(i).getName());
+            if (!"".equals(hotBookData.get(0))) {
+                etSearch.setHint(hotBookData.get(0).getName());
+                ViewToolUtils.setTextLast(etSearch);
+                visible(ivClean);
             }
-            HotGroup.setTags(list);
-            HotGroup.setOnTagClickListener(tag -> {
-                for (int i = 0; i < hotBookData.size(); i++) {
-                    if (tag.equals(hotBookData.get(i).getName())) {
-                        BookDetailsActivity.startActivity(mContext, hotBookData.get(i).getId(), hotBookData.get(i).is_onsale);
-                        break;
-                    }
+            if (hotBookData.size()>1) {
+                visible(recommend);
+                for (int i = 1; i < hotBookData.size(); i++) {
+                    list.add(hotBookData.get(i).getName());
                 }
-            });
+                HotGroup.setTags(list);
+                HotGroup.setOnTagClickListener(tag -> {
+                    for (int i = 0; i < hotBookData.size(); i++) {
+                        if (tag.equals(hotBookData.get(i).getName())) {
+                            BookDetailsActivity.startActivity(mContext, hotBookData.get(i).getId(), hotBookData.get(i).is_onsale);
+                            break;
+                        }
+                    }
+                });
+            }
         }
 
         initSearchHistory();
@@ -134,6 +141,7 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
 
         mPresenter.attachView(this);
         ViewToolUtils.showSoftInputDelay(mContext);
+        ViewToolUtils.setEmptyView(mRecyclerView, R.mipmap.no_search_result, R.string.no_search_result);
         setView();
     }
 
@@ -182,7 +190,8 @@ public class SearchActivity extends BaseRVActivity<BookList.DataBean> implements
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (!TextUtils.isEmpty(etSearch.getText())) {
                     search(etSearch.getText().toString().trim());
-                } else if (!TextUtils.isEmpty(etSearch.getHint())) {
+                } else if (!etSearch.getHint().toString().equals(getResources().getString(R.string.hint_search)) //不是默认搜索提示
+                        && !TextUtils.isEmpty(etSearch.getHint())) {
                     search(etSearch.getHint().toString());
                 } else {
                     ToastUtils.showToast("请输入需要搜索的小说标题");

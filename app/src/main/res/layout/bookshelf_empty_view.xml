@@ -11,10 +11,10 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_wn"
+            android:id="@+id/ivEmptyView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_no_book"/>
+            android:src="@mipmap/ic_no_data"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:maxLines="3"
             android:layout_marginTop="@dimen/distance_text_text_12"
             android:text="@string/no_book"
-            android:id="@+id/tv_toast" />
+            android:id="@+id/tvEmptyView" />
 
         <TextView
             android:layout_width="160dp"
@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_middle"
             android:layout_marginTop="25dp"
-            android:background="@drawable/bg_finid_book"
+            android:background="@drawable/bg_back_home"
             android:text="@string/to_get_book"
             android:gravity="center"
             android:id="@+id/tv_take" />

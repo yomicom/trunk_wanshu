@@ -40,7 +40,9 @@
     <string name="to_get_web">再试一次</string>
     <string name="no_book">书架还没有书哦</string>
     <string name="no_history">暂无阅读记录</string>
+    <string name="no_data">暂无数据</string>
     <string name="novel_coding">未完待续，作者努力码字中...</string>
+    <string name="no_search_result">哎呀，没有找到您要的书籍 请换个条件试试呗～</string>
     <string name="to_get_book">去书城逛逛</string>
     <string name="no_login">登录后开启精彩阅读时间</string>
     <string name="to_login">马上登录</string>
@@ -77,7 +79,9 @@
     <string name="home_continue">火热连载</string>
     <string name="home_finished">完本精选</string>
 
-    <string name="no_more_data">小说已加载完毕！</string>
+    <string name="load_finish">小说已加载完毕！</string>
+    <string name="load_fail">加载内容失败</string>
+    <string name="hint_search">搜索书名、关键词</string>
 
 
     <string name="first_chapter">已翻至第一页</string>

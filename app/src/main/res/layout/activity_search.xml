@@ -42,6 +42,7 @@
                 android:gravity="center_vertical"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
+                android:hint="@string/hint_search"
                 android:textColor="@color/text_color_1"
                 android:textColorHint="@color/text_hint_color"
                 android:textCursorDrawable="@null"
@@ -90,6 +91,7 @@
         <RelativeLayout
             android:id="@+id/history"
             style="@style/rl_normal"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/line_big_space">
 
             <TextView
@@ -114,7 +116,9 @@
             app:atg_pressedBackgroundColor="@color/text_pressed" />
 
         <RelativeLayout
+            android:id="@+id/recommend"
             style="@style/rl_normal"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/distance_top">
 
             <TextView

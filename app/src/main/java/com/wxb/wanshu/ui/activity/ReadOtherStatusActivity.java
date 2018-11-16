@@ -66,6 +66,7 @@ public class ReadOtherStatusActivity extends BaseActivity {
         switch (code) {
             case Constant.READ_DOWN_CODE:
                 gone(commonToolbar);
+                ivWn.setImageResource(R.mipmap.load_lock);
                 tvToast.setText("为响应先进文化“净网行动”号召，维持绿色的网络环境，部分书籍已下架。");
                 visible(back);
                 break;
@@ -73,6 +74,7 @@ public class ReadOtherStatusActivity extends BaseActivity {
                 showRecomend();
                 break;
             case Constant.READ_FINISH_CODE:
+                ivWn.setImageResource(R.mipmap.read_finish);
                 tvToast.setText("全书完，快去寻找你的下一本书吧！");
                 showRecomend();
                 break;

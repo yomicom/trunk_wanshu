@@ -30,8 +30,10 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
     public static void startActivity(Context context, String type, String title) {
         context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title));
     }
-    public static void startActivity(Context context, String type,String category_id, String title) {
-        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type).putExtra("title", title).putExtra("category_id", category_id));
+
+    public static void startActivity(Context context, String type, String category_id, String title) {
+        context.startActivity(new Intent(context, SelectBooksActivity.class).putExtra(TYPE, type)
+                .putExtra("title", title).putExtra("category_id", category_id));
     }
 
     @Inject
@@ -100,10 +102,17 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
 
     private void getData() {
         switch (type) {
-            case "classify":
+            case "classify"://分类
                 String category_id = getIntent().getStringExtra("category_id");
-                mPresenter.getBookList( category_id,  page);
+                mPresenter.getBookList(category_id, page);
                 break;
+            case "recommend"://阅读猜你喜欢更多
+                String id = getIntent().getStringExtra("category_id");
+                mPresenter.getLikeBooks(id, page);
+                break;
+            /**
+             * 首页更多内容
+             */
             case Constant.BookType.Boutique_All://精选
                 mPresenter.getBoutiqueList(0, page);
                 break;

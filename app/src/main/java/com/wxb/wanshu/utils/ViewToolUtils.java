@@ -25,6 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wxb.wanshu.R;
+import com.wxb.wanshu.ui.adapter.base.ViewHelper;
+import com.wxb.wanshu.view.recycleview.EasyRecyclerView;
+
 import java.math.BigDecimal;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -60,6 +64,16 @@ public class ViewToolUtils {
             Spannable spannable = (Spannable) charSequence;
             Selection.setSelection(spannable, charSequence.length());
         }
+    }
+    //设置空布局
+    public static void setEmptyView(EasyRecyclerView recyclerView, int imgId, int tip) {
+        View emptyView = recyclerView.getEmptyView();
+        ImageView imageView = emptyView.findViewById(R.id.ivEmptyView);
+        imageView.setImageResource(imgId);
+
+        TextView textView = emptyView.findViewById(R.id.tvEmptyView);
+        textView.setText(tip);
+
     }
 
     private void dealNumber(String str, TextView textView) {

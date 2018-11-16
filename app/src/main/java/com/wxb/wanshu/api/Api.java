@@ -129,6 +129,10 @@ public class Api {
         return service.getSelectBookList(category_id, page);
     }
 
+    public Observable<BookList> getLikeBooks(String category_id, int page) {
+        return service.getLikeBooks(category_id, page);
+    }
+
     public Observable<BookDetails> getBookDetail(String novel_id, int client_id, int user_id) {
         return service.getBookDetail(novel_id, user_id);
     }

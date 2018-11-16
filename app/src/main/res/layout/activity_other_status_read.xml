@@ -28,7 +28,7 @@
             android:id="@+id/iv_wn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_no_novel"
+            android:src="@mipmap/ic_no_data"
             android:layout_centerHorizontal="true"/>
 
         <TextView

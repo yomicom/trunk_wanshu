@@ -318,11 +318,12 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 }
                 break;
             case R.id.tv_read_book://开始阅读
-                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
+                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))//书已下架
                     ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
                 break;
             case R.id.book_menu:
-                MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
+                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
+                    MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
                 break;
             case R.id.item_last_chapter://查看最新章节
                 if (!ReadOtherStatusActivity.startActivity(this, is_onsale))

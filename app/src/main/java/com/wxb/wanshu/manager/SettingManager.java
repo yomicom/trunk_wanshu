@@ -231,7 +231,7 @@ public class SettingManager {
     }
 
     public boolean isVolumeFlipEnable() {
-        return SharedPreferencesUtil.getInstance().getBoolean("volumeFlip", true);
+        return SharedPreferencesUtil.getInstance().getBoolean("volumeFlip", false);
     }
 
     public void saveAutoBrightness(boolean enable) {

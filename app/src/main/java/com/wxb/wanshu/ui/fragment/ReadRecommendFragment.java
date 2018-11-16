@@ -16,6 +16,7 @@ import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.activity.BookDetailsActivity;
+import com.wxb.wanshu.ui.activity.ListActivity.SelectBooksActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.ReadRecommendAdapter;
 import com.wxb.wanshu.view.recycleview.decoration.GridSpacingItemDecoration;
 
@@ -86,7 +87,11 @@ public class ReadRecommendFragment extends BaseFragment implements OnRvItemClick
     }
 
     private void setMoreView() {
-        gone(tvMore);
+        if (data.recommend_list.size() <= 8) {
+            gone(tvMore);
+        } else {
+            SelectBooksActivity.startActivity(mContext, "recommend", data.novel.id,"猜你喜欢");
+        }
     }
 
     @Override

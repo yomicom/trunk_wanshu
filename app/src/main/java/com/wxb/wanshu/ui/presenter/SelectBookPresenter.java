@@ -57,6 +57,29 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
     }
 
     @Override
+    public void getLikeBooks( String category_id,int page) {
+        Subscription rxSubscription = api.getLikeBooks(category_id, page).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BookList>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onNext(BookList data) {
+                        mView.showBookList(data);
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    @Override
     public void getBoutiqueList(int type, int page) {
         Subscription rxSubscription = api.getBoutiqueList(type, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
