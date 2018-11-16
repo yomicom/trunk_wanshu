@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@drawable/touch_bg">
+    android:layout_width="match_parent"
+    android:layout_height="101dp"
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_material_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white" >
+        android:background="@color/white">
 
         <RelativeLayout
             android:id="@+id/rl_article_pic"
@@ -17,16 +18,19 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp">
 
-            <ImageView
-                android:id="@+id/iv_article_pic"
-                style="@style/novel_middle_cover"  />
+            <RelativeLayout style="@style/novel_middle_cover_border">
+
+                <ImageView
+                    android:id="@+id/iv_article_pic"
+                    style="@style/novel_middle_cover" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/iv_free"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/tag_free"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </RelativeLayout>
 
         <LinearLayout
@@ -50,9 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tv_title"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="@dimen/distance_text_text_10"
             android:layout_alignLeft="@id/tv_title"
+            android:layout_marginTop="@dimen/distance_text_text_10"
+            android:layout_marginRight="14dp"
             android:layout_toRightOf="@id/rl_article_pic"
             android:orientation="vertical">
 
@@ -65,8 +69,8 @@
                 <TextView
                     android:id="@+id/tv_article_intro"
                     style="@style/text_novel_intro"
-                    android:text="111"
-                    android:gravity="top"/>
+                    android:gravity="top"
+                    android:text="111" />
 
             </RelativeLayout>
 
@@ -81,27 +85,27 @@
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
                     android:drawableLeft="@mipmap/ic_author"
-                    android:drawablePadding="7dp"/>
+                    android:drawablePadding="7dp" />
 
                 <TextView
                     android:id="@+id/tv_word_nums"
                     style="@style/text_small_nomal"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bg_book_status"
                     android:text="10万字"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="16dp"
-                    android:textSize="@dimen/text_more_small"/>
+                    android:textSize="@dimen/text_more_small" />
 
                 <TextView
                     android:id="@+id/tv_category"
                     style="@style/text_small_nomal"
-                    android:background="@drawable/bg_book_category"
-                    android:text="都市言情"
-                    android:textColor="@color/gobal_color"
                     android:layout_height="16dp"
                     android:layout_marginRight="11dp"
                     android:layout_toLeftOf="@id/tv_word_nums"
-                    android:textSize="@dimen/text_more_small"/>
+                    android:background="@drawable/bg_book_category"
+                    android:text="都市言情"
+                    android:textColor="@color/gobal_color"
+                    android:textSize="@dimen/text_more_small" />
             </RelativeLayout>
         </LinearLayout>
 

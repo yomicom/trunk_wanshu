@@ -80,10 +80,10 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
     @OnClick({R.id.read, R.id.search, R.id.click, R.id.store})
     public void onViewClicked(View view) {
         if (mAdapter.getAllData() != null) {
-            showDialog();
             switch (view.getId()) {
                 case R.id.read:
                     if (!type.equals(TYPE_1)) {
+                        showDialog();
                         changeStatus(read);
                         type = TYPE_1;
                         page = START_PAGE;
@@ -92,6 +92,8 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
                     break;
                 case R.id.search:
                     if (!type.equals(TYPE_2)) {
+                        showDialog();
+
                         changeStatus(search);
                         type = TYPE_2;
                         page = START_PAGE;
@@ -100,6 +102,8 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
                     break;
                 case R.id.click:
                     if (!type.equals(TYPE_3)) {
+                        showDialog();
+
                         changeStatus(click);
                         type = TYPE_3;
                         page = START_PAGE;
@@ -108,6 +112,8 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
                     break;
                 case R.id.store:
                     if (!type.equals(TYPE_4)) {
+                        showDialog();
+
                         changeStatus(store);
                         type = TYPE_4;
                         page = START_PAGE;

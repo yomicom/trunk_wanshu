@@ -54,17 +54,18 @@ public class Utils {
             return defautlUUID;
         }
     }
+
     /**
      * 跳转QQ聊天界面
      */
-    public static void joinQQ(Activity mContext,String qqNum) {
+    public static void joinQQ(Activity mContext, String qqNum) {
         try {
             //第二种方式：可以跳转到添加好友，如果qq号是好友了，直接聊天
             String url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qqNum;//uin是发送过去的qq号码
             mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtils.showToast( "请检查是否安装QQ");
+            ToastUtils.showToast("请检查是否安装QQ");
         }
     }
 
@@ -81,6 +82,7 @@ public class Utils {
             return "";
         }
     }
+
     /**
      * 获取APP版本号
      *
@@ -101,7 +103,8 @@ public class Utils {
      * @return
      */
     public static String getOsMessage() {
-        return "model:" + Build.MODEL + "," + "SDK:" + Build.VERSION.SDK_INT;
+        return Build.VERSION.SDK_INT + "";
+//        return "model:" + Build.MODEL + "," + "SDK:" + Build.VERSION.SDK_INT;
     }
 
 //    "[Android当前应用软件版本:" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName + "]"

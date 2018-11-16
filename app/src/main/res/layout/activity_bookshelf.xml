@@ -69,10 +69,9 @@
         android:layout_weight="1"
         android:paddingLeft="@dimen/distance_text_text_8"
         android:paddingRight="@dimen/distance_text_text_8"
-        android:paddingBottom="@dimen/distance_top"
         android:visibility="visible"
         app:layout_empty="@layout/bookshelf_empty_view"
-        app:layout_error="@layout/common_net_error_view"
+        app:layout_error="@layout/common_error_view"
         app:layout_progress="@layout/common_progress_view" />
 
     <LinearLayout

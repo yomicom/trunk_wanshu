@@ -30,11 +30,6 @@ public class HomeHotAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
                 .setText(R.id.title, item.getName())
                 .setText(R.id.word_num, FormatUtils.formatWordCount(item.word_num));
 
-        viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view, position, item);
-            }
-        });
+        viewHolder.setOnItemViewClickListener(view -> itemClickListener.onItemClick(view, position, item));
     }
 }

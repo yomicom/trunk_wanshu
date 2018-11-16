@@ -114,10 +114,10 @@ public abstract class BaseDynamicInterceptor<R extends BaseDynamicInterceptor> i
         TreeMap<String, String> newParams = dynamic(oldparams);
         Utils.checkNotNull(newParams, "newParams==null");
         for (Map.Entry<String, String> entry : newParams.entrySet()) {
-            String urlValue = URLEncoder.encode(entry.getValue(), "utf8");
+//            String urlValue = URLEncoder.encode(entry.getValue(), "utf8");
             //原来的URl: https://xxx.xxx.xxx/app/chairdressing/skinAnalyzePower/skinTestResult?appId=10101
             if (!nameKeys.contains(entry.getKey())) {//避免重复添加
-                newBuilder.addQueryParameter(entry.getKey(), urlValue);
+                newBuilder.addQueryParameter(entry.getKey(), entry.getValue());
             }
         }
 

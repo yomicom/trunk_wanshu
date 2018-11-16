@@ -6,19 +6,22 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="@dimen/distance_left"
-    android:paddingTop="@dimen/distance_left"
+    android:paddingTop="@dimen/distance_top"
     android:paddingRight="@dimen/distance_left"
-    android:paddingBottom="@dimen/distance_left">
+    android:paddingBottom="@dimen/distance_top">
 
-    <ImageView
-        android:id="@+id/cover"
-        style="@style/classify_big_cover"  />
+    <RelativeLayout style="@style/classify_big_cover_border">
+
+        <ImageView
+            android:id="@+id/cover"
+            style="@style/classify_big_cover" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/classify"
         style="@style/text_middle_nomal"
+        android:layout_marginTop="@dimen/distance_big_cover_title"
         android:maxLines="2"
-        android:text="都市言情"
-        android:layout_marginTop="@dimen/distance_big_cover_title"/>
+        android:text="都市言情" />
 
 </LinearLayout>

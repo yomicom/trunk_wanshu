@@ -62,7 +62,7 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.showError();
+//                        mView.showError();
                     }
 
                     @Override

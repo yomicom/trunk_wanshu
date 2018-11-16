@@ -113,6 +113,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/distance_left"
             app:atg_backgroundColor="@color/bg_tag_group"
+            app:atg_textColor="@color/text_color_3"
             app:atg_pressedBackgroundColor="@color/text_pressed" />
 
         <RelativeLayout
@@ -131,6 +132,7 @@
             style="@style/TagGroup"
             android:layout_marginLeft="@dimen/distance_left"
             android:layout_marginTop="5dp"
+            app:atg_textColor="@color/text_color_3"
             android:layout_marginRight="@dimen/distance_left"
             app:atg_backgroundColor="@color/bg_tag_group"
             app:atg_pressedBackgroundColor="@color/text_pressed" />

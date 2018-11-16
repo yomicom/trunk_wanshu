@@ -36,7 +36,10 @@
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/distance_left"></android.support.v7.widget.RecyclerView>
+        app:layout_empty="@layout/common_empty_view"
+        android:paddingLeft="@dimen/distance_left"
+        android:paddingRight="@dimen/distance_left"
+        android:paddingTop="@dimen/setting_cut_10"></android.support.v7.widget.RecyclerView>
 
     <com.wxb.wanshu.view.recycleview.EasyRecyclerView
         android:id="@+id/recyclerview"

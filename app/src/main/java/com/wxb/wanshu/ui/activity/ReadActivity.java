@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -184,7 +185,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isFromMenu = false;
     private ShareBookDialog shareBookDialog;
     private int chapter_num = 0;
-    private String novelTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,18 +197,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         startActivity(context, bookId, true);
     }
 
-    public static void startActivity(Context context, String bookId, int currentChapter, boolean isFromMenu, boolean on_self) {
-        context.startActivity(new Intent(context, ReadActivity.class)
-                .putExtra(INTENT_BEAN, bookId)
-                .putExtra(INTENT_CHAPTER, currentChapter)
-                .putExtra(INTENT_ON_SHELF, on_self)
-                .putExtra(INTENT_MENU, isFromMenu));
+    public static void startActivity(Context context, String bookId, boolean on_self) {
+        startActivity(context, bookId, on_self, 0, false);
     }
 
-    public static void startActivity(Context context, String bookId, boolean on_self) {
+    public static void startActivity(Context context, String bookId, boolean on_self, int currentChapter, boolean isFromMenu) {
         context.startActivity(new Intent(context, ReadActivity.class)
                 .putExtra(INTENT_BEAN, bookId)
-                .putExtra(INTENT_ON_SHELF, on_self));
+                .putExtra(INTENT_ON_SHELF, on_self)
+                .putExtra(INTENT_CHAPTER, currentChapter)
+                .putExtra(INTENT_MENU, isFromMenu));
     }
 
     @Override
@@ -365,9 +363,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         this.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS), true, Brightness);
 
         if (SettingManager.getInstance().isAutoBrightness()) {
-            startAutoLightness();
+//            startAutoLightness();
         } else {
-            stopAutoLightness();
+//            stopAutoLightness();
         }
 
         cbVolume.setChecked(SettingManager.getInstance().isVolumeFlipEnable());
@@ -533,7 +531,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void netError(int chapter) {
         hideDialog();//防止因为网络问题而出现dialog不消失
         if (Math.abs(chapter - currentChapter) <= 1) {
-            ToastUtils.showToast(R.string.last_chapter);
+//            ToastUtils.showToast(R.string.last_chapter);
         }
     }
 

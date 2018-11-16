@@ -8,7 +8,7 @@
     android:clickable="true"
     android:orientation="vertical"
     android:paddingTop="@dimen/distance_text_text_10"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"

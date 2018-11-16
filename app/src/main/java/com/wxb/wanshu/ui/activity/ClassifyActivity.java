@@ -38,10 +38,6 @@ import butterknife.BindView;
  */
 public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implements SelectBooksContract.View, OnRvItemClickListener {
 
-    int MAN_TYPE = 10;
-    int WOMAN_TYPE = 20;
-    int sex_type = 20;
-
     @Inject
     SelectBookPresenter mPresenter;
     @BindView(R.id.iv_search)
@@ -186,13 +182,14 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
     public void showNovelCategory(NovelCategory categoryData) {
 
         List<NovelCategory.DataBean> data = categoryData.getData();
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
-        recycleview.setLayoutManager(layoutManager);
-        recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 30, false));
+        if (data.size() > 0) {
+            GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            recycleview.setLayoutManager(layoutManager);
+            recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 30, false));
 
-        BookClassifyAdapter adapter = new BookClassifyAdapter(mContext, data, this);
-        recycleview.setAdapter(adapter);
-
+            BookClassifyAdapter adapter = new BookClassifyAdapter(mContext, data, this);
+            recycleview.setAdapter(adapter);
+        }
     }
 
     @Override

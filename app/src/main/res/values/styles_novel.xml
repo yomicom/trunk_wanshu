@@ -20,7 +20,8 @@
     <style name="novel_middle_cover">
         <item name="android:layout_width">@dimen/book_cover_width_middle</item>
         <item name="android:layout_height">@dimen/book_cover_height_middle</item>
-        <item name="android:scaleType">centerCrop</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_centerInParent">true</item>
         <item name="android:src">@drawable/defalt_book_cover</item>
         <item name="android:background">@drawable/bg_book_border</item>
     </style>
@@ -30,6 +31,35 @@
         <item name="android:layout_height">@dimen/book_cover_height_small</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:src">@drawable/defalt_book_cover</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+    </style>
+
+
+    <style name="novel_big_cover_border">
+        <item name="android:layout_width">@dimen/book_cover_width0</item>
+        <item name="android:layout_height">@dimen/book_cover_height0</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="classify_big_cover_border">
+        <item name="android:layout_width">@dimen/book_cover_width_history0</item>
+        <item name="android:layout_height">@dimen/book_cover_height_history0</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="novel_middle_cover_border">
+        <item name="android:layout_width">@dimen/book_cover_width_middle0</item>
+        <item name="android:layout_height">@dimen/book_cover_height_middle0</item>
+        <item name="android:background">@drawable/bg_book_border</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="novel_small_cover_border">
+        <item name="android:layout_width">@dimen/book_cover_width_small0</item>
+        <item name="android:layout_height">@dimen/book_cover_height_small0</item>
+        <item name="android:gravity">center</item>
         <item name="android:background">@drawable/bg_book_border</item>
     </style>
 </resources>

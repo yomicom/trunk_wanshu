@@ -28,11 +28,6 @@ public class HomeRecommendAdapter extends EasyRVAdapter<Book> {
     protected void onBindData(EasyRVHolder viewHolder, int position, Book item) {
         viewHolder.setImageUrl(R.id.iv, item.getCover(),R.drawable.defalt_book_cover)
                 .setText(R.id.tv_title, item.getName());
-        viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view, position, item);
-            }
-        });
+        viewHolder.setOnItemViewClickListener(view -> itemClickListener.onItemClick(view, position, item));
     }
 }

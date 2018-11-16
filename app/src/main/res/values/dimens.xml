@@ -57,6 +57,14 @@
     <dimen name="book_cover_height_middle">100dp</dimen>
     <dimen name="book_cover_width_small">40dp</dimen>
     <dimen name="book_cover_height_small">53dp</dimen>
+    <dimen name="book_cover_width_history0">61dp</dimen>
+    <dimen name="book_cover_height_history0">81dp</dimen>
+    <dimen name="book_cover_width0">91dp</dimen>
+    <dimen name="book_cover_height0">121dp</dimen>
+    <dimen name="book_cover_width_middle0">76dp</dimen>
+    <dimen name="book_cover_height_middle0">101dp</dimen>
+    <dimen name="book_cover_width_small0">41dp</dimen>
+    <dimen name="book_cover_height_small0">54dp</dimen>
 
     <!--文字间隔-->
     <dimen name="line_small_space">3dp</dimen>

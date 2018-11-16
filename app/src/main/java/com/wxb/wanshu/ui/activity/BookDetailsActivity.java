@@ -327,7 +327,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 break;
             case R.id.item_last_chapter://查看最新章节
                 if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
-                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.latest_chapter.sort, true, bookDetails.on_shelf);
+                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf, bookDetails.latest_chapter.sort, true);
                 break;
         }
     }

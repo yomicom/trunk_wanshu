@@ -25,6 +25,7 @@ import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.manager.CacheManager;
+import com.wxb.wanshu.manager.SettingManager;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookshelfAdapter;
 import com.wxb.wanshu.ui.contract.BookselfContract;
 import com.wxb.wanshu.ui.presenter.BookselfPresenter;
@@ -55,6 +56,8 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     TextView tvDelete;
     @BindView(R.id.llBatchManagement)
     LinearLayout llBatchManagement;
+    @BindView(R.id.item)
+    View item;
 
     private boolean isSelectAll = false;
     @Inject
@@ -113,11 +116,15 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
     protected void onResume() {
         super.onResume();
         onRefresh();
+        if (SettingManager.getInstance().getFirstEnterBookshelf()) {//第一次进入查看书城
+            SettingManager.getInstance().saveFirstEnterBookshelf();
+            visible(item);
+        }
     }
 
     @Override
     public void showError() {
-        gone(manage, finish);
+        gone(manage, finish, tvDelete);
         View errorView = mRecyclerView.getErrorView();
         errorView.findViewById(R.id.get).setOnClickListener(v -> onRefresh());
         mRecyclerView.showError();

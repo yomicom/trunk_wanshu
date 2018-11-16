@@ -10,19 +10,22 @@
         android:id="@+id/rl_image"
         style="@style/rl_normal">
 
-        <ImageView
-            android:id="@+id/iv_book"
-            android:layout_marginRight="@dimen/distance_image_text_15"
-            style="@style/novel_big_cover"
-            android:layout_width="@dimen/book_cover_width_history"
-            android:layout_height="@dimen/book_cover_height_history"/>
+        <RelativeLayout
+            android:id="@+id/border"
+            style="@style/classify_big_cover_border"
+            android:layout_marginRight="@dimen/distance_image_text_15">
+
+            <ImageView
+                android:id="@+id/iv_book"
+                style="@style/classify_big_cover" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_title"
             style="@style/text_novel_title"
             android:layout_width="160dp"
+            android:layout_toRightOf="@id/border"
             android:ellipsize="end"
-            android:layout_toRightOf="@id/iv_book"
             android:maxLines="1"
             android:text="" />
 
@@ -30,12 +33,12 @@
             android:id="@+id/tv_introduce"
             style="@style/text_small_nomal"
             android:layout_width="160dp"
-            android:maxLines="1"
-            android:gravity="left"
-            android:ellipsize="end"
             android:layout_below="@id/tv_title"
             android:layout_marginTop="@dimen/distance_text_text_12"
-            android:layout_toRightOf="@id/iv_book"
+            android:layout_toRightOf="@id/border"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxLines="1"
             android:text="" />
 
 
@@ -43,10 +46,10 @@
             android:id="@+id/tv_time"
             style="@style/text_small_nomal"
             android:layout_below="@id/tv_introduce"
-            android:layout_alignBottom="@id/iv_book"
+            android:layout_alignBottom="@id/border"
             android:layout_marginBottom="3dp"
+            android:layout_toRightOf="@id/border"
             android:gravity="bottom"
-            android:layout_toRightOf="@id/iv_book"
             android:lines="1"
             android:text="" />
 

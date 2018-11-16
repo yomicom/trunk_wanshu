@@ -19,9 +19,12 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp">
 
-            <ImageView
-                android:id="@+id/iv_article_pic"
-                style="@style/novel_middle_cover"/>
+            <RelativeLayout style="@style/novel_middle_cover_border">
+
+                <ImageView
+                    android:id="@+id/iv_article_pic"
+                    style="@style/novel_middle_cover" />
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -31,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/rl_article_pic"
             android:layout_centerVertical="true"
-            android:gravity="center_vertical"
             android:layout_toRightOf="@id/rl_article_pic"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -42,25 +45,26 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:text="标题"></TextView>
+
             <TextView
                 android:id="@+id/rank"
                 style="@style/text_small_nomal"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:gravity="top|center_horizontal"
                 android:background="@mipmap/top_1"
-                android:text="1"></TextView>
+                android:gravity="top|center_horizontal"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="10sp"></TextView>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@id/rl_article_pic"
-            android:layout_alignLeft="@id/tv_title"
             android:layout_below="@id/tv_title"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_alignBottom="@id/rl_article_pic"
             android:layout_marginTop="@dimen/distance_text_text_10"
             android:layout_toRightOf="@id/rl_article_pic"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rl_time"
@@ -71,8 +75,8 @@
                 <TextView
                     android:id="@+id/tv_article_intro"
                     style="@style/text_novel_intro"
-                    android:maxLines="2"
                     android:gravity="top"
+                    android:maxLines="2"
                     android:text="111" />
 
             </RelativeLayout>
@@ -87,16 +91,16 @@
                     android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
-                    android:text="11"/>
+                    android:text="11" />
 
                 <TextView
                     android:id="@+id/word_num"
                     style="@style/text_small_nomal"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bg_book_category"
                     android:text="10万字"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="16dp"
-                    android:textSize="@dimen/text_more_small"/>
+                    android:textSize="@dimen/text_more_small" />
 
             </RelativeLayout>
         </LinearLayout>

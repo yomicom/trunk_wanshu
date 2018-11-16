@@ -120,10 +120,9 @@ public class MeActivity extends BaseActivity implements MeContract.View {
             if (isClick) {
                 ToastUtils.showToast("已是最新版本");
             }
-            gone(update);
+            update.setText("");
         } else {
             if (old_version < new_version) {//有新版本
-                visible(update);
                 update.setText("点击更新V" + bean.version + "版本");
                 if (isClick) {//弹框去更新
                     ConfirmDialog.showNotice(mContext, "提醒", bean.msg, () -> {

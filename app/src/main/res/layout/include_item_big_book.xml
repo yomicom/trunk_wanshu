@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/one_item"
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:background="@drawable/touch_bg"
     android:orientation="vertical"
     android:paddingLeft="@dimen/distance_left"
-    android:paddingRight="@dimen/distance_left"
-    android:id="@+id/one_item">
+    android:paddingRight="@dimen/distance_left">
 
     <RelativeLayout
         android:id="@+id/rl_material_item"
@@ -16,14 +16,18 @@
         <RelativeLayout
             android:id="@+id/rl_article_pic"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp">
 
-            <ImageView
-                android:id="@+id/iv_article_pic"
-                style="@style/novel_middle_cover"
-                android:visibility="visible" />
+            <RelativeLayout
+                style="@style/novel_middle_cover_border">
+
+                <ImageView
+                    android:id="@+id/iv_article_pic"
+                    style="@style/novel_middle_cover"
+                    android:visibility="visible" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/iv_free"
@@ -62,12 +66,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@id/rl_article_pic"
-            android:layout_alignLeft="@id/tv_title"
             android:layout_below="@id/tv_title"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_alignBottom="@id/rl_article_pic"
             android:layout_marginTop="@dimen/distance_text_text_10"
             android:layout_toRightOf="@id/rl_article_pic"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rl_time"
@@ -78,8 +82,8 @@
                 <TextView
                     android:id="@+id/tv_article_intro"
                     style="@style/text_novel_intro"
-                    android:maxLines="2"
                     android:gravity="top"
+                    android:maxLines="2"
                     android:text="" />
 
             </RelativeLayout>
@@ -94,29 +98,29 @@
                     android:id="@+id/author"
                     style="@style/text_small_nomal"
                     android:layout_alignParentBottom="true"
-                    android:text=""
                     android:drawableLeft="@mipmap/ic_author"
-                    android:drawablePadding="7dp"/>
+                    android:drawablePadding="7dp"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/tv_word_nums"
                     style="@style/text_small_nomal"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bg_book_category"
                     android:text="10万字"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="16dp"
-                    android:textSize="@dimen/text_more_small"/>
+                    android:textSize="@dimen/text_more_small" />
 
                 <TextView
                     android:id="@+id/tv_category"
                     style="@style/text_small_nomal"
-                    android:text="都市言情"
-                    android:textColor="@color/gobal_color"
-                    android:background="@drawable/bg_book_status"
                     android:layout_height="16dp"
                     android:layout_marginRight="11dp"
                     android:layout_toLeftOf="@id/tv_word_nums"
-                    android:textSize="@dimen/text_more_small"/>
+                    android:background="@drawable/bg_book_status"
+                    android:text="都市言情"
+                    android:textColor="@color/gobal_color"
+                    android:textSize="@dimen/text_more_small" />
             </RelativeLayout>
         </LinearLayout>
 

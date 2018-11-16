@@ -134,7 +134,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
-                ReadActivity.startActivity(mContext, novel_id, bean.sort, true, on_self);
+                ReadActivity.startActivity(mContext, novel_id, on_self, bean.sort, true);
             }
         });
     }

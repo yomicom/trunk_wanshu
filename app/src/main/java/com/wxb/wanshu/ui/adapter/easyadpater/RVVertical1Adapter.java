@@ -33,11 +33,6 @@ public class RVVertical1Adapter extends EasyRVAdapter<HomeData.DataBeanX.DataBea
                 .setText(R.id.tv_word_nums, FormatUtils.formatWordCount(item.word_num) )
                 .setText(R.id.tv_category, item.getCategory_name());
 
-        viewHolder.setOnItemViewClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view, position, item);
-            }
-        });
+        viewHolder.setOnItemViewClickListener(view -> itemClickListener.onItemClick(view, position, item));
     }
 }

@@ -18,8 +18,11 @@ import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.base.ChapterRead;
 import com.wxb.wanshu.base.Constant;
+import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.ui.fragment.ReadRecommendFragment;
+
+import org.simple.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,5 +131,6 @@ public class ReadOtherStatusActivity extends BaseActivity {
     public void onViewClicked() {
         finish();
         startActivity(new Intent(mContext, MainActivity.class));
+        EventBus.getDefault().post(new BookShelfStatus(0));
     }
 }

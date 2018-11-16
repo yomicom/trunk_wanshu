@@ -207,6 +207,16 @@ public class SettingManager {
     public boolean getFirstEnter() {
         return SharedPreferencesUtil.getInstance().getBoolean("FirstEnter", true);
     }
+    /**
+     * 第一次进入书架
+     */
+    public void saveFirstEnterBookshelf() {
+        SharedPreferencesUtil.getInstance().putBoolean("FirstEnterBookshelf", false);
+    }
+
+    public boolean getFirstEnterBookshelf() {
+        return SharedPreferencesUtil.getInstance().getBoolean("FirstEnterBookshelf", true);
+    }
 
     /**
      * 阅读页亮屏时间
