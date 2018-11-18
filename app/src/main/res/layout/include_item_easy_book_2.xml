@@ -8,18 +8,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv"
-            style="@style/novel_big_cover" />
+        <RelativeLayout style="@style/novel_big_cover_border">
+
+            <ImageView
+                android:id="@+id/iv"
+                style="@style/novel_big_cover" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_title"
             style="@style/text_novel_title"
-            android:text="标题"
             android:layout_marginTop="@dimen/distance_cover_title"
+            android:text="标题"
             android:textSize="@dimen/text_middle" />
     </LinearLayout>
 </LinearLayout>

@@ -82,7 +82,7 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
         switch (type) {
             case 0://精选
                 mCommonToolbar.setTitle("精品馆");
-                key = "boutique:all,boutique:publishing,finished:all";
+                key = "boutique:all,boutique:publishing,boutique:finished";
                 break;
             case 1://短篇
                 mCommonToolbar.setTitle("短篇");
