@@ -78,6 +78,8 @@
                     android:layout_below="@id/author"
                     android:layout_marginTop="@dimen/distance_text_text_10"
                     android:layout_toRightOf="@id/border"
+                    android:layout_alignBottom="@id/border"
+                    android:gravity="bottom"
                     android:lines="1"
                     android:text="" />
 

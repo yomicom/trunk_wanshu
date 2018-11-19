@@ -200,7 +200,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             }
         } else {
             if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).novel.is_onsale))
-                ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id);
+                ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id, mAdapter.getItem(position).isOn_shelf(),
+                        mAdapter.getItem(position).chapter.sort, false);
         }
 
     }

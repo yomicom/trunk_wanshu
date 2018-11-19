@@ -47,7 +47,6 @@
             style="@style/text_small_nomal"
             android:layout_below="@id/tv_introduce"
             android:layout_alignBottom="@id/border"
-            android:layout_marginBottom="3dp"
             android:layout_toRightOf="@id/border"
             android:gravity="bottom"
             android:lines="1"
