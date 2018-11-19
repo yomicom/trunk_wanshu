@@ -197,8 +197,9 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
             }
 //            tvSelectedBooks.setText("已选择" + removeList.size() + "");
         } else {
-            if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).is_onsale))
+            if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).is_onsale)) {
                 ReadActivity.startActivity(this, mAdapter.getItem(position).getId());
+            }
         }
     }
 

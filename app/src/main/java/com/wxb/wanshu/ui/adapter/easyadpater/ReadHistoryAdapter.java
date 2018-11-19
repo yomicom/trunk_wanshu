@@ -18,6 +18,7 @@ import org.simple.eventbus.EventBus;
 
 public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.DataBean> {
 
+    boolean isSelectAll;
     public ReadHistoryAdapter(Context context) {
         super(context);
     }
@@ -40,10 +41,14 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
                     holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
                 }
 
-                if (item.isSeleted) {
+                if (isSelectAll){
                     holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
-                } else {
-                    holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
+                }else {
+                    if (item.isSeleted) {
+                        holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
+                    } else {
+                        holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
+                    }
                 }
 //                int complete_status = item.getComplete_status();
 //                if (complete_status == 1) {
@@ -66,5 +71,9 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
                 EventBus.getDefault().post(new AddShlef(item));
             }
         });
+    }
+
+    public void isSelectAll(boolean isSelectAll) {
+        this.isSelectAll = isSelectAll;
     }
 }

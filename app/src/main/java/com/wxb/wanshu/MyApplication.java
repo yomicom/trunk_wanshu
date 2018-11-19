@@ -43,11 +43,8 @@ public class MyApplication extends Application {
         AppUtils.init(this);
 //        CrashHandler.getInstance().init(this);
         initPrefs();
-        initNightMode();
+//        initNightMode();
         //initHciCloud();
-
-
-        SharedPreferencesUtil.init(getApplicationContext(), getPackageName() + "_preference", Context.MODE_MULTI_PROCESS);
 
         PlatformConfig.setWeixin(Constant.WEXIN_APPID,Constant.WEXIN_APPSECRECT);
         PlatformConfig.setQQZone(Constant.QQ_APPID,Constant.QQ_APPSECRECT);

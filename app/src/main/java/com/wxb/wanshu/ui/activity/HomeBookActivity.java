@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -35,7 +36,6 @@ import com.wxb.wanshu.ui.fragment.HomePopularityFragment;
 import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.HomeBookPresenter;
 import com.wxb.wanshu.utils.ImageUtils;
-import com.wxb.wanshu.view.AdvanceSwipeRefreshLayout;
 import com.wxb.wanshu.view.AlphaTitleScrollView;
 import com.wxb.wanshu.view.loadding.CustomDialog;
 
@@ -81,7 +81,7 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     @BindView(R.id.iv_book)
     ImageView iv_book;
     @BindView(R.id.swipeRefresh)
-    AdvanceSwipeRefreshLayout swipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.vp_banner)
     BGABanner banner;
     @BindView(R.id.bg_search)
@@ -131,44 +131,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 //        dialog.show();
 
         scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
-//        bgSearch.setBackgroundColor(ContextCompat.getColor(mContext, R.color.no_gobal_color));   //初始化搜索栏背景颜色
-
-
-//        swipeRefresh.setOnPreInterceptTouchEventDelegate(ev -> false);
-//        scrollView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                float initTouchY = 0;
-//
-//                switch (event.getAction()) {
-//                    //放下监听
-//                    case MotionEvent.ACTION_DOWN:
-//                        initTouchY = event.getY();
-//                        break;
-//                    //手指抬起监听
-//                    case MotionEvent.ACTION_UP:
-////                        mSlidingPlayView.setLayoutParams(new RelativeLayout.LayoutParams(diaplayWidth, AbViewUtil.dip2px(DetailA.this, imagHeight)));
-//
-//                        break;
-//                    //移动监听
-//                    case MotionEvent.ACTION_MOVE:
-//                        int upY = v.getScrollY();
-//                        float touchY = event.getY();
-//                        //对图片放大的处理
-//                        if (upY == 0) {  //scrollview在顶部
-//                            float deltaY = touchY - initTouchY;// 滑动距离
-//                            if (deltaY < 80) {
-//                                crossfadeToContentView(bgSearch);
-//                            }
-//                        }
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
-
     }
 
     private void showData(HomeData homeData) {
@@ -214,11 +176,17 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
 
                 case Constant.BookType.MID_BANNER://设置首页图片
                     if (item.data.size() > 0) {
+                        HomeData.DataBeanX.DataBean midData = item.data.get(0);
                         iv_book.setVisibility(View.VISIBLE);
-                        ImageUtils.displayImage(mContext, iv_book, item.data.get(0).cover, R.mipmap.mid_image, R.mipmap.mid_image);
+                        ImageUtils.displayImage(mContext, iv_book, midData.cover, R.mipmap.mid_image, R.mipmap.mid_image);
 
-                        iv_book.setOnClickListener(v ->
-                                BookDetailsActivity.startActivity(mContext, item.data.get(0).novel_id, 1));
+                        iv_book.setOnClickListener(v -> {
+                            if ("page".equals(midData.type)) {
+                                WebViewActivity.startActivity(mContext, "详情", midData.url);
+                            } else {
+                                BookDetailsActivity.startActivity(mContext, midData.novel_id, 1);
+                            }
+                        });
                     }
                     break;
 

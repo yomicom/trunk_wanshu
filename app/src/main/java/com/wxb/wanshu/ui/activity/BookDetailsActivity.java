@@ -12,25 +12,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
-import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
 import com.wxb.wanshu.bean.BookRewardData;
 import com.wxb.wanshu.bean.RewardType;
-import com.wxb.wanshu.bean.SimpleEventBus;
 import com.wxb.wanshu.common.OnRvItemClickListener;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
@@ -41,7 +35,6 @@ import com.wxb.wanshu.ui.fragment.HomeRecommendFragment;
 import com.wxb.wanshu.ui.presenter.BookDetailsPresenter;
 import com.wxb.wanshu.utils.FormatUtils;
 import com.wxb.wanshu.utils.ImageUtils;
-import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.ToastUtils;
 import com.wxb.wanshu.utils.ViewToolUtils;
 import com.wxb.wanshu.view.dialog.RewardGiftDialog;
@@ -118,6 +111,8 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     TextView lastChapterTime;
     @BindView(R.id.book_chapter_num)
     TextView bookChapterNum;
+    @BindView(R.id.iv_add_book)
+    ImageView ivAddBook;
     private BookDetails.DataBean bookDetails;
     private BookRewardAdapter adapter;
     private int rewardPage = 1;
@@ -159,12 +154,16 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
         EventBus.getDefault().register(this);
         novel_id = getIntent().getStringExtra(INTENT_BOOK_ID);
-        int client_id = SharedPreferencesUtil.getInstance().getInt(SharedPreferencesUtil.CLIENT_ID, 1);
 
         mPresenter.attachView(this);
         showDialog();
-        mPresenter.getBookDetails(novel_id, client_id, 0);
 //        mPresenter.getBookReward(novel_id, rewardPage);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getBookDetails(novel_id, 0);
     }
 
     @Override
@@ -222,8 +221,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         author.setText(data.getAuthor());
         tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + FormatUtils.formatWordCount(data.word_num));
         if (bookDetails.on_shelf) {
-            tvAddBook.setText("已加入书架");
-            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+            hasAddBookshlef();
         } else {
             tvAddBook.setText("加入书架");
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
@@ -233,6 +231,13 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
         lastChapterTime.setText(data.latest_chapter.publish_time);
         bookChapterNum.setText("共" + data.getChapter_num() + "章");
         ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
+    }
+
+    private void hasAddBookshlef() {
+        bookDetails.on_shelf = true;
+        tvAddBook.setText("已加入书架");
+        ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+        visible(ivAddBook);
     }
 
     public static Bitmap getBitMBitmap(String urlpath) {
@@ -291,13 +296,11 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     public void addBookResult(Base result) {
         if (result.getErrcode() == 0) {
             ToastUtils.showLongToast("添加书架成功");
-            tvAddBook.setText("已加入书架");
-            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-            bookDetails.on_shelf = true;
+            hasAddBookshlef();
         }
     }
 
-    @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.tv_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
+    @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.ll_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
     public void onViewClicked(View view) {
         int is_onsale = bookDetails.is_onsale;
         switch (view.getId()) {
@@ -309,7 +312,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
                 rewardPage++;
                 mPresenter.getBookReward(novel_id, rewardPage);
                 break;
-            case R.id.tv_add_book:
+            case R.id.ll_add_book:
                 if (!bookDetails.on_shelf) {
                     showDialog();
                     mPresenter.addBookShelf(novel_id);
@@ -352,9 +355,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
     @Subscriber
     public void onEventMainThread(AddShlef event) {//阅读页加入书架成功
         if (event.add == 1) {
-            tvAddBook.setText("已加入书架");
-            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-            bookDetails.on_shelf = true;
+            hasAddBookshlef();
         }
     }
 

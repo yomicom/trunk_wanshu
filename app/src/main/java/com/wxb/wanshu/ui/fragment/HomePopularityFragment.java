@@ -75,6 +75,8 @@ public class HomePopularityFragment extends BaseFragment implements OnRvItemClic
 
     @Override
     public void configViews() {
+        rvHorizontal1.setHasFixedSize(true);
+        rvHorizontal1.setNestedScrollingEnabled(false);
         if (data != null) {
             GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
             rvHorizontal1.setLayoutManager(layoutManager);

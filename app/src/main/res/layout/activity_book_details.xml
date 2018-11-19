@@ -5,7 +5,7 @@
     android:id="@+id/ll_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.wxb.wanshu.ui.activity.BookDetailsActivity">
@@ -76,9 +76,9 @@
                     android:id="@+id/tv_read"
                     style="@style/text_middle_nomal"
                     android:layout_below="@id/author"
+                    android:layout_alignBottom="@id/border"
                     android:layout_marginTop="@dimen/distance_text_text_10"
                     android:layout_toRightOf="@id/border"
-                    android:layout_alignBottom="@id/border"
                     android:gravity="bottom"
                     android:lines="1"
                     android:text="" />
@@ -100,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginLeft="@dimen/distance_left"
                     android:layout_marginRight="@dimen/distance_left"
+                    android:ellipsize="end"
                     android:gravity="left"
                     android:lineSpacingExtra="@dimen/line_small_space"
                     android:maxLines="3"
@@ -107,9 +108,9 @@
 
                 <ImageView
                     android:id="@+id/iv_show_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
@@ -326,15 +327,30 @@
         android:background="@color/white"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_add_book"
-            style="@style/text_big_nomal_click"
+        <LinearLayout
+            android:id="@+id/ll_add_book"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/item_click_bg"
-            android:clickable="true"
-            android:text="加入书架" />
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_add_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/has_added"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_add_book"
+                style="@style/text_big_nomal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="加入书架" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_read_book"

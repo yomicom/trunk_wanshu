@@ -30,8 +30,8 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
 
 
     @Override
-    public void getBookDetails(String novel_id, int client_id, int user_id) {
-        Subscription subscribe = api.getBookDetail(novel_id, client_id, user_id).subscribeOn(Schedulers.io())
+    public void getBookDetails(String novel_id, int user_id) {
+        Subscription subscribe = api.getBookDetail(novel_id, user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
                     @Override

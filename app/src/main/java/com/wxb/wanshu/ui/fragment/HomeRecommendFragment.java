@@ -123,6 +123,8 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
 
     @Override
     public void configViews() {
+        rvHorizontal1.setHasFixedSize(true);
+        rvHorizontal1.setNestedScrollingEnabled(false);
         Bundle bundle = getArguments();
         type = bundle.getInt("type");
 
@@ -172,7 +174,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     private void setHorinalList(List list) {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
         rvHorizontal1.setLayoutManager(layoutManager);
-        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 20, false));
+        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 10, false));
         HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), list, this);
         rvHorizontal1.setAdapter(adapter);
     }

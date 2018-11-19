@@ -18,14 +18,23 @@ package com.wxb.wanshu.utils;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.wxb.wanshu.ui.activity.ReadActivity;
+import com.wxb.wanshu.view.dialog.ConfirmDialog;
+
 import java.lang.reflect.Field;
+
+import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTER;
+import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_ON_SHELF;
 
 /**
  * 屏幕亮度工具类
@@ -274,14 +283,14 @@ public class ScreenUtils {
      * 设置当前屏幕亮度值
      *
      * @param paramInt 0~255
-     * @param mContext
+     * @param context
      */
-    public static void saveScreenBrightnessInt255(int paramInt, Context mContext) {
+    public static void saveScreenBrightnessInt255(int paramInt, Context context) {
         if (paramInt <= 5) {
             paramInt = 5;
         }
-        try {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, paramInt);
+        try {//改变屏幕亮度所需权限
+            Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, paramInt);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -294,7 +303,16 @@ public class ScreenUtils {
      * @param mContext
      */
     public static void saveScreenBrightnessInt100(int paramInt, Context mContext) {
-        saveScreenBrightnessInt255((int) (paramInt / 100.0F * 255), mContext);
+//        saveScreenBrightnessInt255((int) (paramInt / 100.0F * 255), mContext);
+        paramInt = (int) (paramInt / 100.0F * 255);
+        if (paramInt <= 5) {
+            paramInt = 5;
+        }
+        try {
+            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, paramInt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

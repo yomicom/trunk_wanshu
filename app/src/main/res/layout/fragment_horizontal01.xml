@@ -15,6 +15,6 @@
         android:layout_marginLeft="@dimen/distance_left"
         android:layout_marginRight="@dimen/distance_left"
         android:layout_marginTop="5dp"
-        />
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>

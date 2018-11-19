@@ -41,25 +41,6 @@ public class WelcomeActivity extends BaseActivity {
     @BindView(R.id.welcome)
     RelativeLayout welcome;
     private AlphaAnimation alphaAnimation;
-    private static final String TAG = "SplashActivity";
-
-    final private static int PERMISSIONS_CODE = 29; // 请求码
-
-    static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.INTERNET,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.ACCESS_NETWORK_STATE,
-            Manifest.permission.ACCESS_WIFI_STATE,
-            Manifest.permission.CHANGE_NETWORK_STATE,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_SETTINGS,
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
-
-    private PermissionsChecker permissionsChecker;
 
     @Override
     public int getLayoutId() {
@@ -80,39 +61,11 @@ public class WelcomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        permissionsChecker = new PermissionsChecker(this);
     }
 
     @Override
     protected void onResume() {
-//        if (permissionsChecker.lacksPermissions(PERMISSIONS)) {
-//            startPermissionsActivity();
-//        } else {
-//            showMainActivity();
-//            finish();
-//        }
         super.onResume();
-    }
-
-    private void startPermissionsActivity() {
-        PermissionsActivity.startActivityForResult(this, PERMISSIONS_CODE, PERMISSIONS);
-    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-    // 拒绝时, 关闭页面, 缺少主要权限, 无法运行
-//        if (requestCode == PERMISSIONS_CODE &&
-//                resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
-//        } else {
-//            showMainActivity();
-//        }
-//        finish();
-//    }
-
-    private void showMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -147,7 +100,8 @@ public class WelcomeActivity extends BaseActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
                     10);
         } else {
-            writeSettingsPermission();
+            welcome.startAnimation(alphaAnimation);
+//            writeSettingsPermission();
         }
 //        if (PermissionUtils.CheckPermission(PermissionUtils.READ_EXTERNAL_STORAGE, (Activity) mContext)
 //                && PermissionUtils.CheckPermission(PermissionUtils.WRITE_EXTERNAL_STORAGE, (Activity) mContext)) {
@@ -166,25 +120,6 @@ public class WelcomeActivity extends BaseActivity {
 
     int REQUEST_CODE_WRITE_SETTINGS = 10;
 
-    private void writeSettingsPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.System.canWrite(this)) {
-                ConfirmDialog.showNotice(mContext, "权限申请", "点击去授权进入设置界面，授予允许修改系统设置权限", "确定", "取消", () -> {
-
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
-                            Uri.parse("package:" + getPackageName()));
-                    startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
-                }, () -> {
-                    finish();
-                });
-            } else {
-                welcome.startAnimation(alphaAnimation);
-            }
-        } else {
-            welcome.startAnimation(alphaAnimation);
-        }
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -192,29 +127,47 @@ public class WelcomeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (Settings.System.canWrite(this) && requestCode == REQUEST_CODE_WRITE_SETTINGS) {//屏幕亮度权限
             welcome.startAnimation(alphaAnimation);
-//            Toast.makeText(this, "WRITE_SETTINGS permission granted", Toast.LENGTH_SHORT).show();
         } else {
 //            Toast.makeText(this, "WRITE_SETINGS permission denied", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 10:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { //同意权限申请
-                    writeSettingsPermission();
-                } else { //拒绝权限申请
-//                    Toast.makeText(this,"权限被拒绝了",Toast.LENGTH_SHORT).show();
-                    writeSettingsPermission();
-                }
-                break;
-            default:
-                break;
-        }
-    }
+//    private void writeSettingsPermission() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (!Settings.System.canWrite(this)) {
+//                ConfirmDialog.showNotice(mContext, "权限申请", "点击去授权进入设置界面，授予允许修改系统设置权限", "确定", "取消", () -> {
+//
+//                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+//                            Uri.parse("package:" + getPackageName()));
+//                    startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS);
+//                }, () -> {
+//                    finish();
+//                });
+//            } else {
+//                welcome.startAnimation(alphaAnimation);
+//            }
+//        } else {
+//            welcome.startAnimation(alphaAnimation);
+//        }
+//    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case 10:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { //同意权限申请
+//                    writeSettingsPermission();
+//                } else { //拒绝权限申请
+////                    Toast.makeText(this,"权限被拒绝了",Toast.LENGTH_SHORT).show();
+//                    writeSettingsPermission();
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     /**
      * 打开安装包

@@ -80,7 +80,7 @@ public class ShareBookDialog extends Dialog implements View.OnClickListener {
 
     private void initData() {
 
-        Subscription subscribe = api.getBookDetail(novel_id,0,0).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.getBookDetail(novel_id,0).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetails>() {
                     @Override

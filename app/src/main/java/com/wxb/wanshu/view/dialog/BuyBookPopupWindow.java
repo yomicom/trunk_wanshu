@@ -181,7 +181,7 @@ public class BuyBookPopupWindow extends PopupWindow implements View.OnClickListe
              * 购买书籍
              */
             if ("确定购买".equals(btAddMoney.getText().toString())) {
-                Subscription subscribe = api.getBookDetail(novel_id,0,0).subscribeOn(Schedulers.io())
+                Subscription subscribe = api.getBookDetail(novel_id,0).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<BookDetails>() {
                             @Override

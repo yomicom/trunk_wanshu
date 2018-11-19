@@ -34,10 +34,12 @@ import java.util.Map;
  */
 public class Constant {
 
-    public static final String APP_ID = "1542361970";
-    public static final String APP_SECRET = "59f562ec6ed4090bfe244875bf4045ed";
-
+//    public static final String APP_ID = "1";
+//    public static final String APP_SECRET = "34215c97838ba75e762146d74489a7a7";
 //    public static final String API_BASE_URL = "http://app-dev.wanshu.com";
+
+    public static final String APP_SECRET = "59f562ec6ed4090bfe244875bf4045ed";
+    public static final String APP_ID = "1542361970";
     public static final String API_BASE_URL = "http://app.wanshu.com";
 
     public static String PATH_DATA = FileUtils.createRootPath(AppUtils.getAppContext()) + "/cache";
@@ -79,6 +81,9 @@ public class Constant {
     public static final int READ_FINISH_CODE = 430;//小说完结
 
     public static final int BOOK_IS_NOT_ONSALE = 0;//小说下架
+
+
+    public static final int REQUEST_CODE_WRITE_SETTINGS = 9;//权限状态码
 
     /**
      * 支付宝支付业务：入参app_id

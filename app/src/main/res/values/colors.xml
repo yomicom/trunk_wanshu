@@ -8,6 +8,8 @@
     <color name="text_color_3">#666777</color>
     <color name="text_hint_color">#555666</color>
 
+    <color name="elevation_color">#FFC2C0C0</color>
+
     <color name="no_gobal_color">#00276EFF</color>
 
     <color name="text_hint_color0">#666777</color>
@@ -78,7 +80,7 @@
     <color name="read_theme_blue">#061D2D</color>
     <color name="read_theme_brown">#383234</color>
     <color name="read_theme_night">#000000</color>
-    <!--阅读页内容字体色-->
+    <!--阅读页内容字体色-->read_content_night
     <color name="read_content_white">#222333</color>
     <color name="read_content_gray">#222333</color>
     <color name="read_content_leather">#3a3342</color>
@@ -96,7 +98,7 @@
     <!--章节标题夜间颜色-->
     <color name="read_title_night">#4C5054</color>
     <!--电池颜色-->
-    <color name="read_seekbar_battery">#4C5054</color>
+    <color name="read_seekbar_battery">#888999</color>
 
     <!--阅读页底部字体颜色-->
     <color name="book_read_bottom_text">#e6e6e6</color>

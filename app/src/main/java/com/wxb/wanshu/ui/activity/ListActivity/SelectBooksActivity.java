@@ -141,11 +141,11 @@ public class SelectBooksActivity extends BaseRVActivity<BookList.DataBean> imple
                 mPresenter.getFinishList("time", 1, page);
                 break;
 
-            case Constant.BookType.PUBLISHING://首页-火爆连载
-                mPresenter.getFinishList("time", 0, page);
+            case Constant.BookType.PUBLISHING://首页-火热连载
+                mPresenter.getFinishList("read", 0, page);
                 break;
             case Constant.BookType.FINISH://首页-完本精选
-                mPresenter.getFinishList("time", 1, page);
+                mPresenter.getFinishList("read", 1, page);
                 break;
         }
     }

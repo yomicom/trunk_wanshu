@@ -24,7 +24,7 @@ public interface BookDetailsContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getBookDetails(String novel_id, int client_id, int user_id);
+        void getBookDetails(String novel_id, int user_id);
 
         void getBookReward(String novel_id, int page);
 

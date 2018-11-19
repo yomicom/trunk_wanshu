@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.bean.HomeData;
 import com.wxb.wanshu.component.AppComponent;
@@ -49,6 +50,10 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
 
     @Inject
     HomeBookPresenter mPresenter;
+    @BindView(R.id.divide_1)
+    View divide1;
+    @BindView(R.id.divide_2)
+    View divide2;
 
     public static void startActivity(Context context, int type) {
         Intent intent = new Intent(context, KindNovelActivity.class);
@@ -120,14 +125,23 @@ public class KindNovelActivity extends BaseActivity implements HomeContract.View
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(0), HOME_RECOMMEND_TYPE);
-            transaction.replace(frameId[0], recommendFragment);
+            if (data.get(0).getData().size() > 0) {
+                visible(flContent0);
+                HomeRecommendFragment recommendFragment = HomeRecommendFragment.newInstance(data.get(0), HOME_RECOMMEND_TYPE);
+                transaction.replace(frameId[0], recommendFragment);
+            }
 
-            HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(data.get(1));
-            transaction.replace(frameId[1], homePopularityFragment);
+            if (data.get(1).getData().size() > 0) {
+                visible(flContent1, divide1);
+                HomePopularityFragment homePopularityFragment = HomePopularityFragment.newInstance(data.get(1));
+                transaction.replace(frameId[1], homePopularityFragment);
+            }
 
-            HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(data.get(2));
-            transaction.replace(frameId[2], homeBookListFragment);
+            if (data.get(2).getData().size() > 0) {
+                visible(flContent2, divide2);
+                HomeBookListFragment homeBookListFragment = HomeBookListFragment.newInstance(data.get(2));
+                transaction.replace(frameId[2], homeBookListFragment);
+            }
 
             transaction.commit();
         }

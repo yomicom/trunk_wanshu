@@ -97,6 +97,11 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
         isReading = getIntent().getBooleanExtra(INTENT_IS_READING, false);
         mPresenter.attachView(this);
         showDialog();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mPresenter.getBookMenu(novel_id);
     }
 
@@ -143,6 +148,7 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     public void showBookMenu(BookMenu data) {
         hideDialog();
         if (data != null) {
+            if (adapter.getCount() > 0) adapter.clear();//重新刷新时清空
             adapter.addAll(data.getData().getChapters());
             title.setText(data.data.novel.name);
 

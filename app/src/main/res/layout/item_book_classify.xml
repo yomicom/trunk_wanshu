@@ -10,12 +10,12 @@
     android:paddingRight="@dimen/distance_left"
     android:paddingBottom="@dimen/distance_top">
 
-    <RelativeLayout style="@style/classify_big_cover_border">
+    <!--<RelativeLayout style="@style/classify_big_cover_border">-->
 
-        <ImageView
-            android:id="@+id/cover"
-            style="@style/classify_big_cover" />
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/cover"
+        style="@style/classify_big_cover" />
+    <!--</RelativeLayout>-->
 
     <TextView
         android:id="@+id/classify"

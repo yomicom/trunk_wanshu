@@ -145,7 +145,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/client/readLog")
-    Observable<ReadHistoryList> delReadHistoryList(@Field("log_ids") String logs_ids);
+    Observable<ReadHistoryList> delReadHistoryList(@Field("log_ids") String logs_ids, @Field("delete_all") int delete_all);
 
     /**
      * 获取书币明细

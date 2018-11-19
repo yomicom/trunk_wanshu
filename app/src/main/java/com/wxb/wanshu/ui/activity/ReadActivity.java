@@ -1,5 +1,6 @@
 package com.wxb.wanshu.ui.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.wxb.wanshu.MainActivity;
+import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.base.ChapterRead;
@@ -76,6 +79,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.wxb.wanshu.base.Constant.REQUEST_CODE_WRITE_SETTINGS;
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTER;
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_ON_SHELF;
 
@@ -202,11 +206,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     }
 
     public static void startActivity(Context context, String bookId, boolean on_self, int currentChapter, boolean isFromMenu) {
-        context.startActivity(new Intent(context, ReadActivity.class)
-                .putExtra(INTENT_BEAN, bookId)
-                .putExtra(INTENT_ON_SHELF, on_self)
-                .putExtra(INTENT_CHAPTER, currentChapter)
-                .putExtra(INTENT_MENU, isFromMenu));
+        context.startActivity(new Intent(context, ReadActivity.class).putExtra(INTENT_BEAN, bookId)
+                .putExtra(INTENT_ON_SHELF, on_self).putExtra(INTENT_CHAPTER, currentChapter).putExtra(INTENT_MENU, isFromMenu));
     }
 
     @Override
@@ -641,8 +642,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     //切换阅读模式
     private void changedMode(boolean isNight, int position) {
         SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, isNight);
-        AppCompatDelegate.setDefaultNightMode(isNight ? AppCompatDelegate.MODE_NIGHT_YES
-                : AppCompatDelegate.MODE_NIGHT_NO);
+//        AppCompatDelegate.setDefaultNightMode(isNight ? AppCompatDelegate.MODE_NIGHT_YES
+//                : AppCompatDelegate.MODE_NIGHT_NO);
 
         if (position >= 0) {
             curTheme = position;
@@ -718,20 +719,20 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     //亮度
     @OnClick(R.id.ivBrightnessMinus)
     public void brightnessMinus() {
-        int curBrightness = SettingManager.getInstance().getReadBrightness();
-        if (curBrightness > 5 && !SettingManager.getInstance().isAutoBrightness()) {
-            seekbarLightness.setProgress((curBrightness = curBrightness - 2));
-            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
-        }
+//        int curBrightness = SettingManager.getInstance().getReadBrightness();
+//        if (curBrightness > 5 && !SettingManager.getInstance().isAutoBrightness()) {
+//            seekbarLightness.setProgress((curBrightness = curBrightness - 2));
+//            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
+//        }
     }
 
     @OnClick(R.id.ivBrightnessPlus)
     public void brightnessPlus() {
-        int curBrightness = SettingManager.getInstance().getReadBrightness();
-        if (!SettingManager.getInstance().isAutoBrightness()) {
-            seekbarLightness.setProgress((curBrightness = curBrightness + 2));
-            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
-        }
+//        int curBrightness = SettingManager.getInstance().getReadBrightness();
+//        if (!SettingManager.getInstance().isAutoBrightness()) {
+//            seekbarLightness.setProgress((curBrightness = curBrightness + 2));
+//            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
+//        }
     }
 
     //字体大小
@@ -977,6 +978,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
     }
 
+    boolean isShowDialog = false;
+
     private class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
         @Override
@@ -986,8 +989,27 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //            } else
             if (seekBar.getId() == seekbarLightness.getId() && fromUser
                     && !SettingManager.getInstance().isAutoBrightness()) { // 非自动调节模式下 才可调整屏幕亮度
-                ScreenUtils.saveScreenBrightnessInt100(progress, ReadActivity.this);
-                //SettingManager.getInstance().saveReadBrightness(progress);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (!Settings.System.canWrite(mContext)) {
+                        if (!isShowDialog) {
+                            isShowDialog = true;
+                            ConfirmDialog.showNotice(mContext, "权限申请", "“来点小说”需要使用修改系统设置权限，是否立即前往设置？", "去设置", "暂时不", () -> {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                                        Uri.parse("package:" + mContext.getPackageName()));
+                                mContext.startActivity(intent);
+                                isShowDialog = false;
+                            }, () -> {
+                                isShowDialog = false;
+//                    ((Activity) context).finish();
+                            });
+                        }
+                    } else {
+                        ScreenUtils.saveScreenBrightnessInt100(progress, ReadActivity.this);
+                    }
+                } else {
+                    ScreenUtils.saveScreenBrightnessInt100(progress, ReadActivity.this);
+                }
+//                SettingManager.getInstance().saveReadBrightness(progress);
             } else if (seekBar.getId() == seekbarChapter.getId() && fromUser) {
                 readCurrentChapter(progress);
             }
@@ -1147,4 +1169,5 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         overridePendingTransition(R.anim.anim_no, R.anim.push_right_out);
         super.finish();
     }
+
 }

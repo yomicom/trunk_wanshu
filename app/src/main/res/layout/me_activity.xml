@@ -21,6 +21,8 @@
             android:textSize="@dimen/text_huge" />
     </RelativeLayout>
 
+    <View style="@style/toolbar_elevation" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
@@ -203,8 +205,8 @@
             android:src="@mipmap/read_history" />
 
         <!--<View-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="match_parent" />-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="match_parent" />-->
 
         <ImageView
             android:id="@+id/comment"
@@ -234,9 +236,9 @@
 
     <View
         style="@style/line_divide"
-        android:visibility="gone"
         android:layout_marginLeft="@dimen/setting_left"
-        android:layout_marginRight="@dimen/setting_right" />
+        android:layout_marginRight="@dimen/setting_right"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/item_clean"

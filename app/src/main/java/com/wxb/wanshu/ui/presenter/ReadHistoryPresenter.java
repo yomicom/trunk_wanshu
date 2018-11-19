@@ -81,9 +81,9 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
     }
 
     @Override
-    public void delHistory(String novel_ids) {
+    public void delHistory(String novel_ids,int delete_all) {
 
-        Subscription subscribe = api.delReadHistoryList(novel_ids).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.delReadHistoryList(novel_ids,delete_all).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override

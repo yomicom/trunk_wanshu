@@ -72,6 +72,8 @@ public class HomeBookListFragment extends BaseFragment implements OnRvItemClickL
 
     @Override
     public void configViews() {
+        rvHorizontal1.setHasFixedSize(true);
+        rvHorizontal1.setNestedScrollingEnabled(false);
         if (data != null) {
             NoScrollLayoutManager layoutManager = new NoScrollLayoutManager(getActivity());
             layoutManager.setScrollEnabled(false);

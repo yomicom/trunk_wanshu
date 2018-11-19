@@ -151,15 +151,24 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void delHistoryBookResult(String novel_ids) {
-        String[] ids = novel_ids.split(",");
-        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
-            for (int i = 0; i < ids.length; i++) {
-                if (ids[i].equals(bean.log.id)) {
-                    mAdapter.remove(bean);
-                    if (!bean.on_shelf) {
-                        FileUtils.deleteBookFiles(bean.novel.id, 0);
+        if (isSelectAll){
+            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                if (!bean.on_shelf) {
+                    FileUtils.deleteBookFiles(bean.novel.id, 0);
+                }
+            }
+            mPresenter.getReadHistoryList(START_PAGE);
+        }else {
+            String[] ids = novel_ids.split(",");
+            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+                for (int i = 0; i < ids.length; i++) {
+                    if (ids[i].equals(bean.log.id)) {
+                        mAdapter.remove(bean);
+                        if (!bean.on_shelf) {
+                            FileUtils.deleteBookFiles(bean.novel.id, 0);
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
@@ -226,7 +235,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 //                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
                     ToastUtils.showToast(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
-                    showDeleteDialog(removeList);
+                    showDeleteDialog(removeList, isSelectAll);
                 }
                 break;
             case R.id.finish://完成操作
@@ -237,9 +246,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                     if (isVisible(llBatchManagement)) {//全选操作
                         isSelectAll = !isSelectAll;
                         manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
-                        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
-                            bean.isSeleted = isSelectAll;
-                        }
+                        ((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
                         mAdapter.notifyDataSetChanged();
                     } else {//管理操作
                         showBatchManagementLayout(-1);
@@ -251,14 +258,18 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         }
     }
 
-    private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList) {
+    private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList, boolean isSelectAll) {
         ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", () -> {
-            StringBuilder novelIds = new StringBuilder();
-            for (ReadHistoryList.DataBean item : removeList) {
-                novelIds.append(item.log.id + ",");
-            }
-            if (novelIds.length() > 0) {
-                mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1));
+            if (isSelectAll) {
+                mPresenter.delHistory("", 1);
+            } else {
+                StringBuilder novelIds = new StringBuilder();
+                for (ReadHistoryList.DataBean item : removeList) {
+                    novelIds.append(item.log.id + ",");
+                }
+                if (novelIds.length() > 0) {
+                    mPresenter.delHistory(novelIds.substring(0, novelIds.length() - 1), 0);
+                }
             }
         });
     }

@@ -11,36 +11,42 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:descendantFocusability="blocksDescendants"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:id="@+id/content"
+            android:orientation="vertical"
             android:visibility="gone">
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/distance_view_item"-->
-                <!--android:background="@color/common_bg" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/distance_view_item"-->
+            <!--android:background="@color/common_bg" />-->
 
             <FrameLayout
                 android:id="@+id/fl_content0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_marginTop="@dimen/distance_left"
                 android:layout_marginBottom="@dimen/distance_left"
-                android:visibility="visible">
+                android:background="@color/white"
+                android:visibility="gone">
 
             </FrameLayout>
 
             <View
+                android:id="@+id/divide_1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/distance_view_item"
+                android:visibility="gone"
                 android:background="@color/common_bg" />
 
             <FrameLayout
@@ -52,13 +58,15 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="visible">
+                android:visibility="gone">
 
             </FrameLayout>
 
             <View
+                android:id="@+id/divide_2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/distance_view_item"
+                android:visibility="gone"
                 android:background="@color/common_bg" />
 
             <FrameLayout
@@ -68,7 +76,7 @@
                 android:layout_marginTop="@dimen/distance_left"
                 android:layout_marginBottom="@dimen/distance_top"
                 android:background="@color/white"
-                android:visibility="visible">
+                android:visibility="gone">
 
             </FrameLayout>
         </LinearLayout>

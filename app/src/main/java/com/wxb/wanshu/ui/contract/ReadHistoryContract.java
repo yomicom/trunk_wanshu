@@ -25,6 +25,6 @@ public interface ReadHistoryContract {
 
         void addBookShelf(String novel_id);
 
-        void delHistory(String novel_ids);
+        void delHistory(String novel_ids,int delete_all);
     }
 }

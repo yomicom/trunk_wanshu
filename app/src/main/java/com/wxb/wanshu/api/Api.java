@@ -111,11 +111,11 @@ public class Api {
     }
 
     public Observable<ReadHistoryList> getReadHistoryList(int page) {
-        return service.getReadHistoryList(page,20);
+        return service.getReadHistoryList(page, 20);
     }
 
-    public Observable<ReadHistoryList> delReadHistoryList(String log_ids) {
-        return service.delReadHistoryList(log_ids);
+    public Observable<ReadHistoryList> delReadHistoryList(String log_ids, int delete_all) {
+        return service.delReadHistoryList(log_ids, delete_all);
     }
 
     public Observable<AmountRecordList> getAmountRecordList(int page) {
@@ -134,7 +134,7 @@ public class Api {
         return service.getLikeBooks(category_id, page);
     }
 
-    public Observable<BookDetails> getBookDetail(String novel_id, int client_id, int user_id) {
+    public Observable<BookDetails> getBookDetail(String novel_id, int user_id) {
         return service.getBookDetail(novel_id, user_id);
     }
 
@@ -152,7 +152,7 @@ public class Api {
 
     public Observable<BookList> getRankBookList(String type, int page) {
 //        return service.getRankBookList(type, page);
-        return service.getRankBookList(type,1,20);
+        return service.getRankBookList(type, 1, 20);
     }
 
     public Observable<BookList> getBoutiqueList(int type, int page) {
@@ -199,13 +199,14 @@ public class Api {
         return service.getBookMixAToc(novel_id);
     }
 
-    public Observable<ChapterRead> getChapterRead(String novel_id, int sort, int next,int preview) {
-        return service.getChapterRead(novel_id, sort, next,preview);
+    public Observable<ChapterRead> getChapterRead(String novel_id, int sort, int next, int preview) {
+        return service.getChapterRead(novel_id, sort, next, preview);
     }
 
     public Observable<Base> reportRead(String novel_id, int chapter) {
-        return service.reportRead(novel_id,chapter);
+        return service.reportRead(novel_id, chapter);
     }
+
     public Observable<AppVersion> getVersion() {
         return service.getVersion();
     }
