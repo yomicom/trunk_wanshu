@@ -3,6 +3,7 @@ package com.wxb.wanshu.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +16,7 @@ import com.wxb.wanshu.R;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
-public class AlphaTitleScrollView extends ScrollView {
+public class AlphaTitleScrollView extends NestedScrollView {
     public static final String TAG = "AlphaTitleScrollView";
     private int mSlop;
     private RelativeLayout mytitleview;
