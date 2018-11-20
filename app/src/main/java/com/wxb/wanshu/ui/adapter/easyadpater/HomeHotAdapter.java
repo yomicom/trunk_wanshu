@@ -26,7 +26,7 @@ public class HomeHotAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataBean> {
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.cover, item.getCover())
+        viewHolder.setImageUrl(R.id.cover, item.getCover(),R.mipmap.defalt_book_cover)
                 .setText(R.id.title, item.getName())
                 .setText(R.id.word_num, FormatUtils.formatWordCount(item.word_num));
 

@@ -26,7 +26,7 @@ public class ReadRecommendAdapter extends EasyRVAdapter<ChapterRead.DataBean.Nov
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, ChapterRead.DataBean.NovelBean item) {
-        viewHolder.setImageUrl(R.id.iv, item.getCover())
+        viewHolder.setImageUrl(R.id.iv, item.getCover(), R.mipmap.defalt_book_cover)
                 .setText(R.id.tv_title, item.getName());
 
 //        switch (position + 1) {

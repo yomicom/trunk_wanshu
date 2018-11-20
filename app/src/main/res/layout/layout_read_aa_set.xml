@@ -139,10 +139,12 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/distance_text_text_12"
-        android:columnWidth="32dp"
+        android:layout_marginTop="@dimen/distance_top"
+        android:columnWidth="28dp"
+        android:horizontalSpacing="45dp"
+        android:gravity="center_horizontal|bottom"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
         android:scrollbars="none"
-        android:stretchMode="spacingWidth" />
+        android:stretchMode="columnWidth" />
 </LinearLayout>

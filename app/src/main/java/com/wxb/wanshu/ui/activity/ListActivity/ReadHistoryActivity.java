@@ -157,7 +157,8 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                     FileUtils.deleteBookFiles(bean.novel.id, 0);
                 }
             }
-            mPresenter.getReadHistoryList(START_PAGE);
+            page = START_PAGE;
+            mPresenter.getReadHistoryList(page);
         } else {
             String[] ids = novel_ids.split(",");
             for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
@@ -194,14 +195,21 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     @Override
     public void onItemClick(int position) {
         if (isVisible(finish)) { //批量管理时，点击选中某项
+            if (isSelectAll) {
+                isSelectAll = false;((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
+                List<ReadHistoryList.DataBean> allData = mAdapter.getAllData();
+                for (ReadHistoryList.DataBean dataBean:allData){
+                    dataBean.isSeleted = true;
+                }
+            }
             ReadHistoryList.DataBean item = mAdapter.getItem(position);
+
             if (item.isSeleted) {
                 item.isSeleted = false;
             } else {
                 item.isSeleted = true;
             }
             mAdapter.notifyDataSetChanged();
-
 
             List<ReadHistoryList.DataBean> removeList = new ArrayList<>();
             for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
