@@ -25,7 +25,7 @@ public class RVHomePopularAdapter extends EasyRVAdapter<HomeData.DataBeanX.DataB
 
     @Override
     protected void onBindData(EasyRVHolder viewHolder, int position, HomeData.DataBeanX.DataBean item) {
-        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.mipmap.defalt_book_cover)
+        viewHolder.setImageUrl(R.id.iv, item.getCover(),R.drawable.defalt_book_cover)
                 .setText(R.id.tv_title, item.getName());
 
 //        switch (position + 1) {

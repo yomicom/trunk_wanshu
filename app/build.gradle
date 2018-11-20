@@ -82,9 +82,12 @@ android {
 //        s_mi {}
 //        s_360 {}
 //        s_meizu {}
+//        s_lenovomm {}
 //        s_wandoujia {}
 //        s_hicloud {}
+//        s_anzhi {}
 //        s_aliyun {}
+//        s_baidu {}
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]

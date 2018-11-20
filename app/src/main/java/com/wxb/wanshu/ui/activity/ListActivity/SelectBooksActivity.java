@@ -15,8 +15,6 @@ import com.wxb.wanshu.ui.adapter.easyadpater.SelectBooksAdapter;
 import com.wxb.wanshu.ui.contract.SelectBooksContract;
 import com.wxb.wanshu.ui.presenter.SelectBookPresenter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 /**
