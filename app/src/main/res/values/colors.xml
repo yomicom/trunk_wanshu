@@ -7,6 +7,7 @@
     <color name="text_color_2">#888999</color>
     <color name="text_color_3">#666777</color>
     <color name="text_hint_color">#555666</color>
+    <color name="read_book_color">#777777</color>
 
     <color name="elevation_color">#FFC2C0C0</color>
     <color name="bg_guide">#44000000</color>
