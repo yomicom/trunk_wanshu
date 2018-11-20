@@ -161,7 +161,7 @@ public class MeActivity extends BaseActivity implements MeContract.View {
                 showDialog();
                 CacheManager.getInstance().clearCache(true);
                 new Handler().postDelayed(() -> {
-                    clean.setText("");
+                    clean.setText("0M");
                     hideDialog();
                     ToastUtils.showToast("清除缓存成功");
                 }, 1000);

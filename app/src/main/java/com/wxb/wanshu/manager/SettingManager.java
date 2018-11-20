@@ -207,6 +207,7 @@ public class SettingManager {
     public boolean getFirstEnter() {
         return SharedPreferencesUtil.getInstance().getBoolean("FirstEnter", true);
     }
+
     /**
      * 第一次进入书架
      */
@@ -281,5 +282,21 @@ public class SettingManager {
 
     public void saveNoneCover(boolean isNoneCover) {
         SharedPreferencesUtil.getInstance().putBoolean("isNoneCover", isNoneCover);
+    }
+
+    public boolean showGuide1() {
+        return SharedPreferencesUtil.getInstance().getBoolean("showGuide_1", true);
+    }
+
+    public void saveGuide1() {
+        SharedPreferencesUtil.getInstance().putBoolean("showGuide_1", false);
+    }
+
+    public boolean showGuide2() {
+        return SharedPreferencesUtil.getInstance().getBoolean("showGuide2", true);
+    }
+
+    public void saveGuide2() {
+        SharedPreferencesUtil.getInstance().putBoolean("showGuide2", false);
     }
 }

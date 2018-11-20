@@ -35,7 +35,7 @@ public class AboutUsActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("关于");
+        mCommonToolbar.setTitle("关于我们");
     }
 
     @Override

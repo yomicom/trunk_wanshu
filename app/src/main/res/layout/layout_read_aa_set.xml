@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlReadAaSet"
     android:layout_width="match_parent"
-    android:layout_height="134dp"
+    android:layout_height="130dp"
     android:layout_above="@+id/llBookReadBottom"
     android:background="@color/reader_menu_bg_color"
     android:clickable="true"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:scaleType="center"
-            android:src="@mipmap/ic_brightness_add" />
+            android:src="@mipmap/ic_menu_mode_day_manual" />
     </LinearLayout>
 
     <LinearLayout
@@ -104,7 +104,6 @@
             android:id="@+id/tvFontsizePlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:src="@mipmap/ic_size_add" />
     </LinearLayout>
 

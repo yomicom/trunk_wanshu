@@ -22,6 +22,7 @@ import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.utils.ACache;
 import com.wxb.wanshu.utils.AppUtils;
 import com.wxb.wanshu.utils.FileUtils;
+import com.wxb.wanshu.utils.ImageUtils;
 import com.wxb.wanshu.utils.LogUtils;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.StringUtils;
@@ -199,6 +200,8 @@ public class CacheManager {
 //            }
             // 清除其他缓存
             ACache.get(AppUtils.getAppContext()).clear();
+            //清除图片缓存
+            ImageUtils.clearCache();
         } catch (Exception e) {
             LogUtils.e(e.toString());
         }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.BookMenu;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
@@ -21,6 +22,7 @@ import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.ui.adapter.easyadpater.BookMenuAdapter;
 import com.wxb.wanshu.ui.contract.MenuContract;
 import com.wxb.wanshu.ui.presenter.BookMenuPresenter;
+import com.wxb.wanshu.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,6 +105,13 @@ public class MenuActivity extends BaseActivity implements MenuContract.View {
     protected void onResume() {
         super.onResume();
         mPresenter.getBookMenu(novel_id);
+
+        boolean isNight = SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);//设置目录夜间模式
+        if (isNight) {
+
+        } else {
+
+        }
     }
 
     @Override

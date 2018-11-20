@@ -29,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.app.hubert.guide.NewbieGuide;
+import com.app.hubert.guide.model.GuidePage;
 import com.wxb.wanshu.MainActivity;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
@@ -38,6 +40,7 @@ import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookMenu;
+import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.ReadTheme;
 import com.wxb.wanshu.bean.RewardType;
 import com.wxb.wanshu.component.AppComponent;
@@ -79,7 +82,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.wxb.wanshu.base.Constant.REQUEST_CODE_WRITE_SETTINGS;
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_CHAPTER;
 import static com.wxb.wanshu.ui.activity.ListActivity.MenuActivity.INTENT_ON_SHELF;
 
@@ -154,6 +156,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     SeekBar seekbarChapter;
     @BindView(R.id.item_chapter)
     LinearLayout itemChapter;
+    @BindView(R.id.item_book_setting)
+    LinearLayout itemSetting;
 
     private View decodeView;
 
@@ -276,11 +280,18 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @Override
     public void configViews() {
-        hideStatusBar();
         decodeView = getWindow().getDecorView();
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) llBookReadTop.getLayoutParams();
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         llBookReadTop.setLayoutParams(params);
+
+//        if (SettingManager.getInstance().showGuide2()) {//第一次进入阅读
+//            SettingManager.getInstance().saveGuide2();
+//            showReadBar();
+        showGuideView();
+//        } else {
+        hideStatusBar();
+//        }
 
         new Handler().postDelayed(() -> {
             if (mChapterList.size() == 0)
@@ -321,6 +332,27 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
         }
 //        buyBookPopupWindow = new BuyBookPopupWindow((Activity) mContext, novel_id, currentChapter);
+    }
+
+    //显示引导图层
+    private void showGuideView() {
+        NewbieGuide.with(this)
+                .setLabel("Guide_Read")
+                .addGuidePage(GuidePage.newInstance().addHighLight(tvAddMark)
+                        .setLayoutRes(R.layout.view_guide_simple)
+                        .setOnLayoutInflatedListener((view, controller) -> {
+                            view.findViewById(R.id.guide).setOnClickListener(v -> {
+                                controller.remove();
+                                showReadBar();
+
+                                NewbieGuide.with(this).setLabel("Setting")
+                                        .addGuidePage(GuidePage.newInstance().addHighLight(tvAddBook).addHighLight(itemSetting)
+                                                .setLayoutRes(R.layout.view_guide_show2))
+                                        .show();
+                            });
+                        }))
+
+                .show();
     }
 
     /**
@@ -448,7 +480,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             readCurrentChapter(currentChapter);
 
             cleanFileCache(dataBean.novel.update_time);
-        } else if (data.errcode == 1) {//书籍已下架
+        } else if (data.errcode == Constant.READ_DOWN_CODE) {//书籍已下架
             finish();
             ReadOtherStatusActivity.startActivity(mContext, 0);
         }

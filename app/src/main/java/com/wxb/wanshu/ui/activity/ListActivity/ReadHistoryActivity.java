@@ -151,14 +151,14 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void delHistoryBookResult(String novel_ids) {
-        if (isSelectAll){
+        if (isSelectAll) {
             for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
                 if (!bean.on_shelf) {
                     FileUtils.deleteBookFiles(bean.novel.id, 0);
                 }
             }
             mPresenter.getReadHistoryList(START_PAGE);
-        }else {
+        } else {
             String[] ids = novel_ids.split(",");
             for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
                 for (int i = 0; i < ids.length; i++) {
@@ -231,7 +231,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
                     if (bean.isSeleted) removeList.add(bean);
                 }
-                if (removeList.isEmpty()) {
+                if (!isSelectAll && removeList.isEmpty()) {
 //                    mRecyclerView.showTipViewAndDelayClose(mContext.getString(R.string.has_not_selected_delete_book));
                     ToastUtils.showToast(mContext.getString(R.string.has_not_selected_delete_book));
                 } else {
@@ -288,7 +288,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             bean.showCheckBox = false;
             bean.isSeleted = false;
         }
-        ((ReadHistoryAdapter)mAdapter).isChoosing(false);
+        ((ReadHistoryAdapter) mAdapter).isChoosing(false);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -304,7 +304,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         if (position > 0) {
             mAdapter.getItem(position).isSeleted = true;
         }
-        ((ReadHistoryAdapter)mAdapter).isChoosing(false);
+        ((ReadHistoryAdapter) mAdapter).isChoosing(true);
         mAdapter.notifyDataSetChanged();
 
         visible(finish, llBatchManagement);

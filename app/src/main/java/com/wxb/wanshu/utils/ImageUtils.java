@@ -53,6 +53,11 @@ public class ImageUtils {
 //        Glide.with(context).load(imgUrl).into(imageView);
     }
 
+    public static void clearCache() {
+        imageLoader.clearDiskCache();//清除磁盘缓存
+        imageLoader.clearMemoryCache();//清除内存缓存
+    }
+
     //显示圆图
     public static void showCircleImage(Context context, String url, ImageView imageView) {
         if (context != null) {

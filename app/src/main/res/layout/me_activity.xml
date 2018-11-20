@@ -21,8 +21,6 @@
             android:textSize="@dimen/text_huge" />
     </RelativeLayout>
 
-    <View style="@style/toolbar_elevation" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"

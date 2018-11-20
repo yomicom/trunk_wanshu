@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="divider">#cdced3</color>
+    <color name="divider">#D9D9D9</color>
 
     <color name="gobal_color">#276EFF</color>
     <color name="text_color_1">#1C1C1C</color>
@@ -9,6 +9,8 @@
     <color name="text_hint_color">#555666</color>
 
     <color name="elevation_color">#FFC2C0C0</color>
+    <color name="bg_guide">#44000000</color>
+    <color name="bg_guide_2">#66000000</color>
 
     <color name="no_gobal_color">#00276EFF</color>
 

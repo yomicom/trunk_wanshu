@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseActivity;
+import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.AddShlef;
 import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookDetails;
@@ -197,7 +198,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             bookDetails = data.getData();
             showBookData(bookDetails);
             showRecommandData(bookDetails);
-        } else if (data.errcode == 1) {//书籍已下架
+        } else if (data.errcode == Constant.READ_DOWN_CODE) {//书籍已下架
             finish();
             ReadOtherStatusActivity.startActivity(mContext, 0);
         }

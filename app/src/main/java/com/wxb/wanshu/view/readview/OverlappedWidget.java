@@ -202,6 +202,7 @@ public class OverlappedWidget extends BaseReadView {
         if (color != 0) {
 //            pagefactory.setBgBitmap(bg);
             pagefactory.setBgColor(color);
+            pagefactory.convertBetteryBitmap();
             if (isPrepared) {
                 pagefactory.onDraw(mCurrentPageCanvas);
                 pagefactory.onDraw(mNextPageCanvas);

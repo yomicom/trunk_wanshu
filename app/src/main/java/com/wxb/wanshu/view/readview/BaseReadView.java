@@ -288,6 +288,7 @@ public abstract class BaseReadView extends View {
     public void jumpToChapter(int chapter) {
         resetTouchPoint();
         pagefactory.openBook(chapter, new int[]{0, 0});
+        pagefactory.isReadingMenu();
         pagefactory.onDraw(mCurrentPageCanvas);
         pagefactory.onDraw(mNextPageCanvas);
         postInvalidate();

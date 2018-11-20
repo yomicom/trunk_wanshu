@@ -53,16 +53,16 @@
     <dimen name="book_cover_height">120dp</dimen>
     <dimen name="book_cover_width_history">60dp</dimen>
     <dimen name="book_cover_height_history">80dp</dimen>
-    <dimen name="book_cover_width_middle">75dp</dimen>
-    <dimen name="book_cover_height_middle">100dp</dimen>
+    <dimen name="book_cover_width_middle">72dp</dimen>
+    <dimen name="book_cover_height_middle">96dp</dimen>
     <dimen name="book_cover_width_small">40dp</dimen>
     <dimen name="book_cover_height_small">53dp</dimen>
     <dimen name="book_cover_width_history0">61dp</dimen>
     <dimen name="book_cover_height_history0">81dp</dimen>
     <dimen name="book_cover_width0">91dp</dimen>
     <dimen name="book_cover_height0">121dp</dimen>
-    <dimen name="book_cover_width_middle0">76dp</dimen>
-    <dimen name="book_cover_height_middle0">101dp</dimen>
+    <dimen name="book_cover_width_middle0">73dp</dimen>
+    <dimen name="book_cover_height_middle0">97dp</dimen>
     <dimen name="book_cover_width_small0">41dp</dimen>
     <dimen name="book_cover_height_small0">54dp</dimen>
 

@@ -42,7 +42,7 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("../wanshu.jks")
+            storeFile file("/Users/qiming/Work/Android_Sign/wanshu.jks")
             storePassword "soude123"
             keyAlias "wanshu"
             keyPassword "soude123"
@@ -54,7 +54,9 @@ android {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "boolean", "USE_CANARY", "true"
+            debuggable true
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名
             signingConfig signingConfigs.release
@@ -63,8 +65,8 @@ android {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
             buildConfigField "boolean", "USE_CANARY", "false"
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             //true打包出错：\build\intermediates\res\resources-anzhi-debug-stripped.ap_' specified for property 'resourceFile' does not exist
             zipAlignEnabled true// 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -75,8 +77,8 @@ android {
 
     productFlavors {
 
+//        s_myapp {}
         s_default {}
-        s_myapp {}
 //        s_mi {}
 //        s_360 {}
 //        s_meizu {}
@@ -118,6 +120,7 @@ android {
             exclude module: 'butterknife-annotations'
         }
         compile rootProject.ext.dependencies["banner"]
+        compile rootProject.ext.dependencies["guide"]//引导图
         //test
 
         //eventbus

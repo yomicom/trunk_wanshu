@@ -14,6 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.hubert.guide.NewbieGuide;
+import com.app.hubert.guide.core.Controller;
+import com.app.hubert.guide.listener.OnLayoutInflatedListener;
+import com.app.hubert.guide.model.GuidePage;
+import com.app.hubert.guide.model.HighLight;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
@@ -143,6 +148,23 @@ public class BookshelfActivity extends BaseRVActivity<BookselfList.DataBean> imp
         if (data0.getData().size() > 0) {
             mAdapter.addAll(data0.getData());
             visible(manage);
+
+            if (SettingManager.getInstance().showGuide1()) {//第一次显示管理引导
+                SettingManager.getInstance().saveGuide1();
+                EventBus.getDefault().post(new BookShelfStatus(2));
+                NewbieGuide.with(this)
+                        .setLabel("Guide_Books")
+                        .addGuidePage(GuidePage.newInstance().addHighLight(manage, HighLight.Shape.RECTANGLE, 4)
+                                .setLayoutRes(R.layout.view_guide_show)
+                                .setOnLayoutInflatedListener((view, controller) -> {
+                                    view.findViewById(R.id.guide).setOnClickListener(v -> {
+                                        controller.remove();
+                                        EventBus.getDefault().post(new BookShelfStatus(1));
+                                    });
+                                }))
+                        .show();
+            }
+
         } else {
             gone(manage, finish);
         }

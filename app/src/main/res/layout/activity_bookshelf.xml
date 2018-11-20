@@ -59,11 +59,9 @@
             android:text="管理"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_middle"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </RelativeLayout>
-
-    <View style="@style/toolbar_elevation" />
 
     <com.wxb.wanshu.view.recycleview.EasyRecyclerView
         android:id="@+id/recyclerview"

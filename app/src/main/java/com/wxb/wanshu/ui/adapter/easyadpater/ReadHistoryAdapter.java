@@ -44,13 +44,15 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
                     } else {
                         holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
                     }
-                } else if (isSelectAll) {
-                    holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
                 } else {
-                    if (item.isSeleted) {
+                    if (isSelectAll) {
                         holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
                     } else {
-                        holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
+                        if (item.isSeleted) {
+                            holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
+                        } else {
+                            holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
+                        }
                     }
                 }
 //                int complete_status = item.getComplete_status();

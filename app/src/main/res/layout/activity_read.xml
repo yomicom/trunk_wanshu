@@ -25,7 +25,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/distance_left"
-        android:paddingRight="@dimen/distance_left"
+        android:paddingRight="12dp"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -77,6 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableRight="@mipmap/ic_add_book"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="@dimen/distance_text_text_8"
+            android:paddingLeft="@dimen/distance_text_text_8"
             android:drawablePadding="@dimen/drawable_padding_normal"/>
 
     </LinearLayout>
@@ -102,14 +106,13 @@
     <LinearLayout
         android:id="@+id/llBookReadBottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="@color/reader_menu_bg_color"
         android:clickable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="gone"
-        android:padding="10dp">
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/item_book_menu"

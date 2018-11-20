@@ -118,6 +118,8 @@ public class PageFactory {
     private OnReadStateChangeListener listener;
     private String charset = "UTF-8";
 
+//    private boolean isReadingMenu = false;//是否是阅读时目录进入
+
     public PageFactory(Context context, String bookId, List<BookMenu.DataBean.ChaptersBean> chaptersList) {
         this(context, ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(),
                 //SettingManager.getInstance().getReadFontSize(bookId),
@@ -714,6 +716,11 @@ public class PageFactory {
     public void setBattery(int battery) {
         this.battery = battery;
         convertBetteryBitmap();
+    }
+
+
+    public void isReadingMenu() {//阅读时点击目录选择某章节，页数置为1
+        currentPage = 1;
     }
 
     public void setTime(String time) {
