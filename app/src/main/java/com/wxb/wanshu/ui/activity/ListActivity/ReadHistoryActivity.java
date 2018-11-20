@@ -210,7 +210,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         } else {
             if (!ReadOtherStatusActivity.startActivity(this, mAdapter.getItem(position).novel.is_onsale))
                 ReadActivity.startActivity(this, mAdapter.getItem(position).novel.id, mAdapter.getItem(position).isOn_shelf(),
-                        mAdapter.getItem(position).chapter.sort, false);
+                        mAdapter.getItem(position).chapter.sort, true);
         }
 
     }
@@ -288,6 +288,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             bean.showCheckBox = false;
             bean.isSeleted = false;
         }
+        ((ReadHistoryAdapter)mAdapter).isChoosing(false);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -303,6 +304,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
         if (position > 0) {
             mAdapter.getItem(position).isSeleted = true;
         }
+        ((ReadHistoryAdapter)mAdapter).isChoosing(false);
         mAdapter.notifyDataSetChanged();
 
         visible(finish, llBatchManagement);

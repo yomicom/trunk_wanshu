@@ -613,9 +613,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
      */
     @OnClick(R.id.tvBookReadIntroduce)
     public void addBook() {
-        gone(rlReadAaSet, rlReadMark);
-        mPresenter.addBookShelf(novel_id, false);
-        showDialog();
+        if (!isOnShelf) {
+            gone(rlReadAaSet, rlReadMark);
+            mPresenter.addBookShelf(novel_id, false);
+            showDialog();
+        }
     }
 
     /**

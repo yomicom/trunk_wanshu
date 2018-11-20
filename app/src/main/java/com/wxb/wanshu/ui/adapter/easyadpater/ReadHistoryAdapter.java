@@ -19,6 +19,8 @@ import org.simple.eventbus.EventBus;
 public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.DataBean> {
 
     boolean isSelectAll;
+    private boolean isChoosing = false;//是否选择状态
+
     public ReadHistoryAdapter(Context context) {
         super(context);
     }
@@ -35,15 +37,16 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
                         .setText(R.id.tv_introduce, "已读：" + item.chapter.name)
                         .setVisible(R.id.add_shelf, !item.showCheckBox)
                         .setVisible(R.id.select, item.showCheckBox);
-                if (item.isOn_shelf()) {
-                    holder.setImageResource(R.id.add_shelf, R.mipmap.has_add_shlef);
-                } else {
-                    holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
-                }
 
-                if (isSelectAll){
+                if (!isChoosing) {
+                    if (item.isOn_shelf()) {
+                        holder.setImageResource(R.id.add_shelf, R.mipmap.has_add_shlef);
+                    } else {
+                        holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
+                    }
+                } else if (isSelectAll) {
                     holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
-                }else {
+                } else {
                     if (item.isSeleted) {
                         holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
                     } else {
@@ -75,5 +78,9 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
 
     public void isSelectAll(boolean isSelectAll) {
         this.isSelectAll = isSelectAll;
+    }
+
+    public void isChoosing(boolean isChoosing) {
+        this.isChoosing = isChoosing;
     }
 }
