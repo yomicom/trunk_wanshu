@@ -174,7 +174,7 @@ public class HomeRecommendFragment extends BaseFragment implements OnRvItemClick
     private void setHorinalList(List list) {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
         rvHorizontal1.setLayoutManager(layoutManager);
-        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 10, false));
+        rvHorizontal1.addItemDecoration(new GridSpacingItemDecoration(4, 15, true));
         HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), list, this);
         rvHorizontal1.setAdapter(adapter);
     }

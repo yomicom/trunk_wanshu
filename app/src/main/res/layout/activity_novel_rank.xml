@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,12 +8,14 @@
     android:background="@color/white"
     tools:context="com.wxb.wanshu.ui.activity.NovelRankActivity">
 
-    <include layout="@layout/common_toolbar" />
+    <include layout="@layout/common_toolbar"
+        android:id="@+id/tool_bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@id/tool_bar">
 
         <LinearLayout
             android:layout_width="75dp"
@@ -56,4 +58,7 @@
             app:scrollbarStyle="insideOverlay" />
     </LinearLayout>
 
-</LinearLayout>
+    <!--<View-->
+        <!--style="@style/toolbar_elevation"-->
+        <!--android:layout_below="@id/tool_bar"/>-->
+</RelativeLayout>

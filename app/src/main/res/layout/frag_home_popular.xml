@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchMode="columnWidth"
-        android:layout_marginTop="@dimen/distance_top_20"
+        android:layout_marginTop="13dp"
         android:layout_marginLeft="@dimen/distance_left"
         android:layout_marginRight="@dimen/distance_left"
         android:foregroundGravity="center" />

@@ -185,7 +185,7 @@ public class ClassifyActivity extends BaseRVActivity<BookList.DataBean> implemen
         if (data.size() > 0) {
             GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
             recycleview.setLayoutManager(layoutManager);
-            recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 30, false));
+            recycleview.addItemDecoration(new GridSpacingItemDecoration(3, 35, false));
 
             BookClassifyAdapter adapter = new BookClassifyAdapter(mContext, data, this);
             recycleview.setAdapter(adapter);

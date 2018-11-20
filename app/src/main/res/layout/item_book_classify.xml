@@ -5,17 +5,17 @@
     android:background="@drawable/bg_hot_book"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/distance_left"
+    android:paddingLeft="@dimen/distance_top"
     android:paddingTop="@dimen/distance_top"
-    android:paddingRight="@dimen/distance_left"
+    android:paddingRight="@dimen/distance_top"
     android:paddingBottom="@dimen/distance_top">
 
-    <!--<RelativeLayout style="@style/classify_big_cover_border">-->
+    <RelativeLayout style="@style/classify_big_cover_border">
 
-    <ImageView
-        android:id="@+id/cover"
-        style="@style/classify_big_cover" />
-    <!--</RelativeLayout>-->
+        <ImageView
+            android:id="@+id/cover"
+            style="@style/classify_big_cover" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/classify"

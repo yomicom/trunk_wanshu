@@ -300,6 +300,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
         if (isOnShelf) {
             tvAddBook.setText(R.string.has_add_shlef);
+            ViewToolUtils.setTextViewLRDrawable(mContext,tvAddBook,0,R.mipmap.has_read_added);
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
         } else {
             tvAddBook.setText(R.string.add_shlef);
@@ -581,6 +582,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (result.getErrcode() == 0) {
             ToastUtils.showLongToast("添加书架成功");
             tvAddBook.setText("已加入书架");
+            ViewToolUtils.setTextViewLRDrawable(mContext,tvAddBook,0,R.mipmap.has_read_added);
             ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
             isOnShelf = true;
             EventBus.getDefault().post(new AddShlef(1));

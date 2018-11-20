@@ -77,9 +77,8 @@
                     style="@style/text_middle_nomal"
                     android:layout_below="@id/author"
                     android:layout_alignBottom="@id/border"
-                    android:layout_marginTop="@dimen/distance_text_text_10"
+                    android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/border"
-                    android:gravity="bottom"
                     android:lines="1"
                     android:text="" />
 
@@ -209,7 +208,7 @@
                     android:background="@color/white"
                     android:gravity="left"
                     android:paddingLeft="@dimen/distance_left"
-                    android:paddingTop="@dimen/distance_left"
+                    android:paddingTop="18dp"
                     android:paddingRight="@dimen/distance_left"
                     android:text="同类推荐"
                     android:textSize="@dimen/text_huge" />
@@ -221,7 +220,7 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingTop="@dimen/distance_top"
+                    android:paddingTop="3dp"
                     android:paddingBottom="@dimen/distance_top"
                     android:visibility="visible" />
             </LinearLayout>

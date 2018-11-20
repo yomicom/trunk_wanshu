@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_empty="@layout/common_empty_view"
+        android:stretchMode="columnWidth"
         android:paddingLeft="@dimen/distance_left"
         android:paddingRight="@dimen/distance_left"
         android:paddingTop="@dimen/setting_cut_10"></android.support.v7.widget.RecyclerView>

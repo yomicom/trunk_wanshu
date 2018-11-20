@@ -49,5 +49,4 @@
             android:src="@mipmap/menu_down_sort" />
     </RelativeLayout>
 
-    <View style="@style/toolbar_elevation" />
 </LinearLayout>

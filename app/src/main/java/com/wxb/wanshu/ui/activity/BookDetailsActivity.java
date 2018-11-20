@@ -146,7 +146,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("");
+        mCommonToolbar.setTitle("书籍详情");
 //        mCommonToolbar.setTitle(R.string.details_books);
     }
 

@@ -27,7 +27,7 @@
         android:theme="@style/Theme.ToolBar.Menu"
         android:titleTextAppearance="@style/ToolbarTitle" />
 
-    <View
-        style="@style/toolbar_elevation"
-        android:layout_below="@id/common_toolbar" />
+    <!--<View-->
+        <!--style="@style/toolbar_elevation"-->
+        <!--android:layout_below="@id/common_toolbar" />-->
 </RelativeLayout>
