@@ -32,12 +32,14 @@ public class BookMenuPresenter extends RxPresenter<MenuContract.View> implements
                 .subscribe(new Observer<BookMenu>() {
                     @Override
                     public void onCompleted() {
+                        if (mView!=null)
                         mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("getBookListDetail:" + e.toString());
+                        if (mView!=null)
                         mView.complete();
                     }
 

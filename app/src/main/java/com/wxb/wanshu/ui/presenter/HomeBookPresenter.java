@@ -25,6 +25,7 @@ public class HomeBookPresenter extends RxPresenter<HomeContract.View> implements
     public HomeBookPresenter(Api api) {
         this.api = api;
     }
+
     @Override
     public void getHomeData(String key) {
         Subscription rxSubscription = api.getHomeData(key).subscribeOn(Schedulers.io())
@@ -37,7 +38,8 @@ public class HomeBookPresenter extends RxPresenter<HomeContract.View> implements
 
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override

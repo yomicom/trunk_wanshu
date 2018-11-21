@@ -35,13 +35,12 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
                 .subscribe(new Observer<ReadHistoryList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
                     }
 
                     @Override
@@ -60,7 +59,8 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
@@ -81,14 +81,15 @@ public class ReadHistoryPresenter extends RxPresenter<ReadHistoryContract.View> 
     }
 
     @Override
-    public void delHistory(String novel_ids,int delete_all) {
+    public void delHistory(String novel_ids, int delete_all) {
 
-        Subscription subscribe = api.delReadHistoryList(novel_ids,delete_all).subscribeOn(Schedulers.io())
+        Subscription subscribe = api.delReadHistoryList(novel_ids, delete_all).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override

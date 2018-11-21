@@ -33,13 +33,14 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
                 .subscribe(new Observer<HotNovelList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -51,19 +52,20 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
     }
 
     @Override
-    public void getBookList(String kw,int page) {
-        Subscription rxSubscription = api.getSearchResult(kw,page).subscribeOn(Schedulers.io())
+    public void getBookList(String kw, int page) {
+        Subscription rxSubscription = api.getSearchResult(kw, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override

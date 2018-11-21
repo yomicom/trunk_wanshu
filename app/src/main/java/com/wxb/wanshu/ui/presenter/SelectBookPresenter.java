@@ -33,7 +33,7 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
     }
 
     @Override
-    public void getBookList( String category_id,int page) {
+    public void getBookList(String category_id, int page) {
         Subscription rxSubscription = api.getSelectBookList(category_id, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
@@ -44,8 +44,8 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -57,18 +57,20 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
     }
 
     @Override
-    public void getLikeBooks( String category_id,int page) {
+    public void getLikeBooks(String category_id, int page) {
         Subscription rxSubscription = api.getLikeBooks(category_id, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -86,13 +88,14 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -111,13 +114,15 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -136,13 +141,15 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override
@@ -160,13 +167,15 @@ public class SelectBookPresenter extends RxPresenter<SelectBooksContract.View> i
                 .subscribe(new Observer<NovelCategory>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("getBookListDetail:" + e.toString());
-                        mView.complete();
+                        if (mView != null)
+                            mView.showError();
                     }
 
                     @Override

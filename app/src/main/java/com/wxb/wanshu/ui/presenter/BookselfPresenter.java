@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
  * Created by qiming on 2017/12/11.
  */
 
-public class BookselfPresenter  extends RxPresenter<BookselfContract.View> implements BookselfContract.Presenter<BookselfContract.View> {
+public class BookselfPresenter extends RxPresenter<BookselfContract.View> implements BookselfContract.Presenter<BookselfContract.View> {
     Api api;
 
     @Inject
@@ -33,7 +33,8 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
                 .subscribe(new Observer<BookselfList>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
@@ -57,7 +58,8 @@ public class BookselfPresenter  extends RxPresenter<BookselfContract.View> imple
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override

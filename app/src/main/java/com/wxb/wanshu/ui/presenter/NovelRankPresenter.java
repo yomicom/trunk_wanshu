@@ -32,12 +32,14 @@ public class NovelRankPresenter extends RxPresenter<NovelRankContract.View> impl
                 .subscribe(new Observer<BookList>() {
                     @Override
                     public void onCompleted() {
+                        if (mView!=null)
                         mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.e("getBookListDetail:" + e.toString());
+                        if (mView!=null)
                         mView.complete();
                     }
 

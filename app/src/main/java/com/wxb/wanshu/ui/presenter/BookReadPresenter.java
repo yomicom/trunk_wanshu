@@ -42,12 +42,10 @@ import rx.schedulers.Schedulers;
 public class BookReadPresenter extends RxPresenter<BookReadContract.View>
         implements BookReadContract.Presenter<BookReadContract.View> {
 
-    private Context mContext;
     private Api api;
 
     @Inject
     public BookReadPresenter(Context mContext, Api api) {
-        this.mContext = mContext;
         this.api = api;
     }
 
@@ -58,50 +56,12 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
      */
     @Override
     public void getBookMixAToc(final String novel_id) {
-//        String key = StringUtils.creatAcacheKey("book-toc", novel_id);
-//        Observable<BookMenu.DataBean> fromNetWork = api.getBookMixAToc(novel_id)
-//                .map(new Func1<BookMenu, BookMenu.DataBean>() {
-//                    @Override
-//                    public BookMenu.DataBean call(BookMenu data) {
-//                        return data.data;
-//                    }
-//                })
-//                .compose(RxUtil.<BookMenu.DataBean>rxCacheListHelper(key));
-//
-//        //依次检查disk、network
-//        Subscription rxSubscription = Observable
-//                .concat(RxUtil.rxCreateDiskObservable(key, BookMenu.DataBean.class), fromNetWork)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<BookMenu.DataBean>() {
-//                    @Override
-//                    public void onNext(BookMenu.DataBean data) {
-//                        List<BookMenu.DataBean.ChaptersBean> list = data.getChapters();
-//                        if (list != null && !list.isEmpty() && mView != null) {
-//                            mView.showBookToc(list);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        LogUtils.e("onError: " + e);
-//                        mView.netError(0);
-//                    }
-//                });
-//        addSubscrebe(rxSubscription);
-
         Subscription rxSubscription = api.getBookMixAToc(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookMenu>() {
                     @Override
                     public void onNext(BookMenu data) {
-//                        List<BookMenu.DataBean.ChaptersBean> list = data.getData().chapters;
-//                        if (list != null && !list.isEmpty() && mView != null) {
                         mView.showBookToc(data);
-//                        }
                     }
 
                     @Override
@@ -123,10 +83,12 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                 .subscribe(new Observer<ChapterRead>() {
                     @Override
                     public void onNext(ChapterRead data) {
-                        if (data.data != null && mView != null) {
-                            mView.showChapterRead(data.data);
-                        } else {
-                            mView.netError(sort);
+                        if (mView != null) {
+                            if (data.data != null) {
+                                mView.showChapterRead(data.data);
+                            } else {
+                                mView.netError(sort);
+                            }
                         }
                     }
 
@@ -145,44 +107,26 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 
     @Override
     public void getRewardType() {
-        api.getRewardType().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RewardType>() {
-                    @Override
-                    public void onCompleted() {
-                        mView.complete();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(RewardType bookDetails) {
-                        mView.showRewardType(bookDetails);
-                    }
-                });
     }
 
     @Override
-    public void addBookShelf(String novel_id,boolean needExit) {
+    public void addBookShelf(String novel_id, boolean needExit) {
         api.addBookshelfList(novel_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null) mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if (mView != null) mView.showError();
                     }
 
                     @Override
                     public void onNext(Base bookDetails) {
-                        mView.addBookResult(bookDetails,needExit);
+                        mView.addBookResult(bookDetails, needExit);
                     }
                 });
     }
@@ -194,7 +138,6 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
                     }
 
                     @Override
@@ -204,7 +147,7 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
 
                     @Override
                     public void onNext(Base result) {
-                        if (result!=null){
+                        if (result != null) {
 
                         }
                     }

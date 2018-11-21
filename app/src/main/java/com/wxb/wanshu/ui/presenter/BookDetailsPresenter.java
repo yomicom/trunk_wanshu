@@ -36,7 +36,8 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
                 .subscribe(new Observer<BookDetails>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
@@ -59,7 +60,8 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
                 .subscribe(new Observer<BookRewardData>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
@@ -82,7 +84,8 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
                 .subscribe(new Observer<RewardType>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
@@ -106,7 +109,8 @@ public class BookDetailsPresenter extends RxPresenter<BookDetailsContract.View> 
                 .subscribe(new Observer<Base>() {
                     @Override
                     public void onCompleted() {
-                        mView.complete();
+                        if (mView != null)
+                            mView.complete();
                     }
 
                     @Override
