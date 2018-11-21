@@ -23,9 +23,9 @@ import butterknife.OnClick;
 public class ConnectUsActivity extends BaseActivity {
 
 
-    public String KEFU_QQ = "3374397930";
+    public String KEFU_QQ = "4009981236";
     public String KEFU_CALL = "400-9981236";
-    public String HEZUO_QQ = "2499931904";
+    public String HEZUO_QQ = "215333652";
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ConnectUsActivity.class));

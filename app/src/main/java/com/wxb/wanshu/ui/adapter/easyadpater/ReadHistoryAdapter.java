@@ -31,30 +31,30 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
             @Override
             public void setData(ReadHistoryList.DataBean item) {
 
-                holder.setImageUrl(R.id.iv_book, item.novel.cover,R.drawable.defalt_book_cover)
+                holder.setImageUrl(R.id.iv_book, item.novel.cover, R.drawable.defalt_book_cover)
                         .setText(R.id.tv_title, item.novel.name)
                         .setText(R.id.tv_time, "上次阅读：" + item.last_read_time)
                         .setText(R.id.tv_introduce, "已读：" + item.chapter.name)
                         .setVisible(R.id.add_shelf, !item.showCheckBox)
                         .setVisible(R.id.select, item.showCheckBox);
 
-                if (!isChoosing) {
-                    if (item.isOn_shelf()) {
-                        holder.setImageResource(R.id.add_shelf, R.mipmap.has_add_shlef);
-                    } else {
-                        holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
-                    }
+//                if (!isChoosing) {
+                if (item.isOn_shelf()) {
+                    holder.setImageResource(R.id.add_shelf, R.mipmap.has_add_shlef);
                 } else {
-                    if (isSelectAll) {
-                        holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
-                    } else {
-                        if (item.isSeleted) {
-                            holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
-                        } else {
-                            holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
-                        }
-                    }
+                    holder.setImageResource(R.id.add_shelf, R.mipmap.add_shlef);
                 }
+//                } else {
+//                    if (isSelectAll) {
+//                        holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
+//                    } else {
+//                        if (item.isSeleted) {
+//                            holder.setImageDrawableRes(R.id.select, R.mipmap.select_history);
+//                        } else {
+//                            holder.setImageDrawableRes(R.id.select, R.mipmap.no_select_history);
+//                        }
+//                    }
+//                }
 //                int complete_status = item.getComplete_status();
 //                if (complete_status == 1) {
 //                    holder.setText(R.id.tv_introduce, "上次看到第" + item.getChapter_name() + "章 | 已完结共" + item.getLatest_chapter() + "章");

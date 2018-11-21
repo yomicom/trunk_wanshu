@@ -32,22 +32,15 @@
             android:visibility="gone"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_empty="@layout/common_empty_view"
-        android:stretchMode="columnWidth"
-        android:paddingLeft="@dimen/distance_left"
-        android:paddingRight="@dimen/distance_left"
-        android:paddingTop="@dimen/setting_cut_10"></android.support.v7.widget.RecyclerView>
-
     <com.wxb.wanshu.view.recycleview.EasyRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_empty="@layout/common_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay"
-        android:visibility="gone"/>
+        app:layout_error="@layout/common_error_view"
+        android:stretchMode="columnWidth"
+        android:paddingLeft="@dimen/distance_left"
+        android:paddingRight="@dimen/distance_left"
+        android:paddingTop="@dimen/setting_cut_10"></com.wxb.wanshu.view.recycleview.EasyRecyclerView>
+
 </LinearLayout>

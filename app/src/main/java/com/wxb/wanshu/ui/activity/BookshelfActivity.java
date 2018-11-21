@@ -1,32 +1,22 @@
 package com.wxb.wanshu.ui.activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.hubert.guide.NewbieGuide;
-import com.app.hubert.guide.core.Controller;
-import com.app.hubert.guide.listener.OnLayoutInflatedListener;
 import com.app.hubert.guide.model.GuidePage;
 import com.app.hubert.guide.model.HighLight;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.base.BaseRVActivity;
-import com.wxb.wanshu.base.Constant;
-import com.wxb.wanshu.bean.Base;
 import com.wxb.wanshu.bean.BookShelfStatus;
 import com.wxb.wanshu.bean.BookselfList;
-import com.wxb.wanshu.bean.ReadHistoryList;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.manager.CacheManager;
@@ -36,13 +26,11 @@ import com.wxb.wanshu.ui.contract.BookselfContract;
 import com.wxb.wanshu.ui.presenter.BookselfPresenter;
 import com.wxb.wanshu.utils.FileUtils;
 import com.wxb.wanshu.utils.ToastUtils;
-import com.wxb.wanshu.view.EmptyView;
 import com.wxb.wanshu.view.dialog.ConfirmDialog;
 import com.wxb.wanshu.view.recycleview.adapter.RecyclerArrayAdapter;
 
 import org.simple.eventbus.EventBus;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

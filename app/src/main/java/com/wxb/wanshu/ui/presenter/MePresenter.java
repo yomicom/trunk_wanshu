@@ -55,16 +55,17 @@ public class MePresenter extends RxPresenter<MeContract.View> implements MeContr
                 .subscribe(new Observer<AppVersion>() {
                     @Override
                     public void onCompleted() {
+                        if (mView != null) mView.complete();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.showError();
                     }
 
                     @Override
                     public void onNext(AppVersion data) {
-                        mView.showLastVersion(data,isClick);
+                        mView.showLastVersion(data, isClick);
                     }
                 });
         addSubscrebe(rxSubscription);

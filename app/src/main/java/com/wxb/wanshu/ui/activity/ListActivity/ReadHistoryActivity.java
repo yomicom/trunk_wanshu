@@ -129,6 +129,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     public void showReadHistoryList(ReadHistoryList data) {
         if (data != null && data.data.size() > 0) {
             visible(manage);
+            manage.setText("清空");
         }
         if (page == START_PAGE)
             mAdapter.clear();
@@ -151,29 +152,29 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void delHistoryBookResult(String novel_ids) {
-        if (isSelectAll) {
-            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
-                if (!bean.on_shelf) {
-                    FileUtils.deleteBookFiles(bean.novel.id, 0);
-                }
-            }
-            page = START_PAGE;
-            mPresenter.getReadHistoryList(page);
-            gone(manage);
-        } else {
-            String[] ids = novel_ids.split(",");
-            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
-                for (int i = 0; i < ids.length; i++) {
-                    if (ids[i].equals(bean.log.id)) {
-                        mAdapter.remove(bean);
-                        if (!bean.on_shelf) {
-                            FileUtils.deleteBookFiles(bean.novel.id, 0);
-                        }
-                        break;
-                    }
-                }
+//        if (isSelectAll) {
+        for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+            if (!bean.on_shelf) {
+                FileUtils.deleteBookFiles(bean.novel.id, 0);
             }
         }
+        page = START_PAGE;
+        mPresenter.getReadHistoryList(page);
+        gone(manage);
+//        } else {
+//            String[] ids = novel_ids.split(",");
+//            for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
+//                for (int i = 0; i < ids.length; i++) {
+//                    if (ids[i].equals(bean.log.id)) {
+//                        mAdapter.remove(bean);
+//                        if (!bean.on_shelf) {
+//                            FileUtils.deleteBookFiles(bean.novel.id, 0);
+//                        }
+//                        break;
+//                    }
+//                }
+//            }
+//        }
         hideDialog();
         if (mAdapter.getAllData().size() == 0) gone(manage);
         if (isVisible(llBatchManagement)) {
@@ -253,15 +254,15 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 goneBatchManagementAndRefreshUI();
                 break;
             case R.id.manage:
-                if (mAdapter.getAllData() != null)
-                    if (isVisible(llBatchManagement)) {//全选操作
-                        isSelectAll = !isSelectAll;
-                        manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
-                        ((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
-                        mAdapter.notifyDataSetChanged();
-                    } else {//管理操作
-                        showBatchManagementLayout(-1);
-                    }
+                if (mAdapter.getAllData() != null) showDeleteDialog(null, true);
+//                    if (isVisible(llBatchManagement)) {//全选操作
+//                        isSelectAll = !isSelectAll;
+//                        manage.setText(isSelectAll ? mContext.getString(R.string.cancel_selected_all) : mContext.getString(R.string.selected_all));
+//                        ((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
+//                        mAdapter.notifyDataSetChanged();
+//                    } else {//管理操作
+//                        showBatchManagementLayout(-1);
+//                    }
                 break;
             case R.id.title:
                 finish();
@@ -270,7 +271,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     }
 
     private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList, boolean isSelectAll) {
-        ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", () -> {
+        ConfirmDialog.showNotice(mContext, "提示", "确认清空记录吗？", () -> {
             showDialog();
             if (isSelectAll) {
                 mPresenter.delHistory("", 1);
