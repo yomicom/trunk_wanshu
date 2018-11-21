@@ -55,7 +55,7 @@
             style="@style/text_big_nomal"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="5dp"
+            android:padding="6dp"
             android:text="管理"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_middle"

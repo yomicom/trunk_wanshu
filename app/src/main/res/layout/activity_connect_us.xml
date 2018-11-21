@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.ConnectUsActivity">
 
     <include layout="@layout/common_toolbar" />

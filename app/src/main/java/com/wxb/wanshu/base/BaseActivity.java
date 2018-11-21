@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        transparent19and20();
 
         if (mContext instanceof ReadActivity) {
-        }else {
+        } else {
             setStatusBarView();
 //        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
         }
@@ -87,9 +87,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void setStatusBarView() {
         //标题栏与状态栏颜色一致 xml中配置
         Window window = getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.white));
+            window.setStatusBarColor(getResources().getColor(R.color.white, null));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup systemContent = findViewById(android.R.id.content);

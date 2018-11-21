@@ -181,7 +181,7 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageUrl(int viewId, String imgUrl, int placeHolderRes) {//placeHolderRes 默认放置图片
         ImageView view = getView(viewId);
         RequestOptions placeholder = new RequestOptions().placeholder(placeHolderRes);
-        ImageUtils.displayImage(mContext, view, imgUrl);
+        ImageUtils.displayImage(mContext, view, imgUrl, placeHolderRes, placeHolderRes);
 //        Glide.with(mContext).load(imgUrl).apply(placeholder).into(view);
         return this;
     }

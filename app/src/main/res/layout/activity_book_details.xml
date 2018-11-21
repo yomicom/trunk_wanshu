@@ -75,9 +75,9 @@
                 <TextView
                     android:id="@+id/tv_read"
                     style="@style/text_middle_nomal"
+                    android:textColor="@color/text_color_2"
                     android:layout_below="@id/author"
-                    android:layout_alignBottom="@id/border"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/border"
                     android:lines="1"
                     android:text="" />

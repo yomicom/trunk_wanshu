@@ -220,7 +220,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
             ImageUtils.displayImage(this, ivBook, data.getCover(), R.drawable.defalt_book_cover, R.drawable.defalt_book_cover);
             tvTitle.setText(data.getName());
             author.setText(data.getAuthor());
-            tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + FormatUtils.formatWordCount(data.word_num));
+            tvRead.setText(data.getCategory_name() + "  •  " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + "  •  " + FormatUtils.formatWordCount(data.word_num));
             if (bookDetails.on_shelf) {
                 hasAddBookshlef();
             } else {

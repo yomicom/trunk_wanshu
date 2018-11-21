@@ -31,7 +31,7 @@ public class ReadHistoryAdapter extends RecyclerArrayAdapter<ReadHistoryList.Dat
             @Override
             public void setData(ReadHistoryList.DataBean item) {
 
-                holder.setImageUrl(R.id.iv_book, item.novel.cover)
+                holder.setImageUrl(R.id.iv_book, item.novel.cover,R.drawable.defalt_book_cover)
                         .setText(R.id.tv_title, item.novel.name)
                         .setText(R.id.tv_time, "上次阅读：" + item.last_read_time)
                         .setText(R.id.tv_introduce, "已读：" + item.chapter.name)
