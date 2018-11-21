@@ -105,7 +105,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void configViews() {
-        gone(item, main_title);
+        gone(item, main_title, manage);
         visible(title);
         title.setText("阅读历史");
         ViewToolUtils.setEmptyView(mRecyclerView, R.mipmap.no_read_history, R.string.no_history);
@@ -117,12 +117,12 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     @Override
     public void showError() {
-
+        hideDialog();
     }
 
     @Override
     public void complete() {
-
+        hideDialog();
     }
 
     @Override
@@ -159,6 +159,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
             }
             page = START_PAGE;
             mPresenter.getReadHistoryList(page);
+            gone(manage);
         } else {
             String[] ids = novel_ids.split(",");
             for (ReadHistoryList.DataBean bean : mAdapter.getAllData()) {
@@ -173,6 +174,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
                 }
             }
         }
+        hideDialog();
         if (mAdapter.getAllData().size() == 0) gone(manage);
         if (isVisible(llBatchManagement)) {
             //批量管理完成后，隐藏批量管理布局并刷新页面
@@ -196,9 +198,10 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
     public void onItemClick(int position) {
         if (isVisible(finish)) { //批量管理时，点击选中某项
             if (isSelectAll) {
-                isSelectAll = false;((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
+                isSelectAll = false;
+                ((ReadHistoryAdapter) mAdapter).isSelectAll(isSelectAll);
                 List<ReadHistoryList.DataBean> allData = mAdapter.getAllData();
-                for (ReadHistoryList.DataBean dataBean:allData){
+                for (ReadHistoryList.DataBean dataBean : allData) {
                     dataBean.isSeleted = true;
                 }
             }
@@ -268,6 +271,7 @@ public class ReadHistoryActivity extends BaseRVActivity<ReadHistoryList.DataBean
 
     private void showDeleteDialog(List<ReadHistoryList.DataBean> removeList, boolean isSelectAll) {
         ConfirmDialog.showNotice(mContext, "提示", "确认删除吗？", () -> {
+            showDialog();
             if (isSelectAll) {
                 mPresenter.delHistory("", 1);
             } else {

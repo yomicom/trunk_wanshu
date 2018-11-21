@@ -22,6 +22,7 @@ import com.r0adkll.slidr.model.SlidrInterface;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
+import com.wxb.wanshu.ui.activity.ReadActivity;
 import com.wxb.wanshu.utils.SharedPreferencesUtil;
 import com.wxb.wanshu.utils.StatusBarUtils;
 import com.wxb.wanshu.utils.Utils;
@@ -59,8 +60,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 //            statusBarView = StatusBarCompat.compat(this, statusBarColor);
 //        }
 //        transparent19and20();
-//        setStatusBarView();
-//        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
+
+//        if (mContext instanceof ReadActivity) {
+//        }else {
+//            setStatusBarView();
+////        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
+//        }
 
         ButterKnife.bind(this);
         setupActivityComponent(MyApplication.getsInstance().getAppComponent());

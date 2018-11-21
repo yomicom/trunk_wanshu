@@ -216,29 +216,32 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 //            e.printStackTrace();
 //        }
 
+        if (bookDetails != null) {
+            ImageUtils.displayImage(this, ivBook, data.getCover(), R.drawable.defalt_book_cover, R.drawable.defalt_book_cover);
+            tvTitle.setText(data.getName());
+            author.setText(data.getAuthor());
+            tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + FormatUtils.formatWordCount(data.word_num));
+            if (bookDetails.on_shelf) {
+                hasAddBookshlef();
+            } else {
+                tvAddBook.setText("加入书架");
+                ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
+            }
 
-        ImageUtils.displayImage(this, ivBook, data.getCover(), R.drawable.defalt_book_cover, R.drawable.defalt_book_cover);
-        tvTitle.setText(data.getName());
-        author.setText(data.getAuthor());
-        tvRead.setText(data.getCategory_name() + " • " + ("0".equals(data.getComplete_status()) ? "连载" : "完结") + " • " + FormatUtils.formatWordCount(data.word_num));
-        if (bookDetails.on_shelf) {
-            hasAddBookshlef();
-        } else {
-            tvAddBook.setText("加入书架");
-            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_1);
+            lastChapter.setText(data.getLatest_chapter().name);
+            lastChapterTime.setText(data.latest_chapter.publish_time);
+            bookChapterNum.setText("共" + data.getChapter_num() + "章");
+            ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
         }
-
-        lastChapter.setText(data.getLatest_chapter().name);
-        lastChapterTime.setText(data.latest_chapter.publish_time);
-        bookChapterNum.setText("共" + data.getChapter_num() + "章");
-        ViewToolUtils.setShowMoreContent(3, data.getDescription(), tvAccountIntro, ivShowText, descriptionLayout);
     }
 
     private void hasAddBookshlef() {
-        bookDetails.on_shelf = true;
-        tvAddBook.setText("已加入书架");
-        ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
-        visible(ivAddBook);
+        if (bookDetails != null) {
+            bookDetails.on_shelf = true;
+            tvAddBook.setText("已加入书架");
+            ViewToolUtils.getResourceColor(mContext, tvAddBook, R.color.text_color_2);
+            visible(ivAddBook);
+        }
     }
 
     public static Bitmap getBitMBitmap(String urlpath) {
@@ -303,36 +306,39 @@ public class BookDetailsActivity extends BaseActivity implements BookDetailsCont
 
     @OnClick({R.id.tv_to_dashang, R.id.tv_load_more, R.id.ll_add_book, R.id.tv_read_book, R.id.book_menu, R.id.item_last_chapter})
     public void onViewClicked(View view) {
-        int is_onsale = bookDetails.is_onsale;
-        switch (view.getId()) {
-            case R.id.tv_to_dashang:
-                showDialog();
-                mPresenter.getRewardType();
-                break;
-            case R.id.tv_load_more:
-                rewardPage++;
-                mPresenter.getBookReward(novel_id, rewardPage);
-                break;
-            case R.id.ll_add_book:
-                if (!bookDetails.on_shelf) {
+        int is_onsale = 1;
+        if (bookDetails != null) {
+            is_onsale = bookDetails.is_onsale;
+            switch (view.getId()) {
+                case R.id.tv_to_dashang:
                     showDialog();
-                    mPresenter.addBookShelf(novel_id);
-                } else {
+                    mPresenter.getRewardType();
+                    break;
+                case R.id.tv_load_more:
+                    rewardPage++;
+                    mPresenter.getBookReward(novel_id, rewardPage);
+                    break;
+                case R.id.ll_add_book:
+                    if (!bookDetails.on_shelf) {
+                        showDialog();
+                        mPresenter.addBookShelf(novel_id);
+                    } else {
 
-                }
-                break;
-            case R.id.tv_read_book://开始阅读
-                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))//书已下架
-                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
-                break;
-            case R.id.book_menu:
-                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
-                    MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
-                break;
-            case R.id.item_last_chapter://查看最新章节
-                if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
-                    ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf, bookDetails.latest_chapter.sort, true);
-                break;
+                    }
+                    break;
+                case R.id.tv_read_book://开始阅读
+                    if (!ReadOtherStatusActivity.startActivity(this, is_onsale))//书已下架
+                        ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf);
+                    break;
+                case R.id.book_menu:
+                    if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
+                        MenuActivity.startActivity(this, bookDetails.getId(), 0, false);
+                    break;
+                case R.id.item_last_chapter://查看最新章节
+                    if (!ReadOtherStatusActivity.startActivity(this, is_onsale))
+                        ReadActivity.startActivity(this, bookDetails.getId(), bookDetails.on_shelf, bookDetails.latest_chapter.sort, true);
+                    break;
+            }
         }
     }
 

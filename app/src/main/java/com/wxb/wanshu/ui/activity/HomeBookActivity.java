@@ -26,8 +26,10 @@ import android.widget.Toast;
 import com.wxb.wanshu.ImageActivity;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
+import com.wxb.wanshu.base.BaseActivity;
 import com.wxb.wanshu.base.Constant;
 import com.wxb.wanshu.bean.HomeData;
+import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.component.DaggerBookComponent;
 import com.wxb.wanshu.ui.contract.HomeContract;
 import com.wxb.wanshu.ui.fragment.BannerFragment;
@@ -55,7 +57,7 @@ import static com.wxb.wanshu.ui.fragment.HomeRecommendFragment.HOME_RECOMMEND_TY
 /**
  * 书城首页
  */
-public class HomeBookActivity extends FragmentActivity implements HomeContract.View {
+public class HomeBookActivity extends BaseActivity implements HomeContract.View {
 
     int frameId[] = {R.id.fl_content1, R.id.fl_content2, R.id.fl_content3, R.id.fl_content4, R.id.fl_content5};
 
@@ -100,37 +102,12 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     private HomeData homeData;
 
     @SuppressLint("ClickableViewAccessibility")
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setCanSlide(false);
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_home_book);
-
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         ButterKnife.bind(this);
-
-        DaggerBookComponent.builder()
-                .appComponent(MyApplication.getsInstance().getAppComponent())
-                .build()
-                .inject(this);
-
-        int[] colors = {R.color.gobal_color, R.color.light_red};
-        swipeRefresh.setColorSchemeResources(colors);
-//        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.common_bg);
-        swipeRefresh.setOnRefreshListener(() -> {
-//            if (homeData != null) {
-            mPresenter.getHomeData("");
-//            }
-        });
-
-        mPresenter.attachView(this);
-        swipeRefresh.setRefreshing(true);
-        mPresenter.getHomeData("");
-//        dialog = CustomDialog.instance(this);
-//        dialog.setCancelable(true);
-//        dialog.show();
-
-        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
     }
 
     private void showData(HomeData homeData) {
@@ -298,8 +275,66 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
     }
 
     @Override
+    public int getLayoutId() {
+        return R.layout.activity_home_book;
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerBookComponent.builder()
+                .appComponent(MyApplication.getsInstance().getAppComponent())
+                .build()
+                .inject(this);
+    }
+
+    @Override
+    public void initToolBar() {
+
+    }
+
+    @Override
+    public void initDatas() {
+        mPresenter.attachView(this);
+    }
+
+    @Override
+    public void configViews() {
+        int[] colors = {R.color.gobal_color, R.color.light_red};
+        swipeRefresh.setColorSchemeResources(colors);
+        swipeRefresh.setOnRefreshListener(() -> {
+            mPresenter.getHomeData("");
+        });
+
+        swipeRefresh.setRefreshing(true);
+        mPresenter.getHomeData("");
+
+        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
+    }
+
+    int mAnimationTime = 1000;
+
+    private long exitTime = 0;
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                // 退出代码
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
     public void showHome(HomeData data) {
-//        crossfadeToProgressView(bgSearch);
         swipeRefresh.setRefreshing(false);
         if (data != null) {
             showData(data);
@@ -307,7 +342,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
         if (dialog != null)
             dialog.hide();
     }
-
 
     @Override
     public void netError() {
@@ -338,27 +372,6 @@ public class HomeBookActivity extends FragmentActivity implements HomeContract.V
             dialog.dismiss();
             dialog = null;
         }
-    }
-
-    int mAnimationTime = 1000;
-
-    private long exitTime = 0;
-
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK
-                && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出",
-                        Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            } else {
-                // 退出代码
-                finish();
-                System.exit(0);
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     private void crossfadeToContentView(View progressView) {

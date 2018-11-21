@@ -51,14 +51,12 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             app:layout_empty="@layout/common_empty_view"
             app:layout_progress="@layout/common_progress_view"
             app:scrollbarStyle="insideOverlay" />
     </LinearLayout>
 
-    <!--<View-->
-        <!--style="@style/toolbar_elevation"-->
-        <!--android:layout_below="@id/tool_bar"/>-->
+    <View
+        style="@style/toolbar_elevation"
+        android:layout_below="@id/tool_bar"/>
 </RelativeLayout>

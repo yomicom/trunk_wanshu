@@ -68,7 +68,7 @@ public class BookDetails extends Base {
         public String update_time;
         public String length_type;
         public String view_count;
-        public int is_onsale;
+        public int is_onsale = 1;
         public String category_name;
         public boolean on_shelf;
         public FirstChapterBean first_chapter;

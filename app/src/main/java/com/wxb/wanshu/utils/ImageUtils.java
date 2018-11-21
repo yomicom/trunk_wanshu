@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LRULimitedMemoryCache;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -19,8 +21,11 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.wxb.wanshu.MyApplication;
 import com.wxb.wanshu.R;
+
+import java.io.File;
 
 /**
  * Created by qiming on 2017/11/22.
@@ -40,10 +45,23 @@ public class ImageUtils {
 
     public static void initImageLoader() {
         imageLoader = ImageLoader.getInstance();
+        File cacheDir = StorageUtils.getCacheDirectory(AppUtils.getAppContext());
         ImageLoaderConfiguration imageLoaderConfig = new ImageLoaderConfiguration
                 .Builder(mContext)
                 .imageDownloader(new BaseImageDownloader(mContext))
-                .memoryCache(new LRULimitedMemoryCache(2 * 1024 * 1024))
+                // 超过设定的缓存大小时,内存缓存的清除机制
+                .memoryCacheExtraOptions(90, 120) // 即保存的每个缓存文件的最大长宽
+                .memoryCacheSizePercentage(60)// 图片内存占应用的60%；
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                // 内存的一个大小
+                .memoryCacheSize(2 * 1024 * 1024)
+                .memoryCacheSizePercentage(13)
+                // default 将图片信息缓存到该路径下
+                .diskCache(new UnlimitedDiskCache(cacheDir))
+                // default 磁盘缓存的大小
+                .diskCacheSize(50 * 1024 * 1024)
+                // 磁盘缓存文件的个数
+                .diskCacheFileCount(100)
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
                 .build();
         imageLoader.init(imageLoaderConfig);
