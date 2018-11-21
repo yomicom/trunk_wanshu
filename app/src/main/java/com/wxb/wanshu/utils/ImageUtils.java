@@ -50,7 +50,7 @@ public class ImageUtils {
                 .Builder(mContext)
                 .imageDownloader(new BaseImageDownloader(mContext))
                 // 超过设定的缓存大小时,内存缓存的清除机制
-                .memoryCacheExtraOptions(90, 120) // 即保存的每个缓存文件的最大长宽
+//                .memoryCacheExtraOptions(90, 120) // 即保存的每个缓存文件的最大长宽
                 .memoryCacheSizePercentage(60)// 图片内存占应用的60%；
                 .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
                 // 内存的一个大小

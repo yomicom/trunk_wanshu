@@ -169,7 +169,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/getListByCategory")
-    Observable<BookList> getSelectBookList(@Query("category_id") String category_id, @Query("page") int page);
+    Observable<BookList> getSelectBookList(@Query("category_id") String category_id, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 获取猜你喜欢更多
@@ -177,7 +177,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/mayLikeBooks")
-    Observable<BookList> getLikeBooks(@Query("novel_id") String category_id, @Query("page") int page);
+    Observable<BookList> getLikeBooks(@Query("novel_id") String category_id, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 精品馆频道-更多列表
@@ -374,7 +374,7 @@ public interface ApiService {
      * @return
      */
     @GET("/novel/search")
-    Observable<BookList> getSearchResult(@Query("keyword") String keyword, @Query("page") int page);
+    Observable<BookList> getSearchResult(@Query("keyword") String keyword, @Query("page") int page, @Query("pagesize") int pagesize);
 
     /**
      * 获取分类

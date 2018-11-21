@@ -127,11 +127,11 @@ public class Api {
     }
 
     public Observable<BookList> getSelectBookList(String category_id, int page) {
-        return service.getSelectBookList(category_id, page);
+        return service.getSelectBookList(category_id, page, 20);
     }
 
     public Observable<BookList> getLikeBooks(String category_id, int page) {
-        return service.getLikeBooks(category_id, page);
+        return service.getLikeBooks(category_id, page, 20);
     }
 
     public Observable<BookDetails> getBookDetail(String novel_id, int user_id) {
@@ -139,7 +139,7 @@ public class Api {
     }
 
     public Observable<BookList> getSearchResult(String keyword, int page) {
-        return service.getSearchResult(keyword, page);
+        return service.getSearchResult(keyword, page,20);
     }
 
     public Observable<BookRewardData> getBookReward(String novel_id, int page) {

@@ -61,11 +61,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        }
 //        transparent19and20();
 
-//        if (mContext instanceof ReadActivity) {
-//        }else {
-//            setStatusBarView();
-////        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
-//        }
+        if (mContext instanceof ReadActivity) {
+        }else {
+            setStatusBarView();
+//        StatusBarUtils.setStatusBarLightMode((Activity) mContext, R.color.white);
+        }
 
         ButterKnife.bind(this);
         setupActivityComponent(MyApplication.getsInstance().getAppComponent());

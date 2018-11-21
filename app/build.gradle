@@ -77,17 +77,17 @@ android {
 
     productFlavors {
 
-        s_default {}
-//        s_myapp {}
-//        s_hicloud {}
-//        s_mi {}
+//        s_default {}
+        s_myapp {}
+        s_hicloud {}
+        s_mi {}
 //        s_360 {}
 //        s_baidu {}
 //        s_meizu {}
 //        s_lenovomm {}
 //        s_wandoujia {}
-//        s_vivo {}
-//        s_gfan {}
+        s_vivo {}
+        s_gfan {}
 //        s_anzhi {}
 //        s_aliyun {}
 
