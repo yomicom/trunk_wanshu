@@ -39,8 +39,7 @@
         app:layout_empty="@layout/common_empty_view"
         app:layout_error="@layout/common_error_view"
         android:stretchMode="columnWidth"
-        android:paddingLeft="@dimen/distance_left"
-        android:paddingRight="@dimen/distance_left"
-        android:paddingTop="@dimen/setting_cut_10"></com.wxb.wanshu.view.recycleview.EasyRecyclerView>
+        android:layout_marginLeft="@dimen/distance_top"
+        android:layout_marginRight="@dimen/distance_top"></com.wxb.wanshu.view.recycleview.EasyRecyclerView>
 
 </LinearLayout>

@@ -12,7 +12,8 @@
         app:cardElevation="10dp"
         android:layout_marginRight="@dimen/distance_text_text_10"
         android:layout_marginLeft="@dimen/distance_text_text_10"
-        android:layout_marginTop="@dimen/distance_top"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">

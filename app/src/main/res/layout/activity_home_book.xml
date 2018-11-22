@@ -15,11 +15,11 @@
 
         <com.wxb.wanshu.view.AlphaTitleScrollView
             android:id="@+id/scrollView"
-            android:fillViewport="true"
-            android:overScrollMode="never"
-            android:fadingEdge="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:fillViewport="true"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,9 +83,9 @@
                     android:layout_marginLeft="@dimen/distance_left"
                     android:layout_marginTop="@dimen/distance_left"
                     android:layout_marginRight="@dimen/distance_left"
-                    android:visibility="gone"
+                    android:scaleType="fitXY"
                     android:src="@mipmap/mid_image"
-                    android:scaleType="fitXY"/>
+                    android:visibility="gone" />
 
                 <FrameLayout
                     android:id="@+id/fl_content4"
@@ -152,6 +152,10 @@
                 android:src="@mipmap/ic_search_white" />
         </LinearLayout>
     </RelativeLayout>
+
+    <include
+        layout="@layout/common_error_view"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/iv_to_top"

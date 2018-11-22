@@ -73,13 +73,14 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
 
     @Override
     public void configViews() {
-        initAdapter(NovelRankAdapter.class, false, false);
+        initAdapter(NovelRankAdapter.class, true, false);
         mRecyclerView.removeAllItemDecoration();
+        mRecyclerView.setRefreshingColorResources(R.color.gobal_color, R.color.light_red);
     }
 
     @OnClick({R.id.read, R.id.search, R.id.click, R.id.store})
     public void onViewClicked(View view) {
-        if (mAdapter.getAllData() != null) {
+        if (mAdapter.getAllData() != null) {mRecyclerView.setRefreshing(false);
             switch (view.getId()) {
                 case R.id.read:
                     if (!type.equals(TYPE_1)) {
@@ -148,17 +149,27 @@ public class NovelRankActivity extends BaseRVActivity<BookList.DataBean> impleme
     }
 
     @Override
+    public void onRefresh() {
+        super.onRefresh();
+        page = START_PAGE;
+        mPresenter.getNovelRank(type, page);
+    }
+
+    @Override
     public void showError() {
         hideDialog();
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
     public void complete() {
         hideDialog();
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
     public void showNovelRank(BookList data) {
+        mRecyclerView.setRefreshing(false);
         if (page == START_PAGE) {
             hideDialog();
             mAdapter.clear();

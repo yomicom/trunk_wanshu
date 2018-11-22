@@ -42,10 +42,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("/Users/qiming/Work/Android_Sign/wanshu.jks")
-            storePassword "soude123"
-            keyAlias "wanshu"
-            keyPassword "soude123"
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
         }
     }
 
@@ -133,6 +133,7 @@ android {
         compile rootProject.ext.dependencies["androideventbus"]
         //umeng统计
         compile rootProject.ext.dependencies["umeng-analytics"]
+        compile rootProject.ext.dependencies["umeng-common"]
         //使用Rxjava2
         compile rootProject.ext.dependencies["okhttp3"]
         compile rootProject.ext.dependencies["rxandroid"]

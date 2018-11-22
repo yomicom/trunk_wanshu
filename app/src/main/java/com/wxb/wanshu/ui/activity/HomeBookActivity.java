@@ -5,17 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -96,6 +92,8 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
     LinearLayout search;
     @BindView(R.id.divide)
     View divide;
+    @BindView(R.id.rl_empty_view)
+    RelativeLayout netErrorView;
     private BannerFragment bannerFragment;
     private CustomDialog dialog;
 
@@ -110,10 +108,58 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
         ButterKnife.bind(this);
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_home_book;
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerBookComponent.builder()
+                .appComponent(MyApplication.getsInstance().getAppComponent())
+                .build()
+                .inject(this);
+    }
+
+    @Override
+    public void initToolBar() {
+
+    }
+
+    @Override
+    public void initDatas() {
+        mPresenter.attachView(this);
+    }
+
+    @Override
+    public void configViews() {
+        int[] colors = {R.color.gobal_color, R.color.light_red};
+        swipeRefresh.setColorSchemeResources(colors);
+        swipeRefresh.setOnRefreshListener(() -> {
+            mPresenter.getHomeData("");
+        });
+
+        swipeRefresh.setRefreshing(true);
+        mPresenter.getHomeData("");
+
+        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
+    }
+
+
+    @Override
+    public void showHome(HomeData data) {
+        swipeRefresh.setRefreshing(false);
+        if (data != null) {
+            showData(data);
+        }
+        if (dialog != null)
+            dialog.hide();
+    }
+
+
     private void showData(HomeData homeData) {
-        bgSearch.setVisibility(View.VISIBLE);
-        divide.setVisibility(View.VISIBLE);
-        rank.setVisibility(View.VISIBLE);
+        visible(swipeRefresh, bgSearch, divide, rank);
+        gone(netErrorView);
 
         this.homeData = homeData;
         List<HomeData.DataBeanX> data = homeData.getData();
@@ -228,7 +274,7 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
 
     Context mContext = this;
 
-    @OnClick({R.id.iv_to_top, R.id.search, R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish})
+    @OnClick({R.id.iv_to_top, R.id.search, R.id.item_rank, R.id.item_best, R.id.item_short, R.id.item_finish,R.id.get})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_to_top://gh_8348fbc38b91 掌读宝
@@ -259,6 +305,9 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
             case R.id.item_finish:
                 KindNovelActivity.startActivity(mContext, 2);
                 break;
+            case R.id.get:
+                mPresenter.getHomeData("");
+                break;
         }
     }
 
@@ -275,40 +324,26 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_home_book;
+    public void netError() {
+        gone(swipeRefresh);
+        visible(netErrorView);
+        swipeRefresh.setRefreshing(false);
+        if (dialog != null)
+            dialog.hide();
     }
 
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerBookComponent.builder()
-                .appComponent(MyApplication.getsInstance().getAppComponent())
-                .build()
-                .inject(this);
+    public void showError() {
+        swipeRefresh.setRefreshing(false);
+        if (dialog != null)
+            dialog.hide();
     }
 
     @Override
-    public void initToolBar() {
-
-    }
-
-    @Override
-    public void initDatas() {
-        mPresenter.attachView(this);
-    }
-
-    @Override
-    public void configViews() {
-        int[] colors = {R.color.gobal_color, R.color.light_red};
-        swipeRefresh.setColorSchemeResources(colors);
-        swipeRefresh.setOnRefreshListener(() -> {
-            mPresenter.getHomeData("");
-        });
-
-        swipeRefresh.setRefreshing(true);
-        mPresenter.getHomeData("");
-
-        scrollView.setTitleAndHead(bgSearch, search, etArticleSearch, iv_search, banner);
+    public void complete() {
+        swipeRefresh.setRefreshing(false);
+        if (dialog != null)
+            dialog.hide();
     }
 
     int mAnimationTime = 1000;
@@ -330,38 +365,6 @@ public class HomeBookActivity extends BaseActivity implements HomeContract.View 
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-
-    @Override
-    public void showHome(HomeData data) {
-        swipeRefresh.setRefreshing(false);
-        if (data != null) {
-            showData(data);
-        }
-        if (dialog != null)
-            dialog.hide();
-    }
-
-    @Override
-    public void netError() {
-        swipeRefresh.setRefreshing(false);
-        if (dialog != null)
-            dialog.hide();
-    }
-
-    @Override
-    public void showError() {
-        swipeRefresh.setRefreshing(false);
-        if (dialog != null)
-            dialog.hide();
-    }
-
-    @Override
-    public void complete() {
-        swipeRefresh.setRefreshing(false);
-        if (dialog != null)
-            dialog.hide();
     }
 
     @Override

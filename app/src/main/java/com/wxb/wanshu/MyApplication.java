@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 
+import com.umeng.commonsdk.UMConfigure;
 import com.wxb.wanshu.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.PlatformConfig;
@@ -46,13 +47,15 @@ public class MyApplication extends Application {
 //        initNightMode();
         //initHciCloud();
 
-        PlatformConfig.setWeixin(Constant.WEXIN_APPID,Constant.WEXIN_APPSECRECT);
-        PlatformConfig.setQQZone(Constant.QQ_APPID,Constant.QQ_APPSECRECT);
+//        PlatformConfig.setWeixin(Constant.WEXIN_APPID,Constant.WEXIN_APPSECRECT);
+//        PlatformConfig.setQQZone(Constant.QQ_APPID,Constant.QQ_APPSECRECT);
+//        UMShareAPI.get(this);
 
-        UMShareAPI.get(this);
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.setLogEnabled(false);
 
-        MobclickAgent.openActivityDurationTrack(false);
-        MobclickAgent.setCatchUncaughtExceptions(true);
+//        MobclickAgent.openActivityDurationTrack(false);
+//        MobclickAgent.setCatchUncaughtExceptions(true);
     }
 
     public static MyApplication getsInstance() {

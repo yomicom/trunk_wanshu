@@ -74,19 +74,21 @@ public class ClassifyActivity extends BaseRVActivity<NovelCategory.DataBean> imp
 
     @Override
     public void configViews() {
-        initAdapter(BookClassifyAdapter.class, false, false);
+        initAdapter(BookClassifyAdapter.class, true, false);
         mRecyclerView.removeAllItemDecoration();
 
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 35, false));
 
+        mRecyclerView.setRefreshingColorResources(R.color.gobal_color, R.color.light_red);
         onRefresh();
     }
 
     @Override
     public void showError() {
         hideDialog();
+        mRecyclerView.setRefreshing(false);
         mRecyclerView.showError();
         View errorView = mRecyclerView.getErrorView();
         errorView.findViewById(R.id.get).setOnClickListener(v -> onRefresh());
@@ -95,6 +97,7 @@ public class ClassifyActivity extends BaseRVActivity<NovelCategory.DataBean> imp
     @Override
     public void complete() {
         hideDialog();
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
@@ -103,6 +106,10 @@ public class ClassifyActivity extends BaseRVActivity<NovelCategory.DataBean> imp
 
     @Override
     public void showNovelCategory(NovelCategory categoryData) {
+        mRecyclerView.setRefreshing(false);
+        if (mAdapter.getAllData() != null && mAdapter.getAllData().size() > 0) {
+            mAdapter.clear();
+        }
         List<NovelCategory.DataBean> data = categoryData.getData();
         if (data.size() > 0) {
             mAdapter.addAll(categoryData.getData());
