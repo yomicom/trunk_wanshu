@@ -28,7 +28,7 @@ public class MyApplication extends Application {
     private static MyApplication sInstance;
     private AppComponent appComponent;
 //    private RefWatcher refWatcher;
-//
+
 //    public static RefWatcher getRefWatcher(Context context) {
 //        MyApplication application = (MyApplication) context.getApplicationContext();
 //        return application.refWatcher;
