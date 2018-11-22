@@ -75,6 +75,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void configViews() {
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         alphaAnimation = new AlphaAnimation(0.3F, 1.0F);
         alphaAnimation.setDuration(1000);
