@@ -23,8 +23,6 @@ import com.wxb.wanshu.utils.SharedPreferencesUtil;
  */
 
 public class MyApplication extends Application {
-
-
     private static MyApplication sInstance;
     private AppComponent appComponent;
 //    private RefWatcher refWatcher;
