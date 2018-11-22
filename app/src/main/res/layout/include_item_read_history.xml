@@ -8,7 +8,9 @@
 
     <RelativeLayout
         android:id="@+id/rl_image"
-        style="@style/rl_normal">
+        style="@style/rl_normal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <RelativeLayout
             android:id="@+id/border"

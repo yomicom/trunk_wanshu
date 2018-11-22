@@ -45,17 +45,13 @@ public class MyApplication extends Application {
 //        CrashHandler.getInstance().init(this);
         initPrefs();
 //        initNightMode();
-        //initHciCloud();
 
 //        PlatformConfig.setWeixin(Constant.WEXIN_APPID,Constant.WEXIN_APPSECRECT);
 //        PlatformConfig.setQQZone(Constant.QQ_APPID,Constant.QQ_APPSECRECT);
 //        UMShareAPI.get(this);
 
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
-        UMConfigure.setLogEnabled(false);
-
-//        MobclickAgent.openActivityDurationTrack(false);
-//        MobclickAgent.setCatchUncaughtExceptions(true);
+        MobclickAgent.setCatchUncaughtExceptions(true);
     }
 
     public static MyApplication getsInstance() {

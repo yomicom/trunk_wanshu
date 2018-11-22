@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrInterface;
+import com.umeng.analytics.MobclickAgent;
 import com.wxb.wanshu.component.AppComponent;
 import com.wxb.wanshu.R;
 import com.wxb.wanshu.MyApplication;
@@ -130,6 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
 //        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false) != mNowMode) {
 //            if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -141,14 +143,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         dismissDialog();
     }
-
-//    public static void startActivity(Context context, String intentStr, Bundle bundle){
-//
-//    }
 
     public abstract int getLayoutId();
 
